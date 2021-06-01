@@ -1,0 +1,7 @@
+#!/bin/bash
+
+read -p "enter basic salary" b
+dp= `echo "$b*0.5" | bc`
+bdp= `echo "$bdp+$dp" |bc`
+da= `echo "$b*0.35" | bc`
+hra= `echo "$v

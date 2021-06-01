@@ -1,0 +1,10 @@
+#!/bin/bash
+echo "enter input for calculation"
+read -p "input :" a op b
+
+if ["$op" ="+"]
+then
+result=`echo "$a+$b"| bc`
+echo "result: $result"
+
+elif [
