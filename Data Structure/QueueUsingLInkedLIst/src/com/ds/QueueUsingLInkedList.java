@@ -1,20 +1,21 @@
 package com.ds;
 
 public class QueueUsingLInkedList {
-	private Node head;
-	
+	private Node front;
+	private Node rear;
 	public QueueUsingLInkedList() {
-		head = null;
+		rear = null;
+		front = null;
 	}
 	
 	
 	public void enqueue(int element) {
 		Node temp = new Node();
 		temp.setInfo(element);
-		if (head == null) {
-			head = temp;
+		if (rear == null) {
+			rear=front = temp;
 		} else {
-			Node curr = head;
+			Node curr = rear;
 			while (curr.getNext() != null) {
 				curr = curr.getNext();
 			}
@@ -23,18 +24,18 @@ public class QueueUsingLInkedList {
 	}
 	
 	public int dequeue() {
-		if(head == null) {
+		if(front == null) {
 			throw new RuntimeException("Queue is Emopty");
 		}
 		else 
 		{
-			Node temp = head;
-			head = head.getNext();
+			Node temp = front;
+			front = front.getNext();
 			return temp.getInfo();
 		}
 	}
 	public boolean isEmpty() {
-		return (head == null);
+		return (rear == null);
 	}
 	
 }
