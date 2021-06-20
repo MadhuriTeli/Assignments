@@ -1,0 +1,45 @@
+Assignment 1: Assign a set of characters to a String involving Brackets "{([])}" characters.
+Ex: 
+I/p : str = "{()[[]}"
+O/p: The Brackets do not match
+
+I/p : str = "{()[[]]}"
+O/p: The Brackets match
+
+Assignment 2: Implement Stack & Queue using a Linked List.
+
+Assignment 3: Implement a Circular Queue using Linked List. 
+
+Assignment 4:
+Create a singly linked list of integers such that all elements are inserted in ascending order.
+
+Eg.
+i/p
+ 20, 5, 10, 30, 25
+
+o/p
+ 5,10, 20, 25, 30
+
+Assignment 5:					     th 
+Consider a singly linked list. Rotate the list from k   position from the last node.
+Eg.
+  k = 2
+10, 20, 30, 40, 50
+
+After rotation
+o/p
+40, 50, 10, 20, 30
+
+Assignment 6:
+Write a recursive method to return nth term of Fibonacci Series.
+1st term = 0
+2nd term = 1
+3rd = 1
+4th = 2
+3,5,
+t   = t     +  t
+ n     n-1      n-2
+
+fibo(5)
+	3
+
