@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Customer</title>
+  <!------------------------------------------------------------------------------------------------------
+     -- order matters always add jquery file above of javascript file
+     ------------------------------------------------------------------------------------------------------->
+
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/customer.js"></script>
+  <link rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body>
+  <div>
+    <h2>Add New Customer</h2>
+    <div class="add-new-customer-form">
+      <label>ID</label>
+      <input type="number" id="userid" required>
+
+      <label>First Name</label>
+      <input type="text" id="fname" required>
+
+      <label>Last Name</label>
+      <input type="text" id="lname" required>
+
+      <label>email</label>
+      <input type="email" id="email" required>
+
+      <label>Contact</label>
+      <input type="text" id="contact" required>
+
+      <button id="create">Add Customer</button>
+    </div>
+  </div>
+
+  <hr>
+  <div>
+    <h2>Display Customers</h2>
+    <button id="showCustomers">Show</button>
+    <table id="show">
+    </table>
+  </div>
+  <hr>
+  <br />
+  <div>
+    <h2>Update Customer</h2>
+    <div class="update-new-customer-form">
+      <label>ID</label>
+      <input type="number" id="userid1" required>
+
+      <label>First Name</label>
+      <input type="text" id="fname1" required>
+
+      <label>Last Name</label>
+      <input type="text" id="lname1" required>
+
+      <labe>email</label>
+        <input type="email" id="email1" required>
+
+        <label>Contact</label>
+        <input type="text" id="contact1" required>
+
+        <button id="update">Update Customer</button>
+    </div>
+  </div>
+  <hr />
+  <div>
+
+    <h2>Delete Customer</h2>
+    <label>Customer Id</label>
+    <input type="number" id="customerid" name="customerid" required />
+    <button id="delete">Delete Customer</button>
+  </div>
+  <hr>
+
+  </div>
+</body>
+
+</html>

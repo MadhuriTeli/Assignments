@@ -5,17 +5,21 @@
 3.Implement REST API for 
 /api/orderitems
 /api/orderitems/12
-CRUD operations against orderitems table using mySQL connector
+
+CRUD operations against orderitems table
+ using mySQL connector
 
 
 4.Implement REST API for 
 /api/orders
 /api/orders/56
+
 CRUD operations against orderitems table using mySQL connector
 
 5.Implement REST API for customer
 Get all orders /api/customersorders
-Get all orders for a customer using /api/customerorders/customerid
+Get all orders for a
+ customer using /api/customerorders/customerid
 
 
 6.Add bill.html to show order details for customer he want to pay
@@ -24,7 +28,8 @@ Get all orders for a customer using /api/customerorders/customerid
 
 
 8.Add cart.html page to show shoppingcart items as well as 
-  Add or remove existing item selected from shopping cart
+  Add or remove existing item
+ selected from shopping cart
 
 9.Store Shopping cart data at client side using SessionStorage HTML 5.
 
