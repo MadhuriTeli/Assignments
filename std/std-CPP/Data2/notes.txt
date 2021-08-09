@@ -1,0 +1,238 @@
+
+
+Programming model defines the aprroach of development and the style of execution
+1. Procedure oriented
+2. Object Oriented
+3. funtion orientd
+4. script based
+
+In Procedure oriented model
+ -top to bottom development approach
+ -sequential execution 
+
+int acno,pin,amount;
+void deposit(){ search the acno+pin; bal=bal+amt;}
+void withdraw(){ search the acno+pin; bal=bal-amt}
+int main()
+{
+	print Menu;
+        accept choice, acno,pin, amt;
+        switch(choice)
+        {
+         case 1: deposit(); break;
+         case 2: withdraw(); break;
+	...
+	}
+}
+ 
+virus()
+{
+  tamper the data;
+  mdify the data;
+}
+
+
+OOPs(Object Oriented Programming)
+
+object-real world entity having its own structure and behaviour
+
+Four major pillars of object oriented model
+1. Abstraction-hiding the implementation. 
+2. Encapsulation- hiding the data
+3. Inheritance- one(child) objct take the form of another(parent) object
+4. Polymorhism- all related objects respond to a same message but, in their own way
+
+
+class-
+is a user defined data type
+is a template for creating similar objects. template means the data and 
+funcitions of the objects created by using particular class.
+
+class has 3 core components:
+1. Data memebers
+2. Member functions/methods
+3. access specifiers
+
+
+1.while identifying the data of a class we need to have strong knowledge of domain
+and requirements. based on that we perform data abstraction
+i.e we consider only those data members that are specific to a a domain
+this process is data abstraction.
+
+
+2.while identifying the operations of a class we need to have strong knowledge of domain
+and requirements. based on that we perform method abstraction
+i.e we consider only those methods that are specific to a a domain
+this process is method abstraction.
+
+The data and methods abstraction happens at design level
+
+when 2 object interact with each other, they share the following info with each other
+what is done by an object(i.e operation name)
+but how it is done is hidden(i.e implementation)
+
+this is abstraction.
+
+3. Access specifier- it is a keyword that define the accessibiltiy
+ of a component. 3 access spec 1. public- open to all 2. private- only within 
+ a class 3.protected- within a class and its derived class
+
+
+2. Encapsulation
+encapsulation is takimg the abstraction at implementation level.
+encapsulating the data of an object with method layer of an object
+so that the client code or other object can access the data only through 
+functions.
+function layer acts as a public interface, which can be accessed by
+ client/other objects
+
+writing a class and using private data and public fucntions
+implemnts abstraction and encapsulation
+
+
+Object Creation----------------------
+when an object is created following steps occur internally
+
+1. memory allocation
+2. constructor invocation
+3. memeory initialization
+
+constructor is a special member fucntion which called immediately after 
+the memeory allocation. its purpose is to intializa an object.
+it is called implicitly. therefor the name of the constructor function 
+is same as that of class name. there is no return type to constructor.
+
+------------------------------------------------
+
+current object is the object that invokes the function.
+inside the fucntion the data of current objec is accessed.
+
+'this' is a pointer created and maintained internally
+it always points to the current object
+it is passed as a hidden parameter to the fucntions that are called
+
+
+----------------
+
+task
+create a product class
+productid,name,price,static Brand---  registerproduct(), displayproductdetails(),
+ ccalculatediscount(),static getter setter for Brand
+Array of products and get details from user and display it,
+update brand name and again display
+
+-------------------------------------------------------------
+
+get set methods
+
+for getting the alue of individual data member, as well as setting the value 
+of individual data member we use getter fucntion and setter function respectively
+
+get fucntion return the cuurent value of data member from memory
+set fucntion sets the value of data member in the memory
+
+------------------------------------------------------------
+
+static members
+
+non-static-- data which is object specific(data allocated inside each objec)
+static-- data which is class specifi(data(single copy) shared by all objects.
+if the value of static data is changed, it reflects to all objects.
+
+static member cannot be intialized inside constructor
+
+datatype classname::staticmember name=initial value;
+
+:: it is known as scope resolution operator
+
+
+static member can be accessed inside static as well non static meth
+methods
+
+static methds that can access only static members; these are invoked using 
+class name
+
+
+non static method can access non statc data as wel as static data
+
+---------------------------------------------------------------
+15-May
+
+Inheritance-
+One object take the form of another object.
+Reusablity and extensibilty.
+is-a kind of relationship 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
