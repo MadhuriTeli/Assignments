@@ -1,0 +1,7 @@
+[
+    {"id": 15,"title": "Rose","imageurl":"/images/rose.jpg","description": "Valentine flower","unitprice": 10,"quantity":4,"likes":96000},
+    {"id": 16,"title": "Jasmine","imageurl":"/images/jasmine.jpg","description": "Smelling flower","unitprice":3,"quantity":400,"likes":56000},
+    {"id": 17,"title": "Lily","imageurl":"/images/lily.jpg","description": "Beautiful flower","unitprice": 10,"quantity":760,"likes":7660},
+    {"id": 18,"title": "Marigold","imageurl":"/images/marigold.jpg","description": "Festival flower","unitprice":3,"quantity":987,"likes":76000},
+    {"id": 19,"title": "Tulip","imageurl":"/images/tulip.jpg","description": "Silsila flower","unitprice": 10,"quantity":98,"likes":76000}
+]
