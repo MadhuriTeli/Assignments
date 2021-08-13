@@ -1,0 +1,391 @@
+Day 1
+1. Refer to "Installation Instructions" from day1-data\day1_help & complete.
+
+2. MUST go through "readme_day1"  from day1-data\day1_help\readmes & day1-data\day1_help\slides\PPTDay1.pdf
+
+3. Go through simple code samples from day1-data\code\src
+
+4. Solve 
+1
+Accept  i/ps from User , till user enters "quit" or any other option.
+I/P : operation(add|sub|mult|div) , number1(double) , number2(double) 
+Display the result of the operation.
+It should be done in a loop , till user enters "quit" 
+
+
+2. Accept 2 double values from User (using Scanner). Check data type.
+. If arguments are not doubles , supply suitable error message & terminate.
+If numbers are double values , print its average.
+eg :
+sop("Enter 2 double nos");
+boolean flag=sc.hasNextDouble();
+if(flag)
+{
+   //read off the 1st token
+ double d1=sc.nextDouble();
+   if(....)
+   {
+       double d2=sc.nextDouble();
+       sop("Avg+....);
+   }
+else {...}
+}
+else {...}
+
+
+
+
+3. Display food menu to user. User will select items from menu along with the quantity. (eg 1. Dosa 2. Samosa .......10 . Generate Bill ) Assign fixed prices to food items
+When user enters 'Generate Bill' option(10) , display total bill & exit.
+
+Day2
+1. Do complete revision of class work & then solve today's assignemnts
+
+2. 
+Solve Tank assignment along with memory picture.
+
+What will be the output ?
+
+class Tank {
+  private int level;
+  Tank(int l)
+   {
+     level=l;
+   }
+  public void setLevel(int level1)
+  {
+    level=level1;
+  }
+  public int getLevel()
+  {
+    return level;
+  }
+}	
+
+public class Assignment {
+  public static void main(String[] args) {
+    Tank t1 = new Tank(10);
+    Tank t2 = new Tank(20);
+     s.o.p("1: t1.level: " + t1.getLevel() +
+          ", t2.level: " + t2.getLevel());
+    t1 = t2;//1st tank obj is marked GC
+    s.o.p("2: t1.level: " + t1.getLevel() +
+          ", t2.level: " + t2.getLevel());
+    t1.setLevel(27);
+     s.o.p("3: t1.level: " + t1.getLevel() +
+          ", t2.level: " + t2.getLevel());
+    t2.setLevel(t1.getLevel()+10);
+     s.o.p("4: t1.level: " + t1.getLevel() +
+          ", t2.level: " + t2.getLevel());
+  }
+}
+
+
+3. Solve
+Create Point class Point2D   : for representing a point in x-y co-ordinate system.
+
+
+3.1 Create a parameterized constructor to accept x & y co-ords.
+
+3.2 Add public String getDetails()) --to return string form point's x & y co-ords
+eg : public String getDetails()
+{
+   return "Point ("+x+","+y+")";
+}
+
+
+3.3 Add isEqual method to Point2D class : boolean returning method : must return true if both points are having same x,y co-ords or false otherwise. 
+eg : p1 , p2
+p1.isEqual(p2) --> true/false
+Method in Point2D class
+boolean isEqual(Point2D anotherPoint)
+{...}
+
+
+
+3.4 Add a method to Point2D class -- to create and return new point having given x & y offset.
+eg : Point2D p1=new Point2D(10,20);
+Point2d p3=p1.createNewPoint(5,-2);//p3 : 15,18
+If user supplies offset of (5, -2) : your method should return a new point object placed at (15,18)
+eg : Point2D createNewPoint(int xOff,iny yOff){
+Point2D newPoint=new Point2D(this.x+xOff,this.y+yOff);
+return newPoint;
+}
+
+3.5 Add calculateDistance method to calculate distance between current point & specified point & return the distance to the caller.
+(eg double  calcDistance(Point2D anotherPoint))
+Hint : Use distance formula . Use java.lang.Math class methods --sqrt, pow etc.
+
+3.6 Write TestPoint class ,  with a main method
+Accept co ordinates of 2 points from user (Scanner) --p1 & p2
+
+3.7 Use getDetails method to display point details.(p1's details & p2's details)
+
+3.8 Invoke isEqual & display if points are same or different (i.e p1 & p2 are located at the same position)
+
+3.9 Create new point p3 , with the dimensions offset from p1.
+input --x offset & y offset
+eg : p1 : 50,100
+Point2D p1=new Point2D(sc.nextInt(),sc.nextInt());//50,100
+sop("Enter x off n y offset);
+Point2D p3=p1.createNewPoint(sc.nextInt(),sc.nextInt());// 5 -3
+//p3 : 55 97
+
+
+
+
+
+
+
+
+3.10 Display distance between 2 points.(between p1 & p2)
+-------------------------------
+Tomorrow's topics
+packages, classpath setting, access specifiers, revising arrays , intro to inheritance
+
+
+Day 3
+1. Revise entire class work.
+
+1.5 
+Copy earlier created Point2D class  n place it under the package "com.geometry"
+Copy earlier created TestPoint class n place it under "tester" package.
+Solve compiler errors n run it without IDE (set CLASSPATH , so that you can run it from anywhere)
+eg : day3_lab/src
+javac -d ..\bin tester\TestPoint.java
+cd ..\bin
+java tester.TestPoint
+
+
+2. Solve
+Create new eclipse project "day3_assgnment"
+Copy Point2D class n TestPoints classalong with the packages in IDE.
+
+2.1 Create a new tester in package "com.tester" : TestPointArray
+ Prompt user , how many points to plot?
+Create suitable array , to store Point2D type of references.
+eg : Point2D[] points=new Point2D[sc.nextInt()];//10 --- 1 obj --filled with 10 nulls
+
+2.2 Add a menu , Run the application till user chooses option 10 (exit)
+
+1 Plot a new point
+I/P --index , x & y
+eg : If user supplies 5 50 100
+Create a Point2D with x, y of (50,100) & its reference should be stored at the 5th index position in array.
+eg : case 1 : sop("Enter index x & y");
+read index , x, y
+boundary checking (0---points.length-1)
+points[index]=new Point2D(x,y);
+break;
+
+2 Display all points plotted so far. (Use for-each)
+Will null checking be required? : YESSS
+eg : for(Point2D p : points)//p=points[0]
+         if(p != null)
+          sop(p.getDetails());
+
+
+3. Test equality of 2 points
+I/P : index1 , index 2
+eg If user enters 1 7 , you have to check if point at 1st n 7th index is same.
+If same , print "SAME" , otherwise print "DIFFERENT"
+
+4. Calculate distance
+I/P strt , end point indexes.
+eg : If user enters 2 6
+Find out the distance between 2nd & 6th point. (array indexes start from 0)
+
+10. Exit
+
+Note : Boundary condition checking & null checking is expected.
+(Meaning : if user supplies invalid index , then give error message : invalid index --out of range
+If no point is plotted at user specified index , then give error message : invalid index -- no point plotted here.)
+
+
+Day 4
+1. Complete pending work
+
+2. Revise array examples , static keyword n inheritance using code samples & readmes
+refer : sequence.txt
+refer : from <readmes> :  "regarding static.txt", "regarding private members n inheritance", "readme inheritance_polymorphism"
+
+Day 5
+1. Revise complete class work.
+
+2. Apply inheritance & polymorphism to emp based organization scenario.
+
+Create Emp based organization structure --- Emp , Mgr , Worker
+All of above classes must be in package--com.app.org
+
+2.1 Emp state--- id(int), name, deptId(string) , basic(double)
+Accept all of above in constructor arguments.
+Behaviour ---1.  get emp details -- override toString.
+2. compute net salary ---return 0
+(eg : public double computeNetSalary(){return 0;})
+Tomorrow we will replace it by abstract method.
+
+
+2.2 Mgr state  ---id,name,basic,deptId , perfmonceBonus
+Behaviour ----1. get mgr details :  override toString. 
+2. compute net salary (formula: basic+perfmonceBonus) -- override computeNetSalary
+3. get performance bonus. --add a new method to return bonus.(getter)
+
+
+2.3 Worker state  --id,name,basic,deptId,hoursWorked,hourlyRate
+Behaviour--- 
+1. get worker details -- :  override toString.
+2.  compute net salary (formula:  = basic+(hoursWorked*hourlyRate) --override computeNetSalary
+3. get hrlyRate of the worker  -- add a new method to return hourly rate of a worker.(getter)
+
+Organize classes in inheritance  hierarchy.
+
+2.4 Write TestOrganization in "tester" package.
+Create suitable array to store organization details.
+eg : Emp[] emps=new Emp[sc.nextInt()];
+
+Provide following options. Run the application till "exit"
+
+1. Hire Manager
+eg : chk counter < emps.length
+emps[counter++]=new Mgr(....);
+2. Hire Worker  
+eg :  chk counter < emps.length
+emps[counter++]=new Worker(...);
+3. Display information of all employees including net salary  using single for-each loop.
+Display from the same for-each loop, performance bonus if it's a manager or if it's a worker , display hourly rate of the worker .
+eg : {m1,w1,w2,w3,m2,w4,w5,......}
+        for(Emp e : emps)//e=emps[0]
+        if (e != null)
+        {
+          sop(e);//toString : on which object => run time poly.
+          sop("net sal "+e.computeNetSalary());//computeNetSal : on which object => run time poly.
+    //      sop("Bonus "+e.getPerformanceBonus());//javac err
+           if (e instanceof Mgr)
+            sop("Bonus "+((Mgr)e).getPerformanceBonus());//downcasting :will not throw Classcastexc
+           else if (e instanceof Worker)
+            sop("Rate "+((Worker)e).getHourlyRate());
+            
+        }
+
+
+10 Exit
+
+Day 6
+1. Revise class work
+(abstract classes & interfaces)
+
+2. Can you apply abstraction in Day 5 assignment ?
+Hint : computeNetSalary method in Emp class.
+
+3. Complete Bank implementation for pay bills.
+
+4. Create a class Vehicle , under the package : com.app.vehicles , to represent any vehicle. 
+tight encapsulation
+state(data members)  : registrationNo : int , color : String , price : double
+registrationNo  MUST be unique (non duplicate) for any vehicle (primary Key : unique ID)
+Override toString to return complete state.
+DO NOT override equals
+
+
+
+Create a class TestVehicle under the package "tester"
+Accept details of 2 vehicles from user . 
+Display "SAME" or "DIFFERENT" , in case of same or different reg nos.
+(try to invoke equals : inherited from Object class : v1.equals(v2)) 
+
+
+Day7
+1. Revise entire exception handling using readmes n code samples.
+
+2. Solve covariance demo
+
+3. Solve  (Create new java project day7_assgn)
+3.1 Copy earlier Vehicle class
+3.2 Equality testing criteria : regNo & color
+(i.e 2 vehicles are same , if & only if , their regNo & color is same) 
+So make changes suitably
+3.3 Create custom exception class : VehicleHandlingException (checked exception)
+3.3 Create a ValidationRules class in "utils" package.
+Add a validation rule (i.e a static method) to check for a duplicate vehicle.
+This method should throw a custom exception , in case of a duplicate vehicle. 
+3.4 Create a Tester : VehicleShowroom 
+Create suitable data structure to store vehicle information.
+Add Options
+1. Add new vehicle :
+It should add a vehicle iff it's not duplicate.
+2. Display all vehicles
+3. Exit
+
+
+Day 8
+1. import day7_assgn eclipse project in your workspace. Understand the code.
+
+2. import day8.1 & revise string n date / time handling
+
+3. import day8.2 to see earlier vehicles example , with validations n date.
+(use readme n javadocs for the help)
+
+4. Fresh assignment will be discused later.
+Create Java application for customer management system.
+4.1 Customer : name(string),email(string),password(string),registrationAmount(double),dob(Date)
+Add/generate suitable constructor & toString
+Unique ID : email (where will you use this fact ?????????????????) : equals
+Will you add any other data member in Customer class for parsing n formatting? YES
+HOW ? : static data member : SDF
+
+
+4.2 Create custom exception class in a separate package
+CustomerHandlingException
+
+4.3 Create in "utils" package : ValidationRules
+Rules 
+email must contain "@" & should be from ".com" domain
+password must be min 4 max 10 chars long
+reg amount should be multiples of 500
+dob should be before 1st Jan 1995
+
+Add 2 different static methods : validateEmail n validatePassword
+Add a static method here to parse String---> Date
+eg : convertDate
+
+
+4.4 Create a simple tester : Tester1 (no while loop , no switch/case)
+MUST use try-with-resources to create scanner
+Prompt for customer details
+Validate customer details .
+Iff it's valid , create customer instance , display customer details(via toString) , o.w display err mesg via catch block
+
+Day 9
+1. import day9.1 & revise : var-args , wrappers, enums , nested classes
+
+2. import day9.2 & understand the flow.
+
+3. Optional assignment
+3.1 Copy day8_assgnment into new java project day9_assgnment
+3.2 Customers may belong to different categories , depending upon their reg amount(they can avail different type of services)
+Create CustomerCategory as an enum.
+Add these constants : SILVER,GOLD,DIAMOND,PLATINUM
+
+Add HAS-A relationship between Customer & CustomerCategory
+(Customer HAS-A CustomerCategory) 
+HOW ???????????????
+
+Modify constructor n toString suitably (HOW ??????????)
+
+3.3 Add a new validation rule to validate customer category , in ValidationRules class
+What will be the method declaration ??????????
+public static CustomerCategory validateCategory(String category){...}
+(Hint : valueOf)
+
+3.4 Modify Tester1 to accept customer category as the additional input & test it.
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,105 @@
+Revise
+
+Enums
+What is it ? : enum : keyword --set of related constants
+Which is the super class of all java enums ? : java.lang.Enum
+
+eg : public enum CustomerCategory
+{
+ SILVER,GOLD,DIAMOND,PLATINUM
+}
+
+eg class : public class CustomerCategory extends Enum
+
+what are legal access sepcifiers for enum ? : default/public 
+
+What will javac generate (for above constatnts)
+data member : self typed constants
+eg : public static final CustomerCategory SILVER; //null
+
+Which constructor added by javac ? : private CustomerCategory (String name,int ordinal)
+{
+   super(name,ordinal);
+}
+
+Static init block ? : 
+static {
+  SILVER=new CustomerCategory("SILVER",0);
+....
+  PLATINUM=new CustomerCategory("PLATINUM",3);
+}
+
+Which methods ?
+public static CustomerCategory[] values();
+public static CustomerCategory valueOf(String name) throws IllegalArgumentException
+eg : Tester :
+ validateCategory(sc.next());
+
+Utils :
+public static CustomerCategory validateCategory(String catgeory)
+{
+   return CustomerCategory.valueOf(category.toUpperCase());
+}
+
+
+Which method can be overridden ? : toString
+Which methods can not be overridden ? equals,hashCode,compareTo
+
+How will you establish : Customer HAS-A CustomerCategory ?
+By adding the ref of CustomerCategory  as a data member of Customer
+eg :
+public class Customer
+{
+ ..... +
+  private CustomerCategory category;
+
+
+}
+
+Nested classes : class declaed within another class
+Main 2 categories : non static nested class (inner class)
+method local inner class
+ano inner class
+
+non static nested class (inner class) :
+1. Can inner class contain static & non static members ?  NO (can contain only non static memebrs)
+no static methods, static final data members, no static init blocks
+2. Can inner class methods access outer's private members ? YES (directly=> w/o creating instance of the outer class)
+3. Can Outer class access inner's private members directly ? NO
+How to access ? : by creating inner class instance
+BUT in the static method of outer class : create Outer's instance n within that create inner's instance.
+-----------------------------------------------
+static nested class
+
+Today's topics 
+
+static nested classes : This not really a nested class, rather it's considered as the static member of the outer class.
+
+A static class  created inside a class is called static nested class in java. 
+
+It can contain static n non static memebrs.
+It cannot access non-static data members and methods of the outer class directly. 
+BUT can access static members of the outer class directly.
+It can be accessed by just outer class name.
+
+
+Method local Inner class
+A class  created inside a method is called method local inner class in java. 
+If you want to invoke the methods of local inner class, you must instantiate this class inside the method.
+
+Anonymous inner class
+An inner class with no name is known as anonymous inner class in java. 
+
+It can be used if you want to override method/s of class or interface. 
+
+Java Anonymous inner class can be created by two ways:
+
+Class (may be abstract or concrete).
+Interface
+
+
+
+Generics
+
+Overview of Collection Framework
+

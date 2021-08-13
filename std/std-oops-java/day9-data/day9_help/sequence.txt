@@ -1,0 +1,45 @@
+Revise
+Date Time Handling
+java.util.Date
+Constrs : 
+Date() : current date n time 
+Date(long msec) : msec elapsed after epoch date (1st Jan 1970)
+Methods : toString , before ,after,compareTo,equals
+eg : d1.compareTo(d2) --- -1 / 0 /1
+
+eg How to accept DoB of a customer ?
+SDF sdf=new SDF("dd-MM-yyyy");//static init block
+//parsing : string ---> date
+Date dob=sdf.parse(sc.next()); //throws ParseException : checked exc : MUST be handled
+//formatting : Date ---> String
+String formattedString=sdf.format(dob);
+-----------------------------------
+
+var-args
+
+Enum
+Objective : Create an enum : VehicleType : BIKE,SCOOTER,SUV,SEDAN,VAN
+What's relationship between a Vehicle n VehicleType : HAS-A (association)
+
+
+Wrapper classes in Java
+
+Association : HAS-A
+
+Nested classes : non static nested class (inner class)
+Objective : Add another state to the  Vehicle 
+DeliveryAddress : city , state , country, zipCode, phoneNo
+Add composition between Vehicle & Delivery address
+
+In Tester : Add Option : Purchase a Vehicle
+Input : regNo (Unique ID)
+validate : to check if vehicle exists ---in case err : throw exc
+Prompt for DeliveryAddress 
+Associate delivery address to the vehicle.(link)
+Display suitable mesg.
+
+
+
+
+
+
