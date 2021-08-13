@@ -1,0 +1,220 @@
+SQL> create or replace procedure cal_bonus(eno  number,y number,bonus_sal out number)
+  2  as
+  3  salary number(7,2);
+  4  per number(7,2);
+  5  bonus number(7,2);
+  6  begin
+  7  select sal into salary
+  8  from emp
+  9  where empno=eno;
+ 10  dbms_output.put_line(salary);
+ 11  select amt into per
+ 12  from emp_bonus where year=y;
+ 13  dbms_output.put_line(per);
+ 14  bonus:=(salary *per )/100;
+ 15  dbms_output.put_line(bonus);
+ 16  bonus_sal:=bonus+salary;
+ 17  dbms_output.put_line(bonus_sal);
+ 18  end;
+ 19  /
+
+Procedure created.
+
+SQL> begin
+  2  ;
+  3  /
+;
+*
+ERROR at line 2:
+ORA-06550: line 2, column 1: 
+PLS-00103: Encountered the symbol ";" when expecting one of the following: 
+( begin case declare exit for goto if loop mod null pragma 
+raise return select update while with <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> << 
+continue close current delete fetch lock insert open rollback 
+savepoint set sql execute commit forall merge pipe purge 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  salary_bonus number(7,2);
+  3  begin
+  4  cal_bonus(7788,2021,salary_bonus);
+  5  dbms_output.put_line(salary_bonus);
+  6* end
+  7  /
+end
+  *
+ERROR at line 6:
+ORA-06550: line 6, column 3: 
+PLS-00103: Encountered the symbol "end-of-file" when expecting one of the following: 
+; <an identifier> <a double-quoted delimited-identifier> 
+The symbol ";" was substituted for "end-of-file" to continue. 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  salary_bonus number(7,2);
+  3  begin
+  4  cal_bonus(7788,2021,salary_bonus);
+  5  dbms_output.put_line(salary_bonus);
+  6* end;
+SQL> /
+3000                                                                                                                    
+20                                                                                                                      
+600                                                                                                                     
+3600                                                                                                                    
+3600                                                                                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> create or replace procedure cal_bonus(eno  number,y number,bonus_sal out number)
+  2  as
+  3  salary number(7,2);
+  4  per number(7,2);
+  5  bonus number(7,2);
+  6  begin
+  7  select sal into salary
+  8  from emp
+  9  where empno=eno;
+ 10  dbms_output.put_line('emp salary '||salary);
+ 11  select amt into per
+ 12  from emp_bonus where year=y;
+ 13  dbms_output.put_line('percent '||per);
+ 14  bonus:=(salary *per )/100;
+ 15  dbms_output.put_line('Bonus amt '||bonus);
+ 16  bonus_sal:=bonus+salary;
+ 17  dbms_output.put_line('Bonus with salary '||bonus_sal);
+ 18  end;
+ 19  /
+
+Procedure created.
+
+SQL> declare
+  2      salary_bonus number(7,2);
+  3      begin
+  4      cal_bonus(7788,2021,salary_bonus);
+  5      dbms_output.put_line(salary_bonus);
+  6     end;
+  7     /
+emp salary 3000                                                                                                         
+percent 20                                                                                                              
+Bonus amt 600                                                                                                           
+Bonus with salary 3600                                                                                                  
+3600                                                                                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE CLUSTERID                                                                        
+------------------------------ ------- ---------                                                                        
+BONUS                          TABLE                                                                                    
+DEPT                           TABLE                                                                                    
+DUMMY                          TABLE                                                                                    
+EMP                            TABLE                                                                                    
+EMP_BONUS                      TABLE                                                                                    
+EMP_MONTH_SAL                  TABLE                                                                                    
+SALGRADE                       TABLE                                                                                    
+STUDENT                        TABLE                                                                                    
+
+8 rows selected.
+
+SQL> desc emp_month_sal;
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ EMPNO                                                                      NUMBER
+ SAL                                                                        NUMBER(7,2)
+ SAL_MONTH                                                                  DATE
+
+SQL> select * from emp_month_sal;
+
+no rows selected
+
+SQL>   declare
+  2      salary_bonus number(7,2);
+  3      begin
+  4      cal_bonus(7788,2021,salary_bonus);
+  5      dbms_output.put_line(salary_bonus);
+  6  
+  7  insert into emp_month_sal values (7788,salary_bonus,sysdate);
+  8     end;
+  9     /
+emp salary 3000                                                                                                         
+percent 20                                                                                                              
+Bonus amt 600                                                                                                           
+Bonus with salary 3600                                                                                                  
+3600                                                                                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from emp_month_sal;
+
+EMPNO   SAL SAL_MONTH                                                                                                   
+----- ----- ---------                                                                                                   
+ 7788  3600 20-JUL-21                                                                                                   
+
+SQL> ed d:\proc_cal_bonus.sql
+
+SQL> @ d:\proc_cal_bonus.sql
+
+Procedure created.
+
+SQL> ed call_proc_cal_bonus.sql
+
+SQL> ed d:\call_proc_cal_bonus.sql
+
+SQL> start d:\call_proc_cal_bonus.sql
+emp salary 3000                                                                                                         
+percent 20                                                                                                              
+Bonus amt 600                                                                                                           
+Bonus with salary 3600                                                                                                  
+3600                                                                                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL>  select * from emp_month_sal;
+
+EMPNO   SAL SAL_MONTH                                                                                                   
+----- ----- ---------                                                                                                   
+ 7788  3600 20-JUL-21                                                                                                   
+ 7788  3600 20-JUL-21                                                                                                   
+
+SQL> @ d:\call_proc_cal_bonus.sql
+Enter value for empno: 7902
+old   4:     cal_bonus(&empno,2021,salary_bonus);
+new   4:     cal_bonus(7902,2021,salary_bonus);
+emp salary 3000                                                                                                         
+percent 20                                                                                                              
+Bonus amt 600                                                                                                           
+Bonus with salary 3600                                                                                                  
+3600                                                                                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> @ d:\call_proc_cal_bonus.sql
+Enter value for empno: 7369
+old   4:     cal_bonus(&empno,2021,salary_bonus);
+new   4:     cal_bonus(7369,2021,salary_bonus);
+emp salary 800                                                                                                          
+percent 20                                                                                                              
+Bonus amt 160                                                                                                           
+Bonus with salary 960                                                                                                   
+960                                                                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL>  select * from emp_month_sal;
+
+EMPNO   SAL SAL_MONTH                                                                                                   
+----- ----- ---------                                                                                                   
+ 7788  3600 20-JUL-21                                                                                                   
+ 7788  3600 20-JUL-21                                                                                                   
+ 7902  3600 20-JUL-21                                                                                                   
+ 7369   960 20-JUL-21                                                                                                   
+
+SQL> spool off

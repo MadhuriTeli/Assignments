@@ -1,0 +1,932 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.22 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use test;
+Database changed
+mysql> select * from product;
++------+---------------+------+--------+------+
+| pid  | pname         | qty  | price  | cid  |
++------+---------------+------+--------+------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |
+|    3 | Pringles123   |   12 | 150.00 |    1 |
+|    4 | Marie gold    |   20 |  50.00 |    2 |
+|    5 | nice1234      |   35 |  45.00 |    2 |
+|    6 | good day123   |   45 |  60.00 |    2 |
+|   20 | Hide and seek |   45 |  40.00 |    2 |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |
+|  145 | bread         |   30 |  40.00 | NULL |
++------+---------------+------+--------+------+
+8 rows in set (0.02 sec)
+
+mysql> 150.00 |    1 |
+    ->
+    ->
+    -> ^C
+mysql> delimiter //
+mysql> create procedure display empdata()
+    -> begin
+    -> declare cset int default 0;
+    -> declare vname varchar(20),
+    -> declare vdt date;
+    -> declare empcur cursor for select ename,hiredate from emp where deptno=10;
+    -> declare continue handler for NOT FOUND set cset=1;
+    -> open empcur
+    -> lable1:loop
+    -> fetch empcur into vname,vdt
+    -> if cset=1 then
+    ->        leave lable1
+    -> end if
+    -> select vname,vdt
+    -> end loop
+    -> close cursor;
+    -> end//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'empdata()
+begin
+declare cset int default 0;
+declare vname varchar(20),
+declare v' at line 1
+mysql> delimiter ;
+mysql> delimiter //
+mysql> create procedure display empdata()
+    -> begin
+    -> declare cset int default 0;
+    -> declare vname varchar(20);
+    -> declare vdt date;
+    -> declare empcur cursor for select ename,hiredate from emp where deptno=10;
+    -> declare continue handler for NOT FOUND set cset=1;
+    -> open empcur;
+    -> lable1:loop
+    -> fetch empcur into vname,vdt;
+    -> if cset=1 then
+    ->        leave lable1;
+    -> end if;
+    -> select vname,vdt;
+    -> end loop;
+    -> close empcur;
+    -> end//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'empdata()
+begin
+declare cset int default 0;
+declare vname varchar(20);
+declare v' at line 1
+mysql> delimiter ;
+mysql> create procedure display_empdata()
+    -> begin
+    -> declare cset int default 0;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql> declare vname varchar(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'declare vname varchar(20)' at line 1
+mysql> declare vdt date;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'declare vdt date' at line 1
+mysql> declare empcur cursor for select ename,hiredate from emp where deptno=10;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'declare empcur cursor for select ename,hiredate from emp where deptno=10' at line 1
+mysql> declare continue handler for NOT FOUND set cset=1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'declare continue handler for NOT FOUND set cset=1' at line 1
+mysql> open empcur;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'open empcur' at line 1
+mysql> lable1:loop
+    -> fetch empcur into vname,vdt;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'lable1:loop
+fetch empcur into vname,vdt' at line 1
+mysql> if cset=1 then
+    ->        leave lable1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'if cset=1 then
+       leave lable1' at line 1
+mysql> end if;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'end if' at line 1
+mysql> select vname,vdt;
+ERROR 1054 (42S22): Unknown column 'vname' in 'field list'
+mysql> end loop;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'end loop' at line 1
+mysql> close empcur;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'close empcur' at line 1
+mysql> end//
+    -> delimiter ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'end//
+delimiter' at line 1
+mysql> delimiter //
+mysql> create procedure display_empdata()
+    -> begin
+    -> declare cset int default 0;
+    -> declare vname varchar(20);
+    -> declare vdt date;
+    -> declare empcur cursor for select ename,hiredate from emp where deptno=10;
+    -> declare continue handler for NOT FOUND set cset=1;
+    -> open empcur;
+    -> lable1:loop
+    -> fetch empcur into vname,vdt;
+    -> if cset=1 then
+    ->        leave lable1;
+    -> end if;
+    -> select vname,vdt;
+    -> end loop;
+    -> close empcur;
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> call display_empdata();
+ERROR 1146 (42S02): Table 'test.emp' doesn't exist
+mysql> use iacsdedacmay21;
+Database changed
+mysql> create procedure display_empdata()
+    -> begin
+    -> declare cset int default 0;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql> declare vname varchar(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'declare vname varchar(20)' at line 1
+mysql> declare vdt date;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'declare vdt date' at line 1
+mysql> declare empcur cursor for select ename,hiredate from emp where deptno=10;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'declare empcur cursor for select ename,hiredate from emp where deptno=10' at line 1
+mysql> declare continue handler for NOT FOUND set cset=1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'declare continue handler for NOT FOUND set cset=1' at line 1
+mysql> open empcur;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'open empcur' at line 1
+mysql> lable1:loop
+    -> fetch empcur into vname,vdt;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'lable1:loop
+fetch empcur into vname,vdt' at line 1
+mysql> if cset=1 then
+    ->        leave lable1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'if cset=1 then
+       leave lable1' at line 1
+mysql> end if;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'end if' at line 1
+mysql> select vname,vdt;
+ERROR 1054 (42S22): Unknown column 'vname' in 'field list'
+mysql> end loop;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'end loop' at line 1
+mysql> close empcur;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'close empcur' at line 1
+mysql> end//
+    -> delimiter ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'end//
+delimiter' at line 1
+mysql> delimiter //
+mysql> create procedure display_empdata()
+    -> begin
+    -> declare cset int default 0;
+    -> declare vname varchar(20);
+    -> declare vdt date;
+    -> declare empcur cursor for select ename,hiredate from emp where deptno=10;
+    -> declare continue handler for NOT FOUND set cset=1;
+    -> open empcur;
+    -> lable1:loop
+    -> fetch empcur into vname,vdt;
+    -> if cset=1 then
+    ->        leave lable1;
+    -> end if;
+    -> select vname,vdt;
+    -> end loop;
+    -> close empcur;
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> call display_empdata();
++---------+------------+
+| vname   | vdt        |
++---------+------------+
+| Rajas_D | 1998-02-02 |
++---------+------------+
+1 row in set (0.01 sec)
+
++----------+------------+
+| vname    | vdt        |
++----------+------------+
+| Devendra | 2000-04-25 |
++----------+------------+
+1 row in set (0.01 sec)
+
++-------+------------+
+| vname | vdt        |
++-------+------------+
+| Rajan | 2020-12-10 |
++-------+------------+
+1 row in set (0.01 sec)
+
++----------+------+
+| vname    | vdt  |
++----------+------+
+| Swapnali | NULL |
++----------+------+
+1 row in set (0.01 sec)
+
++--------+------+
+| vname  | vdt  |
++--------+------+
+| Sonali | NULL |
++--------+------+
+1 row in set (0.02 sec)
+
++-------+------------+
+| vname | vdt        |
++-------+------------+
+| CLARK | 1981-06-09 |
++-------+------------+
+1 row in set (0.03 sec)
+
++-------+------------+
+| vname | vdt        |
++-------+------------+
+| KING  | 1981-11-17 |
++-------+------------+
+1 row in set (0.09 sec)
+
++--------+------------+
+| vname  | vdt        |
++--------+------------+
+| MILLER | 1982-01-23 |
++--------+------------+
+1 row in set (0.11 sec)
+
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> delimiter //
+mysql> create procedure calculatediscount()
+    -> begin
+    -> declare cset int default 0;
+    -> declare vnm varchar(20);
+    -> declare vprice,vdispr decimal(9,2);
+    -> declare prcur cursor for select pname,price from product;
+    -> declare continue handler for NOT FOUND set cset=1;
+    -> open prcur;
+    -> label1: loop
+    -> fetch prcur into vnm,vprice;
+    -> if cset=1 then
+    ->       leave label1;
+    -> end if;
+    -> if vprice <100 then
+    ->        set vdispr=vprice-vprice*0.15;
+    -> elseif vprice < 150 then
+    ->        set vdispr=vprice-vprice*0.10;
+    -> else
+    ->         set vdispr=vprice-vprice*0.08;
+    -> end if;
+    -> select vnm,vprice, vdispr;
+    ->
+    -> end loop;
+    -> close prcur;
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from product;
+    -> //
+Empty set (0.01 sec)
+
+mysql> delimiter ;
+mysql> use test;
+Database changed
+mysql> select * from product
+    -> ;
++------+---------------+------+--------+------+
+| pid  | pname         | qty  | price  | cid  |
++------+---------------+------+--------+------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |
+|    3 | Pringles123   |   12 | 150.00 |    1 |
+|    4 | Marie gold    |   20 |  50.00 |    2 |
+|    5 | nice1234      |   35 |  45.00 |    2 |
+|    6 | good day123   |   45 |  60.00 |    2 |
+|   20 | Hide and seek |   45 |  40.00 |    2 |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |
+|  145 | bread         |   30 |  40.00 | NULL |
++------+---------------+------+--------+------+
+8 rows in set (0.00 sec)
+
+mysql> 150.00 |    1 |
+    -> |    3 | Pringles123   |   12 | 150.00 |    1 |
+    -> |    4 | Marie gold    |   20 |  50.00 |    2 |
+    -> |    5 | nice1234      |   35 |  45.00 |    2 |
+    -> |    6 | good day123   |   45 |  60.00 |    2 |
+    -> |   20 | Hide and seek |   45 |  40.00 |    2 |
+    -> |  123 | sfgdfg        |   45 | 123.00 |    3 |
+    -> |  145 | bread         |   30 |  40.00^C
+mysql>
+mysql> delimiter //
+mysql> create procedure calculatediscount()
+    -> begin
+    -> declare cset int default 0;
+    -> declare vnm varchar(20);
+    -> declare vprice,vdispr decimal(9,2);
+    -> declare prcur cursor for select pname,price from product;
+    -> declare continue handler for NOT FOUND set cset=1;
+    -> open prcur;
+    -> label1: loop
+    -> fetch prcur into vnm,vprice;
+    -> if cset=1 then
+    ->       leave label1;
+    -> end if;
+    -> if vprice <100 then
+    ->        set vdispr=vprice-vprice*0.15;
+    -> elseif vprice < 150 then
+    ->        set vdispr=vprice-vprice*0.10;
+    -> else
+    ->         set vdispr=vprice-vprice*0.08;
+    -> end if;
+    -> select vnm,vprice, vdispr;
+    ->
+    -> end loop;
+    -> close prcur;
+    -> end//
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call calculatediscount();
+    -> //
++-----------+--------+--------+
+| vnm       | vprice | vdispr |
++-----------+--------+--------+
+| Nachos123 | 150.00 | 138.00 |
++-----------+--------+--------+
+1 row in set (0.00 sec)
+
++-------------+--------+--------+
+| vnm         | vprice | vdispr |
++-------------+--------+--------+
+| Pringles123 | 150.00 | 138.00 |
++-------------+--------+--------+
+1 row in set (0.00 sec)
+
++------------+--------+--------+
+| vnm        | vprice | vdispr |
++------------+--------+--------+
+| Marie gold |  50.00 |  42.50 |
++------------+--------+--------+
+1 row in set (0.01 sec)
+
++----------+--------+--------+
+| vnm      | vprice | vdispr |
++----------+--------+--------+
+| nice1234 |  45.00 |  38.25 |
++----------+--------+--------+
+1 row in set (0.01 sec)
+
++-------------+--------+--------+
+| vnm         | vprice | vdispr |
++-------------+--------+--------+
+| good day123 |  60.00 |  51.00 |
++-------------+--------+--------+
+1 row in set (0.01 sec)
+
++---------------+--------+--------+
+| vnm           | vprice | vdispr |
++---------------+--------+--------+
+| Hide and seek |  40.00 |  34.00 |
++---------------+--------+--------+
+1 row in set (0.01 sec)
+
++--------+--------+--------+
+| vnm    | vprice | vdispr |
++--------+--------+--------+
+| sfgdfg | 123.00 | 110.70 |
++--------+--------+--------+
+1 row in set (0.03 sec)
+
++-------+--------+--------+
+| vnm   | vprice | vdispr |
++-------+--------+--------+
+| bread |  40.00 |  34.00 |
++-------+--------+--------+
+1 row in set (0.04 sec)
+
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> delimiter //
+mysql> create procedure disp_empdata(in psal int)
+    -> begin
+    -> declare cset int default 0;
+    -> declare vnm,vjob varchar(20);
+    -> declare data varchar(200) default '';
+    -> declare empcur cursor for select ename,job from emp;
+    -> declare continue handler for NOT FOUND set cset=1;
+    -> open empcur;
+    -> label1:loop
+    -> fetch empcur into vnm,vjob;
+    -> if cset=1 then
+    ->        leave label1;
+    -> end if;
+    ->       set  data=concat(data,vnm,'----',vjob,',');
+    -> end loop;
+    -> select data;
+    -> close empcur;
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call disp_empdata();
+    -> //
+ERROR 1318 (42000): Incorrect number of arguments for PROCEDURE test.disp_empdata; expected 1, got 0
+mysql> call disp_empdata(2000);
+    -> //
+ERROR 1146 (42S02): Table 'test.emp' doesn't exist
+mysql> use iacsdedacmay21;
+ERROR 1049 (42000): Unknown database 'iacsdedacmay21;'
+mysql> use iacsdedacmay21
+Database changed
+mysql> delimiter //
+mysql> create procedure disp_empdata(in psal int)
+    -> begin
+    -> declare cset int default 0;
+    -> declare vnm,vjob varchar(20);
+    -> declare data varchar(200) default '';
+    -> declare empcur cursor for select ename,job from emp;
+    -> declare continue handler for NOT FOUND set cset=1;
+    -> open empcur;
+    -> label1:loop
+    -> fetch empcur into vnm,vjob;
+    -> if cset=1 then
+    ->        leave label1;
+    -> end if;
+    ->       set  data=concat(data,vnm,'----',vjob,',');
+    -> end loop;
+    -> select data;
+    -> close empcur;
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call disp_empdata(2000);
+    -> //
+ERROR 1406 (22001): Data too long for column 'data' at row 1
+mysql> drop procedure disp_empdata;
+    -> //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter //
+mysql> create procedure disp_empdata(in psal int)
+    -> begin
+    -> declare cset int default 0;
+    -> declare vnm,vjob varchar(20);
+    -> declare data varchar(500) default '';
+    -> declare empcur cursor for select ename,job from emp;
+    -> declare continue handler for NOT FOUND set cset=1;
+    -> open empcur;
+    -> label1:loop
+    -> fetch empcur into vnm,vjob;
+    -> if cset=1 then
+    ->        leave label1;
+    -> end if;
+    ->       set  data=concat(data,vnm,'----',vjob,',');
+    -> end loop;
+    -> select data;
+    -> close empcur;
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call disp_empdata(2000);
+    -> //
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| data                                                                                                                                                                                                                                                                                                                                                                                                  |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Rajas_D----Manager,Devendra----Analyst,Rajan----designer,Revati----designer,Swapnali----analyst,Swapnali----analyst,Sonali----analyst,Ashwini----ANALYST,SMITH----CLERK,ALLEN----SALESMAN,WARD----SALESMAN,JONES----MANAGER,MARTIN----SALESMAN,BLAKE----MANAGER,CLARK----MANAGER,SCOTT----ANALYST,KING----PRESIDENT,TURNER----SALESMAN,ADAMS----CLERK,JAMES----CLERK,FORD----ANALYST,MILLER----CLERK, |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> delimiter//
+ERROR:
+DELIMITER must be followed by a 'delimiter' character or string
+mysql> create procedure update_sal()
+    -> begin
+    ->    declare vempno,vsal int;
+    ->    declare cset int default 0;
+    ->    declare vjob varchar(20);
+    ->    declare empcur cursor for select empno, job,sal from emp;
+    ->    declare continue handler for not found set cset=1;
+    ->    open empcur;
+    ->   label1:loop
+    ->         fetch empcur into vempno,vjob,vsal;
+    ->         if cset=1 then
+    ->               leave label1;
+    ->         end if;
+    ->        #procee data
+    ->         if vjob='MANAGER' then
+    ->               update emp
+    ->               set sal=vsal*1.10
+    ->                where empno=vempno;
+    ->        elseif  vjob='ANALYST' then
+    ->               update emp
+    ->               set sal=vsal*1.15
+    ->                where empno=vempno;
+    ->         elseif  vjob='CLERK' then
+    ->               update emp
+    ->               set sal=vsal*1.30
+    ->                where empno=vempno;
+    ->         else
+    ->                 update emp
+    ->                 set sal=vsal*1.35
+    ->                 where empno=vempno;
+    ->       end if;
+    -> end loop;
+    -> close empcur;
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from emp;
+    -> //
++-------+----------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME    | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+----------+-----------+------+------------+----------+---------+--------+
+|     1 | Rajas_D  | Manager   | 7902 | 1998-02-02 |  3756.00 |  345.00 |     10 |
+|   111 | Devendra | Analyst   | NULL | 2000-04-25 |     NULL |    NULL |     10 |
+|   123 | Rajan    | designer  | 7902 | 2020-12-10 | 34867.00 | 3456.00 |     10 |
+|   124 | Revati   | designer  | 7902 | 1999-12-10 | 34767.00 | 3456.00 |     20 |
+|   221 | Swapnali | analyst   | NULL | NULL       |  3456.00 |    NULL |     20 |
+|   222 | Swapnali | analyst   | NULL | NULL       |  3456.00 |    NULL |     10 |
+|   223 | Sonali   | analyst   | NULL | NULL       |  3457.00 |    NULL |     10 |
+|  1111 | Ashwini  | ANALYST   | NULL | NULL       |  2345.00 |    NULL |   NULL |
+|  7369 | SMITH    | CLERK     | 7902 | 1980-12-17 |  1000.00 |    NULL |     20 |
+|  7499 | ALLEN    | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD     | SALESMAN  | 7698 | 1981-02-22 |  1600.00 |  500.00 |     30 |
+|  7566 | JONES    | MANAGER   | 7839 | 1981-04-02 |  3175.00 |    NULL |     20 |
+|  7654 | MARTIN   | SALESMAN  | 7698 | 1981-09-28 |  1600.00 | 1400.00 |     30 |
+|  7698 | BLAKE    | MANAGER   | 7839 | 1981-05-01 |  1600.00 |    NULL |     30 |
+|  7782 | CLARK    | MANAGER   | 7839 | 1981-06-09 |  2750.00 |    NULL |     10 |
+|  7788 | SCOTT    | ANALYST   | 7566 | 1982-12-09 |  3200.00 |    NULL |     20 |
+|  7839 | KING     | PRESIDENT | NULL | 1981-11-17 |  5300.00 |    NULL |     10 |
+|  7844 | TURNER   | SALESMAN  | 7698 | 1981-09-08 |  1600.00 |    0.00 |     30 |
+|  7876 | ADAMS    | CLERK     | 7788 | 1983-01-12 |  1300.00 |    NULL |     20 |
+|  7900 | JAMES    | CLERK     | 7698 | 1981-12-03 |  1600.00 |    NULL |     30 |
+|  7902 | FORD     | ANALYST   | 7566 | 1981-12-03 |  3200.00 |    NULL |     20 |
+|  7934 | MILLER   | CLERK     | 7782 | 1982-01-23 |  1600.00 |    NULL |     10 |
++-------+----------+-----------+------+------------+----------+---------+--------+
+22 rows in set (0.00 sec)
+
+mysql> call update_sal();
+    -> //
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select * from emp;
+    -> //
++-------+----------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME    | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+----------+-----------+------+------------+----------+---------+--------+
+|     1 | Rajas_D  | Manager   | 7902 | 1998-02-02 |  4131.60 |  345.00 |     10 |
+|   111 | Devendra | Analyst   | NULL | 2000-04-25 |     NULL |    NULL |     10 |
+|   123 | Rajan    | designer  | 7902 | 2020-12-10 | 47070.45 | 3456.00 |     10 |
+|   124 | Revati   | designer  | 7902 | 1999-12-10 | 46935.45 | 3456.00 |     20 |
+|   221 | Swapnali | analyst   | NULL | NULL       |  3974.40 |    NULL |     20 |
+|   222 | Swapnali | analyst   | NULL | NULL       |  3974.40 |    NULL |     10 |
+|   223 | Sonali   | analyst   | NULL | NULL       |  3975.55 |    NULL |     10 |
+|  1111 | Ashwini  | ANALYST   | NULL | NULL       |  2696.75 |    NULL |   NULL |
+|  7369 | SMITH    | CLERK     | 7902 | 1980-12-17 |  1300.00 |    NULL |     20 |
+|  7499 | ALLEN    | SALESMAN  | 7698 | 1981-02-20 |  2160.00 |  300.00 |     30 |
+|  7521 | WARD     | SALESMAN  | 7698 | 1981-02-22 |  2160.00 |  500.00 |     30 |
+|  7566 | JONES    | MANAGER   | 7839 | 1981-04-02 |  3492.50 |    NULL |     20 |
+|  7654 | MARTIN   | SALESMAN  | 7698 | 1981-09-28 |  2160.00 | 1400.00 |     30 |
+|  7698 | BLAKE    | MANAGER   | 7839 | 1981-05-01 |  1760.00 |    NULL |     30 |
+|  7782 | CLARK    | MANAGER   | 7839 | 1981-06-09 |  3025.00 |    NULL |     10 |
+|  7788 | SCOTT    | ANALYST   | 7566 | 1982-12-09 |  3680.00 |    NULL |     20 |
+|  7839 | KING     | PRESIDENT | NULL | 1981-11-17 |  7155.00 |    NULL |     10 |
+|  7844 | TURNER   | SALESMAN  | 7698 | 1981-09-08 |  2160.00 |    0.00 |     30 |
+|  7876 | ADAMS    | CLERK     | 7788 | 1983-01-12 |  1690.00 |    NULL |     20 |
+|  7900 | JAMES    | CLERK     | 7698 | 1981-12-03 |  2080.00 |    NULL |     30 |
+|  7902 | FORD     | ANALYST   | 7566 | 1981-12-03 |  3680.00 |    NULL |     20 |
+|  7934 | MILLER   | CLERK     | 7782 | 1982-01-23 |  2080.00 |    NULL |     10 |
++-------+----------+-----------+------+------------+----------+---------+--------+
+22 rows in set (0.00 sec)
+
+mysql> delimiter //
+mysql> create function calculateexp(dt1 date,dt2 date) returns int
+    -> begin
+    -> declare vexp int;
+    -> set vexp= floor(datediff(dt1,dt2)/365)
+    -> return vexp;
+    -> end//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'return vexp;
+end' at line 5
+mysql> delimiter //
+mysql> create function calculateexp(dt1 date,dt2 date) returns int
+    -> begin
+    -> declare vexp int;
+    -> set vexp= floor(datediff(dt1,dt2)/365);
+    -> return vexp;
+    -> end//
+ERROR 1418 (HY000): This function has none of DETERMINISTIC, NO SQL, or READS SQL DATA in its declaration and binary logging is enabled (you *might* want to use the less safe log_bin_trust_function_creators variable)
+mysql>  SET GLOBAL log_bin_trust_function_creators = 1;
+    -> //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delimiter //
+mysql> create function calculateexp(dt1 date,dt2 date) returns int
+    -> begin
+    -> declare vexp int;
+    -> set vexp= floor(datediff(dt1,dt2)/365);
+    -> return vexp;
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select empno,ename,hiredate,calculateexp(curdate(),hiredate)
+    -> from emp;
+    -> //
++-------+----------+------------+----------------------------------+
+| empno | ename    | hiredate   | calculateexp(curdate(),hiredate) |
++-------+----------+------------+----------------------------------+
+|     1 | Rajas_D  | 1998-02-02 |                               23 |
+|   111 | Devendra | 2000-04-25 |                               21 |
+|   123 | Rajan    | 2020-12-10 |                                0 |
+|   124 | Revati   | 1999-12-10 |                               21 |
+|   221 | Swapnali | NULL       |                             NULL |
+|   222 | Swapnali | NULL       |                             NULL |
+|   223 | Sonali   | NULL       |                             NULL |
+|  1111 | Ashwini  | NULL       |                             NULL |
+|  7369 | SMITH    | 1980-12-17 |                               40 |
+|  7499 | ALLEN    | 1981-02-20 |                               40 |
+|  7521 | WARD     | 1981-02-22 |                               40 |
+|  7566 | JONES    | 1981-04-02 |                               40 |
+|  7654 | MARTIN   | 1981-09-28 |                               39 |
+|  7698 | BLAKE    | 1981-05-01 |                               40 |
+|  7782 | CLARK    | 1981-06-09 |                               40 |
+|  7788 | SCOTT    | 1982-12-09 |                               38 |
+|  7839 | KING     | 1981-11-17 |                               39 |
+|  7844 | TURNER   | 1981-09-08 |                               39 |
+|  7876 | ADAMS    | 1983-01-12 |                               38 |
+|  7900 | JAMES    | 1981-12-03 |                               39 |
+|  7902 | FORD     | 1981-12-03 |                               39 |
+|  7934 | MILLER   | 1982-01-23 |                               39 |
++-------+----------+------------+----------------------------------+
+22 rows in set (0.00 sec)
+
+mysql> select empno,ename,hiredate,calculateexp(curdate(),hiredate) experience
+    -> from emp
+    -> where calculateexp(curdate(),hiredate)>35;
+    -> //
++-------+--------+------------+------------+
+| empno | ename  | hiredate   | experience |
++-------+--------+------------+------------+
+|  7369 | SMITH  | 1980-12-17 |         40 |
+|  7499 | ALLEN  | 1981-02-20 |         40 |
+|  7521 | WARD   | 1981-02-22 |         40 |
+|  7566 | JONES  | 1981-04-02 |         40 |
+|  7654 | MARTIN | 1981-09-28 |         39 |
+|  7698 | BLAKE  | 1981-05-01 |         40 |
+|  7782 | CLARK  | 1981-06-09 |         40 |
+|  7788 | SCOTT  | 1982-12-09 |         38 |
+|  7839 | KING   | 1981-11-17 |         39 |
+|  7844 | TURNER | 1981-09-08 |         39 |
+|  7876 | ADAMS  | 1983-01-12 |         38 |
+|  7900 | JAMES  | 1981-12-03 |         39 |
+|  7902 | FORD   | 1981-12-03 |         39 |
+|  7934 | MILLER | 1982-01-23 |         39 |
++-------+--------+------------+------------+
+14 rows in set (0.00 sec)
+
+mysql> show function code calculateexp;
+    -> //
+ERROR 1289 (HY000): The 'SHOW PROCEDURE|FUNCTION CODE' feature is disabled; you need MySQL built with '--with-debug' to have it working
+mysql> show create function calculateexp;
+    -> //
++--------------+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+--------------------+
+| Function     | sql_mode                                   | Create Function                                                                                                                                                           | character_set_client | collation_connection | Database Collation |
++--------------+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+--------------------+
+| calculateexp | STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION | CREATE DEFINER=`root`@`localhost` FUNCTION `calculateexp`(dt1 date,dt2 date) RETURNS int
+begin
+declare vexp int;
+set vexp= floor(datediff(dt1,dt2)/365);
+return vexp;
+end | cp850                | cp850_general_ci     | utf8mb4_0900_ai_ci |
++--------------+--------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------+----------------------+--------------------+
+1 row in set (0.00 sec)
+
+mysql> create function calculatediscount(ppr decimal(9,2)) returns int
+    -> begin
+    -> declare vdisc int default 0;
+    -> if ppr <100 then
+    ->       set vdisc=10;
+    -> elseif ppr<150 then
+    ->       set vdisc=15;
+    -> else
+    ->        set vdisc=20;
+    -> end if;
+    -> end//
+ERROR 1320 (42000): No RETURN found in FUNCTION iacsdedacmay21.calculatediscount
+mysql> create function calculatediscount(ppr decimal(9,2)) returns int
+    -> begin
+    -> declare vdisc int default 0;
+    -> if ppr <100 then
+    ->       set vdisc=10;
+    -> elseif ppr<150 then
+    ->       set vdisc=15;
+    -> else
+    ->        set vdisc=20;
+    -> end if;
+    -> return vdisc;
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> drop function calculatediscount;
+    -> //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> Query OK, 0 rows affected (0.01 sec)
+    ->
+    -> mysql>
+    ->
+    -> ^C
+mysql>
+mysql> delimiter //
+mysql> create function calculatediscount(ppr decimal(9,2)) returns int
+    -> begin
+    -> declare vdisc int default 0;
+    -> if ppr <100 then
+    ->       set vdisc=price-price*0.10;
+    -> elseif ppr<150 then
+    ->       set vdisc=price-price*0.15;
+    -> else
+    ->        set vdisc=price-price*0.20;
+    -> end if;
+    -> return vdisc;
+    -> end//
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> drop function calculatediscount;
+    -> //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create function calculatediscount(ppr decimal(9,2)) returns int
+    -> begin
+    -> declare vdisc int default 0;
+    -> if ppr <100 then
+    ->       set vdisc=ppr-ppr*0.10;
+    -> elseif ppr<150 then
+    ->       set vdisc=ppr-ppr*0.15;
+    -> else
+    ->        set vdisc=ppr-ppr*0.20;
+    -> end if;
+    -> return vdisc;
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from product;
+    -> //
+Empty set (0.00 sec)
+
+mysql> use test;
+ERROR 1049 (42000): Unknown database 'test;'
+mysql> use test
+Database changed
+mysql> create function calculatediscount(ppr decimal(9,2)) returns int
+    -> begin
+    -> declare vdisc int default 0;
+    -> if ppr <100 then
+    ->       set vdisc=ppr-ppr*0.10;
+    -> elseif ppr<150 then
+    ->       set vdisc=ppr-ppr*0.15;
+    -> else
+    ->        set vdisc=ppr-ppr*0.20;
+    -> end if;
+    -> return vdisc;
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from product;
+    -> //
++------+---------------+------+--------+------+
+| pid  | pname         | qty  | price  | cid  |
++------+---------------+------+--------+------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |
+|    3 | Pringles123   |   12 | 150.00 |    1 |
+|    4 | Marie gold    |   20 |  50.00 |    2 |
+|    5 | nice1234      |   35 |  45.00 |    2 |
+|    6 | good day123   |   45 |  60.00 |    2 |
+|   20 | Hide and seek |   45 |  40.00 |    2 |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |
+|  145 | bread         |   30 |  40.00 | NULL |
++------+---------------+------+--------+------+
+8 rows in set (0.00 sec)
+
+mysql> select pid,pname,price,calculatediscount(price)
+    -> from product;
+    -> //
++------+---------------+--------+--------------------------+
+| pid  | pname         | price  | calculatediscount(price) |
++------+---------------+--------+--------------------------+
+|    2 | Nachos123     | 150.00 |                      120 |
+|    3 | Pringles123   | 150.00 |                      120 |
+|    4 | Marie gold    |  50.00 |                       45 |
+|    5 | nice1234      |  45.00 |                       41 |
+|    6 | good day123   |  60.00 |                       54 |
+|   20 | Hide and seek |  40.00 |                       36 |
+|  123 | sfgdfg        | 123.00 |                      105 |
+|  145 | bread         |  40.00 |                       36 |
++------+---------------+--------+--------------------------+
+8 rows in set (0.00 sec)
+
+mysql> create procedure dis_discount()
+    -> begin
+    ->   select pid,pname,price,calculatediscount(price)
+    ->   from product;
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call dis_discount();
+    -> //
++------+---------------+--------+--------------------------+
+| pid  | pname         | price  | calculatediscount(price) |
++------+---------------+--------+--------------------------+
+|    2 | Nachos123     | 150.00 |                      120 |
+|    3 | Pringles123   | 150.00 |                      120 |
+|    4 | Marie gold    |  50.00 |                       45 |
+|    5 | nice1234      |  45.00 |                       41 |
+|    6 | good day123   |  60.00 |                       54 |
+|   20 | Hide and seek |  40.00 |                       36 |
+|  123 | sfgdfg        | 123.00 |                      105 |
+|  145 | bread         |  40.00 |                       36 |
++------+---------------+--------+--------------------------+
+8 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> use iacsdedacmay21
+Database changed
+mysql> create function generateemail(nm varchar(20), job varchar(20)) returns varchar(30)
+    -> begin
+    -> declare vemail varchar(30);
+    ->       set vemail=concat(ename,’.’,substr(job,1,3),’@mycompany.com’);
+    ->       return vemail;
+    -> end//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?.?,substr(job,1,3),?@mycompany.com?);
+      return vemail;
+end' at line 4
+mysql> delimiter //
+mysql> create function generateemail(pnm varchar(20), pjob varchar(20)) returns varchar(30)
+    -> begin
+    -> declare vemail varchar(30);
+    ->       set vemail=concat(pnm,'.',substr(pjob,1,3),'@mycompany.com');
+    ->       return vemail;
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select empno,ename,job,generateemail(ename,job)
+    -> from emp;
+    -> //
++-------+----------+-----------+----------------------------+
+| empno | ename    | job       | generateemail(ename,job)   |
++-------+----------+-----------+----------------------------+
+|     1 | Rajas_D  | Manager   | Rajas_D.Man@mycompany.com  |
+|   111 | Devendra | Analyst   | Devendra.Ana@mycompany.com |
+|   123 | Rajan    | designer  | Rajan.des@mycompany.com    |
+|   124 | Revati   | designer  | Revati.des@mycompany.com   |
+|   221 | Swapnali | analyst   | Swapnali.ana@mycompany.com |
+|   222 | Swapnali | analyst   | Swapnali.ana@mycompany.com |
+|   223 | Sonali   | analyst   | Sonali.ana@mycompany.com   |
+|  1111 | Ashwini  | ANALYST   | Ashwini.ANA@mycompany.com  |
+|  7369 | SMITH    | CLERK     | SMITH.CLE@mycompany.com    |
+|  7499 | ALLEN    | SALESMAN  | ALLEN.SAL@mycompany.com    |
+|  7521 | WARD     | SALESMAN  | WARD.SAL@mycompany.com     |
+|  7566 | JONES    | MANAGER   | JONES.MAN@mycompany.com    |
+|  7654 | MARTIN   | SALESMAN  | MARTIN.SAL@mycompany.com   |
+|  7698 | BLAKE    | MANAGER   | BLAKE.MAN@mycompany.com    |
+|  7782 | CLARK    | MANAGER   | CLARK.MAN@mycompany.com    |
+|  7788 | SCOTT    | ANALYST   | SCOTT.ANA@mycompany.com    |
+|  7839 | KING     | PRESIDENT | KING.PRE@mycompany.com     |
+|  7844 | TURNER   | SALESMAN  | TURNER.SAL@mycompany.com   |
+|  7876 | ADAMS    | CLERK     | ADAMS.CLE@mycompany.com    |
+|  7900 | JAMES    | CLERK     | JAMES.CLE@mycompany.com    |
+|  7902 | FORD     | ANALYST   | FORD.ANA@mycompany.com     |
+|  7934 | MILLER   | CLERK     | MILLER.CLE@mycompany.com   |
++-------+----------+-----------+----------------------------+
+22 rows in set (0.00 sec)
+
+mysql> select empno,ename,job,generateemail(ename,job) email
+    -> from emp;
+    -> //
++-------+----------+-----------+----------------------------+
+| empno | ename    | job       | email                      |
++-------+----------+-----------+----------------------------+
+|     1 | Rajas_D  | Manager   | Rajas_D.Man@mycompany.com  |
+|   111 | Devendra | Analyst   | Devendra.Ana@mycompany.com |
+|   123 | Rajan    | designer  | Rajan.des@mycompany.com    |
+|   124 | Revati   | designer  | Revati.des@mycompany.com   |
+|   221 | Swapnali | analyst   | Swapnali.ana@mycompany.com |
+|   222 | Swapnali | analyst   | Swapnali.ana@mycompany.com |
+|   223 | Sonali   | analyst   | Sonali.ana@mycompany.com   |
+|  1111 | Ashwini  | ANALYST   | Ashwini.ANA@mycompany.com  |
+|  7369 | SMITH    | CLERK     | SMITH.CLE@mycompany.com    |
+|  7499 | ALLEN    | SALESMAN  | ALLEN.SAL@mycompany.com    |
+|  7521 | WARD     | SALESMAN  | WARD.SAL@mycompany.com     |
+|  7566 | JONES    | MANAGER   | JONES.MAN@mycompany.com    |
+|  7654 | MARTIN   | SALESMAN  | MARTIN.SAL@mycompany.com   |
+|  7698 | BLAKE    | MANAGER   | BLAKE.MAN@mycompany.com    |
+|  7782 | CLARK    | MANAGER   | CLARK.MAN@mycompany.com    |
+|  7788 | SCOTT    | ANALYST   | SCOTT.ANA@mycompany.com    |
+|  7839 | KING     | PRESIDENT | KING.PRE@mycompany.com     |
+|  7844 | TURNER   | SALESMAN  | TURNER.SAL@mycompany.com   |
+|  7876 | ADAMS    | CLERK     | ADAMS.CLE@mycompany.com    |
+|  7900 | JAMES    | CLERK     | JAMES.CLE@mycompany.com    |
+|  7902 | FORD     | ANALYST   | FORD.ANA@mycompany.com     |
+|  7934 | MILLER   | CLERK     | MILLER.CLE@mycompany.com   |
++-------+----------+-----------+----------------------------+
+22 rows in set (0.00 sec)
+
+mysql>

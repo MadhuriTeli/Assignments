@@ -1,0 +1,17 @@
+create or replace trigger restict_user_student
+before delete or insert or update
+on student
+declare
+var varchar2(10);
+begin
+select to_char(sysdate,'day') into var
+from dual;
+
+if var='wednesday' then
+RAISE_APPLICATION_ERROR(-20001,'No any operation allowed today...');
+end if;
+
+dbms_output.put_line('---trigger run ---');
+
+end;
+/

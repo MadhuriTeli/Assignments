@@ -1,0 +1,6145 @@
+Microsoft Windows [Version 10.0.19043.1083]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\anilk>mongo
+MongoDB shell version v4.2.11
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("2246660c-bee7-4de3-9707-3e630c5585ee") }
+MongoDB server version: 4.2.11
+Server has startup warnings:
+2021-07-13T03:04:00.237+0530 I  CONTROL  [initandlisten]
+2021-07-13T03:04:00.237+0530 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2021-07-13T03:04:00.237+0530 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2021-07-13T03:04:00.237+0530 I  CONTROL  [initandlisten]
+---
+Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+and anyone you share the URL with. MongoDB may use this information to make product
+improvements and to suggest MongoDB products and deployment options to you.
+
+To enable free monitoring, run the following command: db.enableFreeMonitoring()
+To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+
+> show dbs;
+admin         0.000GB
+config        0.000GB
+iacsdedbda    0.005GB
+knowitdbedac  0.004GB
+local         0.000GB
+mydb          0.000GB
+test          0.005GB
+> use iacsdedac
+switched to db iacsdedac
+> db
+iacsdedac
+> show dbs
+admin         0.000GB
+config        0.000GB
+iacsdedbda    0.005GB
+knowitdbedac  0.004GB
+local         0.000GB
+mydb          0.000GB
+test          0.005GB
+> db.createCollection('mycollection')
+{ "ok" : 1 }
+> show collections
+mycollection
+> show dbs
+admin         0.000GB
+config        0.000GB
+iacsdedac     0.000GB
+iacsdedbda    0.005GB
+knowitdbedac  0.004GB
+local         0.000GB
+mydb          0.000GB
+test          0.005GB
+> db.emp.insert({empid:12,ename:'kishori'})
+WriteResult({ "nInserted" : 1 })
+> show collections
+emp
+mycollection
+> show collections
+emp
+movie
+mycollection
+> show collections
+emp
+movie
+mycollection
+restaurent
+> db.movie.find()
+{ "_id" : ObjectId("5aaa3334639395f86922a882"), "name" : "aradhana", "actor" : [ "amitabh", "prem", "rajesh khanna" ], "rating" : 3, "ticket_no" : 550, "price" : 260 }
+{ "_id" : ObjectId("5aaa31ee639395f86922a87f"), "name" : "3 idiots", "actor" : [ "Kareena Kapoor", "amir", "kareena", "mahadavan", "sharman" ], "rating" : 3, "ticket_no" : 150, "price" : 200 }
+{ "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"), "name" : "Andhadhund", "price" : null, "actor" : [ "Tabbu" ], "rating" : 4 }
+{ "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"), "name" : "padmavat", "rating" : 4, "price" : 250, "ticket_no" : 300, "actor" : [ "Deepika", "shahid kapoor", "ranveer singh", "aditi Rao", "aaaaa" ], "cancellation" : { "date" : Timestamp(1567175239, 1) } }
+{ "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"), "name" : "mission mangal", "price" : 350, "actor" : [ "Sonakshi", "Vidya Balan" ], "rating" : 6 }
+{ "_id" : ObjectId("5c865923d82c19b8ed996550"), "name" : "Dil dhadakane do", "rating" : 3, "price" : 340, "actor" : "['Anil kapoor']" }
+{ "_id" : ObjectId("5c8283789eb55675f0272933"), "name" : "uri", "rating" : 5, "actor" : [ "vicky kaushal", "yami", "Paresh Rawal" ] }
+{ "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"), "name" : "newton", "ticket_no" : 690, "actor" : [ "Rajkumar Rao", "Pankaj Tripathi" ], "price" : 310, "lastmodified" : ISODate("2019-09-28T14:47:49.204Z") }
+{ "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"), "name" : "Kesari", "actor" : [ "Akshay Kumar", "Pariniti chopra" ], "rating" : 6, "price" : 350, "ticket_no" : 270, "rdate" : ISODate("2019-01-23T00:00:00Z") }
+{ "_id" : ObjectId("5aaa3334639395f86922a880"), "name" : "lagaan", "actor" : [ "amir", "angraz" ], "rating" : 6, "ticket_no" : 410, "price" : 350, "cancellation" : { "date" : Timestamp(1554356003, 1), "reason" : "user request" }, "lastModified" : ISODate("2019-04-04T05:33:23.022Z") }
+{ "_id" : ObjectId("5aab6da4639395f86922a883"), "name" : "kahani 2", "ticket_no" : 820, "actor" : [ "vidya", "Arjun", "Jonny", "nawaz", "prasad", "Shreyas", "Jonny", "yash" ], "rating" : 5, "price" : 200 }
+{ "_id" : ObjectId("5d8f6eec620d2353221b91dd"), "price" : 280 }
+{ "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"), "name" : "dream girl", "actor" : [ "ayushman", "nushrat bharucha" ], "price" : 250, "rating" : null }
+{ "_id" : ObjectId("5d89e9adfd4adc2f84279f43"), "name" : "chichore", "price" : 274, "rating" : 4.3, "actor" : [ "sushant", "shradha kapoor", "zzz", "harshal" ] }
+{ "_id" : ObjectId("5aaa3334639395f86922a881"), "name" : "sholay", "actor" : [ "Dharamendra", "Amitabh", "Sachin Pilgaokar", "Dharamendra", "Dharamendra", "Mr. Khote", "jaya bacchan", "sanjiv kapoor" ], "rating" : 6, "ticket_no" : 550, "price" : 350, "position" : [ 2, 2 ] }
+{ "_id" : ObjectId("5ca456072952ebdd7ae2a930"), "name" : "paa", "actor" : [ "Amitabh", "vidya balan", "Abhishek" ], "rating" : 2, "price" : 270, "ticket_no" : 210, "rdate" : ISODate("2019-01-23T00:00:00Z"), "others" : { "director" : "R Balki", "songs" : "Amit trivedi" } }
+{ "_id" : ObjectId("5aaa31a2639395f86922a87e"), "name" : "kahani", "actor" : [ "aaaa", "bbbb", "karan", "karri", "vidya" ], "ticket_no" : 420, "price" : 200, "actors" : [ "bbbb" ], "rating" : 8, "lastmodified" : ISODate("2019-04-07T11:25:40.634Z") }
+{ "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"), "name" : "Andhadhund", "price" : 400, "actor" : [ "Ayushman", "radhika" ], "rating" : 4 }
+> db.movie.find().pretty()
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "ticket_no" : 550,
+        "price" : 260
+}
+{
+        "_id" : ObjectId("5aaa31ee639395f86922a87f"),
+        "name" : "3 idiots",
+        "actor" : [
+                "Kareena Kapoor",
+                "amir",
+                "kareena",
+                "mahadavan",
+                "sharman"
+        ],
+        "rating" : 3,
+        "ticket_no" : 150,
+        "price" : 200
+}
+{
+        "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"),
+        "name" : "Andhadhund",
+        "price" : null,
+        "actor" : [
+                "Tabbu"
+        ],
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "rating" : 4,
+        "price" : 250,
+        "ticket_no" : 300,
+        "actor" : [
+                "Deepika",
+                "shahid kapoor",
+                "ranveer singh",
+                "aditi Rao",
+                "aaaaa"
+        ],
+        "cancellation" : {
+                "date" : Timestamp(1567175239, 1)
+        }
+}
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350,
+        "actor" : [
+                "Sonakshi",
+                "Vidya Balan"
+        ],
+        "rating" : 6
+}
+{
+        "_id" : ObjectId("5c865923d82c19b8ed996550"),
+        "name" : "Dil dhadakane do",
+        "rating" : 3,
+        "price" : 340,
+        "actor" : "['Anil kapoor']"
+}
+{
+        "_id" : ObjectId("5c8283789eb55675f0272933"),
+        "name" : "uri",
+        "rating" : 5,
+        "actor" : [
+                "vicky kaushal",
+                "yami",
+                "Paresh Rawal"
+        ]
+}
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "ticket_no" : 690,
+        "actor" : [
+                "Rajkumar Rao",
+                "Pankaj Tripathi"
+        ],
+        "price" : 310,
+        "lastmodified" : ISODate("2019-09-28T14:47:49.204Z")
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "actor" : [
+                "Akshay Kumar",
+                "Pariniti chopra"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "ticket_no" : 270,
+        "rdate" : ISODate("2019-01-23T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "actor" : [
+                "amir",
+                "angraz"
+        ],
+        "rating" : 6,
+        "ticket_no" : 410,
+        "price" : 350,
+        "cancellation" : {
+                "date" : Timestamp(1554356003, 1),
+                "reason" : "user request"
+        },
+        "lastModified" : ISODate("2019-04-04T05:33:23.022Z")
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "ticket_no" : 820,
+        "actor" : [
+                "vidya",
+                "Arjun",
+                "Jonny",
+                "nawaz",
+                "prasad",
+                "Shreyas",
+                "Jonny",
+                "yash"
+        ],
+        "rating" : 5,
+        "price" : 200
+}
+{ "_id" : ObjectId("5d8f6eec620d2353221b91dd"), "price" : 280 }
+{
+        "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"),
+        "name" : "dream girl",
+        "actor" : [
+                "ayushman",
+                "nushrat bharucha"
+        ],
+        "price" : 250,
+        "rating" : null
+}
+{
+        "_id" : ObjectId("5d89e9adfd4adc2f84279f43"),
+        "name" : "chichore",
+        "price" : 274,
+        "rating" : 4.3,
+        "actor" : [
+                "sushant",
+                "shradha kapoor",
+                "zzz",
+                "harshal"
+        ]
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 6,
+        "ticket_no" : 550,
+        "price" : 350,
+        "position" : [
+                2,
+                2
+        ]
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 2,
+        "price" : 270,
+        "ticket_no" : 210,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        }
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "actor" : [
+                "aaaa",
+                "bbbb",
+                "karan",
+                "karri",
+                "vidya"
+        ],
+        "ticket_no" : 420,
+        "price" : 200,
+        "actors" : [
+                "bbbb"
+        ],
+        "rating" : 8,
+        "lastmodified" : ISODate("2019-04-07T11:25:40.634Z")
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400,
+        "actor" : [
+                "Ayushman",
+                "radhika"
+        ],
+        "rating" : 4
+}
+> show collections
+emp
+movie
+mycollection
+restaurent
+> db.emp.insert({
+...     empid:123,
+...     ename:'kishori',
+...      skills:['java','python','mongodb','spring boot','hibernate'],
+...      joining_dt: ISODate('2000-04-27'),
+...     dept:{deptno:11,dname:'hr',dloc:'pune'}
+...    experience:[{name:'hsbc',years:3},{name:'igate',years:4},{name:Capgemini,years:5}],
+...    maritalStatus:null
+... });
+2021-07-15T13:19:33.387+0530 E  QUERY    [js] uncaught exception: SyntaxError: missing } after property list :
+@(shell):7:3
+> db.emp.insert({     empid:123,     ename:'kishori',      skills:['java','python','mongodb','spring boot','hibernate'],      joining_dt: ISODate('2000-04-27'),     dept:{deptno:11,dname:'hr',dloc:'pune'}  ,  experience:[{name:'hsbc',years:3},{name:'igate',years:4},{name:'Capgemini',years:5}],    maritalStatus:null });
+WriteResult({ "nInserted" : 1 })
+> db.emp.find()
+{ "_id" : ObjectId("60efdc3b48242d5ac491328d"), "empid" : 12, "ename" : "kishori" }
+{ "_id" : ObjectId("60efe8d248242d5ac491328e"), "empid" : 123, "ename" : "kishori", "skills" : [ "java", "python", "mongodb", "spring boot", "hibernate" ], "joining_dt" : ISODate("2000-04-27T00:00:00Z"), "dept" : { "deptno" : 11, "dname" : "hr", "dloc" : "pune" }, "experience" : [ { "name" : "hsbc", "years" : 3 }, { "name" : "igate", "years" : 4 }, { "name" : "Capgemini", "years" : 5 } ], "maritalStatus" : null }
+> db.emp.find().pretty();
+{
+        "_id" : ObjectId("60efdc3b48242d5ac491328d"),
+        "empid" : 12,
+        "ename" : "kishori"
+}
+{
+        "_id" : ObjectId("60efe8d248242d5ac491328e"),
+        "empid" : 123,
+        "ename" : "kishori",
+        "skills" : [
+                "java",
+                "python",
+                "mongodb",
+                "spring boot",
+                "hibernate"
+        ],
+        "joining_dt" : ISODate("2000-04-27T00:00:00Z"),
+        "dept" : {
+                "deptno" : 11,
+                "dname" : "hr",
+                "dloc" : "pune"
+        },
+        "experience" : [
+                {
+                        "name" : "hsbc",
+                        "years" : 3
+                },
+                {
+                        "name" : "igate",
+                        "years" : 4
+                },
+                {
+                        "name" : "Capgemini",
+                        "years" : 5
+                }
+        ],
+        "maritalStatus" : null
+}
+> db
+iacsdedac
+> db.createCollection("mycomment",{capped:true,max:2,size:40000});
+{ "ok" : 1 }
+> db.mycomment.insert({name:'Rajan',comment:"good blog"});
+WriteResult({ "nInserted" : 1 })
+> db.mycomment.insert({name:'Revati',comment:"excellent"});
+WriteResult({ "nInserted" : 1 })
+> db.mycomment.find();
+{ "_id" : ObjectId("60f1098b48242d5ac491328f"), "name" : "Rajan", "comment" : "good blog" }
+{ "_id" : ObjectId("60f1099e48242d5ac4913290"), "name" : "Revati", "comment" : "excellent" }
+> db.mycomment.insert({name:'Sarang',comment:"excellent"});
+WriteResult({ "nInserted" : 1 })
+> db.mycomment.find();
+{ "_id" : ObjectId("60f1099e48242d5ac4913290"), "name" : "Revati", "comment" : "excellent" }
+{ "_id" : ObjectId("60f109c248242d5ac4913291"), "name" : "Sarang", "comment" : "excellent" }
+> db.mycomment.insert({name:'Vivekanand',comment:"excellent"});
+WriteResult({ "nInserted" : 1 })
+> db.mycomment.find();
+{ "_id" : ObjectId("60f109c248242d5ac4913291"), "name" : "Sarang", "comment" : "excellent" }
+{ "_id" : ObjectId("60f109e948242d5ac4913292"), "name" : "Vivekanand", "comment" : "excellent" }
+> db.emp.find()
+{ "_id" : ObjectId("60efdc3b48242d5ac491328d"), "empid" : 12, "ename" : "kishori" }
+{ "_id" : ObjectId("60efe8d248242d5ac491328e"), "empid" : 123, "ename" : "kishori", "skills" : [ "java", "python", "mongodb", "spring boot", "hibernate" ], "joining_dt" : ISODate("2000-04-27T00:00:00Z"), "dept" : { "deptno" : 11, "dname" : "hr", "dloc" : "pune" }, "experience" : [ { "name" : "hsbc", "years" : 3 }, { "name" : "igate", "years" : 4 }, { "name" : "Capgemini", "years" : 5 } ], "maritalStatus" : null }
+> db.emp.find().pretty()
+{
+        "_id" : ObjectId("60efdc3b48242d5ac491328d"),
+        "empid" : 12,
+        "ename" : "kishori"
+}
+{
+        "_id" : ObjectId("60efe8d248242d5ac491328e"),
+        "empid" : 123,
+        "ename" : "kishori",
+        "skills" : [
+                "java",
+                "python",
+                "mongodb",
+                "spring boot",
+                "hibernate"
+        ],
+        "joining_dt" : ISODate("2000-04-27T00:00:00Z"),
+        "dept" : {
+                "deptno" : 11,
+                "dname" : "hr",
+                "dloc" : "pune"
+        },
+        "experience" : [
+                {
+                        "name" : "hsbc",
+                        "years" : 3
+                },
+                {
+                        "name" : "igate",
+                        "years" : 4
+                },
+                {
+                        "name" : "Capgemini",
+                        "years" : 5
+                }
+        ],
+        "maritalStatus" : null
+}
+> db.emp.insert({name:'Revati',desg:'sr. designer'})
+WriteResult({ "nInserted" : 1 })
+> db.emp.insert({name:'Revati',desg:'sr. designer'})
+WriteResult({ "nInserted" : 1 })
+> db.emp.insert({name:'Revati',desg:'sr. designer'})
+WriteResult({ "nInserted" : 1 })
+> db.emp.find().pretty()
+{
+        "_id" : ObjectId("60efdc3b48242d5ac491328d"),
+        "empid" : 12,
+        "ename" : "kishori"
+}
+{
+        "_id" : ObjectId("60efe8d248242d5ac491328e"),
+        "empid" : 123,
+        "ename" : "kishori",
+        "skills" : [
+                "java",
+                "python",
+                "mongodb",
+                "spring boot",
+                "hibernate"
+        ],
+        "joining_dt" : ISODate("2000-04-27T00:00:00Z"),
+        "dept" : {
+                "deptno" : 11,
+                "dname" : "hr",
+                "dloc" : "pune"
+        },
+        "experience" : [
+                {
+                        "name" : "hsbc",
+                        "years" : 3
+                },
+                {
+                        "name" : "igate",
+                        "years" : 4
+                },
+                {
+                        "name" : "Capgemini",
+                        "years" : 5
+                }
+        ],
+        "maritalStatus" : null
+}
+{
+        "_id" : ObjectId("60f10b9448242d5ac4913293"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{
+        "_id" : ObjectId("60f10b9648242d5ac4913294"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{
+        "_id" : ObjectId("60f10b9848242d5ac4913295"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+> db.emp.insert({_id:1,name:'Revati',desg:'sr. designer'})
+WriteResult({ "nInserted" : 1 })
+> db.emp.find().pretty()
+{
+        "_id" : ObjectId("60efdc3b48242d5ac491328d"),
+        "empid" : 12,
+        "ename" : "kishori"
+}
+{
+        "_id" : ObjectId("60efe8d248242d5ac491328e"),
+        "empid" : 123,
+        "ename" : "kishori",
+        "skills" : [
+                "java",
+                "python",
+                "mongodb",
+                "spring boot",
+                "hibernate"
+        ],
+        "joining_dt" : ISODate("2000-04-27T00:00:00Z"),
+        "dept" : {
+                "deptno" : 11,
+                "dname" : "hr",
+                "dloc" : "pune"
+        },
+        "experience" : [
+                {
+                        "name" : "hsbc",
+                        "years" : 3
+                },
+                {
+                        "name" : "igate",
+                        "years" : 4
+                },
+                {
+                        "name" : "Capgemini",
+                        "years" : 5
+                }
+        ],
+        "maritalStatus" : null
+}
+{
+        "_id" : ObjectId("60f10b9448242d5ac4913293"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{
+        "_id" : ObjectId("60f10b9648242d5ac4913294"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{
+        "_id" : ObjectId("60f10b9848242d5ac4913295"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{ "_id" : 1, "name" : "Revati", "desg" : "sr. designer" }
+> db.emp.insert({_id:1,name:'Revati',desg:'sr. designer'})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 11000,
+                "errmsg" : "E11000 duplicate key error collection: iacsdedac.emp index: _id_ dup key: { _id: 1.0 }"
+        }
+})
+> db.emp.insert({_id:2,name:'Revati',desg:'sr. designer'})
+WriteResult({ "nInserted" : 1 })
+> db.emp.insert({name:'Revati',desg:'sr. designer'})
+WriteResult({ "nInserted" : 1 })
+> db.emp.find().pretty()
+{
+        "_id" : ObjectId("60efdc3b48242d5ac491328d"),
+        "empid" : 12,
+        "ename" : "kishori"
+}
+{
+        "_id" : ObjectId("60efe8d248242d5ac491328e"),
+        "empid" : 123,
+        "ename" : "kishori",
+        "skills" : [
+                "java",
+                "python",
+                "mongodb",
+                "spring boot",
+                "hibernate"
+        ],
+        "joining_dt" : ISODate("2000-04-27T00:00:00Z"),
+        "dept" : {
+                "deptno" : 11,
+                "dname" : "hr",
+                "dloc" : "pune"
+        },
+        "experience" : [
+                {
+                        "name" : "hsbc",
+                        "years" : 3
+                },
+                {
+                        "name" : "igate",
+                        "years" : 4
+                },
+                {
+                        "name" : "Capgemini",
+                        "years" : 5
+                }
+        ],
+        "maritalStatus" : null
+}
+{
+        "_id" : ObjectId("60f10b9448242d5ac4913293"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{
+        "_id" : ObjectId("60f10b9648242d5ac4913294"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{
+        "_id" : ObjectId("60f10b9848242d5ac4913295"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{ "_id" : 1, "name" : "Revati", "desg" : "sr. designer" }
+{ "_id" : 2, "name" : "Revati", "desg" : "sr. designer" }
+{
+        "_id" : ObjectId("60f10c5248242d5ac4913296"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+> db.emp.getIndexes()
+[
+        {
+                "v" : 2,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_",
+                "ns" : "iacsdedac.emp"
+        }
+]
+> db.emp.findOne();
+{
+        "_id" : ObjectId("60efdc3b48242d5ac491328d"),
+        "empid" : 12,
+        "ename" : "kishori"
+}
+> db.emp.find();
+{ "_id" : ObjectId("60efdc3b48242d5ac491328d"), "empid" : 12, "ename" : "kishori" }
+{ "_id" : ObjectId("60efe8d248242d5ac491328e"), "empid" : 123, "ename" : "kishori", "skills" : [ "java", "python", "mongodb", "spring boot", "hibernate" ], "joining_dt" : ISODate("2000-04-27T00:00:00Z"), "dept" : { "deptno" : 11, "dname" : "hr", "dloc" : "pune" }, "experience" : [ { "name" : "hsbc", "years" : 3 }, { "name" : "igate", "years" : 4 }, { "name" : "Capgemini", "years" : 5 } ], "maritalStatus" : null }
+{ "_id" : ObjectId("60f10b9448242d5ac4913293"), "name" : "Revati", "desg" : "sr. designer" }
+{ "_id" : ObjectId("60f10b9648242d5ac4913294"), "name" : "Revati", "desg" : "sr. designer" }
+{ "_id" : ObjectId("60f10b9848242d5ac4913295"), "name" : "Revati", "desg" : "sr. designer" }
+{ "_id" : 1, "name" : "Revati", "desg" : "sr. designer" }
+{ "_id" : 2, "name" : "Revati", "desg" : "sr. designer" }
+{ "_id" : ObjectId("60f10c5248242d5ac4913296"), "name" : "Revati", "desg" : "sr. designer" }
+> db.emp.find().sort({empid:1}).pretty()
+{
+        "_id" : ObjectId("60f10b9448242d5ac4913293"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{
+        "_id" : ObjectId("60f10b9648242d5ac4913294"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{
+        "_id" : ObjectId("60f10b9848242d5ac4913295"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{ "_id" : 1, "name" : "Revati", "desg" : "sr. designer" }
+{ "_id" : 2, "name" : "Revati", "desg" : "sr. designer" }
+{
+        "_id" : ObjectId("60f10c5248242d5ac4913296"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{
+        "_id" : ObjectId("60efdc3b48242d5ac491328d"),
+        "empid" : 12,
+        "ename" : "kishori"
+}
+{
+        "_id" : ObjectId("60efe8d248242d5ac491328e"),
+        "empid" : 123,
+        "ename" : "kishori",
+        "skills" : [
+                "java",
+                "python",
+                "mongodb",
+                "spring boot",
+                "hibernate"
+        ],
+        "joining_dt" : ISODate("2000-04-27T00:00:00Z"),
+        "dept" : {
+                "deptno" : 11,
+                "dname" : "hr",
+                "dloc" : "pune"
+        },
+        "experience" : [
+                {
+                        "name" : "hsbc",
+                        "years" : 3
+                },
+                {
+                        "name" : "igate",
+                        "years" : 4
+                },
+                {
+                        "name" : "Capgemini",
+                        "years" : 5
+                }
+        ],
+        "maritalStatus" : null
+}
+> db.movie.find().sort({rating:1}).pretty();
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "ticket_no" : 690,
+        "actor" : [
+                "Rajkumar Rao",
+                "Pankaj Tripathi"
+        ],
+        "price" : 310,
+        "lastmodified" : ISODate("2019-09-28T14:47:49.204Z")
+}
+{ "_id" : ObjectId("5d8f6eec620d2353221b91dd"), "price" : 280 }
+{
+        "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"),
+        "name" : "dream girl",
+        "actor" : [
+                "ayushman",
+                "nushrat bharucha"
+        ],
+        "price" : 250,
+        "rating" : null
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 2,
+        "price" : 270,
+        "ticket_no" : 210,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        }
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "ticket_no" : 550,
+        "price" : 260
+}
+{
+        "_id" : ObjectId("5aaa31ee639395f86922a87f"),
+        "name" : "3 idiots",
+        "actor" : [
+                "Kareena Kapoor",
+                "amir",
+                "kareena",
+                "mahadavan",
+                "sharman"
+        ],
+        "rating" : 3,
+        "ticket_no" : 150,
+        "price" : 200
+}
+{
+        "_id" : ObjectId("5c865923d82c19b8ed996550"),
+        "name" : "Dil dhadakane do",
+        "rating" : 3,
+        "price" : 340,
+        "actor" : "['Anil kapoor']"
+}
+{
+        "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"),
+        "name" : "Andhadhund",
+        "price" : null,
+        "actor" : [
+                "Tabbu"
+        ],
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "rating" : 4,
+        "price" : 250,
+        "ticket_no" : 300,
+        "actor" : [
+                "Deepika",
+                "shahid kapoor",
+                "ranveer singh",
+                "aditi Rao",
+                "aaaaa"
+        ],
+        "cancellation" : {
+                "date" : Timestamp(1567175239, 1)
+        }
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400,
+        "actor" : [
+                "Ayushman",
+                "radhika"
+        ],
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5d89e9adfd4adc2f84279f43"),
+        "name" : "chichore",
+        "price" : 274,
+        "rating" : 4.3,
+        "actor" : [
+                "sushant",
+                "shradha kapoor",
+                "zzz",
+                "harshal"
+        ]
+}
+{
+        "_id" : ObjectId("5c8283789eb55675f0272933"),
+        "name" : "uri",
+        "rating" : 5,
+        "actor" : [
+                "vicky kaushal",
+                "yami",
+                "Paresh Rawal"
+        ]
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "ticket_no" : 820,
+        "actor" : [
+                "vidya",
+                "Arjun",
+                "Jonny",
+                "nawaz",
+                "prasad",
+                "Shreyas",
+                "Jonny",
+                "yash"
+        ],
+        "rating" : 5,
+        "price" : 200
+}
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350,
+        "actor" : [
+                "Sonakshi",
+                "Vidya Balan"
+        ],
+        "rating" : 6
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "actor" : [
+                "Akshay Kumar",
+                "Pariniti chopra"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "ticket_no" : 270,
+        "rdate" : ISODate("2019-01-23T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "actor" : [
+                "amir",
+                "angraz"
+        ],
+        "rating" : 6,
+        "ticket_no" : 410,
+        "price" : 350,
+        "cancellation" : {
+                "date" : Timestamp(1554356003, 1),
+                "reason" : "user request"
+        },
+        "lastModified" : ISODate("2019-04-04T05:33:23.022Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 6,
+        "ticket_no" : 550,
+        "price" : 350,
+        "position" : [
+                2,
+                2
+        ]
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "actor" : [
+                "aaaa",
+                "bbbb",
+                "karan",
+                "karri",
+                "vidya"
+        ],
+        "ticket_no" : 420,
+        "price" : 200,
+        "actors" : [
+                "bbbb"
+        ],
+        "rating" : 8,
+        "lastmodified" : ISODate("2019-04-07T11:25:40.634Z")
+}
+> db.movie.find({},{name:1,rating:1,price:1}).sort({rating:1}).pretty();
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "price" : 310
+}
+{ "_id" : ObjectId("5d8f6eec620d2353221b91dd"), "price" : 280 }
+{
+        "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"),
+        "name" : "dream girl",
+        "price" : 250,
+        "rating" : null
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "rating" : 2,
+        "price" : 270
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "rating" : 3,
+        "price" : 260
+}
+{
+        "_id" : ObjectId("5aaa31ee639395f86922a87f"),
+        "name" : "3 idiots",
+        "rating" : 3,
+        "price" : 200
+}
+{
+        "_id" : ObjectId("5c865923d82c19b8ed996550"),
+        "name" : "Dil dhadakane do",
+        "rating" : 3,
+        "price" : 340
+}
+{
+        "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"),
+        "name" : "Andhadhund",
+        "price" : null,
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "rating" : 4,
+        "price" : 250
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400,
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5d89e9adfd4adc2f84279f43"),
+        "name" : "chichore",
+        "price" : 274,
+        "rating" : 4.3
+}
+{
+        "_id" : ObjectId("5c8283789eb55675f0272933"),
+        "name" : "uri",
+        "rating" : 5
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "rating" : 5,
+        "price" : 200
+}
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350,
+        "rating" : 6
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "rating" : 6,
+        "price" : 350
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "rating" : 6,
+        "price" : 350
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "rating" : 6,
+        "price" : 350
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "price" : 200,
+        "rating" : 8
+}
+> db.movie.find({},{name:1,rating:1,price:1,_id:0}).sort({rating:1}).pretty();
+{ "name" : "newton", "price" : 310 }
+{ "price" : 280 }
+{ "name" : "dream girl", "price" : 250, "rating" : null }
+{ "name" : "paa", "rating" : 2, "price" : 270 }
+{ "name" : "aradhana", "rating" : 3, "price" : 260 }
+{ "name" : "3 idiots", "rating" : 3, "price" : 200 }
+{ "name" : "Dil dhadakane do", "rating" : 3, "price" : 340 }
+{ "name" : "Andhadhund", "price" : null, "rating" : 4 }
+{ "name" : "padmavat", "rating" : 4, "price" : 250 }
+{ "name" : "Andhadhund", "price" : 400, "rating" : 4 }
+{ "name" : "chichore", "price" : 274, "rating" : 4.3 }
+{ "name" : "uri", "rating" : 5 }
+{ "name" : "kahani 2", "rating" : 5, "price" : 200 }
+{ "name" : "mission mangal", "price" : 350, "rating" : 6 }
+{ "name" : "Kesari", "rating" : 6, "price" : 350 }
+{ "name" : "lagaan", "rating" : 6, "price" : 350 }
+{ "name" : "sholay", "rating" : 6, "price" : 350 }
+{ "name" : "kahani", "price" : 200, "rating" : 8 }
+> db.movie.find({},{name:1,rating:1,price:1,_id:0,ticket_num:0}).sort({rating:1}).pretty();
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "Projection cannot have a mix of inclusion and exclusion.",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+> db.movie.find({},{name:1,rating:1,price:1,_id:0}).sort({rating:1}).pretty();
+{ "name" : "newton", "price" : 310 }
+{ "price" : 280 }
+{ "name" : "dream girl", "price" : 250, "rating" : null }
+{ "name" : "paa", "rating" : 2, "price" : 270 }
+{ "name" : "aradhana", "rating" : 3, "price" : 260 }
+{ "name" : "3 idiots", "rating" : 3, "price" : 200 }
+{ "name" : "Dil dhadakane do", "rating" : 3, "price" : 340 }
+{ "name" : "Andhadhund", "price" : null, "rating" : 4 }
+{ "name" : "padmavat", "rating" : 4, "price" : 250 }
+{ "name" : "Andhadhund", "price" : 400, "rating" : 4 }
+{ "name" : "chichore", "price" : 274, "rating" : 4.3 }
+{ "name" : "uri", "rating" : 5 }
+{ "name" : "kahani 2", "rating" : 5, "price" : 200 }
+{ "name" : "mission mangal", "price" : 350, "rating" : 6 }
+{ "name" : "Kesari", "rating" : 6, "price" : 350 }
+{ "name" : "lagaan", "rating" : 6, "price" : 350 }
+{ "name" : "sholay", "rating" : 6, "price" : 350 }
+{ "name" : "kahani", "price" : 200, "rating" : 8 }
+> db.movie.find({},{ticket_num:0,_id:0}).sort({rating:1}).pretty();
+{
+        "name" : "newton",
+        "ticket_no" : 690,
+        "actor" : [
+                "Rajkumar Rao",
+                "Pankaj Tripathi"
+        ],
+        "price" : 310,
+        "lastmodified" : ISODate("2019-09-28T14:47:49.204Z")
+}
+{ "price" : 280 }
+{
+        "name" : "dream girl",
+        "actor" : [
+                "ayushman",
+                "nushrat bharucha"
+        ],
+        "price" : 250,
+        "rating" : null
+}
+{
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 2,
+        "price" : 270,
+        "ticket_no" : 210,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        }
+}
+{
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "ticket_no" : 550,
+        "price" : 260
+}
+{
+        "name" : "3 idiots",
+        "actor" : [
+                "Kareena Kapoor",
+                "amir",
+                "kareena",
+                "mahadavan",
+                "sharman"
+        ],
+        "rating" : 3,
+        "ticket_no" : 150,
+        "price" : 200
+}
+{
+        "name" : "Dil dhadakane do",
+        "rating" : 3,
+        "price" : 340,
+        "actor" : "['Anil kapoor']"
+}
+{
+        "name" : "Andhadhund",
+        "price" : null,
+        "actor" : [
+                "Tabbu"
+        ],
+        "rating" : 4
+}
+{
+        "name" : "padmavat",
+        "rating" : 4,
+        "price" : 250,
+        "ticket_no" : 300,
+        "actor" : [
+                "Deepika",
+                "shahid kapoor",
+                "ranveer singh",
+                "aditi Rao",
+                "aaaaa"
+        ],
+        "cancellation" : {
+                "date" : Timestamp(1567175239, 1)
+        }
+}
+{
+        "name" : "Andhadhund",
+        "price" : 400,
+        "actor" : [
+                "Ayushman",
+                "radhika"
+        ],
+        "rating" : 4
+}
+{
+        "name" : "chichore",
+        "price" : 274,
+        "rating" : 4.3,
+        "actor" : [
+                "sushant",
+                "shradha kapoor",
+                "zzz",
+                "harshal"
+        ]
+}
+{
+        "name" : "uri",
+        "rating" : 5,
+        "actor" : [
+                "vicky kaushal",
+                "yami",
+                "Paresh Rawal"
+        ]
+}
+{
+        "name" : "kahani 2",
+        "ticket_no" : 820,
+        "actor" : [
+                "vidya",
+                "Arjun",
+                "Jonny",
+                "nawaz",
+                "prasad",
+                "Shreyas",
+                "Jonny",
+                "yash"
+        ],
+        "rating" : 5,
+        "price" : 200
+}
+{
+        "name" : "mission mangal",
+        "price" : 350,
+        "actor" : [
+                "Sonakshi",
+                "Vidya Balan"
+        ],
+        "rating" : 6
+}
+{
+        "name" : "Kesari",
+        "actor" : [
+                "Akshay Kumar",
+                "Pariniti chopra"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "ticket_no" : 270,
+        "rdate" : ISODate("2019-01-23T00:00:00Z")
+}
+{
+        "name" : "lagaan",
+        "actor" : [
+                "amir",
+                "angraz"
+        ],
+        "rating" : 6,
+        "ticket_no" : 410,
+        "price" : 350,
+        "cancellation" : {
+                "date" : Timestamp(1554356003, 1),
+                "reason" : "user request"
+        },
+        "lastModified" : ISODate("2019-04-04T05:33:23.022Z")
+}
+{
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 6,
+        "ticket_no" : 550,
+        "price" : 350,
+        "position" : [
+                2,
+                2
+        ]
+}
+{
+        "name" : "kahani",
+        "actor" : [
+                "aaaa",
+                "bbbb",
+                "karan",
+                "karri",
+                "vidya"
+        ],
+        "ticket_no" : 420,
+        "price" : 200,
+        "actors" : [
+                "bbbb"
+        ],
+        "rating" : 8,
+        "lastmodified" : ISODate("2019-04-07T11:25:40.634Z")
+}
+> db.movie.find({},{ticket_no:0,_id:0}).sort({rating:1}).pretty();
+{
+        "name" : "newton",
+        "actor" : [
+                "Rajkumar Rao",
+                "Pankaj Tripathi"
+        ],
+        "price" : 310,
+        "lastmodified" : ISODate("2019-09-28T14:47:49.204Z")
+}
+{ "price" : 280 }
+{
+        "name" : "dream girl",
+        "actor" : [
+                "ayushman",
+                "nushrat bharucha"
+        ],
+        "price" : 250,
+        "rating" : null
+}
+{
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 2,
+        "price" : 270,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        }
+}
+{
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "price" : 260
+}
+{
+        "name" : "3 idiots",
+        "actor" : [
+                "Kareena Kapoor",
+                "amir",
+                "kareena",
+                "mahadavan",
+                "sharman"
+        ],
+        "rating" : 3,
+        "price" : 200
+}
+{
+        "name" : "Dil dhadakane do",
+        "rating" : 3,
+        "price" : 340,
+        "actor" : "['Anil kapoor']"
+}
+{
+        "name" : "Andhadhund",
+        "price" : null,
+        "actor" : [
+                "Tabbu"
+        ],
+        "rating" : 4
+}
+{
+        "name" : "padmavat",
+        "rating" : 4,
+        "price" : 250,
+        "actor" : [
+                "Deepika",
+                "shahid kapoor",
+                "ranveer singh",
+                "aditi Rao",
+                "aaaaa"
+        ],
+        "cancellation" : {
+                "date" : Timestamp(1567175239, 1)
+        }
+}
+{
+        "name" : "Andhadhund",
+        "price" : 400,
+        "actor" : [
+                "Ayushman",
+                "radhika"
+        ],
+        "rating" : 4
+}
+{
+        "name" : "chichore",
+        "price" : 274,
+        "rating" : 4.3,
+        "actor" : [
+                "sushant",
+                "shradha kapoor",
+                "zzz",
+                "harshal"
+        ]
+}
+{
+        "name" : "uri",
+        "rating" : 5,
+        "actor" : [
+                "vicky kaushal",
+                "yami",
+                "Paresh Rawal"
+        ]
+}
+{
+        "name" : "kahani 2",
+        "actor" : [
+                "vidya",
+                "Arjun",
+                "Jonny",
+                "nawaz",
+                "prasad",
+                "Shreyas",
+                "Jonny",
+                "yash"
+        ],
+        "rating" : 5,
+        "price" : 200
+}
+{
+        "name" : "mission mangal",
+        "price" : 350,
+        "actor" : [
+                "Sonakshi",
+                "Vidya Balan"
+        ],
+        "rating" : 6
+}
+{
+        "name" : "Kesari",
+        "actor" : [
+                "Akshay Kumar",
+                "Pariniti chopra"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "rdate" : ISODate("2019-01-23T00:00:00Z")
+}
+{
+        "name" : "lagaan",
+        "actor" : [
+                "amir",
+                "angraz"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "cancellation" : {
+                "date" : Timestamp(1554356003, 1),
+                "reason" : "user request"
+        },
+        "lastModified" : ISODate("2019-04-04T05:33:23.022Z")
+}
+{
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "position" : [
+                2,
+                2
+        ]
+}
+{
+        "name" : "kahani",
+        "actor" : [
+                "aaaa",
+                "bbbb",
+                "karan",
+                "karri",
+                "vidya"
+        ],
+        "price" : 200,
+        "actors" : [
+                "bbbb"
+        ],
+        "rating" : 8,
+        "lastmodified" : ISODate("2019-04-07T11:25:40.634Z")
+}
+> db.movie.find({},{name:1,_id:0}).sort({rating:1}).pretty();
+{ "name" : "newton" }
+{ }
+{ "name" : "dream girl" }
+{ "name" : "paa" }
+{ "name" : "aradhana" }
+{ "name" : "3 idiots" }
+{ "name" : "Dil dhadakane do" }
+{ "name" : "Andhadhund" }
+{ "name" : "padmavat" }
+{ "name" : "Andhadhund" }
+{ "name" : "chichore" }
+{ "name" : "uri" }
+{ "name" : "kahani 2" }
+{ "name" : "mission mangal" }
+{ "name" : "Kesari" }
+{ "name" : "lagaan" }
+{ "name" : "sholay" }
+{ "name" : "kahani" }
+> db.movie.find({},{name:1,rating:1,_id:0}).sort({rating:-1,name:1}).limit(5).pretty();
+{ "name" : "kahani", "rating" : 8 }
+{ "name" : "Kesari", "rating" : 6 }
+{ "name" : "lagaan", "rating" : 6 }
+{ "name" : "mission mangal", "rating" : 6 }
+{ "name" : "sholay", "rating" : 6 }
+> db.movie.find({},{name:1,rating:1,_id:0}).sort({rating:-1,name:1}).limit(1).skip(3).pretty();
+{ "name" : "mission mangal", "rating" : 6 }
+> use test
+switched to db test
+> db.movie.find().pretty();
+{
+        "_id" : ObjectId("5c865923d82c19b8ed996550"),
+        "name" : "dil",
+        "rating" : 3,
+        "price" : 300,
+        "actor" : "['Anil kapoor']",
+        "ticket_num" : 300,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 3,
+        "price" : 420,
+        "position" : [
+                2,
+                2
+        ],
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "price" : 260,
+        "ticket_num" : 550,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350,
+        "actor" : [
+                "Sonakshi",
+                "Vidya Balan"
+        ],
+        "rating" : 6,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "price" : 600,
+        "actor" : [
+                "Deepika",
+                "shahid kapoor",
+                "ranveer singh",
+                "aditi Rao",
+                "aaaaa"
+        ],
+        "cancellation" : {
+                "date" : Timestamp(1567175239, 1)
+        },
+        "ticket_num" : 300
+}
+{
+        "_id" : ObjectId("5c8283789eb55675f0272933"),
+        "name" : "uri",
+        "rating" : 8,
+        "actor" : [
+                "vicky kaushal",
+                "yami",
+                "Paresh Rawal"
+        ],
+        "ticket_num" : 200
+}
+{ "_id" : ObjectId("5d8f6eec620d2353221b91dd"), "price" : 280 }
+{
+        "_id" : ObjectId("5d89e9adfd4adc2f84279f43"),
+        "name" : "chichore",
+        "price" : 274,
+        "rating" : 4.3,
+        "actor" : [
+                "sushant",
+                "shradha kapoor",
+                "zzz",
+                "harshal"
+        ]
+}
+{
+        "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"),
+        "name" : "Andhadhund",
+        "price" : null,
+        "actor" : [
+                "Tabbu"
+        ]
+}
+{
+        "_id" : ObjectId("5aaa31ee639395f86922a87f"),
+        "name" : "3 idiots",
+        "actor" : [
+                "Kareena Kapoor",
+                "amir",
+                "kareena",
+                "mahadavan",
+                "sharman"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "ticket_num" : 150,
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"),
+        "name" : "dream girl",
+        "actor" : [
+                "ayushman",
+                "nushrat bharucha"
+        ],
+        "price" : 250,
+        "rating" : null
+}
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "actor" : [
+                "Rajkumar Rao",
+                "Pankaj Tripathi"
+        ],
+        "price" : 310,
+        "lastmodified" : ISODate("2019-09-28T14:47:49.204Z"),
+        "ticket_num" : 690,
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400,
+        "actor" : [
+                "Ayushman",
+                "radhika"
+        ],
+        "rating" : 5,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "actor" : [
+                "aaaa",
+                "bbbb",
+                "karan",
+                "karri",
+                "vidya"
+        ],
+        "price" : 400,
+        "actors" : [
+                "bbbb"
+        ],
+        "rating" : 5,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 420,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 3,
+        "price" : 324,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        },
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "actor" : [
+                "amir",
+                "angraz"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "cancellation" : {
+                "date" : Timestamp(1554356003, 1),
+                "reason" : "user request"
+        },
+        "lastModified" : ISODate("2019-04-04T05:33:23.022Z"),
+        "ticket_num" : 410,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "actor" : [
+                "Akshay Kumar",
+                "Pariniti chopra"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "ticket_num" : 270,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "actor" : [
+                "Arjun",
+                "yyyy",
+                "Jonny",
+                "nawaz",
+                "Vidya",
+                "shreyas"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 820,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+> db.movie.find({name:'padmavat'}).pretty();
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "price" : 600,
+        "actor" : [
+                "Deepika",
+                "shahid kapoor",
+                "ranveer singh",
+                "aditi Rao",
+                "aaaaa"
+        ],
+        "cancellation" : {
+                "date" : Timestamp(1567175239, 1)
+        },
+        "ticket_num" : 300
+}
+> db.movie.find({name:'padmavat'},{name:1,rating:1,price:1,_id:0}).pretty();
+{ "name" : "padmavat", "price" : 600 }
+> db.movie.find({name:'padmavat'},{name:1,rating:1,price:1,_id:0}).pretty();
+{ "name" : "padmavat", "price" : 600 }
+> db.movie.find({rating:3},{name:1,rating:1,price:1,_id:0}).pretty();
+{ "name" : "dil", "rating" : 3, "price" : 300 }
+{ "name" : "sholay", "rating" : 3, "price" : 420 }
+{ "name" : "aradhana", "rating" : 3, "price" : 260 }
+{ "name" : "paa", "rating" : 3, "price" : 324 }
+> db.movie.find({rating:3},{name:1,rating:1,price:1,_id:0}).sort({price:1})
+{ "name" : "aradhana", "rating" : 3, "price" : 260 }
+{ "name" : "dil", "rating" : 3, "price" : 300 }
+{ "name" : "paa", "rating" : 3, "price" : 324 }
+{ "name" : "sholay", "rating" : 3, "price" : 420 }
+> db.movie.find({rating:3,price:260},{name:1,rating:1,price:1,_id:0}).sort({price:1})
+{ "name" : "aradhana", "rating" : 3, "price" : 260 }
+> db.movie.find({ $and:[{ rating:3},{ price:260}]},{name:1,rating:1,ticke_no:1,_id:0})
+{ "name" : "aradhana", "rating" : 3 }
+> db.movie.find({ $and:[{ rating:3},{ price:260}]},{name:1,rating:1,ticket_no:1,_id:0})
+{ "name" : "aradhana", "rating" : 3 }
+> db.movie.find({ $and:[{ rating:3},{ price:260}]},{name:1,rating:1,price:1,_id:0})
+{ "name" : "aradhana", "rating" : 3, "price" : 260 }
+> db.movie.find({price:200},{name:1,rating:1,price:1}).pretty()
+> db.movie.find({price:300},{name:1,rating:1,price:1}).pretty()
+{
+        "_id" : ObjectId("5c865923d82c19b8ed996550"),
+        "name" : "dil",
+        "rating" : 3,
+        "price" : 300
+}
+> db.movie.find({price:{$gt:200}},{name:1,rating:1,price:1}).pretty()
+{
+        "_id" : ObjectId("5c865923d82c19b8ed996550"),
+        "name" : "dil",
+        "rating" : 3,
+        "price" : 300
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "rating" : 3,
+        "price" : 420
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "rating" : 3,
+        "price" : 260
+}
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350,
+        "rating" : 6
+}
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "price" : 600
+}
+{ "_id" : ObjectId("5d8f6eec620d2353221b91dd"), "price" : 280 }
+{
+        "_id" : ObjectId("5d89e9adfd4adc2f84279f43"),
+        "name" : "chichore",
+        "price" : 274,
+        "rating" : 4.3
+}
+{
+        "_id" : ObjectId("5aaa31ee639395f86922a87f"),
+        "name" : "3 idiots",
+        "rating" : 5,
+        "price" : 400
+}
+{
+        "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"),
+        "name" : "dream girl",
+        "price" : 250,
+        "rating" : null
+}
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "price" : 310,
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400,
+        "rating" : 5
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "price" : 400,
+        "rating" : 5
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "rating" : 3,
+        "price" : 324
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "rating" : 6,
+        "price" : 350
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "rating" : 6,
+        "price" : 350
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "rating" : 5,
+        "price" : 400
+}
+> db.movie.find({price:{$gt:300}},{name:1,rating:1,price:1}).pretty()
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "rating" : 3,
+        "price" : 420
+}
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350,
+        "rating" : 6
+}
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "price" : 600
+}
+{
+        "_id" : ObjectId("5aaa31ee639395f86922a87f"),
+        "name" : "3 idiots",
+        "rating" : 5,
+        "price" : 400
+}
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "price" : 310,
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400,
+        "rating" : 5
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "price" : 400,
+        "rating" : 5
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "rating" : 3,
+        "price" : 324
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "rating" : 6,
+        "price" : 350
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "rating" : 6,
+        "price" : 350
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "rating" : 5,
+        "price" : 400
+}
+> db.movie.find({rating:{$gt:3}},{name:1,rating:1,price:1}).pretty()
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350,
+        "rating" : 6
+}
+{
+        "_id" : ObjectId("5c8283789eb55675f0272933"),
+        "name" : "uri",
+        "rating" : 8
+}
+{
+        "_id" : ObjectId("5d89e9adfd4adc2f84279f43"),
+        "name" : "chichore",
+        "price" : 274,
+        "rating" : 4.3
+}
+{
+        "_id" : ObjectId("5aaa31ee639395f86922a87f"),
+        "name" : "3 idiots",
+        "rating" : 5,
+        "price" : 400
+}
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "price" : 310,
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400,
+        "rating" : 5
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "price" : 400,
+        "rating" : 5
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "rating" : 6,
+        "price" : 350
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "rating" : 6,
+        "price" : 350
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "rating" : 5,
+        "price" : 400
+}
+> db.movie.find({rating:{$lt:3}},{name:1,rating:1,price:1}).pretty()
+> db.movie.find({rating:{$lt:5}},{name:1,rating:1,price:1}).pretty()
+{
+        "_id" : ObjectId("5c865923d82c19b8ed996550"),
+        "name" : "dil",
+        "rating" : 3,
+        "price" : 300
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "rating" : 3,
+        "price" : 420
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "rating" : 3,
+        "price" : 260
+}
+{
+        "_id" : ObjectId("5d89e9adfd4adc2f84279f43"),
+        "name" : "chichore",
+        "price" : 274,
+        "rating" : 4.3
+}
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "price" : 310,
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "rating" : 3,
+        "price" : 324
+}
+> db.movie.find({ rating:{$lt:5}, price:{$gt:300}})
+{ "_id" : ObjectId("5aaa3334639395f86922a881"), "name" : "sholay", "actor" : [ "Dharamendra", "Amitabh", "Sachin Pilgaokar", "Dharamendra", "Dharamendra", "Mr. Khote", "jaya bacchan", "sanjiv kapoor" ], "rating" : 3, "price" : 420, "position" : [ 2, 2 ], "ticket_num" : 400, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"), "name" : "newton", "actor" : [ "Rajkumar Rao", "Pankaj Tripathi" ], "price" : 310, "lastmodified" : ISODate("2019-09-28T14:47:49.204Z"), "ticket_num" : 690, "rating" : 4 }
+{ "_id" : ObjectId("5ca456072952ebdd7ae2a930"), "name" : "paa", "actor" : [ "Amitabh", "vidya balan", "Abhishek" ], "rating" : 3, "price" : 324, "rdate" : ISODate("2019-01-23T00:00:00Z"), "others" : { "director" : "R Balki", "songs" : "Amit trivedi" }, "ticket_num" : 400, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+> db.movie.find({ rating:{$lt:5}, price:{$gt:300}}).pretty()
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 3,
+        "price" : 420,
+        "position" : [
+                2,
+                2
+        ],
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "actor" : [
+                "Rajkumar Rao",
+                "Pankaj Tripathi"
+        ],
+        "price" : 310,
+        "lastmodified" : ISODate("2019-09-28T14:47:49.204Z"),
+        "ticket_num" : 690,
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 3,
+        "price" : 324,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        },
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+> db.movie.find({})
+{ "_id" : ObjectId("5c865923d82c19b8ed996550"), "name" : "dil", "rating" : 3, "price" : 300, "actor" : "['Anil kapoor']", "ticket_num" : 300, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa3334639395f86922a881"), "name" : "sholay", "actor" : [ "Dharamendra", "Amitabh", "Sachin Pilgaokar", "Dharamendra", "Dharamendra", "Mr. Khote", "jaya bacchan", "sanjiv kapoor" ], "rating" : 3, "price" : 420, "position" : [ 2, 2 ], "ticket_num" : 400, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa3334639395f86922a882"), "name" : "aradhana", "actor" : [ "amitabh", "prem", "rajesh khanna" ], "rating" : 3, "price" : 260, "ticket_num" : 550, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"), "name" : "mission mangal", "price" : 350, "actor" : [ "Sonakshi", "Vidya Balan" ], "rating" : 6, "release_date" : ISODate("2019-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"), "name" : "padmavat", "price" : 600, "actor" : [ "Deepika", "shahid kapoor", "ranveer singh", "aditi Rao", "aaaaa" ], "cancellation" : { "date" : Timestamp(1567175239, 1) }, "ticket_num" : 300 }
+{ "_id" : ObjectId("5c8283789eb55675f0272933"), "name" : "uri", "rating" : 8, "actor" : [ "vicky kaushal", "yami", "Paresh Rawal" ], "ticket_num" : 200 }
+{ "_id" : ObjectId("5d8f6eec620d2353221b91dd"), "price" : 280 }
+{ "_id" : ObjectId("5d89e9adfd4adc2f84279f43"), "name" : "chichore", "price" : 274, "rating" : 4.3, "actor" : [ "sushant", "shradha kapoor", "zzz", "harshal" ] }
+{ "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"), "name" : "Andhadhund", "price" : null, "actor" : [ "Tabbu" ] }
+{ "_id" : ObjectId("5aaa31ee639395f86922a87f"), "name" : "3 idiots", "actor" : [ "Kareena Kapoor", "amir", "kareena", "mahadavan", "sharman" ], "rating" : 5, "price" : 400, "ticket_num" : 150, "modified" : ISODate("2021-06-11T09:20:55.016Z"), "release_date" : ISODate("2020-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"), "name" : "dream girl", "actor" : [ "ayushman", "nushrat bharucha" ], "price" : 250, "rating" : null }
+{ "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"), "name" : "newton", "actor" : [ "Rajkumar Rao", "Pankaj Tripathi" ], "price" : 310, "lastmodified" : ISODate("2019-09-28T14:47:49.204Z"), "ticket_num" : 690, "rating" : 4 }
+{ "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"), "name" : "Andhadhund", "price" : 400, "actor" : [ "Ayushman", "radhika" ], "rating" : 5, "release_date" : ISODate("2020-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa31a2639395f86922a87e"), "name" : "kahani", "actor" : [ "aaaa", "bbbb", "karan", "karri", "vidya" ], "price" : 400, "actors" : [ "bbbb" ], "rating" : 5, "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"), "modified" : ISODate("2021-06-11T09:20:55.016Z"), "ticket_num" : 420, "release_date" : ISODate("2020-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5ca456072952ebdd7ae2a930"), "name" : "paa", "actor" : [ "Amitabh", "vidya balan", "Abhishek" ], "rating" : 3, "price" : 324, "rdate" : ISODate("2019-01-23T00:00:00Z"), "others" : { "director" : "R Balki", "songs" : "Amit trivedi" }, "ticket_num" : 400, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa3334639395f86922a880"), "name" : "lagaan", "actor" : [ "amir", "angraz" ], "rating" : 6, "price" : 350, "cancellation" : { "date" : Timestamp(1554356003, 1), "reason" : "user request" }, "lastModified" : ISODate("2019-04-04T05:33:23.022Z"), "ticket_num" : 410, "release_date" : ISODate("2019-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"), "name" : "Kesari", "actor" : [ "Akshay Kumar", "Pariniti chopra" ], "rating" : 6, "price" : 350, "rdate" : ISODate("2019-01-23T00:00:00Z"), "ticket_num" : 270, "release_date" : ISODate("2019-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5aab6da4639395f86922a883"), "name" : "kahani 2", "actor" : [ "Arjun", "yyyy", "Jonny", "nawaz", "Vidya", "shreyas" ], "rating" : 5, "price" : 400, "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"), "modified" : ISODate("2021-06-11T09:20:55.016Z"), "ticket_num" : 820, "release_date" : ISODate("2020-12-10T00:00:00Z") }
+> db.movie.find({},{}).pretty();
+{
+        "_id" : ObjectId("5c865923d82c19b8ed996550"),
+        "name" : "dil",
+        "rating" : 3,
+        "price" : 300,
+        "actor" : "['Anil kapoor']",
+        "ticket_num" : 300,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 3,
+        "price" : 420,
+        "position" : [
+                2,
+                2
+        ],
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "price" : 260,
+        "ticket_num" : 550,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350,
+        "actor" : [
+                "Sonakshi",
+                "Vidya Balan"
+        ],
+        "rating" : 6,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "price" : 600,
+        "actor" : [
+                "Deepika",
+                "shahid kapoor",
+                "ranveer singh",
+                "aditi Rao",
+                "aaaaa"
+        ],
+        "cancellation" : {
+                "date" : Timestamp(1567175239, 1)
+        },
+        "ticket_num" : 300
+}
+{
+        "_id" : ObjectId("5c8283789eb55675f0272933"),
+        "name" : "uri",
+        "rating" : 8,
+        "actor" : [
+                "vicky kaushal",
+                "yami",
+                "Paresh Rawal"
+        ],
+        "ticket_num" : 200
+}
+{ "_id" : ObjectId("5d8f6eec620d2353221b91dd"), "price" : 280 }
+{
+        "_id" : ObjectId("5d89e9adfd4adc2f84279f43"),
+        "name" : "chichore",
+        "price" : 274,
+        "rating" : 4.3,
+        "actor" : [
+                "sushant",
+                "shradha kapoor",
+                "zzz",
+                "harshal"
+        ]
+}
+{
+        "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"),
+        "name" : "Andhadhund",
+        "price" : null,
+        "actor" : [
+                "Tabbu"
+        ]
+}
+{
+        "_id" : ObjectId("5aaa31ee639395f86922a87f"),
+        "name" : "3 idiots",
+        "actor" : [
+                "Kareena Kapoor",
+                "amir",
+                "kareena",
+                "mahadavan",
+                "sharman"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "ticket_num" : 150,
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"),
+        "name" : "dream girl",
+        "actor" : [
+                "ayushman",
+                "nushrat bharucha"
+        ],
+        "price" : 250,
+        "rating" : null
+}
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "actor" : [
+                "Rajkumar Rao",
+                "Pankaj Tripathi"
+        ],
+        "price" : 310,
+        "lastmodified" : ISODate("2019-09-28T14:47:49.204Z"),
+        "ticket_num" : 690,
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400,
+        "actor" : [
+                "Ayushman",
+                "radhika"
+        ],
+        "rating" : 5,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "actor" : [
+                "aaaa",
+                "bbbb",
+                "karan",
+                "karri",
+                "vidya"
+        ],
+        "price" : 400,
+        "actors" : [
+                "bbbb"
+        ],
+        "rating" : 5,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 420,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 3,
+        "price" : 324,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        },
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "actor" : [
+                "amir",
+                "angraz"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "cancellation" : {
+                "date" : Timestamp(1554356003, 1),
+                "reason" : "user request"
+        },
+        "lastModified" : ISODate("2019-04-04T05:33:23.022Z"),
+        "ticket_num" : 410,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "actor" : [
+                "Akshay Kumar",
+                "Pariniti chopra"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "ticket_num" : 270,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "actor" : [
+                "Arjun",
+                "yyyy",
+                "Jonny",
+                "nawaz",
+                "Vidya",
+                "shreyas"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 820,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+> db.movie.find({},{name:1}).pretty();
+{ "_id" : ObjectId("5c865923d82c19b8ed996550"), "name" : "dil" }
+{ "_id" : ObjectId("5aaa3334639395f86922a881"), "name" : "sholay" }
+{ "_id" : ObjectId("5aaa3334639395f86922a882"), "name" : "aradhana" }
+{ "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"), "name" : "mission mangal" }
+{ "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"), "name" : "padmavat" }
+{ "_id" : ObjectId("5c8283789eb55675f0272933"), "name" : "uri" }
+{ "_id" : ObjectId("5d8f6eec620d2353221b91dd") }
+{ "_id" : ObjectId("5d89e9adfd4adc2f84279f43"), "name" : "chichore" }
+{ "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"), "name" : "Andhadhund" }
+{ "_id" : ObjectId("5aaa31ee639395f86922a87f"), "name" : "3 idiots" }
+{ "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"), "name" : "dream girl" }
+{ "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"), "name" : "newton" }
+{ "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"), "name" : "Andhadhund" }
+{ "_id" : ObjectId("5aaa31a2639395f86922a87e"), "name" : "kahani" }
+{ "_id" : ObjectId("5ca456072952ebdd7ae2a930"), "name" : "paa" }
+{ "_id" : ObjectId("5aaa3334639395f86922a880"), "name" : "lagaan" }
+{ "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"), "name" : "Kesari" }
+{ "_id" : ObjectId("5aab6da4639395f86922a883"), "name" : "kahani 2" }
+> db.movie.find({ $or:[{ rating:{$lt:5} },{ price:{$gt:300}}]})
+{ "_id" : ObjectId("5c865923d82c19b8ed996550"), "name" : "dil", "rating" : 3, "price" : 300, "actor" : "['Anil kapoor']", "ticket_num" : 300, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa3334639395f86922a881"), "name" : "sholay", "actor" : [ "Dharamendra", "Amitabh", "Sachin Pilgaokar", "Dharamendra", "Dharamendra", "Mr. Khote", "jaya bacchan", "sanjiv kapoor" ], "rating" : 3, "price" : 420, "position" : [ 2, 2 ], "ticket_num" : 400, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa3334639395f86922a882"), "name" : "aradhana", "actor" : [ "amitabh", "prem", "rajesh khanna" ], "rating" : 3, "price" : 260, "ticket_num" : 550, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"), "name" : "mission mangal", "price" : 350, "actor" : [ "Sonakshi", "Vidya Balan" ], "rating" : 6, "release_date" : ISODate("2019-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"), "name" : "padmavat", "price" : 600, "actor" : [ "Deepika", "shahid kapoor", "ranveer singh", "aditi Rao", "aaaaa" ], "cancellation" : { "date" : Timestamp(1567175239, 1) }, "ticket_num" : 300 }
+{ "_id" : ObjectId("5d89e9adfd4adc2f84279f43"), "name" : "chichore", "price" : 274, "rating" : 4.3, "actor" : [ "sushant", "shradha kapoor", "zzz", "harshal" ] }
+{ "_id" : ObjectId("5aaa31ee639395f86922a87f"), "name" : "3 idiots", "actor" : [ "Kareena Kapoor", "amir", "kareena", "mahadavan", "sharman" ], "rating" : 5, "price" : 400, "ticket_num" : 150, "modified" : ISODate("2021-06-11T09:20:55.016Z"), "release_date" : ISODate("2020-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"), "name" : "newton", "actor" : [ "Rajkumar Rao", "Pankaj Tripathi" ], "price" : 310, "lastmodified" : ISODate("2019-09-28T14:47:49.204Z"), "ticket_num" : 690, "rating" : 4 }
+{ "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"), "name" : "Andhadhund", "price" : 400, "actor" : [ "Ayushman", "radhika" ], "rating" : 5, "release_date" : ISODate("2020-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa31a2639395f86922a87e"), "name" : "kahani", "actor" : [ "aaaa", "bbbb", "karan", "karri", "vidya" ], "price" : 400, "actors" : [ "bbbb" ], "rating" : 5, "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"), "modified" : ISODate("2021-06-11T09:20:55.016Z"), "ticket_num" : 420, "release_date" : ISODate("2020-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5ca456072952ebdd7ae2a930"), "name" : "paa", "actor" : [ "Amitabh", "vidya balan", "Abhishek" ], "rating" : 3, "price" : 324, "rdate" : ISODate("2019-01-23T00:00:00Z"), "others" : { "director" : "R Balki", "songs" : "Amit trivedi" }, "ticket_num" : 400, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa3334639395f86922a880"), "name" : "lagaan", "actor" : [ "amir", "angraz" ], "rating" : 6, "price" : 350, "cancellation" : { "date" : Timestamp(1554356003, 1), "reason" : "user request" }, "lastModified" : ISODate("2019-04-04T05:33:23.022Z"), "ticket_num" : 410, "release_date" : ISODate("2019-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"), "name" : "Kesari", "actor" : [ "Akshay Kumar", "Pariniti chopra" ], "rating" : 6, "price" : 350, "rdate" : ISODate("2019-01-23T00:00:00Z"), "ticket_num" : 270, "release_date" : ISODate("2019-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5aab6da4639395f86922a883"), "name" : "kahani 2", "actor" : [ "Arjun", "yyyy", "Jonny", "nawaz", "Vidya", "shreyas" ], "rating" : 5, "price" : 400, "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"), "modified" : ISODate("2021-06-11T09:20:55.016Z"), "ticket_num" : 820, "release_date" : ISODate("2020-12-10T00:00:00Z") }
+> db.movie.find({ $or:[{ rating:{$lt:5} },{ price:{$gt:300}}]}).pretty()
+{
+        "_id" : ObjectId("5c865923d82c19b8ed996550"),
+        "name" : "dil",
+        "rating" : 3,
+        "price" : 300,
+        "actor" : "['Anil kapoor']",
+        "ticket_num" : 300,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 3,
+        "price" : 420,
+        "position" : [
+                2,
+                2
+        ],
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "price" : 260,
+        "ticket_num" : 550,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350,
+        "actor" : [
+                "Sonakshi",
+                "Vidya Balan"
+        ],
+        "rating" : 6,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "price" : 600,
+        "actor" : [
+                "Deepika",
+                "shahid kapoor",
+                "ranveer singh",
+                "aditi Rao",
+                "aaaaa"
+        ],
+        "cancellation" : {
+                "date" : Timestamp(1567175239, 1)
+        },
+        "ticket_num" : 300
+}
+{
+        "_id" : ObjectId("5d89e9adfd4adc2f84279f43"),
+        "name" : "chichore",
+        "price" : 274,
+        "rating" : 4.3,
+        "actor" : [
+                "sushant",
+                "shradha kapoor",
+                "zzz",
+                "harshal"
+        ]
+}
+{
+        "_id" : ObjectId("5aaa31ee639395f86922a87f"),
+        "name" : "3 idiots",
+        "actor" : [
+                "Kareena Kapoor",
+                "amir",
+                "kareena",
+                "mahadavan",
+                "sharman"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "ticket_num" : 150,
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "actor" : [
+                "Rajkumar Rao",
+                "Pankaj Tripathi"
+        ],
+        "price" : 310,
+        "lastmodified" : ISODate("2019-09-28T14:47:49.204Z"),
+        "ticket_num" : 690,
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400,
+        "actor" : [
+                "Ayushman",
+                "radhika"
+        ],
+        "rating" : 5,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "actor" : [
+                "aaaa",
+                "bbbb",
+                "karan",
+                "karri",
+                "vidya"
+        ],
+        "price" : 400,
+        "actors" : [
+                "bbbb"
+        ],
+        "rating" : 5,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 420,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 3,
+        "price" : 324,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        },
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "actor" : [
+                "amir",
+                "angraz"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "cancellation" : {
+                "date" : Timestamp(1554356003, 1),
+                "reason" : "user request"
+        },
+        "lastModified" : ISODate("2019-04-04T05:33:23.022Z"),
+        "ticket_num" : 410,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "actor" : [
+                "Akshay Kumar",
+                "Pariniti chopra"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "ticket_num" : 270,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "actor" : [
+                "Arjun",
+                "yyyy",
+                "Jonny",
+                "nawaz",
+                "Vidya",
+                "shreyas"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 820,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+> db.movie.find({price:{$in:[260,300,450]}})
+{ "_id" : ObjectId("5c865923d82c19b8ed996550"), "name" : "dil", "rating" : 3, "price" : 300, "actor" : "['Anil kapoor']", "ticket_num" : 300, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa3334639395f86922a882"), "name" : "aradhana", "actor" : [ "amitabh", "prem", "rajesh khanna" ], "rating" : 3, "price" : 260, "ticket_num" : 550, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+> db.movie.find({price:{$in:[260,300,450]}}).pretty()
+{
+        "_id" : ObjectId("5c865923d82c19b8ed996550"),
+        "name" : "dil",
+        "rating" : 3,
+        "price" : 300,
+        "actor" : "['Anil kapoor']",
+        "ticket_num" : 300,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "price" : 260,
+        "ticket_num" : 550,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+> db.movie.find({price:{$nin:[260,300,450]}})
+{ "_id" : ObjectId("5aaa3334639395f86922a881"), "name" : "sholay", "actor" : [ "Dharamendra", "Amitabh", "Sachin Pilgaokar", "Dharamendra", "Dharamendra", "Mr. Khote", "jaya bacchan", "sanjiv kapoor" ], "rating" : 3, "price" : 420, "position" : [ 2, 2 ], "ticket_num" : 400, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"), "name" : "mission mangal", "price" : 350, "actor" : [ "Sonakshi", "Vidya Balan" ], "rating" : 6, "release_date" : ISODate("2019-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"), "name" : "padmavat", "price" : 600, "actor" : [ "Deepika", "shahid kapoor", "ranveer singh", "aditi Rao", "aaaaa" ], "cancellation" : { "date" : Timestamp(1567175239, 1) }, "ticket_num" : 300 }
+{ "_id" : ObjectId("5c8283789eb55675f0272933"), "name" : "uri", "rating" : 8, "actor" : [ "vicky kaushal", "yami", "Paresh Rawal" ], "ticket_num" : 200 }
+{ "_id" : ObjectId("5d8f6eec620d2353221b91dd"), "price" : 280 }
+{ "_id" : ObjectId("5d89e9adfd4adc2f84279f43"), "name" : "chichore", "price" : 274, "rating" : 4.3, "actor" : [ "sushant", "shradha kapoor", "zzz", "harshal" ] }
+{ "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"), "name" : "Andhadhund", "price" : null, "actor" : [ "Tabbu" ] }
+{ "_id" : ObjectId("5aaa31ee639395f86922a87f"), "name" : "3 idiots", "actor" : [ "Kareena Kapoor", "amir", "kareena", "mahadavan", "sharman" ], "rating" : 5, "price" : 400, "ticket_num" : 150, "modified" : ISODate("2021-06-11T09:20:55.016Z"), "release_date" : ISODate("2020-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"), "name" : "dream girl", "actor" : [ "ayushman", "nushrat bharucha" ], "price" : 250, "rating" : null }
+{ "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"), "name" : "newton", "actor" : [ "Rajkumar Rao", "Pankaj Tripathi" ], "price" : 310, "lastmodified" : ISODate("2019-09-28T14:47:49.204Z"), "ticket_num" : 690, "rating" : 4 }
+{ "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"), "name" : "Andhadhund", "price" : 400, "actor" : [ "Ayushman", "radhika" ], "rating" : 5, "release_date" : ISODate("2020-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa31a2639395f86922a87e"), "name" : "kahani", "actor" : [ "aaaa", "bbbb", "karan", "karri", "vidya" ], "price" : 400, "actors" : [ "bbbb" ], "rating" : 5, "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"), "modified" : ISODate("2021-06-11T09:20:55.016Z"), "ticket_num" : 420, "release_date" : ISODate("2020-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5ca456072952ebdd7ae2a930"), "name" : "paa", "actor" : [ "Amitabh", "vidya balan", "Abhishek" ], "rating" : 3, "price" : 324, "rdate" : ISODate("2019-01-23T00:00:00Z"), "others" : { "director" : "R Balki", "songs" : "Amit trivedi" }, "ticket_num" : 400, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa3334639395f86922a880"), "name" : "lagaan", "actor" : [ "amir", "angraz" ], "rating" : 6, "price" : 350, "cancellation" : { "date" : Timestamp(1554356003, 1), "reason" : "user request" }, "lastModified" : ISODate("2019-04-04T05:33:23.022Z"), "ticket_num" : 410, "release_date" : ISODate("2019-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"), "name" : "Kesari", "actor" : [ "Akshay Kumar", "Pariniti chopra" ], "rating" : 6, "price" : 350, "rdate" : ISODate("2019-01-23T00:00:00Z"), "ticket_num" : 270, "release_date" : ISODate("2019-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5aab6da4639395f86922a883"), "name" : "kahani 2", "actor" : [ "Arjun", "yyyy", "Jonny", "nawaz", "Vidya", "shreyas" ], "rating" : 5, "price" : 400, "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"), "modified" : ISODate("2021-06-11T09:20:55.016Z"), "ticket_num" : 820, "release_date" : ISODate("2020-12-10T00:00:00Z") }
+> db.movie.find({price:{$nin:[260,300,450]}}).pretty()
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 3,
+        "price" : 420,
+        "position" : [
+                2,
+                2
+        ],
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350,
+        "actor" : [
+                "Sonakshi",
+                "Vidya Balan"
+        ],
+        "rating" : 6,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "price" : 600,
+        "actor" : [
+                "Deepika",
+                "shahid kapoor",
+                "ranveer singh",
+                "aditi Rao",
+                "aaaaa"
+        ],
+        "cancellation" : {
+                "date" : Timestamp(1567175239, 1)
+        },
+        "ticket_num" : 300
+}
+{
+        "_id" : ObjectId("5c8283789eb55675f0272933"),
+        "name" : "uri",
+        "rating" : 8,
+        "actor" : [
+                "vicky kaushal",
+                "yami",
+                "Paresh Rawal"
+        ],
+        "ticket_num" : 200
+}
+{ "_id" : ObjectId("5d8f6eec620d2353221b91dd"), "price" : 280 }
+{
+        "_id" : ObjectId("5d89e9adfd4adc2f84279f43"),
+        "name" : "chichore",
+        "price" : 274,
+        "rating" : 4.3,
+        "actor" : [
+                "sushant",
+                "shradha kapoor",
+                "zzz",
+                "harshal"
+        ]
+}
+{
+        "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"),
+        "name" : "Andhadhund",
+        "price" : null,
+        "actor" : [
+                "Tabbu"
+        ]
+}
+{
+        "_id" : ObjectId("5aaa31ee639395f86922a87f"),
+        "name" : "3 idiots",
+        "actor" : [
+                "Kareena Kapoor",
+                "amir",
+                "kareena",
+                "mahadavan",
+                "sharman"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "ticket_num" : 150,
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"),
+        "name" : "dream girl",
+        "actor" : [
+                "ayushman",
+                "nushrat bharucha"
+        ],
+        "price" : 250,
+        "rating" : null
+}
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "actor" : [
+                "Rajkumar Rao",
+                "Pankaj Tripathi"
+        ],
+        "price" : 310,
+        "lastmodified" : ISODate("2019-09-28T14:47:49.204Z"),
+        "ticket_num" : 690,
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400,
+        "actor" : [
+                "Ayushman",
+                "radhika"
+        ],
+        "rating" : 5,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "actor" : [
+                "aaaa",
+                "bbbb",
+                "karan",
+                "karri",
+                "vidya"
+        ],
+        "price" : 400,
+        "actors" : [
+                "bbbb"
+        ],
+        "rating" : 5,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 420,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 3,
+        "price" : 324,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        },
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "actor" : [
+                "amir",
+                "angraz"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "cancellation" : {
+                "date" : Timestamp(1554356003, 1),
+                "reason" : "user request"
+        },
+        "lastModified" : ISODate("2019-04-04T05:33:23.022Z"),
+        "ticket_num" : 410,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "actor" : [
+                "Akshay Kumar",
+                "Pariniti chopra"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "ticket_num" : 270,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "actor" : [
+                "Arjun",
+                "yyyy",
+                "Jonny",
+                "nawaz",
+                "Vidya",
+                "shreyas"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 820,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+> db.movie.find({price:{$nin:[260,300,450]}},{name:1,price:1}).sort({price:-1}).pretty()
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "price" : 600
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "price" : 420
+}
+{
+        "_id" : ObjectId("5aaa31ee639395f86922a87f"),
+        "name" : "3 idiots",
+        "price" : 400
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "price" : 400
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "price" : 400
+}
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "price" : 350
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "price" : 350
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "price" : 324
+}
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "price" : 310
+}
+{ "_id" : ObjectId("5d8f6eec620d2353221b91dd"), "price" : 280 }
+{
+        "_id" : ObjectId("5d89e9adfd4adc2f84279f43"),
+        "name" : "chichore",
+        "price" : 274
+}
+{
+        "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"),
+        "name" : "dream girl",
+        "price" : 250
+}
+{ "_id" : ObjectId("5c8283789eb55675f0272933"), "name" : "uri" }
+{
+        "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"),
+        "name" : "Andhadhund",
+        "price" : null
+}
+> db.movie.find({price:{$nin:[260,300,450]}},{name:1,price:1,_id:0}).sort({price:-1}).pretty()
+{ "name" : "padmavat", "price" : 600 }
+{ "name" : "sholay", "price" : 420 }
+{ "name" : "3 idiots", "price" : 400 }
+{ "name" : "Andhadhund", "price" : 400 }
+{ "name" : "kahani", "price" : 400 }
+{ "name" : "kahani 2", "price" : 400 }
+{ "name" : "mission mangal", "price" : 350 }
+{ "name" : "lagaan", "price" : 350 }
+{ "name" : "Kesari", "price" : 350 }
+{ "name" : "paa", "price" : 324 }
+{ "name" : "newton", "price" : 310 }
+{ "price" : 280 }
+{ "name" : "chichore", "price" : 274 }
+{ "name" : "dream girl", "price" : 250 }
+{ "name" : "uri" }
+{ "name" : "Andhadhund", "price" : null }
+> db.movie.firnd({rating:{$exists:false}})
+2021-07-16T11:32:37.575+0530 E  QUERY    [js] uncaught exception: TypeError: db.movie.firnd is not a function :
+@(shell):1:1
+> db.movie.find({rating:{$exists:false}})
+{ "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"), "name" : "padmavat", "price" : 600, "actor" : [ "Deepika", "shahid kapoor", "ranveer singh", "aditi Rao", "aaaaa" ], "cancellation" : { "date" : Timestamp(1567175239, 1) }, "ticket_num" : 300 }
+{ "_id" : ObjectId("5d8f6eec620d2353221b91dd"), "price" : 280 }
+{ "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"), "name" : "Andhadhund", "price" : null, "actor" : [ "Tabbu" ] }
+> db.movie.find({rating:{$exists:false}}).pretty();
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "price" : 600,
+        "actor" : [
+                "Deepika",
+                "shahid kapoor",
+                "ranveer singh",
+                "aditi Rao",
+                "aaaaa"
+        ],
+        "cancellation" : {
+                "date" : Timestamp(1567175239, 1)
+        },
+        "ticket_num" : 300
+}
+{ "_id" : ObjectId("5d8f6eec620d2353221b91dd"), "price" : 280 }
+{
+        "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"),
+        "name" : "Andhadhund",
+        "price" : null,
+        "actor" : [
+                "Tabbu"
+        ]
+}
+> db.movie.find({rating:{$exists:true}}).pretty();
+{
+        "_id" : ObjectId("5c865923d82c19b8ed996550"),
+        "name" : "dil",
+        "rating" : 3,
+        "price" : 300,
+        "actor" : "['Anil kapoor']",
+        "ticket_num" : 300,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 3,
+        "price" : 420,
+        "position" : [
+                2,
+                2
+        ],
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "price" : 260,
+        "ticket_num" : 550,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350,
+        "actor" : [
+                "Sonakshi",
+                "Vidya Balan"
+        ],
+        "rating" : 6,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5c8283789eb55675f0272933"),
+        "name" : "uri",
+        "rating" : 8,
+        "actor" : [
+                "vicky kaushal",
+                "yami",
+                "Paresh Rawal"
+        ],
+        "ticket_num" : 200
+}
+{
+        "_id" : ObjectId("5d89e9adfd4adc2f84279f43"),
+        "name" : "chichore",
+        "price" : 274,
+        "rating" : 4.3,
+        "actor" : [
+                "sushant",
+                "shradha kapoor",
+                "zzz",
+                "harshal"
+        ]
+}
+{
+        "_id" : ObjectId("5aaa31ee639395f86922a87f"),
+        "name" : "3 idiots",
+        "actor" : [
+                "Kareena Kapoor",
+                "amir",
+                "kareena",
+                "mahadavan",
+                "sharman"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "ticket_num" : 150,
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"),
+        "name" : "dream girl",
+        "actor" : [
+                "ayushman",
+                "nushrat bharucha"
+        ],
+        "price" : 250,
+        "rating" : null
+}
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "actor" : [
+                "Rajkumar Rao",
+                "Pankaj Tripathi"
+        ],
+        "price" : 310,
+        "lastmodified" : ISODate("2019-09-28T14:47:49.204Z"),
+        "ticket_num" : 690,
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400,
+        "actor" : [
+                "Ayushman",
+                "radhika"
+        ],
+        "rating" : 5,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "actor" : [
+                "aaaa",
+                "bbbb",
+                "karan",
+                "karri",
+                "vidya"
+        ],
+        "price" : 400,
+        "actors" : [
+                "bbbb"
+        ],
+        "rating" : 5,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 420,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 3,
+        "price" : 324,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        },
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "actor" : [
+                "amir",
+                "angraz"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "cancellation" : {
+                "date" : Timestamp(1554356003, 1),
+                "reason" : "user request"
+        },
+        "lastModified" : ISODate("2019-04-04T05:33:23.022Z"),
+        "ticket_num" : 410,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "actor" : [
+                "Akshay Kumar",
+                "Pariniti chopra"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "ticket_num" : 270,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "actor" : [
+                "Arjun",
+                "yyyy",
+                "Jonny",
+                "nawaz",
+                "Vidya",
+                "shreyas"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 820,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+> db.movie.firnd({rating:{$in:[null],$exists:true}})
+2021-07-16T11:34:44.468+0530 E  QUERY    [js] uncaught exception: TypeError: db.movie.firnd is not a function :
+@(shell):1:1
+> db.movie.find({rating:{$in:[null],$exists:true}})
+{ "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"), "name" : "dream girl", "actor" : [ "ayushman", "nushrat bharucha" ], "price" : 250, "rating" : null }
+> db.movie.find({rating:{$in:[null],$exists:true}}).pretty()
+{
+        "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"),
+        "name" : "dream girl",
+        "actor" : [
+                "ayushman",
+                "nushrat bharucha"
+        ],
+        "price" : 250,
+        "rating" : null
+}
+> db.movie.find({rating:null}).pretty()
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "price" : 600,
+        "actor" : [
+                "Deepika",
+                "shahid kapoor",
+                "ranveer singh",
+                "aditi Rao",
+                "aaaaa"
+        ],
+        "cancellation" : {
+                "date" : Timestamp(1567175239, 1)
+        },
+        "ticket_num" : 300
+}
+{ "_id" : ObjectId("5d8f6eec620d2353221b91dd"), "price" : 280 }
+{
+        "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"),
+        "name" : "Andhadhund",
+        "price" : null,
+        "actor" : [
+                "Tabbu"
+        ]
+}
+{
+        "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"),
+        "name" : "dream girl",
+        "actor" : [
+                "ayushman",
+                "nushrat bharucha"
+        ],
+        "price" : 250,
+        "rating" : null
+}
+> db.movie.find({rating:{$mod:[2,1]}})
+{ "_id" : ObjectId("5c865923d82c19b8ed996550"), "name" : "dil", "rating" : 3, "price" : 300, "actor" : "['Anil kapoor']", "ticket_num" : 300, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa3334639395f86922a881"), "name" : "sholay", "actor" : [ "Dharamendra", "Amitabh", "Sachin Pilgaokar", "Dharamendra", "Dharamendra", "Mr. Khote", "jaya bacchan", "sanjiv kapoor" ], "rating" : 3, "price" : 420, "position" : [ 2, 2 ], "ticket_num" : 400, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa3334639395f86922a882"), "name" : "aradhana", "actor" : [ "amitabh", "prem", "rajesh khanna" ], "rating" : 3, "price" : 260, "ticket_num" : 550, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa31ee639395f86922a87f"), "name" : "3 idiots", "actor" : [ "Kareena Kapoor", "amir", "kareena", "mahadavan", "sharman" ], "rating" : 5, "price" : 400, "ticket_num" : 150, "modified" : ISODate("2021-06-11T09:20:55.016Z"), "release_date" : ISODate("2020-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"), "name" : "Andhadhund", "price" : 400, "actor" : [ "Ayushman", "radhika" ], "rating" : 5, "release_date" : ISODate("2020-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa31a2639395f86922a87e"), "name" : "kahani", "actor" : [ "aaaa", "bbbb", "karan", "karri", "vidya" ], "price" : 400, "actors" : [ "bbbb" ], "rating" : 5, "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"), "modified" : ISODate("2021-06-11T09:20:55.016Z"), "ticket_num" : 420, "release_date" : ISODate("2020-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5ca456072952ebdd7ae2a930"), "name" : "paa", "actor" : [ "Amitabh", "vidya balan", "Abhishek" ], "rating" : 3, "price" : 324, "rdate" : ISODate("2019-01-23T00:00:00Z"), "others" : { "director" : "R Balki", "songs" : "Amit trivedi" }, "ticket_num" : 400, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5aab6da4639395f86922a883"), "name" : "kahani 2", "actor" : [ "Arjun", "yyyy", "Jonny", "nawaz", "Vidya", "shreyas" ], "rating" : 5, "price" : 400, "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"), "modified" : ISODate("2021-06-11T09:20:55.016Z"), "ticket_num" : 820, "release_date" : ISODate("2020-12-10T00:00:00Z") }
+> db.movie.find({rating:{$mod:[2,1]}}).pretty()
+{
+        "_id" : ObjectId("5c865923d82c19b8ed996550"),
+        "name" : "dil",
+        "rating" : 3,
+        "price" : 300,
+        "actor" : "['Anil kapoor']",
+        "ticket_num" : 300,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 3,
+        "price" : 420,
+        "position" : [
+                2,
+                2
+        ],
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "price" : 260,
+        "ticket_num" : 550,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa31ee639395f86922a87f"),
+        "name" : "3 idiots",
+        "actor" : [
+                "Kareena Kapoor",
+                "amir",
+                "kareena",
+                "mahadavan",
+                "sharman"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "ticket_num" : 150,
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400,
+        "actor" : [
+                "Ayushman",
+                "radhika"
+        ],
+        "rating" : 5,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "actor" : [
+                "aaaa",
+                "bbbb",
+                "karan",
+                "karri",
+                "vidya"
+        ],
+        "price" : 400,
+        "actors" : [
+                "bbbb"
+        ],
+        "rating" : 5,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 420,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 3,
+        "price" : 324,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        },
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "actor" : [
+                "Arjun",
+                "yyyy",
+                "Jonny",
+                "nawaz",
+                "Vidya",
+                "shreyas"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 820,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+> db.movie.find({rating:{$mod:[2,0]}}).pretty()
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350,
+        "actor" : [
+                "Sonakshi",
+                "Vidya Balan"
+        ],
+        "rating" : 6,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5c8283789eb55675f0272933"),
+        "name" : "uri",
+        "rating" : 8,
+        "actor" : [
+                "vicky kaushal",
+                "yami",
+                "Paresh Rawal"
+        ],
+        "ticket_num" : 200
+}
+{
+        "_id" : ObjectId("5d89e9adfd4adc2f84279f43"),
+        "name" : "chichore",
+        "price" : 274,
+        "rating" : 4.3,
+        "actor" : [
+                "sushant",
+                "shradha kapoor",
+                "zzz",
+                "harshal"
+        ]
+}
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "actor" : [
+                "Rajkumar Rao",
+                "Pankaj Tripathi"
+        ],
+        "price" : 310,
+        "lastmodified" : ISODate("2019-09-28T14:47:49.204Z"),
+        "ticket_num" : 690,
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "actor" : [
+                "amir",
+                "angraz"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "cancellation" : {
+                "date" : Timestamp(1554356003, 1),
+                "reason" : "user request"
+        },
+        "lastModified" : ISODate("2019-04-04T05:33:23.022Z"),
+        "ticket_num" : 410,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "actor" : [
+                "Akshay Kumar",
+                "Pariniti chopra"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "ticket_num" : 270,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+> db.movie.find({actors:'Amithabh'})
+> db.movie.find({actor:'Amithabh'})
+> db.movie.find({actor:'Amitabh'})
+{ "_id" : ObjectId("5aaa3334639395f86922a881"), "name" : "sholay", "actor" : [ "Dharamendra", "Amitabh", "Sachin Pilgaokar", "Dharamendra", "Dharamendra", "Mr. Khote", "jaya bacchan", "sanjiv kapoor" ], "rating" : 3, "price" : 420, "position" : [ 2, 2 ], "ticket_num" : 400, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5ca456072952ebdd7ae2a930"), "name" : "paa", "actor" : [ "Amitabh", "vidya balan", "Abhishek" ], "rating" : 3, "price" : 324, "rdate" : ISODate("2019-01-23T00:00:00Z"), "others" : { "director" : "R Balki", "songs" : "Amit trivedi" }, "ticket_num" : 400, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+> db.movie.find({actor:'Amitabh'}).pretty()
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 3,
+        "price" : 420,
+        "position" : [
+                2,
+                2
+        ],
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 3,
+        "price" : 324,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        },
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+> db.movie.find({actor:'amitabh'}).pretty()
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "price" : 260,
+        "ticket_num" : 550,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+> db.movie.find({actor:'Amitabh'}).pretty()
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 3,
+        "price" : 420,
+        "position" : [
+                2,
+                2
+        ],
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 3,
+        "price" : 324,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        },
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+> db.movie.find({'actor.1':'Amitabh'}).pretty()
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 3,
+        "price" : 420,
+        "position" : [
+                2,
+                2
+        ],
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+> db.movie.find({'actor.0':'Amitabh'}).pretty()
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 3,
+        "price" : 324,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        },
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+> db.movie.find({name:/^[Aa]mitabh/})
+> db.movie.find({actor:/^[Aa]mitabh/})
+{ "_id" : ObjectId("5aaa3334639395f86922a881"), "name" : "sholay", "actor" : [ "Dharamendra", "Amitabh", "Sachin Pilgaokar", "Dharamendra", "Dharamendra", "Mr. Khote", "jaya bacchan", "sanjiv kapoor" ], "rating" : 3, "price" : 420, "position" : [ 2, 2 ], "ticket_num" : 400, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa3334639395f86922a882"), "name" : "aradhana", "actor" : [ "amitabh", "prem", "rajesh khanna" ], "rating" : 3, "price" : 260, "ticket_num" : 550, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5ca456072952ebdd7ae2a930"), "name" : "paa", "actor" : [ "Amitabh", "vidya balan", "Abhishek" ], "rating" : 3, "price" : 324, "rdate" : ISODate("2019-01-23T00:00:00Z"), "others" : { "director" : "R Balki", "songs" : "Amit trivedi" }, "ticket_num" : 400, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+> db.movie.find({actor:/^[Aa]mitabh/}).pretty()
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 3,
+        "price" : 420,
+        "position" : [
+                2,
+                2
+        ],
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "price" : 260,
+        "ticket_num" : 550,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 3,
+        "price" : 324,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        },
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+> db.movie.find({name:/t$/}).pretty()
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "price" : 600,
+        "actor" : [
+                "Deepika",
+                "shahid kapoor",
+                "ranveer singh",
+                "aditi Rao",
+                "aaaaa"
+        ],
+        "cancellation" : {
+                "date" : Timestamp(1567175239, 1)
+        },
+        "ticket_num" : 300
+}
+> db.movie.find({name:/[0-9]$/}).pretty()
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "actor" : [
+                "Arjun",
+                "yyyy",
+                "Jonny",
+                "nawaz",
+                "Vidya",
+                "shreyas"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 820,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+> db.movie.find({name:/^[0-9]/}).pretty()
+{
+        "_id" : ObjectId("5aaa31ee639395f86922a87f"),
+        "name" : "3 idiots",
+        "actor" : [
+                "Kareena Kapoor",
+                "amir",
+                "kareena",
+                "mahadavan",
+                "sharman"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "ticket_num" : 150,
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+> db.movie.find({name:/^[^0-9]/}).pretty()
+{
+        "_id" : ObjectId("5c865923d82c19b8ed996550"),
+        "name" : "dil",
+        "rating" : 3,
+        "price" : 300,
+        "actor" : "['Anil kapoor']",
+        "ticket_num" : 300,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 3,
+        "price" : 420,
+        "position" : [
+                2,
+                2
+        ],
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "price" : 260,
+        "ticket_num" : 550,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350,
+        "actor" : [
+                "Sonakshi",
+                "Vidya Balan"
+        ],
+        "rating" : 6,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "price" : 600,
+        "actor" : [
+                "Deepika",
+                "shahid kapoor",
+                "ranveer singh",
+                "aditi Rao",
+                "aaaaa"
+        ],
+        "cancellation" : {
+                "date" : Timestamp(1567175239, 1)
+        },
+        "ticket_num" : 300
+}
+{
+        "_id" : ObjectId("5c8283789eb55675f0272933"),
+        "name" : "uri",
+        "rating" : 8,
+        "actor" : [
+                "vicky kaushal",
+                "yami",
+                "Paresh Rawal"
+        ],
+        "ticket_num" : 200
+}
+{
+        "_id" : ObjectId("5d89e9adfd4adc2f84279f43"),
+        "name" : "chichore",
+        "price" : 274,
+        "rating" : 4.3,
+        "actor" : [
+                "sushant",
+                "shradha kapoor",
+                "zzz",
+                "harshal"
+        ]
+}
+{
+        "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"),
+        "name" : "Andhadhund",
+        "price" : null,
+        "actor" : [
+                "Tabbu"
+        ]
+}
+{
+        "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"),
+        "name" : "dream girl",
+        "actor" : [
+                "ayushman",
+                "nushrat bharucha"
+        ],
+        "price" : 250,
+        "rating" : null
+}
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "actor" : [
+                "Rajkumar Rao",
+                "Pankaj Tripathi"
+        ],
+        "price" : 310,
+        "lastmodified" : ISODate("2019-09-28T14:47:49.204Z"),
+        "ticket_num" : 690,
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400,
+        "actor" : [
+                "Ayushman",
+                "radhika"
+        ],
+        "rating" : 5,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "actor" : [
+                "aaaa",
+                "bbbb",
+                "karan",
+                "karri",
+                "vidya"
+        ],
+        "price" : 400,
+        "actors" : [
+                "bbbb"
+        ],
+        "rating" : 5,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 420,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 3,
+        "price" : 324,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        },
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "actor" : [
+                "amir",
+                "angraz"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "cancellation" : {
+                "date" : Timestamp(1554356003, 1),
+                "reason" : "user request"
+        },
+        "lastModified" : ISODate("2019-04-04T05:33:23.022Z"),
+        "ticket_num" : 410,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "actor" : [
+                "Akshay Kumar",
+                "Pariniti chopra"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "ticket_num" : 270,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "actor" : [
+                "Arjun",
+                "yyyy",
+                "Jonny",
+                "nawaz",
+                "Vidya",
+                "shreyas"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 820,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+> db.movie.find({name:/[Aa]/})
+{ "_id" : ObjectId("5aaa3334639395f86922a881"), "name" : "sholay", "actor" : [ "Dharamendra", "Amitabh", "Sachin Pilgaokar", "Dharamendra", "Dharamendra", "Mr. Khote", "jaya bacchan", "sanjiv kapoor" ], "rating" : 3, "price" : 420, "position" : [ 2, 2 ], "ticket_num" : 400, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa3334639395f86922a882"), "name" : "aradhana", "actor" : [ "amitabh", "prem", "rajesh khanna" ], "rating" : 3, "price" : 260, "ticket_num" : 550, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"), "name" : "mission mangal", "price" : 350, "actor" : [ "Sonakshi", "Vidya Balan" ], "rating" : 6, "release_date" : ISODate("2019-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"), "name" : "padmavat", "price" : 600, "actor" : [ "Deepika", "shahid kapoor", "ranveer singh", "aditi Rao", "aaaaa" ], "cancellation" : { "date" : Timestamp(1567175239, 1) }, "ticket_num" : 300 }
+{ "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"), "name" : "Andhadhund", "price" : null, "actor" : [ "Tabbu" ] }
+{ "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"), "name" : "dream girl", "actor" : [ "ayushman", "nushrat bharucha" ], "price" : 250, "rating" : null }
+{ "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"), "name" : "Andhadhund", "price" : 400, "actor" : [ "Ayushman", "radhika" ], "rating" : 5, "release_date" : ISODate("2020-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa31a2639395f86922a87e"), "name" : "kahani", "actor" : [ "aaaa", "bbbb", "karan", "karri", "vidya" ], "price" : 400, "actors" : [ "bbbb" ], "rating" : 5, "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"), "modified" : ISODate("2021-06-11T09:20:55.016Z"), "ticket_num" : 420, "release_date" : ISODate("2020-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5ca456072952ebdd7ae2a930"), "name" : "paa", "actor" : [ "Amitabh", "vidya balan", "Abhishek" ], "rating" : 3, "price" : 324, "rdate" : ISODate("2019-01-23T00:00:00Z"), "others" : { "director" : "R Balki", "songs" : "Amit trivedi" }, "ticket_num" : 400, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5aaa3334639395f86922a880"), "name" : "lagaan", "actor" : [ "amir", "angraz" ], "rating" : 6, "price" : 350, "cancellation" : { "date" : Timestamp(1554356003, 1), "reason" : "user request" }, "lastModified" : ISODate("2019-04-04T05:33:23.022Z"), "ticket_num" : 410, "release_date" : ISODate("2019-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"), "name" : "Kesari", "actor" : [ "Akshay Kumar", "Pariniti chopra" ], "rating" : 6, "price" : 350, "rdate" : ISODate("2019-01-23T00:00:00Z"), "ticket_num" : 270, "release_date" : ISODate("2019-12-10T00:00:00Z") }
+{ "_id" : ObjectId("5aab6da4639395f86922a883"), "name" : "kahani 2", "actor" : [ "Arjun", "yyyy", "Jonny", "nawaz", "Vidya", "shreyas" ], "rating" : 5, "price" : 400, "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"), "modified" : ISODate("2021-06-11T09:20:55.016Z"), "ticket_num" : 820, "release_date" : ISODate("2020-12-10T00:00:00Z") }
+> db.movie.find({name:/[Aa]/}).pretty()
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 3,
+        "price" : 420,
+        "position" : [
+                2,
+                2
+        ],
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "price" : 260,
+        "ticket_num" : 550,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350,
+        "actor" : [
+                "Sonakshi",
+                "Vidya Balan"
+        ],
+        "rating" : 6,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "price" : 600,
+        "actor" : [
+                "Deepika",
+                "shahid kapoor",
+                "ranveer singh",
+                "aditi Rao",
+                "aaaaa"
+        ],
+        "cancellation" : {
+                "date" : Timestamp(1567175239, 1)
+        },
+        "ticket_num" : 300
+}
+{
+        "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"),
+        "name" : "Andhadhund",
+        "price" : null,
+        "actor" : [
+                "Tabbu"
+        ]
+}
+{
+        "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"),
+        "name" : "dream girl",
+        "actor" : [
+                "ayushman",
+                "nushrat bharucha"
+        ],
+        "price" : 250,
+        "rating" : null
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400,
+        "actor" : [
+                "Ayushman",
+                "radhika"
+        ],
+        "rating" : 5,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "actor" : [
+                "aaaa",
+                "bbbb",
+                "karan",
+                "karri",
+                "vidya"
+        ],
+        "price" : 400,
+        "actors" : [
+                "bbbb"
+        ],
+        "rating" : 5,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 420,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 3,
+        "price" : 324,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        },
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "actor" : [
+                "amir",
+                "angraz"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "cancellation" : {
+                "date" : Timestamp(1554356003, 1),
+                "reason" : "user request"
+        },
+        "lastModified" : ISODate("2019-04-04T05:33:23.022Z"),
+        "ticket_num" : 410,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "actor" : [
+                "Akshay Kumar",
+                "Pariniti chopra"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "ticket_num" : 270,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "actor" : [
+                "Arjun",
+                "yyyy",
+                "Jonny",
+                "nawaz",
+                "Vidya",
+                "shreyas"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 820,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+> db.movie.find({name:/[Kk]/}).pretty()
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "actor" : [
+                "aaaa",
+                "bbbb",
+                "karan",
+                "karri",
+                "vidya"
+        ],
+        "price" : 400,
+        "actors" : [
+                "bbbb"
+        ],
+        "rating" : 5,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 420,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "actor" : [
+                "Akshay Kumar",
+                "Pariniti chopra"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "ticket_num" : 270,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "actor" : [
+                "Arjun",
+                "yyyy",
+                "Jonny",
+                "nawaz",
+                "Vidya",
+                "shreyas"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 820,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+> db.movie.find({name:/[Nn]/}).pretty()
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "price" : 260,
+        "ticket_num" : 550,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350,
+        "actor" : [
+                "Sonakshi",
+                "Vidya Balan"
+        ],
+        "rating" : 6,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"),
+        "name" : "Andhadhund",
+        "price" : null,
+        "actor" : [
+                "Tabbu"
+        ]
+}
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "actor" : [
+                "Rajkumar Rao",
+                "Pankaj Tripathi"
+        ],
+        "price" : 310,
+        "lastmodified" : ISODate("2019-09-28T14:47:49.204Z"),
+        "ticket_num" : 690,
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400,
+        "actor" : [
+                "Ayushman",
+                "radhika"
+        ],
+        "rating" : 5,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "actor" : [
+                "aaaa",
+                "bbbb",
+                "karan",
+                "karri",
+                "vidya"
+        ],
+        "price" : 400,
+        "actors" : [
+                "bbbb"
+        ],
+        "rating" : 5,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 420,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "actor" : [
+                "amir",
+                "angraz"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "cancellation" : {
+                "date" : Timestamp(1554356003, 1),
+                "reason" : "user request"
+        },
+        "lastModified" : ISODate("2019-04-04T05:33:23.022Z"),
+        "ticket_num" : 410,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "actor" : [
+                "Arjun",
+                "yyyy",
+                "Jonny",
+                "nawaz",
+                "Vidya",
+                "shreyas"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 820,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+> db.movie.find({actor:{$size:3}})
+{ "_id" : ObjectId("5aaa3334639395f86922a882"), "name" : "aradhana", "actor" : [ "amitabh", "prem", "rajesh khanna" ], "rating" : 3, "price" : 260, "ticket_num" : 550, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+{ "_id" : ObjectId("5c8283789eb55675f0272933"), "name" : "uri", "rating" : 8, "actor" : [ "vicky kaushal", "yami", "Paresh Rawal" ], "ticket_num" : 200 }
+{ "_id" : ObjectId("5ca456072952ebdd7ae2a930"), "name" : "paa", "actor" : [ "Amitabh", "vidya balan", "Abhishek" ], "rating" : 3, "price" : 324, "rdate" : ISODate("2019-01-23T00:00:00Z"), "others" : { "director" : "R Balki", "songs" : "Amit trivedi" }, "ticket_num" : 400, "release_date" : ISODate("2020-03-10T00:00:00Z") }
+> db.movie.find({actor:{$size:3}}).pretty()
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "price" : 260,
+        "ticket_num" : 550,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5c8283789eb55675f0272933"),
+        "name" : "uri",
+        "rating" : 8,
+        "actor" : [
+                "vicky kaushal",
+                "yami",
+                "Paresh Rawal"
+        ],
+        "ticket_num" : 200
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 3,
+        "price" : 324,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        },
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+> db.movie.find({name:{$type:"string}).pretty()
+2021-07-16T12:06:51.770+0530 E  QUERY    [js] uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:45
+> db.movie.find({name:{$type:"string"}).pretty()
+... db.movie.find({name:{$type:"string}).pretty()^C
+
+> db.movie.find({name:{$type:"string}}).pretty()
+2021-07-16T12:07:10.414+0530 E  QUERY    [js] uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:46
+> db.movie.find({name:{$type:"string"}}).pretty()
+{
+        "_id" : ObjectId("5c865923d82c19b8ed996550"),
+        "name" : "dil",
+        "rating" : 3,
+        "price" : 300,
+        "actor" : "['Anil kapoor']",
+        "ticket_num" : 300,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 3,
+        "price" : 420,
+        "position" : [
+                2,
+                2
+        ],
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "price" : 260,
+        "ticket_num" : 550,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350,
+        "actor" : [
+                "Sonakshi",
+                "Vidya Balan"
+        ],
+        "rating" : 6,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "price" : 600,
+        "actor" : [
+                "Deepika",
+                "shahid kapoor",
+                "ranveer singh",
+                "aditi Rao",
+                "aaaaa"
+        ],
+        "cancellation" : {
+                "date" : Timestamp(1567175239, 1)
+        },
+        "ticket_num" : 300
+}
+{
+        "_id" : ObjectId("5c8283789eb55675f0272933"),
+        "name" : "uri",
+        "rating" : 8,
+        "actor" : [
+                "vicky kaushal",
+                "yami",
+                "Paresh Rawal"
+        ],
+        "ticket_num" : 200
+}
+{
+        "_id" : ObjectId("5d89e9adfd4adc2f84279f43"),
+        "name" : "chichore",
+        "price" : 274,
+        "rating" : 4.3,
+        "actor" : [
+                "sushant",
+                "shradha kapoor",
+                "zzz",
+                "harshal"
+        ]
+}
+{
+        "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"),
+        "name" : "Andhadhund",
+        "price" : null,
+        "actor" : [
+                "Tabbu"
+        ]
+}
+{
+        "_id" : ObjectId("5aaa31ee639395f86922a87f"),
+        "name" : "3 idiots",
+        "actor" : [
+                "Kareena Kapoor",
+                "amir",
+                "kareena",
+                "mahadavan",
+                "sharman"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "ticket_num" : 150,
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"),
+        "name" : "dream girl",
+        "actor" : [
+                "ayushman",
+                "nushrat bharucha"
+        ],
+        "price" : 250,
+        "rating" : null
+}
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "actor" : [
+                "Rajkumar Rao",
+                "Pankaj Tripathi"
+        ],
+        "price" : 310,
+        "lastmodified" : ISODate("2019-09-28T14:47:49.204Z"),
+        "ticket_num" : 690,
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400,
+        "actor" : [
+                "Ayushman",
+                "radhika"
+        ],
+        "rating" : 5,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "actor" : [
+                "aaaa",
+                "bbbb",
+                "karan",
+                "karri",
+                "vidya"
+        ],
+        "price" : 400,
+        "actors" : [
+                "bbbb"
+        ],
+        "rating" : 5,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 420,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 3,
+        "price" : 324,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        },
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "actor" : [
+                "amir",
+                "angraz"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "cancellation" : {
+                "date" : Timestamp(1554356003, 1),
+                "reason" : "user request"
+        },
+        "lastModified" : ISODate("2019-04-04T05:33:23.022Z"),
+        "ticket_num" : 410,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "actor" : [
+                "Akshay Kumar",
+                "Pariniti chopra"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "ticket_num" : 270,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "actor" : [
+                "Arjun",
+                "yyyy",
+                "Jonny",
+                "nawaz",
+                "Vidya",
+                "shreyas"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 820,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+> db.movie.insert({name:111,price:300})
+WriteResult({ "nInserted" : 1 })
+> db.movie.find({name:{$type:"string"}}).pretty()
+{
+        "_id" : ObjectId("5c865923d82c19b8ed996550"),
+        "name" : "dil",
+        "rating" : 3,
+        "price" : 300,
+        "actor" : "['Anil kapoor']",
+        "ticket_num" : 300,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a881"),
+        "name" : "sholay",
+        "actor" : [
+                "Dharamendra",
+                "Amitabh",
+                "Sachin Pilgaokar",
+                "Dharamendra",
+                "Dharamendra",
+                "Mr. Khote",
+                "jaya bacchan",
+                "sanjiv kapoor"
+        ],
+        "rating" : 3,
+        "price" : 420,
+        "position" : [
+                2,
+                2
+        ],
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a882"),
+        "name" : "aradhana",
+        "actor" : [
+                "amitabh",
+                "prem",
+                "rajesh khanna"
+        ],
+        "rating" : 3,
+        "price" : 260,
+        "ticket_num" : 550,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5d6935a3470e2bef2a82cdfa"),
+        "name" : "mission mangal",
+        "price" : 350,
+        "actor" : [
+                "Sonakshi",
+                "Vidya Balan"
+        ],
+        "rating" : 6,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca47e5b2952ebdd7ae2a931"),
+        "name" : "padmavat",
+        "price" : 600,
+        "actor" : [
+                "Deepika",
+                "shahid kapoor",
+                "ranveer singh",
+                "aditi Rao",
+                "aaaaa"
+        ],
+        "cancellation" : {
+                "date" : Timestamp(1567175239, 1)
+        },
+        "ticket_num" : 300
+}
+{
+        "_id" : ObjectId("5c8283789eb55675f0272933"),
+        "name" : "uri",
+        "rating" : 8,
+        "actor" : [
+                "vicky kaushal",
+                "yami",
+                "Paresh Rawal"
+        ],
+        "ticket_num" : 200
+}
+{
+        "_id" : ObjectId("5d89e9adfd4adc2f84279f43"),
+        "name" : "chichore",
+        "price" : 274,
+        "rating" : 4.3,
+        "actor" : [
+                "sushant",
+                "shradha kapoor",
+                "zzz",
+                "harshal"
+        ]
+}
+{
+        "_id" : ObjectId("5bf6a38c57b2d4cc676c7a96"),
+        "name" : "Andhadhund",
+        "price" : null,
+        "actor" : [
+                "Tabbu"
+        ]
+}
+{
+        "_id" : ObjectId("5aaa31ee639395f86922a87f"),
+        "name" : "3 idiots",
+        "actor" : [
+                "Kareena Kapoor",
+                "amir",
+                "kareena",
+                "mahadavan",
+                "sharman"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "ticket_num" : 150,
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5d8f51ce065d3e2aa902aa22"),
+        "name" : "dream girl",
+        "actor" : [
+                "ayushman",
+                "nushrat bharucha"
+        ],
+        "price" : 250,
+        "rating" : null
+}
+{
+        "_id" : ObjectId("5ca47ef82952ebdd7ae2a932"),
+        "name" : "newton",
+        "actor" : [
+                "Rajkumar Rao",
+                "Pankaj Tripathi"
+        ],
+        "price" : 310,
+        "lastmodified" : ISODate("2019-09-28T14:47:49.204Z"),
+        "ticket_num" : 690,
+        "rating" : 4
+}
+{
+        "_id" : ObjectId("5bf6a36f57b2d4cc676c7a95"),
+        "name" : "Andhadhund",
+        "price" : 400,
+        "actor" : [
+                "Ayushman",
+                "radhika"
+        ],
+        "rating" : 5,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa31a2639395f86922a87e"),
+        "name" : "kahani",
+        "actor" : [
+                "aaaa",
+                "bbbb",
+                "karan",
+                "karri",
+                "vidya"
+        ],
+        "price" : 400,
+        "actors" : [
+                "bbbb"
+        ],
+        "rating" : 5,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 420,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca456072952ebdd7ae2a930"),
+        "name" : "paa",
+        "actor" : [
+                "Amitabh",
+                "vidya balan",
+                "Abhishek"
+        ],
+        "rating" : 3,
+        "price" : 324,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "others" : {
+                "director" : "R Balki",
+                "songs" : "Amit trivedi"
+        },
+        "ticket_num" : 400,
+        "release_date" : ISODate("2020-03-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aaa3334639395f86922a880"),
+        "name" : "lagaan",
+        "actor" : [
+                "amir",
+                "angraz"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "cancellation" : {
+                "date" : Timestamp(1554356003, 1),
+                "reason" : "user request"
+        },
+        "lastModified" : ISODate("2019-04-04T05:33:23.022Z"),
+        "ticket_num" : 410,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5ca453ef2952ebdd7ae2a92f"),
+        "name" : "Kesari",
+        "actor" : [
+                "Akshay Kumar",
+                "Pariniti chopra"
+        ],
+        "rating" : 6,
+        "price" : 350,
+        "rdate" : ISODate("2019-01-23T00:00:00Z"),
+        "ticket_num" : 270,
+        "release_date" : ISODate("2019-12-10T00:00:00Z")
+}
+{
+        "_id" : ObjectId("5aab6da4639395f86922a883"),
+        "name" : "kahani 2",
+        "actor" : [
+                "Arjun",
+                "yyyy",
+                "Jonny",
+                "nawaz",
+                "Vidya",
+                "shreyas"
+        ],
+        "rating" : 5,
+        "price" : 400,
+        "lastmodified" : ISODate("2021-03-28T06:02:21.192Z"),
+        "modified" : ISODate("2021-06-11T09:20:55.016Z"),
+        "ticket_num" : 820,
+        "release_date" : ISODate("2020-12-10T00:00:00Z")
+}
+> db.movie.find({name:{$type:"int"}}).pretty()
+> db.movie.find({name:{$type:"number"}}).pretty()
+{
+        "_id" : ObjectId("60f1294048242d5ac4913297"),
+        "name" : 111,
+        "price" : 300
+}
+> db.student.find()
+{ "_id" : 5, "grades" : [ { "grade" : 85, "mean" : 80, "std" : 100 }, { "grade" : 80, "mean" : 95, "std" : 10 }, { "grade" : 82, "mean" : 90, "std" : 12 }, { "grade" : 98, "mean" : 10, "std" : 5 } ] }
+{ "_id" : 6, "grades" : [ { "grade" : 88, "maen" : 2, "std" : 3, "mean" : 5 }, { "grade" : 80, "mean" : 8, "std" : 4 }, { "grade" : 90, "mean" : 9, "std" : 5 }, { "grade" : 98, "mean" : 10, "std" : 5 } ] }
+> db.student.find().pretty()
+{
+        "_id" : 5,
+        "grades" : [
+                {
+                        "grade" : 85,
+                        "mean" : 80,
+                        "std" : 100
+                },
+                {
+                        "grade" : 80,
+                        "mean" : 95,
+                        "std" : 10
+                },
+                {
+                        "grade" : 82,
+                        "mean" : 90,
+                        "std" : 12
+                },
+                {
+                        "grade" : 98,
+                        "mean" : 10,
+                        "std" : 5
+                }
+        ]
+}
+{
+        "_id" : 6,
+        "grades" : [
+                {
+                        "grade" : 88,
+                        "maen" : 2,
+                        "std" : 3,
+                        "mean" : 5
+                },
+                {
+                        "grade" : 80,
+                        "mean" : 8,
+                        "std" : 4
+                },
+                {
+                        "grade" : 90,
+                        "mean" : 9,
+                        "std" : 5
+                },
+                {
+                        "grade" : 98,
+                        "mean" : 10,
+                        "std" : 5
+                }
+        ]
+}
+> db.student.find({'grades.std':10})
+{ "_id" : 5, "grades" : [ { "grade" : 85, "mean" : 80, "std" : 100 }, { "grade" : 80, "mean" : 95, "std" : 10 }, { "grade" : 82, "mean" : 90, "std" : 12 }, { "grade" : 98, "mean" : 10, "std" : 5 } ] }
+> db.student.find({'grades.std':10}).pretty()
+{
+        "_id" : 5,
+        "grades" : [
+                {
+                        "grade" : 85,
+                        "mean" : 80,
+                        "std" : 100
+                },
+                {
+                        "grade" : 80,
+                        "mean" : 95,
+                        "std" : 10
+                },
+                {
+                        "grade" : 82,
+                        "mean" : 90,
+                        "std" : 12
+                },
+                {
+                        "grade" : 98,
+                        "mean" : 10,
+                        "std" : 5
+                }
+        ]
+}
+> db.student.find({'grades.2.std':10}).pretty()
+> db.student.find({'grades.2.std':12}).pretty()
+{
+        "_id" : 5,
+        "grades" : [
+                {
+                        "grade" : 85,
+                        "mean" : 80,
+                        "std" : 100
+                },
+                {
+                        "grade" : 80,
+                        "mean" : 95,
+                        "std" : 10
+                },
+                {
+                        "grade" : 82,
+                        "mean" : 90,
+                        "std" : 12
+                },
+                {
+                        "grade" : 98,
+                        "mean" : 10,
+                        "std" : 5
+                }
+        ]
+}
+> db.student.find({'grades.garde':85,'grades.2.std':12}).pretty()
+> db.student.find({'grades.grade':85,'grades.2.std':12}).pretty()
+{
+        "_id" : 5,
+        "grades" : [
+                {
+                        "grade" : 85,
+                        "mean" : 80,
+                        "std" : 100
+                },
+                {
+                        "grade" : 80,
+                        "mean" : 95,
+                        "std" : 10
+                },
+                {
+                        "grade" : 82,
+                        "mean" : 90,
+                        "std" : 12
+                },
+                {
+                        "grade" : 98,
+                        "mean" : 10,
+                        "std" : 5
+                }
+        ]
+}
+> db.student.find({'grades.grade':85,'grades.std':12}).pretty()
+{
+        "_id" : 5,
+        "grades" : [
+                {
+                        "grade" : 85,
+                        "mean" : 80,
+                        "std" : 100
+                },
+                {
+                        "grade" : 80,
+                        "mean" : 95,
+                        "std" : 10
+                },
+                {
+                        "grade" : 82,
+                        "mean" : 90,
+                        "std" : 12
+                },
+                {
+                        "grade" : 98,
+                        "mean" : 10,
+                        "std" : 5
+                }
+        ]
+}
+> db.student.find({'grades.grade':85,'grades.std':10}).pretty()
+{
+        "_id" : 5,
+        "grades" : [
+                {
+                        "grade" : 85,
+                        "mean" : 80,
+                        "std" : 100
+                },
+                {
+                        "grade" : 80,
+                        "mean" : 95,
+                        "std" : 10
+                },
+                {
+                        "grade" : 82,
+                        "mean" : 90,
+                        "std" : 12
+                },
+                {
+                        "grade" : 98,
+                        "mean" : 10,
+                        "std" : 5
+                }
+        ]
+}
+> db.student.find({'grades':{$elemMatch:{grade:85,std:10}}}).pretty()
+> db.student.find({'grades':{$elemMatch:{grade:82,std:10}}}).pretty()
+> db.student.find({'grades':{$elemMatch:{grade:82,mean:90,std:10}}}).pretty()
+> db.student.find({'grades':{$elemMatch:{grade:82,mean:90,std:12}}}).pretty()
+{
+        "_id" : 5,
+        "grades" : [
+                {
+                        "grade" : 85,
+                        "mean" : 80,
+                        "std" : 100
+                },
+                {
+                        "grade" : 80,
+                        "mean" : 95,
+                        "std" : 10
+                },
+                {
+                        "grade" : 82,
+                        "mean" : 90,
+                        "std" : 12
+                },
+                {
+                        "grade" : 98,
+                        "mean" : 10,
+                        "std" : 5
+                }
+        ]
+}
+> db.student.find({'grades':{$elemMatch:{grade:82,std:12}}}).pretty()
+{
+        "_id" : 5,
+        "grades" : [
+                {
+                        "grade" : 85,
+                        "mean" : 80,
+                        "std" : 100
+                },
+                {
+                        "grade" : 80,
+                        "mean" : 95,
+                        "std" : 10
+                },
+                {
+                        "grade" : 82,
+                        "mean" : 90,
+                        "std" : 12
+                },
+                {
+                        "grade" : 98,
+                        "mean" : 10,
+                        "std" : 5
+                }
+        ]
+}
+> db.student.find({'grades.grade':85,'grades.std':10}).count()
+1
+> db.student.find({price:{$not:{$lt:300}}}).count()
+2
+> use iacsdedac
+switched to db iacsdedac
+> db.emp.insertMany([{empno:100,ename:'xxxx'},{empno:12,ename:'rrrr'}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("60f1301248242d5ac4913298"),
+                ObjectId("60f1301248242d5ac4913299")
+        ]
+}
+> db.emp.find().pretty()
+{
+        "_id" : ObjectId("60efdc3b48242d5ac491328d"),
+        "empid" : 12,
+        "ename" : "kishori"
+}
+{
+        "_id" : ObjectId("60efe8d248242d5ac491328e"),
+        "empid" : 123,
+        "ename" : "kishori",
+        "skills" : [
+                "java",
+                "python",
+                "mongodb",
+                "spring boot",
+                "hibernate"
+        ],
+        "joining_dt" : ISODate("2000-04-27T00:00:00Z"),
+        "dept" : {
+                "deptno" : 11,
+                "dname" : "hr",
+                "dloc" : "pune"
+        },
+        "experience" : [
+                {
+                        "name" : "hsbc",
+                        "years" : 3
+                },
+                {
+                        "name" : "igate",
+                        "years" : 4
+                },
+                {
+                        "name" : "Capgemini",
+                        "years" : 5
+                }
+        ],
+        "maritalStatus" : null
+}
+{
+        "_id" : ObjectId("60f10b9448242d5ac4913293"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{
+        "_id" : ObjectId("60f10b9648242d5ac4913294"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{
+        "_id" : ObjectId("60f10b9848242d5ac4913295"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{ "_id" : 1, "name" : "Revati", "desg" : "sr. designer" }
+{ "_id" : 2, "name" : "Revati", "desg" : "sr. designer" }
+{
+        "_id" : ObjectId("60f10c5248242d5ac4913296"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{
+        "_id" : ObjectId("60f1301248242d5ac4913298"),
+        "empno" : 100,
+        "ename" : "xxxx"
+}
+{
+        "_id" : ObjectId("60f1301248242d5ac4913299"),
+        "empno" : 12,
+        "ename" : "rrrr"
+}
+> db.emp.renameCollection("employee")
+{ "ok" : 1 }
+> show collections
+employee
+movie
+mycollection
+mycomment
+restaurent
+> db.mycollection.drop()
+true
+> show collections
+employee
+movie
+mycomment
+restaurent
+> db.employee.find().pretty()
+{
+        "_id" : ObjectId("60efdc3b48242d5ac491328d"),
+        "empid" : 12,
+        "ename" : "kishori"
+}
+{
+        "_id" : ObjectId("60efe8d248242d5ac491328e"),
+        "empid" : 123,
+        "ename" : "kishori",
+        "skills" : [
+                "java",
+                "python",
+                "mongodb",
+                "spring boot",
+                "hibernate"
+        ],
+        "joining_dt" : ISODate("2000-04-27T00:00:00Z"),
+        "dept" : {
+                "deptno" : 11,
+                "dname" : "hr",
+                "dloc" : "pune"
+        },
+        "experience" : [
+                {
+                        "name" : "hsbc",
+                        "years" : 3
+                },
+                {
+                        "name" : "igate",
+                        "years" : 4
+                },
+                {
+                        "name" : "Capgemini",
+                        "years" : 5
+                }
+        ],
+        "maritalStatus" : null
+}
+{
+        "_id" : ObjectId("60f10b9448242d5ac4913293"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{
+        "_id" : ObjectId("60f10b9648242d5ac4913294"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{
+        "_id" : ObjectId("60f10b9848242d5ac4913295"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{ "_id" : 1, "name" : "Revati", "desg" : "sr. designer" }
+{ "_id" : 2, "name" : "Revati", "desg" : "sr. designer" }
+{
+        "_id" : ObjectId("60f10c5248242d5ac4913296"),
+        "name" : "Revati",
+        "desg" : "sr. designer"
+}
+{
+        "_id" : ObjectId("60f1301248242d5ac4913298"),
+        "empno" : 100,
+        "ename" : "xxxx"
+}
+{
+        "_id" : ObjectId("60f1301248242d5ac4913299"),
+        "empno" : 12,
+        "ename" : "rrrr"
+}
+> db.employee.remove({name:'Revati'})
+WriteResult({ "nRemoved" : 6 })
+> db.employee.find().pretty()
+{
+        "_id" : ObjectId("60efdc3b48242d5ac491328d"),
+        "empid" : 12,
+        "ename" : "kishori"
+}
+{
+        "_id" : ObjectId("60efe8d248242d5ac491328e"),
+        "empid" : 123,
+        "ename" : "kishori",
+        "skills" : [
+                "java",
+                "python",
+                "mongodb",
+                "spring boot",
+                "hibernate"
+        ],
+        "joining_dt" : ISODate("2000-04-27T00:00:00Z"),
+        "dept" : {
+                "deptno" : 11,
+                "dname" : "hr",
+                "dloc" : "pune"
+        },
+        "experience" : [
+                {
+                        "name" : "hsbc",
+                        "years" : 3
+                },
+                {
+                        "name" : "igate",
+                        "years" : 4
+                },
+                {
+                        "name" : "Capgemini",
+                        "years" : 5
+                }
+        ],
+        "maritalStatus" : null
+}
+{
+        "_id" : ObjectId("60f1301248242d5ac4913298"),
+        "empno" : 100,
+        "ename" : "xxxx"
+}
+{
+        "_id" : ObjectId("60f1301248242d5ac4913299"),
+        "empno" : 12,
+        "ename" : "rrrr"
+}
+> db.employee.deleteOne({name:'kishori'})
+{ "acknowledged" : true, "deletedCount" : 0 }
+> db.employee.find().pretty()
+{
+        "_id" : ObjectId("60efdc3b48242d5ac491328d"),
+        "empid" : 12,
+        "ename" : "kishori"
+}
+{
+        "_id" : ObjectId("60efe8d248242d5ac491328e"),
+        "empid" : 123,
+        "ename" : "kishori",
+        "skills" : [
+                "java",
+                "python",
+                "mongodb",
+                "spring boot",
+                "hibernate"
+        ],
+        "joining_dt" : ISODate("2000-04-27T00:00:00Z"),
+        "dept" : {
+                "deptno" : 11,
+                "dname" : "hr",
+                "dloc" : "pune"
+        },
+        "experience" : [
+                {
+                        "name" : "hsbc",
+                        "years" : 3
+                },
+                {
+                        "name" : "igate",
+                        "years" : 4
+                },
+                {
+                        "name" : "Capgemini",
+                        "years" : 5
+                }
+        ],
+        "maritalStatus" : null
+}
+{
+        "_id" : ObjectId("60f1301248242d5ac4913298"),
+        "empno" : 100,
+        "ename" : "xxxx"
+}
+{
+        "_id" : ObjectId("60f1301248242d5ac4913299"),
+        "empno" : 12,
+        "ename" : "rrrr"
+}
+> db.employee.deleteOne({name:'kishori'})
+{ "acknowledged" : true, "deletedCount" : 0 }
+> db.employee.deleteOne({ename:'kishori'})
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.employee.find().pretty()
+{
+        "_id" : ObjectId("60efe8d248242d5ac491328e"),
+        "empid" : 123,
+        "ename" : "kishori",
+        "skills" : [
+                "java",
+                "python",
+                "mongodb",
+                "spring boot",
+                "hibernate"
+        ],
+        "joining_dt" : ISODate("2000-04-27T00:00:00Z"),
+        "dept" : {
+                "deptno" : 11,
+                "dname" : "hr",
+                "dloc" : "pune"
+        },
+        "experience" : [
+                {
+                        "name" : "hsbc",
+                        "years" : 3
+                },
+                {
+                        "name" : "igate",
+                        "years" : 4
+                },
+                {
+                        "name" : "Capgemini",
+                        "years" : 5
+                }
+        ],
+        "maritalStatus" : null
+}
+{
+        "_id" : ObjectId("60f1301248242d5ac4913298"),
+        "empno" : 100,
+        "ename" : "xxxx"
+}
+{
+        "_id" : ObjectId("60f1301248242d5ac4913299"),
+        "empno" : 12,
+        "ename" : "rrrr"
+}
+> db.restaurent.find().limit(1).pretty()
+{
+        "_id" : ObjectId("60efdd763a382f012ce8a13e"),
+        "address" : {
+                "building" : "469",
+                "coord" : [
+                        -73.961704,
+                        40.662942
+                ],
+                "street" : "Flatbush Avenue",
+                "zipcode" : "11225"
+        },
+        "borough" : "Brooklyn",
+        "cuisine" : "Hamburgers",
+        "grades" : [
+                {
+                        "date" : ISODate("2014-12-30T00:00:00Z"),
+                        "grade" : "A",
+                        "score" : 8
+                },
+                {
+                        "date" : ISODate("2014-07-01T00:00:00Z"),
+                        "grade" : "B",
+                        "score" : 23
+                },
+                {
+                        "date" : ISODate("2013-04-30T00:00:00Z"),
+                        "grade" : "A",
+                        "score" : 12
+                },
+                {
+                        "date" : ISODate("2012-05-08T00:00:00Z"),
+                        "grade" : "A",
+                        "score" : 12
+                }
+        ],
+        "name" : "Wendy'S",
+        "restaurant_id" : "30112340"
+}
+> db.restaurent.find({},{name:1,borough:1,cuisine:1,'adress.zipcode':1})
+{ "_id" : ObjectId("60efdd763a382f012ce8a13e"), "borough" : "Brooklyn", "cuisine" : "Hamburgers", "name" : "Wendy'S" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a13f"), "borough" : "Queens", "cuisine" : "Jewish/Kosher", "name" : "Tov Kosher Kitchen" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a140"), "borough" : "Queens", "cuisine" : "American", "name" : "Brunos On The Boulevard" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a141"), "borough" : "Brooklyn", "cuisine" : "Chinese", "name" : "May May Kitchen" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a142"), "borough" : "Brooklyn", "cuisine" : "Jewish/Kosher", "name" : "Seuda Foods" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a143"), "borough" : "Staten Island", "cuisine" : "Jewish/Kosher", "name" : "Kosher Island" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a144"), "borough" : "Queens", "cuisine" : "Ice Cream, Gelato, Yogurt, Ices", "name" : "Carvel Ice Cream" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a145"), "borough" : "Brooklyn", "cuisine" : "Delicatessen", "name" : "Wilken'S Fine Food" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a146"), "borough" : "Brooklyn", "cuisine" : "Delicatessen", "name" : "Nordic Delicacies" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a147"), "borough" : "Manhattan", "cuisine" : "American", "name" : "Glorious Food" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a148"), "borough" : "Brooklyn", "cuisine" : "Ice Cream, Gelato, Yogurt, Ices", "name" : "Taste The Tropics Ice Cream" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a149"), "borough" : "Brooklyn", "cuisine" : "American", "name" : "The Movable Feast" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a14a"), "borough" : "Queens", "cuisine" : "Delicatessen", "name" : "Sal'S Deli" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a14b"), "borough" : "Manhattan", "cuisine" : "Delicatessen", "name" : "Bully'S Deli" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a14c"), "borough" : "Bronx", "cuisine" : "American", "name" : "Wild Asia" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a14d"), "borough" : "Manhattan", "cuisine" : "Chicken", "name" : "Harriet'S Kitchen" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a14e"), "borough" : "Bronx", "cuisine" : "Bakery", "name" : "Morris Park Bake Shop" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a14f"), "borough" : "Brooklyn", "cuisine" : "American", "name" : "C & C Catering Service" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a150"), "borough" : "Brooklyn", "cuisine" : "Hamburgers", "name" : "White Castle" }
+{ "_id" : ObjectId("60efdd763a382f012ce8a151"), "borough" : "Manhattan", "cuisine" : "American", "name" : "Angelika Film Center" }
+Type "it" for more
+> db.restaurent.find({},{name:1,borough:1,cuisine:1,'adress.zipcode':1,_id:0}).pretty()
+{ "borough" : "Brooklyn", "cuisine" : "Hamburgers", "name" : "Wendy'S" }
+{
+        "borough" : "Queens",
+        "cuisine" : "Jewish/Kosher",
+        "name" : "Tov Kosher Kitchen"
+}
+{
+        "borough" : "Queens",
+        "cuisine" : "American",
+        "name" : "Brunos On The Boulevard"
+}
+{
+        "borough" : "Brooklyn",
+        "cuisine" : "Chinese",
+        "name" : "May May Kitchen"
+}
+{
+        "borough" : "Brooklyn",
+        "cuisine" : "Jewish/Kosher",
+        "name" : "Seuda Foods"
+}
+{
+        "borough" : "Staten Island",
+        "cuisine" : "Jewish/Kosher",
+        "name" : "Kosher Island"
+}
+{
+        "borough" : "Queens",
+        "cuisine" : "Ice Cream, Gelato, Yogurt, Ices",
+        "name" : "Carvel Ice Cream"
+}
+{
+        "borough" : "Brooklyn",
+        "cuisine" : "Delicatessen",
+        "name" : "Wilken'S Fine Food"
+}
+{
+        "borough" : "Brooklyn",
+        "cuisine" : "Delicatessen",
+        "name" : "Nordic Delicacies"
+}
+{
+        "borough" : "Manhattan",
+        "cuisine" : "American",
+        "name" : "Glorious Food"
+}
+{
+        "borough" : "Brooklyn",
+        "cuisine" : "Ice Cream, Gelato, Yogurt, Ices",
+        "name" : "Taste The Tropics Ice Cream"
+}
+{
+        "borough" : "Brooklyn",
+        "cuisine" : "American",
+        "name" : "The Movable Feast"
+}
+{ "borough" : "Queens", "cuisine" : "Delicatessen", "name" : "Sal'S Deli" }
+{
+        "borough" : "Manhattan",
+        "cuisine" : "Delicatessen",
+        "name" : "Bully'S Deli"
+}
+{ "borough" : "Bronx", "cuisine" : "American", "name" : "Wild Asia" }
+{
+        "borough" : "Manhattan",
+        "cuisine" : "Chicken",
+        "name" : "Harriet'S Kitchen"
+}
+{
+        "borough" : "Bronx",
+        "cuisine" : "Bakery",
+        "name" : "Morris Park Bake Shop"
+}
+{
+        "borough" : "Brooklyn",
+        "cuisine" : "American",
+        "name" : "C & C Catering Service"
+}
+{
+        "borough" : "Brooklyn",
+        "cuisine" : "Hamburgers",
+        "name" : "White Castle"
+}
+{
+        "borough" : "Manhattan",
+        "cuisine" : "American",
+        "name" : "Angelika Film Center"
+}
+Type "it" for more
+> it
+{
+        "borough" : "Manhattan",
+        "cuisine" : "Turkish",
+        "name" : "The Country Cafe"
+}
+{
+        "borough" : "Queens",
+        "cuisine" : "Chinese",
+        "name" : "Ho Mei Restaurant"
+}
+{
+        "borough" : "Manhattan",
+        "cuisine" : "Irish",
+        "name" : "Dj Reynolds Pub And Restaurant"
+}
+{
+        "borough" : "Queens",
+        "cuisine" : "Delicatessen",
+        "name" : "Steve Chu'S Deli & Grocery"
+}
+{
+        "borough" : "Brooklyn",
+        "cuisine" : "American",
+        "name" : "Regina Caterers"
+}
+{
+        "borough" : "Manhattan",
+        "cuisine" : "American",
+        "name" : "P & S Deli Grocery"
+}
+{
+        "borough" : "Manhattan",
+        "cuisine" : "American",
+        "name" : "1 East 66Th Street Kitchen"
+}
+{
+        "borough" : "Brooklyn",
+        "cuisine" : "American",
+        "name" : "Riviera Caterer"
+}
+{
+        "borough" : "Brooklyn",
+        "cuisine" : "Ice Cream, Gelato, Yogurt, Ices",
+        "name" : "Carvel Ice Cream"
+}
+{
+        "borough" : "Brooklyn",
+        "cuisine" : "Caribbean",
+        "name" : "Shashemene Int'L Restaura"
+}
+{
+        "borough" : "Manhattan",
+        "cuisine" : "American",
+        "name" : "Downtown Deli"
+}
+{ "borough" : "Bronx", "cuisine" : "Chinese", "name" : "Happy Garden" }
+{ "borough" : "Brooklyn", "cuisine" : "Donuts", "name" : "Dunkin' Donuts" }
+{
+        "borough" : "Bronx",
+        "cuisine" : "Ice Cream, Gelato, Yogurt, Ices",
+        "name" : "Carvel Ice Cream"
+}
+{
+        "borough" : "Brooklyn",
+        "cuisine" : "American",
+        "name" : "Mejlander & Mulgannon"
+}
+{ "borough" : "Manhattan", "cuisine" : "Bakery", "name" : "Olive'S" }
+{ "borough" : "Manhattan", "cuisine" : "American", "name" : "Cafe Metro" }
+{
+        "borough" : "Staten Island",
+        "cuisine" : "Delicatessen",
+        "name" : "Bagels N Buns"
+}
+{
+        "borough" : "Manhattan",
+        "cuisine" : "Sandwiches/Salads/Mixed Buffet",
+        "name" : "Lexler Deli"
+}
+{ "borough" : "Queens", "cuisine" : "Delicatessen", "name" : "Tony'S Deli" }
+Type "it" for more
+> it
+{
+        "borough" : "Queens",
+        "cuisine" : "Bagels/Pretzels",
+        "name" : "Hot Bagels"
+}
+{
+        "borough" : "Manhattan",
+        "cuisine" : "Continental",
+        "name" : "Lorenzo & Maria'S"
+}
+{
+        "borough" : "Queens",
+        "cuisine" : "American",
+        "name" : "Snack Time Grill"
+}
+{ "borough" : "Brooklyn", "cuisine" : "American", "name" : "Sonny'S Heros" }
+{ "borough" : "Manhattan", "cuisine" : "American", "name" : "Berkely" }
+{ "borough" : "Manhattan", "cuisine" : "Pizza", "name" : "Domino'S Pizza" }
+{
+        "borough" : "Brooklyn",
+        "cuisine" : "Chinese",
+        "name" : "Golden Pavillion"
+}
+{ "borough" : "Manhattan", "cuisine" : "Pizza", "name" : "Domino'S Pizza" }
+{
+        "borough" : "Manhattan",
+        "cuisine" : "American",
+        "name" : "Spoon Bread Catering"
+}
+{
+        "borough" : "Brooklyn",
+        "cuisine" : "Jewish/Kosher",
+        "name" : "Kosher Bagel Hole"
+}
+{ "borough" : "Bronx", "cuisine" : "Chinese", "name" : "Happy Garden" }
+{
+        "borough" : "Queens",
+        "cuisine" : "American",
+        "name" : "Terminal Cafe/Yankee Clipper"
+}
+{
+        "borough" : "Staten Island",
+        "cuisine" : "Delicatessen",
+        "name" : "Plaza Bagels & Deli"
+}
+{
+        "borough" : "Brooklyn",
+        "cuisine" : "Italian",
+        "name" : "Philadelhia Grille Express"
+}
+{ "borough" : "Manhattan", "cuisine" : "American", "name" : "21 Club" }
+{
+        "borough" : "Manhattan",
+        "cuisine" : "Chicken",
+        "name" : "Texas Rotisserie"
+}
+{
+        "borough" : "Staten Island",
+        "cuisine" : "Delicatessen",
+        "name" : "B & M Hot Bagel & Grocery"
+}
+{
+        "borough" : "Brooklyn",
+        "cuisine" : "Steak",
+        "name" : "Peter Luger Steakhouse"
+}
+{ "borough" : "Bronx", "cuisine" : "American", "name" : "Manhem Club" }
+{
+        "borough" : "Manhattan",
+        "cuisine" : "American",
+        "name" : "Palm Restaurant"
+}
+Type "it" for more
+> db.restaurent.find({},{name:1,borough:1,cuisine:1,'adress.zipcode':1,_id:0}).count()
+25359
+> db.restaurent.find({},{name:1,borough:1,cuisine:1,'adress.zipcode':1,_id:0}).skip(19000).limit(2).count()
+25359
+> db.restaurent.find({},{name:1,borough:1,cuisine:1,'adress.zipcode':1,_id:0}).skip(19000).limit(2).pretty()
+{
+        "borough" : "Manhattan",
+        "cuisine" : "Japanese",
+        "name" : "Greenbay Sushi"
+}
+{
+        "borough" : "Bronx",
+        "cuisine" : "Mexican",
+        "name" : "Riky & Sepi Sport Cafe"
+}
+> db.restaurent.find({},{name:1,borough:1,cuisine:1,'address.zipcode':1,_id:0}).skip(19000).limit(2).pretty()
+{
+        "address" : {
+                "zipcode" : "10028"
+        },
+        "borough" : "Manhattan",
+        "cuisine" : "Japanese",
+        "name" : "Greenbay Sushi"
+}
+{
+        "address" : {
+                "zipcode" : "10457"
+        },
+        "borough" : "Bronx",
+        "cuisine" : "Mexican",
+        "name" : "Riky & Sepi Sport Cafe"
+}
+> db.restaurent.find({},{name:1,borough:1,cuisine:1,'address.zipcode':1,_id:0}).skip(19000).limit(2)sort({name:1}).pretty()
+2021-07-16T12:57:52.220+0530 E  QUERY    [js] SyntaxError: unexpected token: identifier :
+@(shell):1:98
+> db.restaurent.find({},{name:1,borough:1,cuisine:1,'address.zipcode':1,_id:0}).skip(19000).limit(2).sort({name:1}).pretty()
+{
+        "address" : {
+                "zipcode" : "10039"
+        },
+        "borough" : "Manhattan",
+        "cuisine" : "Juice, Smoothies, Fruit Salads",
+        "name" : "Reggae Sun Delights Natural Juice Bar"
+}
+{
+        "address" : {
+                "zipcode" : "11223"
+        },
+        "borough" : "Brooklyn",
+        "cuisine" : "Café/Coffee/Tea",
+        "name" : "Reggi'S Cafe"
+}
+> db.restaurent.find({},{name:1,borough:1,cuisine:1,'address.zipcode':1,_id:0}).sort({name:1}).pretty()
+{
+        "address" : {
+                "zipcode" : "10034"
+        },
+        "borough" : "Manhattan",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "11231"
+        },
+        "borough" : "Brooklyn",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "10002"
+        },
+        "borough" : "Manhattan",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "11220"
+        },
+        "borough" : "Brooklyn",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "10462"
+        },
+        "borough" : "Bronx",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "11211"
+        },
+        "borough" : "Brooklyn",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "11232"
+        },
+        "borough" : "Brooklyn",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "11357"
+        },
+        "borough" : "Queens",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "10456"
+        },
+        "borough" : "Bronx",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "11214"
+        },
+        "borough" : "Brooklyn",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "10010"
+        },
+        "borough" : "Manhattan",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "11249"
+        },
+        "borough" : "Brooklyn",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "11223"
+        },
+        "borough" : "Brooklyn",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "11203"
+        },
+        "borough" : "Brooklyn",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "11201"
+        },
+        "borough" : "Brooklyn",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "10037"
+        },
+        "borough" : "Manhattan",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "10025"
+        },
+        "borough" : "Manhattan",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "10029"
+        },
+        "borough" : "Manhattan",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "11368"
+        },
+        "borough" : "Queens",
+        "cuisine" : "Other",
+        "name" : ""
+}
+{
+        "address" : {
+                "zipcode" : "10019"
+        },
+        "borough" : "Manhattan",
+        "cuisine" : "Other",
+        "name" : ""
+}
+Type "it" for more
+> db.restaurent.find({},{name:1,borough:1,cuisine:1,'address.zipcode':1,_id:0}).skip(1000).sort({name:1}).pretty()
+{
+        "address" : {
+                "zipcode" : "10027"
+        },
+        "borough" : "Manhattan",
+        "cuisine" : "American",
+        "name" : "American Legion Veterans Post"
+}
+{
+        "address" : {
+                "zipcode" : "10024"
+        },
+        "borough" : "Manhattan",
+        "cuisine" : "American",
+        "name" : "American Museum Of Natural History Food Court"
+}
+{
+        "address" : {
+                "zipcode" : "11106"
+        },
+        "borough" : "Queens",
+        "cuisine" : "Café/Coffee/Tea",
+        "name" : "American Museum Of The Moving Image"
+}
+{
+        "address" : {
+                "zipcode" : "10019"
+        },
+        "borough" : "Manhattan",
+        "cuisine" : "American",
+        "name" : "American Retro Bar & Grill"
+}
+{
+        "address" : {
+                "zipcode" : "10023"
+        },
+        "borough" : "Manhattan",
+        "cuisine" : "Café/Coffee/Tea",
+        "name" : "American Table Cafe And Bar"
+}
+{
+        "address" : {
+                "zipcode" : "10465"
+        },
+        "borough" : "Bronx",
+        "cuisine" : "Armenian",
+        "name" : "American Turners New York"
+}
+{
+        "address" : {
+                "zipcode" : "10001"
+        },
+        "borough" : "Manhattan",
+        "cuisine" : "American",
+        "name" : "American Whiskey"
+}
+{
+        "address" : {
+                "zipcode" : "10065"
+        },
+        "borough" : "Manhattan",
+        "cuisine" : "American",
+        "name" : "Americas Burger And Wraps"
+}
+{
+        "address" : {
+                "zipcode" : "11368"
+        },
+        "borough" : "Queens",
+        "cuisine" : "Chinese/Cuban",
+        "name" : "Americas Restorante"
+}
+{
+        "address" : {
+                "zipcode" : "10474"
+        },
+        "borough" : "Bronx",
+        "cuisine" : "American",
+        "name" : "Americo Food Market"
+}
+{
+        "address" : {
+                "zipcode" : "11368"
+        },
+        "borough" : "Queens",
+        "cuisine" : "Other",
+        "name" : "Amerivents Catering "
+}
+{
+        "address" : {
+                "zipcode" : "11377"
+        },
+        "borough" : "Queens",
+        "cuisine" : "American",
+        "name" : "Amf 34 Avenue Lanes"
+}
+{
+        "address" : {
+                "zipcode" : "10018"
+        },
+        "borough" : "Manhattan",
+        "cuisine" : "American",
+        "name" : "Amici 36"
+}
+{
+        "address" : {
+                "zipcode" : "10312"
+        },
+        "borough" : "Staten Island",
+        "cuisine" : "Bakery",
+        "name" : "Amici Bakery"
+}
+{
+        "address" : {
+                "zipcode" : "11385"
+        },
+        "borough" : "Queens",
+        "cuisine" : "Café/Coffee/Tea",
+        "name" : "Amici Bar"
+}
+{
+        "address" : {
+                "zipcode" : "10308"
+        },
+        "borough" : "Staten Island",
+        "cuisine" : "Italian",
+        "name" : "Amici Brick Oven Pizza"
+}
+{
+        "address" : {
+                "zipcode" : "11211"
+        },
+        "borough" : "Brooklyn",
+        "cuisine" : "American",
+        "name" : "Amici Cafe"
+}
+{
+        "address" : {
+                "zipcode" : "10013"
+        },
+        "borough" : "Manhattan",
+        "cuisine" : "Italian",
+        "name" : "Amici Ii"
+}
+{
+        "address" : {
+                "zipcode" : "10467"
+        },
+        "borough" : "Bronx",
+        "cuisine" : "Pizza",
+        "name" : "Amici Pizza And Pasta"
+}
+{
+        "address" : {
+                "zipcode" : "10309"
+        },
+        "borough" : "Staten Island",
+        "cuisine" : "Italian",
+        "name" : "Amici Pizzeria"
+}
+Type "it" for more
+> db.restaurent.find().limit(1).pretty()
+{
+        "_id" : ObjectId("60efdd763a382f012ce8a13e"),
+        "address" : {
+                "building" : "469",
+                "coord" : [
+                        -73.961704,
+                        40.662942
+                ],
+                "street" : "Flatbush Avenue",
+                "zipcode" : "11225"
+        },
+        "borough" : "Brooklyn",
+        "cuisine" : "Hamburgers",
+        "grades" : [
+                {
+                        "date" : ISODate("2014-12-30T00:00:00Z"),
+                        "grade" : "A",
+                        "score" : 8
+                },
+                {
+                        "date" : ISODate("2014-07-01T00:00:00Z"),
+                        "grade" : "B",
+                        "score" : 23
+                },
+                {
+                        "date" : ISODate("2013-04-30T00:00:00Z"),
+                        "grade" : "A",
+                        "score" : 12
+                },
+                {
+                        "date" : ISODate("2012-05-08T00:00:00Z"),
+                        "grade" : "A",
+                        "score" : 12
+                }
+        ],
+        "name" : "Wendy'S",
+        "restaurant_id" : "30112340"
+}
+>

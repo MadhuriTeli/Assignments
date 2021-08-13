@@ -1,0 +1,10 @@
+create or replace trigger tr_lower
+before update 
+on student
+
+begin
+
+dbms_output.put_line('ok');
+
+end;
+/

@@ -1,0 +1,962 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 18
+Server version: 8.0.22 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use iacsdedacmay21
+Database changed
+mysql> foreign key fk_vid(vid) references vehicle(vid)
+    -> on delete no action
+    -> on update cascade
+    -> ^C
+mysql>
+mysql> create table customer(
+    -> cid int primary key,
+    -> cname varchar(20) not null,
+    -> address varchar(20)
+    -> )
+    -> ;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table vehicle(
+    -> vid int,
+    -> vname varchar(20),
+    -> price decimal(9,2),
+    -> primary key(vid)
+    -> )
+    -> ;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table vehicle-cust(
+    -> vid int,
+    -> custid int,
+    -> p_date date,
+    -> dis_price decimal(9,2),
+    -> foreign key fk_vid(vid) references vehicle(vid)
+    -> on delete no action
+    -> on update cascade,
+    -> foreign key fk_cid(cid) references customer(cid)
+    -> on delete no action
+    -> on update cascade,
+    -> primary key(vid,custid)
+    ->
+    -> )
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-cust(
+vid int,
+custid int,
+p_date date,
+dis_price decimal(9,2),
+foreign key fk_' at line 1
+mysql> create table vehicle-cust(
+    -> vid int,
+    -> custid int,
+    -> p_date date,
+    -> dis_price decimal(9,2),
+    -> foreign key fk_vid(vid) references vehicle(vid)
+    -> on delete no action
+    -> on update cascade,
+    -> foreign key fk_cid(custid) references customer(cid)
+    -> on delete no action
+    -> on update cascade,
+    -> primary key(vid,custid)
+    ->
+    -> )
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-cust(
+vid int,
+custid int,
+p_date date,
+dis_price decimal(9,2),
+foreign key fk_' at line 1
+mysql> create table vehicle_cust(
+    -> vid int,
+    -> custid int,
+    -> p_date date,
+    -> dis_price decimal(9,2),
+    -> foreign key fk_vid(vid) references vehicle(vid)
+    -> on delete no action
+    -> on update cascade,
+    -> foreign key fk_cid(custid) references customer(cid)
+    -> on delete no action
+    -> on update cascade,
+    -> primary key(vid,custid)
+    ->
+    -> )
+    -> ;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into customer values(10,'Revati','Aundh')
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into customer values(20,'Rajan','Aundh')
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into customer values(30,'Anil','Baner');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into vehicle values(100,'Activa'',80000.00)
+    '> ^Z^C
+mysql> insert into vehicle values(100,'Activa',80000.00);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into vehicle values(200,'Santro',700000.00);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into vehicle values(300,'jupiter',75000.00);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from customer;
++-----+--------+---------+
+| cid | cname  | address |
++-----+--------+---------+
+|  10 | Revati | Aundh   |
+|  20 | Rajan  | Aundh   |
+|  30 | Anil   | Baner   |
++-----+--------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from vehicle;
++-----+---------+-----------+
+| vid | vname   | price     |
++-----+---------+-----------+
+| 100 | Activa  |  80000.00 |
+| 200 | Santro  | 700000.00 |
+| 300 | jupiter |  75000.00 |
++-----+---------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> insert into vehicle_cust(100,10,'2010-02-05',75000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '100,10,'2010-02-05',75000)' at line 1
+mysql> insert into vehicle_cust values(100,10,'2010-02-05',75000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into vehicle_cust values(200,10,'2010-03-05',650000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into vehicle_cust values(100,20,'2010-02-05',75000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into vehicle_cust values(300,20,'2020-02-05',73000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from vehicle_cust;
++-----+--------+------------+-----------+
+| vid | custid | p_date     | dis_price |
++-----+--------+------------+-----------+
+| 100 |     10 | 2010-02-05 |  75000.00 |
+| 100 |     20 | 2010-02-05 |  75000.00 |
+| 200 |     10 | 2010-03-05 | 650000.00 |
+| 300 |     20 | 2020-02-05 |  73000.00 |
++-----+--------+------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from customer;
++-----+--------+---------+
+| cid | cname  | address |
++-----+--------+---------+
+|  10 | Revati | Aundh   |
+|  20 | Rajan  | Aundh   |
+|  30 | Anil   | Baner   |
++-----+--------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from vehicle;
++-----+---------+-----------+
+| vid | vname   | price     |
++-----+---------+-----------+
+| 100 | Activa  |  80000.00 |
+| 200 | Santro  | 700000.00 |
+| 300 | jupiter |  75000.00 |
++-----+---------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> delete from vehicle where vid=100;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`iacsdedacmay21`.`vehicle_cust`, CONSTRAINT `vehicle_cust_ibfk_1` FOREIGN KEY (`vid`) REFERENCES `vehicle` (`vid`) ON UPDATE CASCADE)
+mysql> delete from customer where cid=10;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`iacsdedacmay21`.`vehicle_cust`, CONSTRAINT `vehicle_cust_ibfk_2` FOREIGN KEY (`custid`) REFERENCES `customer` (`cid`) ON UPDATE CASCADE)
+mysql> delete from customer where cid=30;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from emp;
++-------+---------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME   | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+---------+-----------+------+------------+----------+---------+--------+
+|  7369 | SMITH   | CLERK     | 7902 | 1980-12-17 |  1000.00 |    NULL |     20 |
+|  7499 | ALLEN   | SALESMAN  | 7698 | 1981-02-20 |  1800.00 |  300.00 |     30 |
+|  7521 | WARD    | SALESMAN  | 7698 | 1981-02-22 |  1450.00 |  500.00 |     30 |
+|  7566 | JONES   | MANAGER   | 7839 | 1981-04-02 |  3175.00 |    NULL |     20 |
+|  7654 | MARTIN  | SALESMAN  | 7698 | 1981-09-28 |  1450.00 | 1400.00 |     30 |
+|  7698 | BLAKE   | MANAGER   | 7839 | 1981-05-01 |  3050.00 |    NULL |     30 |
+|  7782 | CLARK   | MANAGER   | 7839 | 1981-06-09 |  2750.00 |    NULL |     10 |
+|  7788 | SCOTT   | ANALYST   | 7566 | 1982-12-09 |  3200.00 |    NULL |     20 |
+|  7839 | KING    | PRESIDENT | NULL | 1981-11-17 |  5300.00 |    NULL |     10 |
+|  7844 | TURNER  | SALESMAN  | 7698 | 1981-09-08 |  1700.00 |    0.00 |     30 |
+|  7876 | ADAMS   | CLERK     | 7788 | 1983-01-12 |  1300.00 |    NULL |     20 |
+|  7900 | JAMES   | CLERK     | 7698 | 1981-12-03 |  1150.00 |    NULL |     30 |
+|  7902 | FORD    | ANALYST   | 7566 | 1981-12-03 |  3200.00 |    NULL |     20 |
+|  7934 | MILLER  | CLERK     | 7782 | 1982-01-23 |  1600.00 |    NULL |     10 |
+|   123 | Rajan   | designer  | 7902 | 2020-12-10 | 34867.00 | 3456.00 |     10 |
+|   124 | Revati  | designer  | 7902 | 1999-12-10 | 34767.00 | 3456.00 |     20 |
+|     1 | Rajas_D | Manager   | 7902 | 1998-02-02 |  3756.00 |  345.00 |     10 |
++-------+---------+-----------+------+------------+----------+---------+--------+
+17 rows in set (0.00 sec)
+
+mysql> 369 | SMITH   | CLERK     | 7902 | 1980-12-17 |  1000.00 |    NULL |     20 |
+    -> |  7499 | ALLEN   | SALESMAN  | 7698 | 1981-02-20 |  1800.00 |  300.00 |     30 |
+    -> |  7521 | WARD    | SALESMAN  | 7698 | 1981-02-22 |  1450.00 |  500.00 |     30 |
+    -> |  7566 | JONES   | MANAGER   | 7839 | 1981-04-02 |  3175.00 |    NULL |     20 |
+    -> |  7654 | MARTIN  | SALESMAN  | 7698 | 1981-09-28 |  1450.00 | 1400.00 |     30 |
+    -> |  7698 | BLAKE   | MANAGER   | 7839 | 1981-05-01 |  3050.00 |    NULL |     30 |
+    -> |  7782 | CLARK   | MANAGER   | 7839 | 1981-06-09 |  2750.00 |    NULL |     10 |
+    -> |  7788 | SCOTT   | ANALYST   | 7566 | 1982-12-09 |  3200.00 |    NULL |     20 |
+    -> |  7839 | KING    | PRESIDENT | NULL | 1981-11-17 |  5300.00 |    NULL |     10 |
+    -> |  7844 | TURNER  | SALESMAN  | 7698 | 1981-09-08 |  1700.00 |    0.00 |     30 |
+    -> |  7876 | ADAMS   | CLERK     | 7788 | 1983-01-12 |  1300.00 |    NULL |     20 |
+    -> |  7900 | JAMES   | CLERK     | 7698 | 1981-12-03 |  1150.00 |    NULL |     30 |
+    -> |  7902 | FORD    | ANALYST   | 7566 | 1981-12-03 |  3200.00 |    NULL |     20 |
+    -> |  7934^Z^C
+mysql> create myemp(
+    -> empid int primary key,
+    -> ename varchar(20),
+    -> mgr int,
+    -> job varchar(20),
+    -> foreign key fk_mgr(mgr) references myemp(empid)
+    -> )
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'myemp(
+empid int primary key,
+ename varchar(20),
+mgr int,
+job varchar(20),
+forei' at line 1
+mysql> create table myemp(
+    -> empid int primary key,
+    -> ename varchar(20),
+    -> mgr int,
+    -> job varchar(20),
+    -> foreign key fk_mgr(mgr) references myemp(empid)
+    -> )
+    -> ;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into myemp(empid,ename,job) values(101,'anil','CEO')
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from myemp;
++-------+-------+------+------+
+| empid | ename | mgr  | job  |
++-------+-------+------+------+
+|   101 | anil  | NULL | CEO  |
++-------+-------+------+------+
+1 row in set (0.00 sec)
+
+mysql> insert into myemp values(102,'kishori',101,'Manager');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into myemp values(102,'kishori',10,'Manager');
+ERROR 1062 (23000): Duplicate entry '102' for key 'myemp.PRIMARY'
+mysql> insert into myemp values(103,'kishori',10,'Manager');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`iacsdedacmay21`.`myemp`, CONSTRAINT `myemp_ibfk_1` FOREIGN KEY (`mgr`) REFERENCES `myemp` (`empid`))
+mysql> insert into myemp values(102,'kishori',null,'Manager');
+ERROR 1062 (23000): Duplicate entry '102' for key 'myemp.PRIMARY'
+mysql> insert into myemp values(104,'kishori',null,'Manager');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from myemp;
++-------+---------+------+---------+
+| empid | ename   | mgr  | job     |
++-------+---------+------+---------+
+|   101 | anil    | NULL | CEO     |
+|   102 | kishori |  101 | Manager |
+|   104 | kishori | NULL | Manager |
++-------+---------+------+---------+
+3 rows in set (0.00 sec)
+
+mysql> create table mytable(
+    -> id int primary key auto_increment,
+    -> name varchar(20),
+    -> email varchar(30));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into mytable values(default,'xxx','xxx@gmail');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from mytable;
++----+------+-----------+
+| id | name | email     |
++----+------+-----------+
+|  1 | xxx  | xxx@gmail |
++----+------+-----------+
+1 row in set (0.00 sec)
+
+mysql> insert into mytable values(default,'xxx','xxx@gmail');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from mytable;
++----+------+-----------+
+| id | name | email     |
++----+------+-----------+
+|  1 | xxx  | xxx@gmail |
+|  2 | xxx  | xxx@gmail |
++----+------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> insert into mytable(ename,email) values('yyyyy','yyy@gmail');
+ERROR 1054 (42S22): Unknown column 'ename' in 'field list'
+mysql> insert into mytable(name,email) values('yyyyy','yyy@gmail');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from mytable;
++----+-------+-----------+
+| id | name  | email     |
++----+-------+-----------+
+|  1 | xxx   | xxx@gmail |
+|  2 | xxx   | xxx@gmail |
+|  3 | yyyyy | yyy@gmail |
++----+-------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> insert into mytable(name,email) values('yyyyy');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> drop table mytable;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table mytable(
+    -> id int primary key auto_increment,
+    -> name not null,
+    -> ^C
+mysql>
+mysql> create table mytable(
+    -> id int primary key auto_increment,
+    -> name varchar(20) not null,
+    -> email varchar(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into mytable values(default,'xxx','xxx@sdh')
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from mytable;
++----+------+---------+
+| id | name | email   |
++----+------+---------+
+|  1 | xxx  | xxx@sdh |
++----+------+---------+
+1 row in set (0.00 sec)
+
+mysql> insert into mytable values(10,'xxx','xxx@sdh')
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into mytable values(default,'xxx','xxx@sdh')
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from mytable;
++----+------+---------+
+| id | name | email   |
++----+------+---------+
+|  1 | xxx  | xxx@sdh |
+| 10 | xxx  | xxx@sdh |
+| 11 | xxx  | xxx@sdh |
++----+------+---------+
+3 rows in set (0.00 sec)
+
+mysql> insert into mytable values(9,'xxx','xxx@sdh')
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into mytable values(default,'xxx','xxx@sdh')
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from mytable;
++----+------+---------+
+| id | name | email   |
++----+------+---------+
+|  1 | xxx  | xxx@sdh |
+|  9 | xxx  | xxx@sdh |
+| 10 | xxx  | xxx@sdh |
+| 11 | xxx  | xxx@sdh |
+| 12 | xxx  | xxx@sdh |
++----+------+---------+
+5 rows in set (0.00 sec)
+
+mysql> insert into mytable values(default,'xxx','xxx@sdh')
+    -> ;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> alter table mytable auto_increament=1001;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'auto_increament=1001' at line 1
+mysql> alter table mytable auto_increment=1001;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into mytable values(default,'zzz','xxx@sdh')
+    -> ;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from mytable;
++------+------+---------+
+| id   | name | email   |
++------+------+---------+
+|    1 | xxx  | xxx@sdh |
+|    9 | xxx  | xxx@sdh |
+|   10 | xxx  | xxx@sdh |
+|   11 | xxx  | xxx@sdh |
+|   12 | xxx  | xxx@sdh |
+|   13 | xxx  | xxx@sdh |
+| 1001 | zzz  | xxx@sdh |
++------+------+---------+
+7 rows in set (0.00 sec)
+
+mysql> show tables;
++--------------------------+
+| Tables_in_iacsdedacmay21 |
++--------------------------+
+| bonus                    |
+| category                 |
+| customer                 |
+| dept                     |
+| dummy                    |
+| emp                      |
+| myemp                    |
+| myemployee               |
+| mytable                  |
+| product                  |
+| salgrade                 |
+| vehicle                  |
+| vehicle_cust             |
++--------------------------+
+13 rows in set (0.01 sec)
+
+mysql> select * from product;
+Empty set (0.00 sec)
+
+mysql> desc product;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| pid   | int           | NO   | PRI | NULL    |       |
+| pname | varchar(20)   | NO   |     | NULL    |       |
+| qty   | int           | YES  |     | NULL    |       |
+| price | decimal(11,2) | YES  |     | NULL    |       |
+| cid   | int           | YES  | MUL | NULL    |       |
++-------+---------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table product
+    -> add description varchar(20);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc product;
++-------------+---------------+------+-----+---------+-------+
+| Field       | Type          | Null | Key | Default | Extra |
++-------------+---------------+------+-----+---------+-------+
+| pid         | int           | NO   | PRI | NULL    |       |
+| pname       | varchar(20)   | NO   |     | NULL    |       |
+| qty         | int           | YES  |     | NULL    |       |
+| price       | decimal(11,2) | YES  |     | NULL    |       |
+| cid         | int           | YES  | MUL | NULL    |       |
+| description | varchar(20)   | YES  |     | NULL    |       |
++-------------+---------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> select * from category;
+Empty set (0.00 sec)
+
+mysql> insert into category values(12,'furniture','kjshfkjhfdjkh');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from category
+    -> ;
++-------+-----------+---------------+
+| catid | cname     | description   |
++-------+-----------+---------------+
+|    12 | furniture | kjshfkjhfdjkh |
++-------+-----------+---------------+
+1 row in set (0.00 sec)
+
+mysql> desc category;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| catid       | int         | NO   | PRI | NULL    |       |
+| cname       | varchar(20) | NO   |     | NULL    |       |
+| description | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table category
+    -> add col1 varchar(20) after cname,
+    -> add col2 varchar(20) first;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc category;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| col2        | varchar(20) | YES  |     | NULL    |       |
+| catid       | int         | NO   | PRI | NULL    |       |
+| cname       | varchar(20) | NO   |     | NULL    |       |
+| col1        | varchar(20) | YES  |     | NULL    |       |
+| description | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> select * from category;
++------+-------+-----------+------+---------------+
+| col2 | catid | cname     | col1 | description   |
++------+-------+-----------+------+---------------+
+| NULL |    12 | furniture | NULL | kjshfkjhfdjkh |
++------+-------+-----------+------+---------------+
+1 row in set (0.00 sec)
+
+mysql> alter table category
+    -> add col3 int default 100;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc category;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| col2        | varchar(20) | YES  |     | NULL    |       |
+| catid       | int         | NO   | PRI | NULL    |       |
+| cname       | varchar(20) | NO   |     | NULL    |       |
+| col1        | varchar(20) | YES  |     | NULL    |       |
+| description | varchar(20) | YES  |     | NULL    |       |
+| col3        | int         | YES  |     | 100     |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from category;
++------+-------+-----------+------+---------------+------+
+| col2 | catid | cname     | col1 | description   | col3 |
++------+-------+-----------+------+---------------+------+
+| NULL |    12 | furniture | NULL | kjshfkjhfdjkh |  100 |
++------+-------+-----------+------+---------------+------+
+1 row in set (0.00 sec)
+
+mysql> update category
+    -> set col1='xxxx'
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from category;
++------+-------+-----------+------+---------------+------+
+| col2 | catid | cname     | col1 | description   | col3 |
++------+-------+-----------+------+---------------+------+
+| NULL |    12 | furniture | xxxx | kjshfkjhfdjkh |  100 |
++------+-------+-----------+------+---------------+------+
+1 row in set (0.00 sec)
+
+mysql> alter table category
+    -> modify col1 varchar(20) not null;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table category drop column col3;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc category;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| col2        | varchar(20) | YES  |     | NULL    |       |
+| catid       | int         | NO   | PRI | NULL    |       |
+| cname       | varchar(20) | NO   |     | NULL    |       |
+| col1        | varchar(20) | NO   |     | NULL    |       |
+| description | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> create table mytable1()
+    ->
+    -> ^C
+mysql> create table mytable(
+    -> myid int,
+    -> myname varchar(20));
+ERROR 1050 (42S01): Table 'mytable' already exists
+mysql> create table mytable1(
+    -> myid int,
+    -> myname varchar(20));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc mytable1;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| myid   | int         | YES  |     | NULL    |       |
+| myname | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> alter table mytable1
+    -> add primary key(myid);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc mytable1;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| myid   | int         | NO   | PRI | NULL    |       |
+| myname | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> desc emp;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| EMPNO    | int          | NO   |     | NULL    |       |
+| ENAME    | varchar(10)  | YES  |     | NULL    |       |
+| JOB      | varchar(9)   | YES  |     | NULL    |       |
+| MGR      | int          | YES  |     | NULL    |       |
+| HIREDATE | date         | YES  |     | NULL    |       |
+| SAL      | decimal(7,2) | YES  |     | NULL    |       |
+| COMM     | decimal(7,2) | YES  |     | NULL    |       |
+| DEPTNO   | int          | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table emp
+    -> add primary key(empno);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| EMPNO    | int          | NO   | PRI | NULL    |       |
+| ENAME    | varchar(10)  | YES  |     | NULL    |       |
+| JOB      | varchar(9)   | YES  |     | NULL    |       |
+| MGR      | int          | YES  |     | NULL    |       |
+| HIREDATE | date         | YES  |     | NULL    |       |
+| SAL      | decimal(7,2) | YES  |     | NULL    |       |
+| COMM     | decimal(7,2) | YES  |     | NULL    |       |
+| DEPTNO   | int          | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table emp
+    -> add constraint fk_deptid
+    -> foreign key(deptno) references dept(deptno);
+ERROR 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'fk_deptid' in the referenced table 'dept'
+mysql> desc dept;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| DEPTNO | int         | YES  |     | NULL    |       |
+| DNAME  | varchar(14) | YES  |     | NULL    |       |
+| LOC    | varchar(13) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table dept
+    -> add primary key(deptno);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc dept;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| DEPTNO | int         | NO   | PRI | NULL    |       |
+| DNAME  | varchar(14) | YES  |     | NULL    |       |
+| LOC    | varchar(13) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> alter table emp
+    -> add constraint fk_deptid
+    -> foreign key(deptno) references dept(deptno);
+Query OK, 17 rows affected (0.07 sec)
+Records: 17  Duplicates: 0  Warnings: 0
+
+mysql> desc emp;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| EMPNO    | int          | NO   | PRI | NULL    |       |
+| ENAME    | varchar(10)  | YES  |     | NULL    |       |
+| JOB      | varchar(9)   | YES  |     | NULL    |       |
+| MGR      | int          | YES  |     | NULL    |       |
+| HIREDATE | date         | YES  |     | NULL    |       |
+| SAL      | decimal(7,2) | YES  |     | NULL    |       |
+| COMM     | decimal(7,2) | YES  |     | NULL    |       |
+| DEPTNO   | int          | YES  | MUL | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table emp
+    -> drop constraint fk_deptid;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| EMPNO    | int          | NO   | PRI | NULL    |       |
+| ENAME    | varchar(10)  | YES  |     | NULL    |       |
+| JOB      | varchar(9)   | YES  |     | NULL    |       |
+| MGR      | int          | YES  |     | NULL    |       |
+| HIREDATE | date         | YES  |     | NULL    |       |
+| SAL      | decimal(7,2) | YES  |     | NULL    |       |
+| COMM     | decimal(7,2) | YES  |     | NULL    |       |
+| DEPTNO   | int          | YES  | MUL | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table emp
+    -> drop constraint foreign key fk_deptid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key fk_deptid' at line 2
+mysql> alter table emp
+    -> drop foreign key fk_deptid;
+ERROR 1091 (42000): Can't DROP 'fk_deptid'; check that column/key exists
+mysql> desc emp;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| EMPNO    | int          | NO   | PRI | NULL    |       |
+| ENAME    | varchar(10)  | YES  |     | NULL    |       |
+| JOB      | varchar(9)   | YES  |     | NULL    |       |
+| MGR      | int          | YES  |     | NULL    |       |
+| HIREDATE | date         | YES  |     | NULL    |       |
+| SAL      | decimal(7,2) | YES  |     | NULL    |       |
+| COMM     | decimal(7,2) | YES  |     | NULL    |       |
+| DEPTNO   | int          | YES  | MUL | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table emp
+    -> drop foreign key fk_deptid;
+ERROR 1091 (42000): Can't DROP 'fk_deptid'; check that column/key exists
+mysql> alter table emp fk_deptid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'fk_deptid' at line 1
+mysql> alter table emp
+    -> drop constraint fk_deptid;
+ERROR 3940 (HY000): Constraint 'fk_deptid' does not exist.
+mysql> show constaints from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'constaints from emp' at line 1
+mysql> show constraints from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'constraints from emp' at line 1
+mysql> show constraint from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'constraint from emp' at line 1
+mysql> desc information_schema.key_column_usgae;
+ERROR 1109 (42S02): Unknown table 'KEY_COLUMN_USGAE' in information_schema
+mysql> desc information_schema.key_column_usage;
++-------------------------------+--------------+------+-----+---------+-------+
+| Field                         | Type         | Null | Key | Default | Extra |
++-------------------------------+--------------+------+-----+---------+-------+
+| CONSTRAINT_CATALOG            | varchar(64)  | YES  |     | NULL    |       |
+| CONSTRAINT_SCHEMA             | varchar(64)  | YES  |     | NULL    |       |
+| CONSTRAINT_NAME               | varchar(64)  | YES  |     | NULL    |       |
+| TABLE_CATALOG                 | varchar(64)  | YES  |     | NULL    |       |
+| TABLE_SCHEMA                  | varchar(64)  | YES  |     | NULL    |       |
+| TABLE_NAME                    | varchar(64)  | YES  |     | NULL    |       |
+| COLUMN_NAME                   | varchar(64)  | YES  |     | NULL    |       |
+| ORDINAL_POSITION              | int unsigned | NO   |     | 0       |       |
+| POSITION_IN_UNIQUE_CONSTRAINT | int unsigned | YES  |     | NULL    |       |
+| REFERENCED_TABLE_SCHEMA       | varchar(64)  | YES  |     | NULL    |       |
+| REFERENCED_TABLE_NAME         | varchar(64)  | YES  |     | NULL    |       |
+| REFERENCED_COLUMN_NAME        | varchar(64)  | YES  |     | NULL    |       |
++-------------------------------+--------------+------+-----+---------+-------+
+12 rows in set (0.01 sec)
+
+mysql> select column_name,constriant_name
+    -> from information_schema.key_column_usage
+    -> where table_name='emp';
+ERROR 1054 (42S22): Unknown column 'constriant_name' in 'field list'
+mysql> select column_name,constraint_name
+    -> from information_schema.key_column_usage
+    -> where table_name='emp';
++-------------+-----------------+
+| COLUMN_NAME | CONSTRAINT_NAME |
++-------------+-----------------+
+| EMPNO       | PRIMARY         |
++-------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> desc emp;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| EMPNO    | int          | NO   | PRI | NULL    |       |
+| ENAME    | varchar(10)  | YES  |     | NULL    |       |
+| JOB      | varchar(9)   | YES  |     | NULL    |       |
+| MGR      | int          | YES  |     | NULL    |       |
+| HIREDATE | date         | YES  |     | NULL    |       |
+| SAL      | decimal(7,2) | YES  |     | NULL    |       |
+| COMM     | decimal(7,2) | YES  |     | NULL    |       |
+| DEPTNO   | int          | YES  | MUL | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> show tables;
++--------------------------+
+| Tables_in_iacsdedacmay21 |
++--------------------------+
+| bonus                    |
+| category                 |
+| customer                 |
+| dept                     |
+| dummy                    |
+| emp                      |
+| myemp                    |
+| myemployee               |
+| mytable                  |
+| mytable1                 |
+| product                  |
+| salgrade                 |
+| vehicle                  |
+| vehicle_cust             |
++--------------------------+
+14 rows in set (0.00 sec)
+
+mysql> select column_name,constraint_name
+    -> from information_schema.key_column_usage
+    -> where table_name='product';
++-------------+-----------------+
+| COLUMN_NAME | CONSTRAINT_NAME |
++-------------+-----------------+
+| pid         | PRIMARY         |
+| cid         | product_ibfk_1  |
+| sid         | fk_sid          |
+| pid         | PRIMARY         |
++-------------+-----------------+
+4 rows in set (0.00 sec)
+
+mysql> desc product;
++-------------+---------------+------+-----+---------+-------+
+| Field       | Type          | Null | Key | Default | Extra |
++-------------+---------------+------+-----+---------+-------+
+| pid         | int           | NO   | PRI | NULL    |       |
+| pname       | varchar(20)   | NO   |     | NULL    |       |
+| qty         | int           | YES  |     | NULL    |       |
+| price       | decimal(11,2) | YES  |     | NULL    |       |
+| cid         | int           | YES  | MUL | NULL    |       |
+| description | varchar(20)   | YES  |     | NULL    |       |
++-------------+---------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select column_name,constraint_name
+    -> ;
+ERROR 1054 (42S22): Unknown column 'column_name' in 'field list'
+mysql> select column_name,constriant_name
+    -> from information_schema.key_column_usage
+    -> where table_name like 'vehi%'
+    -> ;
+ERROR 1054 (42S22): Unknown column 'constriant_name' in 'field list'
+mysql> select column_name,constraint_name
+    -> from information_schema.key_column_usage
+    -> where table_name like 'vehi%';
++-------------+---------------------+
+| COLUMN_NAME | CONSTRAINT_NAME     |
++-------------+---------------------+
+| vid         | PRIMARY             |
+| vid         | PRIMARY             |
+| custid      | PRIMARY             |
+| vid         | vehicle_cust_ibfk_1 |
+| custid      | vehicle_cust_ibfk_2 |
++-------------+---------------------+
+5 rows in set (0.01 sec)
+
+mysql> select column_name,constraint_name,table_name
+    -> from information_schema.key_column_usage
+    -> where table_name like 'vehi%';
++-------------+---------------------+--------------+
+| COLUMN_NAME | CONSTRAINT_NAME     | TABLE_NAME   |
++-------------+---------------------+--------------+
+| vid         | PRIMARY             | vehicle      |
+| vid         | PRIMARY             | vehicle_cust |
+| custid      | PRIMARY             | vehicle_cust |
+| vid         | vehicle_cust_ibfk_1 | vehicle_cust |
+| custid      | vehicle_cust_ibfk_2 | vehicle_cust |
++-------------+---------------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> alter table cehicle_cust
+    -> drop constraint vehicle_cust_ibfk_1;
+ERROR 1146 (42S02): Table 'iacsdedacmay21.cehicle_cust' doesn't exist
+mysql> alter table vehicle_cust
+    -> drop constraint vehicle_cust_ibfk_1;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc mytable
+    -> ;'
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int         | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(20) | NO   |     | NULL    |                |
+| email | varchar(20) | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+    '>
+    '> ^C
+mysql> alter table mytable
+    -> rename to newmytab;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc newmytab;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int         | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(20) | NO   |     | NULL    |                |
+| email | varchar(20) | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> desc vehicle_cust;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| vid       | int          | NO   | PRI | NULL    |       |
+| custid    | int          | NO   | PRI | NULL    |       |
+| p_date    | date         | YES  |     | NULL    |       |
+| dis_price | decimal(9,2) | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table vehicle_cust
+    -> modify dis_price int;
+Query OK, 4 rows affected (0.05 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> desc vehicle_cust;
++-----------+------+------+-----+---------+-------+
+| Field     | Type | Null | Key | Default | Extra |
++-----------+------+------+-----+---------+-------+
+| vid       | int  | NO   | PRI | NULL    |       |
+| custid    | int  | NO   | PRI | NULL    |       |
+| p_date    | date | YES  |     | NULL    |       |
+| dis_price | int  | YES  |     | NULL    |       |
++-----------+------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc mytable;
+ERROR 1146 (42S02): Table 'iacsdedacmay21.mytable' doesn't exist
+mysql>

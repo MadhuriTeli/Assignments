@@ -1,0 +1,1025 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 17
+Server version: 8.0.22 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use iacsdedacmay21
+Database changed
+mysql> select ename,sal,format(sal)
+    -> from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+from emp' at line 1
+mysql> select *
+    -> from emp;
++-------+---------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME   | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+---------+-----------+------+------------+----------+---------+--------+
+|  7369 | SMITH   | CLERK     | 7902 | 1980-12-17 |   900.00 |    NULL |     20 |
+|  7499 | ALLEN   | SALESMAN  | 7698 | 1981-02-20 |  1700.00 |  300.00 |     30 |
+|  7521 | WARD    | SALESMAN  | 7698 | 1981-02-22 |  1350.00 |  500.00 |     30 |
+|  7566 | JONES   | MANAGER   | 7839 | 1981-04-02 |  3075.00 |    NULL |     20 |
+|  7654 | MARTIN  | SALESMAN  | 7698 | 1981-09-28 |  1350.00 | 1400.00 |     30 |
+|  7698 | BLAKE   | MANAGER   | 7839 | 1981-05-01 |  2950.00 |    NULL |     30 |
+|  7782 | CLARK   | MANAGER   | 7839 | 1981-06-09 |  2650.00 |    NULL |     10 |
+|  7788 | SCOTT   | ANALYST   | 7566 | 1982-12-09 |  3100.00 |    NULL |     20 |
+|  7839 | KING    | PRESIDENT | NULL | 1981-11-17 |  5200.00 |    NULL |     10 |
+|  7844 | TURNER  | SALESMAN  | 7698 | 1981-09-08 |  1600.00 |    0.00 |     30 |
+|  7876 | ADAMS   | CLERK     | 7788 | 1983-01-12 |  1200.00 |    NULL |     20 |
+|  7900 | JAMES   | CLERK     | 7698 | 1981-12-03 |  1050.00 |    NULL |     30 |
+|  7902 | FORD    | ANALYST   | 7566 | 1981-12-03 |  3100.00 |    NULL |     20 |
+|  7934 | MILLER  | CLERK     | 7782 | 1982-01-23 |  1500.00 |    NULL |     10 |
+|   123 | Rajan   | designer  | 7902 | 2020-12-10 | 34767.00 | 3456.00 |     10 |
+|   124 | Revati  | designer  | 7902 | 1999-12-10 | 34667.00 | 3456.00 |     20 |
+|     1 | Rajas_D | Manager   | 7902 | 1998-02-02 |  3656.00 |  345.00 |     10 |
++-------+---------+-----------+------+------------+----------+---------+--------+
+17 rows in set (0.00 sec)
+
+mysql> select empno,sal,format(sal)
+    -> from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+from emp' at line 1
+mysql> select empno,sal,format(sal,2)
+    -> from emp;
++-------+----------+---------------+
+| empno | sal      | format(sal,2) |
++-------+----------+---------------+
+|  7369 |   900.00 | 900.00        |
+|  7499 |  1700.00 | 1,700.00      |
+|  7521 |  1350.00 | 1,350.00      |
+|  7566 |  3075.00 | 3,075.00      |
+|  7654 |  1350.00 | 1,350.00      |
+|  7698 |  2950.00 | 2,950.00      |
+|  7782 |  2650.00 | 2,650.00      |
+|  7788 |  3100.00 | 3,100.00      |
+|  7839 |  5200.00 | 5,200.00      |
+|  7844 |  1600.00 | 1,600.00      |
+|  7876 |  1200.00 | 1,200.00      |
+|  7900 |  1050.00 | 1,050.00      |
+|  7902 |  3100.00 | 3,100.00      |
+|  7934 |  1500.00 | 1,500.00      |
+|   123 | 34767.00 | 34,767.00     |
+|   124 | 34667.00 | 34,667.00     |
+|     1 |  3656.00 | 3,656.00      |
++-------+----------+---------------+
+17 rows in set (0.00 sec)
+
+mysql> select empno,sal,concat('$',format(sal,2))
+    -> from mep;
+ERROR 1146 (42S02): Table 'iacsdedacmay21.mep' doesn't exist
+mysql> select empno,sal,concat('$',format(sal,2))
+    -> from emp;
++-------+----------+---------------------------+
+| empno | sal      | concat('$',format(sal,2)) |
++-------+----------+---------------------------+
+|  7369 |   900.00 | $900.00                   |
+|  7499 |  1700.00 | $1,700.00                 |
+|  7521 |  1350.00 | $1,350.00                 |
+|  7566 |  3075.00 | $3,075.00                 |
+|  7654 |  1350.00 | $1,350.00                 |
+|  7698 |  2950.00 | $2,950.00                 |
+|  7782 |  2650.00 | $2,650.00                 |
+|  7788 |  3100.00 | $3,100.00                 |
+|  7839 |  5200.00 | $5,200.00                 |
+|  7844 |  1600.00 | $1,600.00                 |
+|  7876 |  1200.00 | $1,200.00                 |
+|  7900 |  1050.00 | $1,050.00                 |
+|  7902 |  3100.00 | $3,100.00                 |
+|  7934 |  1500.00 | $1,500.00                 |
+|   123 | 34767.00 | $34,767.00                |
+|   124 | 34667.00 | $34,667.00                |
+|     1 |  3656.00 | $3,656.00                 |
++-------+----------+---------------------------+
+17 rows in set (0.00 sec)
+
+mysql> update emp
+    -> set sal=sal+100;
+Query OK, 17 rows affected (0.01 sec)
+Rows matched: 17  Changed: 17  Warnings: 0
+
+mysql> select *
+    -> from emp;
++-------+---------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME   | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+---------+-----------+------+------------+----------+---------+--------+
+|  7369 | SMITH   | CLERK     | 7902 | 1980-12-17 |  1000.00 |    NULL |     20 |
+|  7499 | ALLEN   | SALESMAN  | 7698 | 1981-02-20 |  1800.00 |  300.00 |     30 |
+|  7521 | WARD    | SALESMAN  | 7698 | 1981-02-22 |  1450.00 |  500.00 |     30 |
+|  7566 | JONES   | MANAGER   | 7839 | 1981-04-02 |  3175.00 |    NULL |     20 |
+|  7654 | MARTIN  | SALESMAN  | 7698 | 1981-09-28 |  1450.00 | 1400.00 |     30 |
+|  7698 | BLAKE   | MANAGER   | 7839 | 1981-05-01 |  3050.00 |    NULL |     30 |
+|  7782 | CLARK   | MANAGER   | 7839 | 1981-06-09 |  2750.00 |    NULL |     10 |
+|  7788 | SCOTT   | ANALYST   | 7566 | 1982-12-09 |  3200.00 |    NULL |     20 |
+|  7839 | KING    | PRESIDENT | NULL | 1981-11-17 |  5300.00 |    NULL |     10 |
+|  7844 | TURNER  | SALESMAN  | 7698 | 1981-09-08 |  1700.00 |    0.00 |     30 |
+|  7876 | ADAMS   | CLERK     | 7788 | 1983-01-12 |  1300.00 |    NULL |     20 |
+|  7900 | JAMES   | CLERK     | 7698 | 1981-12-03 |  1150.00 |    NULL |     30 |
+|  7902 | FORD    | ANALYST   | 7566 | 1981-12-03 |  3200.00 |    NULL |     20 |
+|  7934 | MILLER  | CLERK     | 7782 | 1982-01-23 |  1600.00 |    NULL |     10 |
+|   123 | Rajan   | designer  | 7902 | 2020-12-10 | 34867.00 | 3456.00 |     10 |
+|   124 | Revati  | designer  | 7902 | 1999-12-10 | 34767.00 | 3456.00 |     20 |
+|     1 | Rajas_D | Manager   | 7902 | 1998-02-02 |  3756.00 |  345.00 |     10 |
++-------+---------+-----------+------+------------+----------+---------+--------+
+17 rows in set (0.00 sec)
+
+mysql> select empno,ename,sal,comm,case when comm is null then 'need improvement'
+    -> when comm<500 then 'ok'
+    -> when comm<1000 then 'good'
+    -> else 'excellent' end "Remark"
+    -> from emp;
++-------+---------+----------+---------+------------------+
+| empno | ename   | sal      | comm    | Remark           |
++-------+---------+----------+---------+------------------+
+|  7369 | SMITH   |  1000.00 |    NULL | need improvement |
+|  7499 | ALLEN   |  1800.00 |  300.00 | ok               |
+|  7521 | WARD    |  1450.00 |  500.00 | good             |
+|  7566 | JONES   |  3175.00 |    NULL | need improvement |
+|  7654 | MARTIN  |  1450.00 | 1400.00 | excellent        |
+|  7698 | BLAKE   |  3050.00 |    NULL | need improvement |
+|  7782 | CLARK   |  2750.00 |    NULL | need improvement |
+|  7788 | SCOTT   |  3200.00 |    NULL | need improvement |
+|  7839 | KING    |  5300.00 |    NULL | need improvement |
+|  7844 | TURNER  |  1700.00 |    0.00 | ok               |
+|  7876 | ADAMS   |  1300.00 |    NULL | need improvement |
+|  7900 | JAMES   |  1150.00 |    NULL | need improvement |
+|  7902 | FORD    |  3200.00 |    NULL | need improvement |
+|  7934 | MILLER  |  1600.00 |    NULL | need improvement |
+|   123 | Rajan   | 34867.00 | 3456.00 | excellent        |
+|   124 | Revati  | 34767.00 | 3456.00 | excellent        |
+|     1 | Rajas_D |  3756.00 |  345.00 | ok               |
++-------+---------+----------+---------+------------------+
+17 rows in set (0.00 sec)
+
+mysql> select * from product;
+ERROR 1146 (42S02): Table 'iacsdedacmay21.product' doesn't exist
+mysql> use test
+Database changed
+mysql> select * from product
+    -> ;
++------+---------------+------+--------+------+
+| pid  | pname         | qty  | price  | cid  |
++------+---------------+------+--------+------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |
+|    3 | Pringles123   |   12 | 150.00 |    1 |
+|    4 | Marie gold    |   20 |  50.00 |    2 |
+|    5 | nice1234      |   35 |  45.00 |    2 |
+|    6 | good day123   |   45 |  60.00 |    2 |
+|   20 | Hide and seek |   45 |  40.00 |    2 |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |
++------+---------------+------+--------+------+
+7 rows in set (0.02 sec)
+
+mysql> select empno,ename,sal,comm,case when comm is null or comm=0 then 'need improvement'
+    -> when comm<500 then 'ok'
+    -> when comm<1000 then 'good'
+    -> else 'excellent' end "Remark"
+    -> from emp;
+ERROR 1146 (42S02): Table 'test.emp' doesn't exist
+mysql> use iacsdedacmay21
+Database changed
+mysql> select empno,ename,sal,comm,case when comm is null or comm=0 then 'need improvement'
+    -> when comm<500 then 'ok'
+    -> when comm<1000 then 'good'
+    -> else 'excellent' end "Remark"
+    -> from emp;
++-------+---------+----------+---------+------------------+
+| empno | ename   | sal      | comm    | Remark           |
++-------+---------+----------+---------+------------------+
+|  7369 | SMITH   |  1000.00 |    NULL | need improvement |
+|  7499 | ALLEN   |  1800.00 |  300.00 | ok               |
+|  7521 | WARD    |  1450.00 |  500.00 | good             |
+|  7566 | JONES   |  3175.00 |    NULL | need improvement |
+|  7654 | MARTIN  |  1450.00 | 1400.00 | excellent        |
+|  7698 | BLAKE   |  3050.00 |    NULL | need improvement |
+|  7782 | CLARK   |  2750.00 |    NULL | need improvement |
+|  7788 | SCOTT   |  3200.00 |    NULL | need improvement |
+|  7839 | KING    |  5300.00 |    NULL | need improvement |
+|  7844 | TURNER  |  1700.00 |    0.00 | need improvement |
+|  7876 | ADAMS   |  1300.00 |    NULL | need improvement |
+|  7900 | JAMES   |  1150.00 |    NULL | need improvement |
+|  7902 | FORD    |  3200.00 |    NULL | need improvement |
+|  7934 | MILLER  |  1600.00 |    NULL | need improvement |
+|   123 | Rajan   | 34867.00 | 3456.00 | excellent        |
+|   124 | Revati  | 34767.00 | 3456.00 | excellent        |
+|     1 | Rajas_D |  3756.00 |  345.00 | ok               |
++-------+---------+----------+---------+------------------+
+17 rows in set (0.00 sec)
+
+mysql> use test
+Database changed
+mysql> select * from product;
++------+---------------+------+--------+------+
+| pid  | pname         | qty  | price  | cid  |
++------+---------------+------+--------+------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |
+|    3 | Pringles123   |   12 | 150.00 |    1 |
+|    4 | Marie gold    |   20 |  50.00 |    2 |
+|    5 | nice1234      |   35 |  45.00 |    2 |
+|    6 | good day123   |   45 |  60.00 |    2 |
+|   20 | Hide and seek |   45 |  40.00 |    2 |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |
++------+---------------+------+--------+------+
+7 rows in set (0.00 sec)
+
+mysql> select pid,pname,price,case when price is null or price=0 then 'wrong price'
+    -> when price<50 then 'less expenssive'
+    -> when price>=50 and price<100 then 'moderate'
+    -> else 'expenssive' end "remark"
+    -> from product;
++------+---------------+--------+-----------------+
+| pid  | pname         | price  | remark          |
++------+---------------+--------+-----------------+
+|    2 | Nachos123     | 150.00 | expenssive      |
+|    3 | Pringles123   | 150.00 | expenssive      |
+|    4 | Marie gold    |  50.00 | moderate        |
+|    5 | nice1234      |  45.00 | less expenssive |
+|    6 | good day123   |  60.00 | moderate        |
+|   20 | Hide and seek |  40.00 | less expenssive |
+|  123 | sfgdfg        | 123.00 | expenssive      |
++------+---------------+--------+-----------------+
+7 rows in set (0.00 sec)
+
+mysql> select pid,pname,price,case when price is null or price=0 then 'wrong price'
+    -> when price<50 then 'less expenssive'
+    -> when price between 50 and 99 then 'moderate'
+    -> else 'expenssive' end "remark"
+    -> from product;
++------+---------------+--------+-----------------+
+| pid  | pname         | price  | remark          |
++------+---------------+--------+-----------------+
+|    2 | Nachos123     | 150.00 | expenssive      |
+|    3 | Pringles123   | 150.00 | expenssive      |
+|    4 | Marie gold    |  50.00 | moderate        |
+|    5 | nice1234      |  45.00 | less expenssive |
+|    6 | good day123   |  60.00 | moderate        |
+|   20 | Hide and seek |  40.00 | less expenssive |
+|  123 | sfgdfg        | 123.00 | expenssive      |
++------+---------------+--------+-----------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from product;
++------+---------------+------+--------+------+
+| pid  | pname         | qty  | price  | cid  |
++------+---------------+------+--------+------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |
+|    3 | Pringles123   |   12 | 150.00 |    1 |
+|    4 | Marie gold    |   20 |  50.00 |    2 |
+|    5 | nice1234      |   35 |  45.00 |    2 |
+|    6 | good day123   |   45 |  60.00 |    2 |
+|   20 | Hide and seek |   45 |  40.00 |    2 |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |
++------+---------------+------+--------+------+
+7 rows in set (0.00 sec)
+
+mysql> select pid,pname,price,case cid when 1 then 'chips'
+    -> when 2 then 'biscuits'
+    -> when 3 then 'snacks'
+    -> else 'others' end "category"
+    -> from product;
++------+---------------+--------+----------+
+| pid  | pname         | price  | category |
++------+---------------+--------+----------+
+|    2 | Nachos123     | 150.00 | chips    |
+|    3 | Pringles123   | 150.00 | chips    |
+|    4 | Marie gold    |  50.00 | biscuits |
+|    5 | nice1234      |  45.00 | biscuits |
+|    6 | good day123   |  60.00 | biscuits |
+|   20 | Hide and seek |  40.00 | biscuits |
+|  123 | sfgdfg        | 123.00 | snacks   |
++------+---------------+--------+----------+
+7 rows in set (0.00 sec)
+
+mysql> use iacsdedacmay21
+Database changed
+mysql> select * from emp;
++-------+---------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME   | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+---------+-----------+------+------------+----------+---------+--------+
+|  7369 | SMITH   | CLERK     | 7902 | 1980-12-17 |  1000.00 |    NULL |     20 |
+|  7499 | ALLEN   | SALESMAN  | 7698 | 1981-02-20 |  1800.00 |  300.00 |     30 |
+|  7521 | WARD    | SALESMAN  | 7698 | 1981-02-22 |  1450.00 |  500.00 |     30 |
+|  7566 | JONES   | MANAGER   | 7839 | 1981-04-02 |  3175.00 |    NULL |     20 |
+|  7654 | MARTIN  | SALESMAN  | 7698 | 1981-09-28 |  1450.00 | 1400.00 |     30 |
+|  7698 | BLAKE   | MANAGER   | 7839 | 1981-05-01 |  3050.00 |    NULL |     30 |
+|  7782 | CLARK   | MANAGER   | 7839 | 1981-06-09 |  2750.00 |    NULL |     10 |
+|  7788 | SCOTT   | ANALYST   | 7566 | 1982-12-09 |  3200.00 |    NULL |     20 |
+|  7839 | KING    | PRESIDENT | NULL | 1981-11-17 |  5300.00 |    NULL |     10 |
+|  7844 | TURNER  | SALESMAN  | 7698 | 1981-09-08 |  1700.00 |    0.00 |     30 |
+|  7876 | ADAMS   | CLERK     | 7788 | 1983-01-12 |  1300.00 |    NULL |     20 |
+|  7900 | JAMES   | CLERK     | 7698 | 1981-12-03 |  1150.00 |    NULL |     30 |
+|  7902 | FORD    | ANALYST   | 7566 | 1981-12-03 |  3200.00 |    NULL |     20 |
+|  7934 | MILLER  | CLERK     | 7782 | 1982-01-23 |  1600.00 |    NULL |     10 |
+|   123 | Rajan   | designer  | 7902 | 2020-12-10 | 34867.00 | 3456.00 |     10 |
+|   124 | Revati  | designer  | 7902 | 1999-12-10 | 34767.00 | 3456.00 |     20 |
+|     1 | Rajas_D | Manager   | 7902 | 1998-02-02 |  3756.00 |  345.00 |     10 |
++-------+---------+-----------+------+------------+----------+---------+--------+
+17 rows in set (0.00 sec)
+
+mysql> select distinct job
+    -> from emp;
++-----------+
+| job       |
++-----------+
+| CLERK     |
+| SALESMAN  |
+| MANAGER   |
+| ANALYST   |
+| PRESIDENT |
+| designer  |
++-----------+
+6 rows in set (0.00 sec)
+
+mysql> select empid,ename,job,case job when 'CLERK' then 'grade 1'
+    -> when 'SALESMAN' then 'grade 1'
+    -> when 'MANAGER' then 'grade 2'
+    -> when 'ANALYST' then 'grade 3'
+    -> when 'president' then 'grade 4'
+    -> when 'designer' then 'grade 3'
+    -> else 'not registered employee' end "grade level"
+    -> from emp;
+ERROR 1054 (42S22): Unknown column 'empid' in 'field list'
+mysql> select empno,ename,job,case job when 'CLERK' then 'grade 1'
+    -> when 'SALESMAN' then 'grade 1'
+    -> when 'MANAGER' then 'grade 2'
+    -> when 'ANALYST' then 'grade 3'
+    -> when 'president' then 'grade 4'
+    -> when 'designer' then 'grade 3'
+    -> else 'not registered employee' end "grade level"
+    -> from emp;
++-------+---------+-----------+-------------+
+| empno | ename   | job       | grade level |
++-------+---------+-----------+-------------+
+|  7369 | SMITH   | CLERK     | grade 1     |
+|  7499 | ALLEN   | SALESMAN  | grade 1     |
+|  7521 | WARD    | SALESMAN  | grade 1     |
+|  7566 | JONES   | MANAGER   | grade 2     |
+|  7654 | MARTIN  | SALESMAN  | grade 1     |
+|  7698 | BLAKE   | MANAGER   | grade 2     |
+|  7782 | CLARK   | MANAGER   | grade 2     |
+|  7788 | SCOTT   | ANALYST   | grade 3     |
+|  7839 | KING    | PRESIDENT | grade 4     |
+|  7844 | TURNER  | SALESMAN  | grade 1     |
+|  7876 | ADAMS   | CLERK     | grade 1     |
+|  7900 | JAMES   | CLERK     | grade 1     |
+|  7902 | FORD    | ANALYST   | grade 3     |
+|  7934 | MILLER  | CLERK     | grade 1     |
+|   123 | Rajan   | designer  | grade 3     |
+|   124 | Revati  | designer  | grade 3     |
+|     1 | Rajas_D | Manager   | grade 2     |
++-------+---------+-----------+-------------+
+17 rows in set (0.00 sec)
+
+mysql> select empid,ename,job,case when job in ('CLERK','salesman') then 'grade 1'
+    -> when job='^C
+mysql> select empno,ename,job,case when job in ('CLERK','salesman') then 'grade 1'
+    -> when job='Manager' then 'grade 2'
+    -> when job in ('ANALYST','designer') then 'grade 3'
+    -> when job='president' then 'grade 4' end "grade"
+    -> from emp;
++-------+---------+-----------+---------+
+| empno | ename   | job       | grade   |
++-------+---------+-----------+---------+
+|  7369 | SMITH   | CLERK     | grade 1 |
+|  7499 | ALLEN   | SALESMAN  | grade 1 |
+|  7521 | WARD    | SALESMAN  | grade 1 |
+|  7566 | JONES   | MANAGER   | grade 2 |
+|  7654 | MARTIN  | SALESMAN  | grade 1 |
+|  7698 | BLAKE   | MANAGER   | grade 2 |
+|  7782 | CLARK   | MANAGER   | grade 2 |
+|  7788 | SCOTT   | ANALYST   | grade 3 |
+|  7839 | KING    | PRESIDENT | grade 4 |
+|  7844 | TURNER  | SALESMAN  | grade 1 |
+|  7876 | ADAMS   | CLERK     | grade 1 |
+|  7900 | JAMES   | CLERK     | grade 1 |
+|  7902 | FORD    | ANALYST   | grade 3 |
+|  7934 | MILLER  | CLERK     | grade 1 |
+|   123 | Rajan   | designer  | grade 3 |
+|   124 | Revati  | designer  | grade 3 |
+|     1 | Rajas_D | Manager   | grade 2 |
++-------+---------+-----------+---------+
+17 rows in set (0.00 sec)
+
+mysql> use test
+Database changed
+mysql> show tables
+    -> ;
++----------------+
+| Tables_in_test |
++----------------+
+| address        |
+| addressmany    |
+| addressmany1   |
+| category       |
+| custtab1       |
+| custtab11      |
+| emptab1        |
+| emptab11       |
+| myprod11       |
+| myproduct      |
+| myuser         |
+| myuser12       |
+| orderitem      |
+| persontab      |
+| pertab11       |
+| product        |
+| quetions       |
+| student        |
+| user           |
+| user_address   |
+| useraddress    |
+| userentity     |
+| usermany       |
+| usermany1      |
++----------------+
+24 rows in set (0.01 sec)
+
+mysql> select * from usermany1;
++-----+--------+
+| uid | uname  |
++-----+--------+
+| 100 | Rajan  |
+| 101 | Revati |
++-----+--------+
+2 rows in set (0.01 sec)
+
+mysql> drop table usermany1
+    -> ;
+ERROR 3730 (HY000): Cannot drop table 'usermany1' referenced by a foreign key constraint 'FKpv95pghtb859t8m01h101nxkg' on table 'user_address'.
+mysql> select * from user_address;
++-------------+----------+
+| addrSet_aid | user_uid |
++-------------+----------+
+|           1 |      100 |
+|           2 |      100 |
+|           1 |      101 |
+|           2 |      101 |
++-------------+----------+
+4 rows in set (0.01 sec)
+
+mysql> drop table user_address;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables
+    -> ;
++----------------+
+| Tables_in_test |
++----------------+
+| address        |
+| addressmany    |
+| addressmany1   |
+| category       |
+| custtab1       |
+| custtab11      |
+| emptab1        |
+| emptab11       |
+| myprod11       |
+| myproduct      |
+| myuser         |
+| myuser12       |
+| orderitem      |
+| persontab      |
+| pertab11       |
+| product        |
+| quetions       |
+| student        |
+| user           |
+| useraddress    |
+| userentity     |
+| usermany       |
+| usermany1      |
++----------------+
+23 rows in set (0.00 sec)
+
+mysql> select * from useraddress;
++-----+-----+--------+--------+-----------------+---------+
+| uid | aid | city   | pin    | street          | uname   |
++-----+-----+--------+--------+-----------------+---------+
+|  12 |   1 | Nashik | 111111 | pancard club rd | Vandana |
+|  13 |   1 | pune   | 111111 | pancard club rd | Rajan   |
+| 333 |  23 | Pune   | 2345   | Aundh           | Revati  |
++-----+-----+--------+--------+-----------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> truncate table useraddress;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| address        |
+| addressmany    |
+| addressmany1   |
+| category       |
+| custtab1       |
+| custtab11      |
+| emptab1        |
+| emptab11       |
+| myprod11       |
+| myproduct      |
+| myuser         |
+| myuser12       |
+| orderitem      |
+| persontab      |
+| pertab11       |
+| product        |
+| quetions       |
+| student        |
+| user           |
+| useraddress    |
+| userentity     |
+| usermany       |
+| usermany1      |
++----------------+
+23 rows in set (0.00 sec)
+
+mysql> select * from useraddress;
+Empty set (0.00 sec)
+
+mysql> desc useraddress;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| uid    | int          | NO   | PRI | NULL    |       |
+| aid    | int          | NO   |     | NULL    |       |
+| city   | varchar(255) | YES  |     | NULL    |       |
+| pin    | varchar(255) | YES  |     | NULL    |       |
+| street | varchar(255) | YES  |     | NULL    |       |
+| uname  | varchar(255) | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from useraddress;
+Empty set (0.00 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| address        |
+| addressmany    |
+| addressmany1   |
+| category       |
+| custtab1       |
+| custtab11      |
+| emptab1        |
+| emptab11       |
+| myprod11       |
+| myproduct      |
+| myuser         |
+| myuser12       |
+| orderitem      |
+| persontab      |
+| pertab11       |
+| product        |
+| quetions       |
+| student        |
+| user           |
+| useraddress    |
+| userentity     |
+| usermany       |
+| usermany1      |
++----------------+
+23 rows in set (0.00 sec)
+
+mysql> select * from userentity;
++-----+-------+--------+
+| uid | uname | addrid |
++-----+-------+--------+
+|  12 | jsdjk |      1 |
++-----+-------+--------+
+1 row in set (0.00 sec)
+
+mysql> delete
+    -> from userentity;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from userentity;
+Empty set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from userentity;
+Empty set (0.00 sec)
+
+mysql> set autocommit=0
+    -> ;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from usermany;
++-----+-------+
+| uid | uname |
++-----+-------+
+| 100 | Rajan |
++-----+-------+
+1 row in set (0.01 sec)
+
+mysql> delete * from usermany;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* from usermany' at line 1
+mysql> delete from usermany;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`test`.`addressmany`, CONSTRAINT `FKpnfh2gwx5a0f49hnfmmlakwho` FOREIGN KEY (`uid`) REFERENCES `usermany` (`uid`))
+mysql> select * from addressmany;
++-----+--------+------+--------+------+
+| aid | city   | pin  | street | uid  |
++-----+--------+------+--------+------+
+|   1 | pune   | 111  | xxxx   |  100 |
+|   2 | mumbai | 2222 | yyyy   |  100 |
++-----+--------+------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> delete from addressmany;
+Query OK, 2 rows affected (0.00 sec)
+
+mysql> select * from addressmany;
+Empty set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from addressmany;
++-----+--------+------+--------+------+
+| aid | city   | pin  | street | uid  |
++-----+--------+------+--------+------+
+|   1 | pune   | 111  | xxxx   |  100 |
+|   2 | mumbai | 2222 | yyyy   |  100 |
++-----+--------+------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> truncate table addressmany;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from addressmany;
+Empty set (0.01 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from addressmany;
+Empty set (0.00 sec)
+
+mysql> create table addressmany(id int);
+ERROR 1050 (42S01): Table 'addressmany' already exists
+mysql> create table myemployee(empid int primary key,
+    -> ename varchar(30) not null,
+    -> price decimal(11,2) default 100,
+    -> qty int check(qty>10),
+    -> passportnum int unique,
+    -> adharnum int unique not null)
+    -> ;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> use iacsdedacmay21;
+Database changed
+mysql> create table myemployee(empid int primary key,
+    -> ename varchar(30) not null,
+    -> price decimal(11,2) default 100,
+    -> qty int check(qty>10),
+    -> passportnum int unique,
+    -> adharnum int unique not null)
+    -> ;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc myemployee;
++-------------+---------------+------+-----+---------+-------+
+| Field       | Type          | Null | Key | Default | Extra |
++-------------+---------------+------+-----+---------+-------+
+| empid       | int           | NO   | PRI | NULL    |       |
+| ename       | varchar(30)   | NO   |     | NULL    |       |
+| price       | decimal(11,2) | YES  |     | 100.00  |       |
+| qty         | int           | YES  |     | NULL    |       |
+| passportnum | int           | YES  | UNI | NULL    |       |
+| adharnum    | int           | NO   | UNI | NULL    |       |
++-------------+---------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> insert into myemployee values(10,'Kishori',1234,34,123454,11111);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into myemployee values(10,'Savita',2345,56,1234541,111111);
+ERROR 1062 (23000): Duplicate entry '10' for key 'myemployee.PRIMARY'
+mysql> insert into myemployee values(11,'Savita',2345,56,1234541,111111);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into myemployee values(12,'Vivekanand',23452,9,1234521,111131);
+ERROR 3819 (HY000): Check constraint 'myemployee_chk_1' is violated.
+mysql> insert into myemployee values(12,'Vivekanand',23452,11,1234521,111131);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into myemployee values(13,'Chetan',23452,11,1234521,111141);
+ERROR 1062 (23000): Duplicate entry '1234521' for key 'myemployee.passportnum'
+mysql> insert into myemployee values(13,'Chetan',23452,11,12345222,111141);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into myemployee values(14,'Neha',23452,11,123452213,111141);
+ERROR 1062 (23000): Duplicate entry '111141' for key 'myemployee.adharnum'
+mysql> select * from myemplyee;
+ERROR 1146 (42S02): Table 'iacsdedacmay21.myemplyee' doesn't exist
+mysql> select * from myemployee;
++-------+------------+----------+------+-------------+----------+
+| empid | ename      | price    | qty  | passportnum | adharnum |
++-------+------------+----------+------+-------------+----------+
+|    10 | Kishori    |  1234.00 |   34 |      123454 |    11111 |
+|    11 | Savita     |  2345.00 |   56 |     1234541 |   111111 |
+|    12 | Vivekanand | 23452.00 |   11 |     1234521 |   111131 |
+|    13 | Chetan     | 23452.00 |   11 |    12345222 |   111141 |
++-------+------------+----------+------+-------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> insert into myemployee(empid,ename,qty,adharnum) values(14,'Neha',11,111143);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from myemployee;
++-------+------------+----------+------+-------------+----------+
+| empid | ename      | price    | qty  | passportnum | adharnum |
++-------+------------+----------+------+-------------+----------+
+|    10 | Kishori    |  1234.00 |   34 |      123454 |    11111 |
+|    11 | Savita     |  2345.00 |   56 |     1234541 |   111111 |
+|    12 | Vivekanand | 23452.00 |   11 |     1234521 |   111131 |
+|    13 | Chetan     | 23452.00 |   11 |    12345222 |   111141 |
+|    14 | Neha       |   100.00 |   11 |        NULL |   111143 |
++-------+------------+----------+------+-------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> insert into myemployee(empid,qty,adharnum) values(15,11,111143);
+ERROR 1364 (HY000): Field 'ename' doesn't have a default value
+mysql> create table category(catid int,
+    -> cname varchar(20) not null,
+    -> desc varchar(20),
+    -> primary key(catid));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc varchar(20),
+primary key(catid))' at line 3
+mysql> create table category(catid int,
+    -> cname varchar(20) not null,
+    -> description varchar(20),
+    -> primary key(catid));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table product(
+    -> pid int primary key,
+    -> pname varchar(20) not null,
+    -> qty int check(qty>0),
+    -> price decimal(11,2) check(price>0),
+    -> cid int,
+    -> foreign key fk_cid(cid) references category(catid)
+    -> on delete set null
+    -> on update cascade)
+    -> ;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc product;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| pid   | int           | NO   | PRI | NULL    |       |
+| pname | varchar(20)   | NO   |     | NULL    |       |
+| qty   | int           | YES  |     | NULL    |       |
+| price | decimal(11,2) | YES  |     | NULL    |       |
+| cid   | int           | YES  | MUL | NULL    |       |
++-------+---------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into product(12,'xxx',12,234.00,1);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '12,'xxx',12,234.00,1)' at line 1
+mysql> insert into product values(12,'xxx',12,234.00,1);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`iacsdedacmay21`.`product`, CONSTRAINT `product_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `category` (`catid`) ON DELETE SET NULL ON UPDATE CASCADE)
+mysql> insert into category values(1,'chips','very crispy');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into category values(2,'biscuits','very sweet');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from category;
++-------+----------+-------------+
+| catid | cname    | description |
++-------+----------+-------------+
+|     1 | chips    | very crispy |
+|     2 | biscuits | very sweet  |
++-------+----------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into product values(12,'lays',12,40.00,1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values(13,'marie',12,20.00,2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from product;
++-----+-------+------+-------+------+
+| pid | pname | qty  | price | cid  |
++-----+-------+------+-------+------+
+|  12 | lays  |   12 | 40.00 |    1 |
+|  13 | marie |   12 | 20.00 |    2 |
++-----+-------+------+-------+------+
+2 rows in set (0.00 sec)
+
+mysql> insert into product values(13,'marie',12,20.00,3);
+ERROR 1062 (23000): Duplicate entry '13' for key 'product.PRIMARY'
+mysql> insert into product values(14,'glucose',12,20.00,3);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`iacsdedacmay21`.`product`, CONSTRAINT `product_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `category` (`catid`) ON DELETE SET NULL ON UPDATE CASCADE)
+mysql> insert into product values(14,'glucose',12,20.00,2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from category;
++-------+----------+-------------+
+| catid | cname    | description |
++-------+----------+-------------+
+|     1 | chips    | very crispy |
+|     2 | biscuits | very sweet  |
++-------+----------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from product;
++-----+---------+------+-------+------+
+| pid | pname   | qty  | price | cid  |
++-----+---------+------+-------+------+
+|  12 | lays    |   12 | 40.00 |    1 |
+|  13 | marie   |   12 | 20.00 |    2 |
+|  14 | glucose |   12 | 20.00 |    2 |
++-----+---------+------+-------+------+
+3 rows in set (0.00 sec)
+
+mysql> insert into product values(15,'pringles',12,20.00,1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from category;
++-------+----------+-------------+
+| catid | cname    | description |
++-------+----------+-------------+
+|     1 | chips    | very crispy |
+|     2 | biscuits | very sweet  |
++-------+----------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from product;
++-----+----------+------+-------+------+
+| pid | pname    | qty  | price | cid  |
++-----+----------+------+-------+------+
+|  12 | lays     |   12 | 40.00 |    1 |
+|  13 | marie    |   12 | 20.00 |    2 |
+|  14 | glucose  |   12 | 20.00 |    2 |
+|  15 | pringles |   12 | 20.00 |    1 |
++-----+----------+------+-------+------+
+4 rows in set (0.00 sec)
+
+mysql> update category
+    -> set cid=100
+    -> ^C
+mysql> update category
+    -> set catid=100
+    -> where catid=1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from category;
++-------+----------+-------------+
+| catid | cname    | description |
++-------+----------+-------------+
+|     2 | biscuits | very sweet  |
+|   100 | chips    | very crispy |
++-------+----------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from product;
++-----+----------+------+-------+------+
+| pid | pname    | qty  | price | cid  |
++-----+----------+------+-------+------+
+|  12 | lays     |   12 | 40.00 |  100 |
+|  13 | marie    |   12 | 20.00 |    2 |
+|  14 | glucose  |   12 | 20.00 |    2 |
+|  15 | pringles |   12 | 20.00 |  100 |
++-----+----------+------+-------+------+
+4 rows in set (0.00 sec)
+
+mysql> delete from category
+    -> where catid=2;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from category;
++-------+-------+-------------+
+| catid | cname | description |
++-------+-------+-------------+
+|   100 | chips | very crispy |
++-------+-------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from product;
++-----+----------+------+-------+------+
+| pid | pname    | qty  | price | cid  |
++-----+----------+------+-------+------+
+|  12 | lays     |   12 | 40.00 |  100 |
+|  13 | marie    |   12 | 20.00 | NULL |
+|  14 | glucose  |   12 | 20.00 | NULL |
+|  15 | pringles |   12 | 20.00 |  100 |
++-----+----------+------+-------+------+
+4 rows in set (0.00 sec)
+
+mysql> insert into category values(2,'biscuits','very sweet');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into category values(3,'snacks','very sweet');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values(16,'nachos',12,20.00,100);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values(17,'hide and seek',12,20.00,2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from category;
++-------+----------+-------------+
+| catid | cname    | description |
++-------+----------+-------------+
+|     2 | biscuits | very sweet  |
+|     3 | snacks   | very sweet  |
+|   100 | chips    | very crispy |
++-------+----------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from product;
++-----+---------------+------+-------+------+
+| pid | pname         | qty  | price | cid  |
++-----+---------------+------+-------+------+
+|  12 | lays          |   12 | 40.00 |  100 |
+|  13 | marie         |   12 | 20.00 | NULL |
+|  14 | glucose       |   12 | 20.00 | NULL |
+|  15 | pringles      |   12 | 20.00 |  100 |
+|  16 | nachos        |   12 | 20.00 |  100 |
+|  17 | hide and seek |   12 | 20.00 |    2 |
++-----+---------------+------+-------+------+
+6 rows in set (0.00 sec)
+
+mysql> delete from category where catid=2;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from product;
++-----+---------------+------+-------+------+
+| pid | pname         | qty  | price | cid  |
++-----+---------------+------+-------+------+
+|  12 | lays          |   12 | 40.00 |  100 |
+|  13 | marie         |   12 | 20.00 | NULL |
+|  14 | glucose       |   12 | 20.00 | NULL |
+|  15 | pringles      |   12 | 20.00 |  100 |
+|  16 | nachos        |   12 | 20.00 |  100 |
+|  17 | hide and seek |   12 | 20.00 | NULL |
++-----+---------------+------+-------+------+
+6 rows in set (0.00 sec)
+
+mysql> update category
+    -> set catid=10
+    -> where catid=100;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from product;
++-----+---------------+------+-------+------+
+| pid | pname         | qty  | price | cid  |
++-----+---------------+------+-------+------+
+|  12 | lays          |   12 | 40.00 |   10 |
+|  13 | marie         |   12 | 20.00 | NULL |
+|  14 | glucose       |   12 | 20.00 | NULL |
+|  15 | pringles      |   12 | 20.00 |   10 |
+|  16 | nachos        |   12 | 20.00 |   10 |
+|  17 | hide and seek |   12 | 20.00 | NULL |
++-----+---------------+------+-------+------+
+6 rows in set (0.00 sec)
+
+mysql> select * from category;
++-------+--------+-------------+
+| catid | cname  | description |
++-------+--------+-------------+
+|     3 | snacks | very sweet  |
+|    10 | chips  | very crispy |
++-------+--------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> update product
+    -> set cid=3
+    -> where cid is null;
+Query OK, 3 rows affected (0.00 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from product;
++-----+---------------+------+-------+------+
+| pid | pname         | qty  | price | cid  |
++-----+---------------+------+-------+------+
+|  12 | lays          |   12 | 40.00 |   10 |
+|  13 | marie         |   12 | 20.00 |    3 |
+|  14 | glucose       |   12 | 20.00 |    3 |
+|  15 | pringles      |   12 | 20.00 |   10 |
+|  16 | nachos        |   12 | 20.00 |   10 |
+|  17 | hide and seek |   12 | 20.00 |    3 |
++-----+---------------+------+-------+------+
+6 rows in set (0.00 sec)
+
+mysql>

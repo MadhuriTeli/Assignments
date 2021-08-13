@@ -1,0 +1,12 @@
+create or replace trigger bk_std
+after delete 
+on student
+for each row
+begin
+
+dbms_output.put_line('---trigger run ---');
+
+insert into bk_student values (:old.sno,:old.sname,:old.city);
+
+end;
+/

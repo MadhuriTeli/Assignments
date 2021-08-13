@@ -1,0 +1,621 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 8.0.22 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use iacsdedacmay21
+Database changed
+mysql> select date_add(date_add(date_add(curdate(),interval 2 year),interval 4 month),interval 2 day);
++-----------------------------------------------------------------------------------------+
+| date_add(date_add(date_add(curdate(),interval 2 year),interval 4 month),interval 2 day) |
++-----------------------------------------------------------------------------------------+
+| 2023-11-03                                                                              |
++-----------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_sub(curdate(),interval 2 month)
+    -> ;
++--------------------------------------+
+| date_sub(curdate(),interval 2 month) |
++--------------------------------------+
+| 2021-05-01                           |
++--------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select year(curdate())
+    -> ;
++-----------------+
+| year(curdate()) |
++-----------------+
+|            2021 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select month(curdate())
+    -> ;
++------------------+
+| month(curdate()) |
++------------------+
+|                7 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select day(curdate());
++----------------+
+| day(curdate()) |
++----------------+
+|              1 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select quarter(curdate());
++--------------------+
+| quarter(curdate()) |
++--------------------+
+|                  3 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select weekday(curdate());
++--------------------+
+| weekday(curdate()) |
++--------------------+
+|                  3 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select weekofyear(curdate());
++-----------------------+
+| weekofyear(curdate()) |
++-----------------------+
+|                    26 |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> select empno,ename,hiredate,year(hiredate0
+    -> from emp
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from emp' at line 2
+mysql> select empno,ename,hiredate,year(hiredate)
+    -> from emp;
++-------+--------+------------+----------------+
+| empno | ename  | hiredate   | year(hiredate) |
++-------+--------+------------+----------------+
+|  7369 | SMITH  | 1980-12-17 |           1980 |
+|  7499 | ALLEN  | 1981-02-20 |           1981 |
+|  7521 | WARD   | 1981-02-22 |           1981 |
+|  7566 | JONES  | 1981-04-02 |           1981 |
+|  7654 | MARTIN | 1981-09-28 |           1981 |
+|  7698 | BLAKE  | 1981-05-01 |           1981 |
+|  7782 | CLARK  | 1981-06-09 |           1981 |
+|  7788 | SCOTT  | 1982-12-09 |           1982 |
+|  7839 | KING   | 1981-11-17 |           1981 |
+|  7844 | TURNER | 1981-09-08 |           1981 |
+|  7876 | ADAMS  | 1983-01-12 |           1983 |
+|  7900 | JAMES  | 1981-12-03 |           1981 |
+|  7902 | FORD   | 1981-12-03 |           1981 |
+|  7934 | MILLER | 1982-01-23 |           1982 |
++-------+--------+------------+----------------+
+14 rows in set (0.00 sec)
+
+mysql> select empno,ename,hiredate,year(hiredate)
+    -> from emp
+    -> where year(hiredate)=1981;
++-------+--------+------------+----------------+
+| empno | ename  | hiredate   | year(hiredate) |
++-------+--------+------------+----------------+
+|  7499 | ALLEN  | 1981-02-20 |           1981 |
+|  7521 | WARD   | 1981-02-22 |           1981 |
+|  7566 | JONES  | 1981-04-02 |           1981 |
+|  7654 | MARTIN | 1981-09-28 |           1981 |
+|  7698 | BLAKE  | 1981-05-01 |           1981 |
+|  7782 | CLARK  | 1981-06-09 |           1981 |
+|  7839 | KING   | 1981-11-17 |           1981 |
+|  7844 | TURNER | 1981-09-08 |           1981 |
+|  7900 | JAMES  | 1981-12-03 |           1981 |
+|  7902 | FORD   | 1981-12-03 |           1981 |
++-------+--------+------------+----------------+
+10 rows in set (0.00 sec)
+
+mysql> select empno,ename,hiredate
+    ->   from emp
+    ->   where month(hiredate) in (8,9)
+    -> ;
++-------+--------+------------+
+| empno | ename  | hiredate   |
++-------+--------+------------+
+|  7654 | MARTIN | 1981-09-28 |
+|  7844 | TURNER | 1981-09-08 |
++-------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select empno,ename,hiredate
+    ->   from emp
+    ->   where month(hiredate) in (6,9);
++-------+--------+------------+
+| empno | ename  | hiredate   |
++-------+--------+------------+
+|  7654 | MARTIN | 1981-09-28 |
+|  7782 | CLARK  | 1981-06-09 |
+|  7844 | TURNER | 1981-09-08 |
++-------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select weekday('2000-12-31'),week('2000-12-31'),weekofyear('2000-12-31')
+    -> ;
++-----------------------+--------------------+--------------------------+
+| weekday('2000-12-31') | week('2000-12-31') | weekofyear('2000-12-31') |
++-----------------------+--------------------+--------------------------+
+|                     6 |                 53 |                       52 |
++-----------------------+--------------------+--------------------------+
+1 row in set (0.00 sec)
+
+mysql> select year(curdate()),extract(year from curdate());
++-----------------+------------------------------+
+| year(curdate()) | extract(year from curdate()) |
++-----------------+------------------------------+
+|            2021 |                         2021 |
++-----------------+------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select month(curdate()),extract(month from curdate());
++------------------+-------------------------------+
+| month(curdate()) | extract(month from curdate()) |
++------------------+-------------------------------+
+|                7 |                             7 |
++------------------+-------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(curdate(),'%M');
++-----------------------------+
+| date_format(curdate(),'%M') |
++-----------------------------+
+| July                        |
++-----------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(curdate(),'%M'),monthname(curdate())
+    -> ;
++-----------------------------+----------------------+
+| date_format(curdate(),'%M') | monthname(curdate()) |
++-----------------------------+----------------------+
+| July                        | July                 |
++-----------------------------+----------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(curdate(),'%M'),monthname(curdate()),dayname(cutdate())
+    -> ;
+ERROR 1305 (42000): FUNCTION iacsdedacmay21.cutdate does not exist
+mysql> select date_format(curdate(),'%M'),monthname(curdate()),dayname(curdate())
+    -> ;
++-----------------------------+----------------------+--------------------+
+| date_format(curdate(),'%M') | monthname(curdate()) | dayname(curdate()) |
++-----------------------------+----------------------+--------------------+
+| July                        | July                 | Thursday           |
++-----------------------------+----------------------+--------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from emp;
++-------+--------+-----------+------+------------+---------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+14 rows in set (0.00 sec)
+
+mysql> insert into emp values(123,'Rajan','designer',7902,'2020-12-10',34567,3456,10);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp values(124,'Revati','designer',7902,'1999-12-10',34567,3456,20);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from emp;
++-------+--------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+----------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |   800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 |  1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 |  2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 |  1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 |  2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 |  2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 |  3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 |  5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 |  1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 |  1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |   950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 |  3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 |  1300.00 |    NULL |     10 |
+|   123 | Rajan  | designer  | 7902 | 2020-12-10 | 34567.00 | 3456.00 |     10 |
+|   124 | Revati | designer  | 7902 | 1999-12-10 | 34567.00 | 3456.00 |     20 |
++-------+--------+-----------+------+------------+----------+---------+--------+
+16 rows in set (0.00 sec)
+
+mysql> select *
+    -> from emp
+    -> where year(hiredate)=year(curdate())-2;
+Empty set (0.00 sec)
+
+mysql> select empno,ename,hiredate,year(hiredate),year(curdate)
+    -> from emp;
+ERROR 1054 (42S22): Unknown column 'curdate' in 'field list'
+mysql> select empno,ename,hiredate,year(hiredate),year(curdate())
+    -> from emp;
++-------+--------+------------+----------------+-----------------+
+| empno | ename  | hiredate   | year(hiredate) | year(curdate()) |
++-------+--------+------------+----------------+-----------------+
+|  7369 | SMITH  | 1980-12-17 |           1980 |            2021 |
+|  7499 | ALLEN  | 1981-02-20 |           1981 |            2021 |
+|  7521 | WARD   | 1981-02-22 |           1981 |            2021 |
+|  7566 | JONES  | 1981-04-02 |           1981 |            2021 |
+|  7654 | MARTIN | 1981-09-28 |           1981 |            2021 |
+|  7698 | BLAKE  | 1981-05-01 |           1981 |            2021 |
+|  7782 | CLARK  | 1981-06-09 |           1981 |            2021 |
+|  7788 | SCOTT  | 1982-12-09 |           1982 |            2021 |
+|  7839 | KING   | 1981-11-17 |           1981 |            2021 |
+|  7844 | TURNER | 1981-09-08 |           1981 |            2021 |
+|  7876 | ADAMS  | 1983-01-12 |           1983 |            2021 |
+|  7900 | JAMES  | 1981-12-03 |           1981 |            2021 |
+|  7902 | FORD   | 1981-12-03 |           1981 |            2021 |
+|  7934 | MILLER | 1982-01-23 |           1982 |            2021 |
+|   123 | Rajan  | 2020-12-10 |           2020 |            2021 |
+|   124 | Revati | 1999-12-10 |           1999 |            2021 |
++-------+--------+------------+----------------+-----------------+
+16 rows in set (0.00 sec)
+
+mysql> insert into emp values(125,'Anil','designer',7902,'2019-12-10',34567,3456,20);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select empno,ename,hiredate,year(hiredate),year(curdate())
+    -> from emp;
++-------+--------+------------+----------------+-----------------+
+| empno | ename  | hiredate   | year(hiredate) | year(curdate()) |
++-------+--------+------------+----------------+-----------------+
+|  7369 | SMITH  | 1980-12-17 |           1980 |            2021 |
+|  7499 | ALLEN  | 1981-02-20 |           1981 |            2021 |
+|  7521 | WARD   | 1981-02-22 |           1981 |            2021 |
+|  7566 | JONES  | 1981-04-02 |           1981 |            2021 |
+|  7654 | MARTIN | 1981-09-28 |           1981 |            2021 |
+|  7698 | BLAKE  | 1981-05-01 |           1981 |            2021 |
+|  7782 | CLARK  | 1981-06-09 |           1981 |            2021 |
+|  7788 | SCOTT  | 1982-12-09 |           1982 |            2021 |
+|  7839 | KING   | 1981-11-17 |           1981 |            2021 |
+|  7844 | TURNER | 1981-09-08 |           1981 |            2021 |
+|  7876 | ADAMS  | 1983-01-12 |           1983 |            2021 |
+|  7900 | JAMES  | 1981-12-03 |           1981 |            2021 |
+|  7902 | FORD   | 1981-12-03 |           1981 |            2021 |
+|  7934 | MILLER | 1982-01-23 |           1982 |            2021 |
+|   123 | Rajan  | 2020-12-10 |           2020 |            2021 |
+|   124 | Revati | 1999-12-10 |           1999 |            2021 |
+|   125 | Anil   | 2019-12-10 |           2019 |            2021 |
++-------+--------+------------+----------------+-----------------+
+17 rows in set (0.00 sec)
+
+mysql> select empno,ename,hiredate,year(hiredate),year(curdate())
+    -> from emp
+    -> where year(hiredate)=year(curdate())-2;
++-------+-------+------------+----------------+-----------------+
+| empno | ename | hiredate   | year(hiredate) | year(curdate()) |
++-------+-------+------------+----------------+-----------------+
+|   125 | Anil  | 2019-12-10 |           2019 |            2021 |
++-------+-------+------------+----------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> set autocommit=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into emp values(125,'Anil11111','designer',7902,'2019-12-10',34567,3456,20);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from mep;
+ERROR 1146 (42S02): Table 'iacsdedacmay21.mep' doesn't exist
+mysql> select * from emp;
++-------+-----------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME     | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+-----------+-----------+------+------------+----------+---------+--------+
+|  7369 | SMITH     | CLERK     | 7902 | 1980-12-17 |   800.00 |    NULL |     20 |
+|  7499 | ALLEN     | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD      | SALESMAN  | 7698 | 1981-02-22 |  1250.00 |  500.00 |     30 |
+|  7566 | JONES     | MANAGER   | 7839 | 1981-04-02 |  2975.00 |    NULL |     20 |
+|  7654 | MARTIN    | SALESMAN  | 7698 | 1981-09-28 |  1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE     | MANAGER   | 7839 | 1981-05-01 |  2850.00 |    NULL |     30 |
+|  7782 | CLARK     | MANAGER   | 7839 | 1981-06-09 |  2450.00 |    NULL |     10 |
+|  7788 | SCOTT     | ANALYST   | 7566 | 1982-12-09 |  3000.00 |    NULL |     20 |
+|  7839 | KING      | PRESIDENT | NULL | 1981-11-17 |  5000.00 |    NULL |     10 |
+|  7844 | TURNER    | SALESMAN  | 7698 | 1981-09-08 |  1500.00 |    0.00 |     30 |
+|  7876 | ADAMS     | CLERK     | 7788 | 1983-01-12 |  1100.00 |    NULL |     20 |
+|  7900 | JAMES     | CLERK     | 7698 | 1981-12-03 |   950.00 |    NULL |     30 |
+|  7902 | FORD      | ANALYST   | 7566 | 1981-12-03 |  3000.00 |    NULL |     20 |
+|  7934 | MILLER    | CLERK     | 7782 | 1982-01-23 |  1300.00 |    NULL |     10 |
+|   123 | Rajan     | designer  | 7902 | 2020-12-10 | 34567.00 | 3456.00 |     10 |
+|   124 | Revati    | designer  | 7902 | 1999-12-10 | 34567.00 | 3456.00 |     20 |
+|   125 | Anil      | designer  | 7902 | 2019-12-10 | 34567.00 | 3456.00 |     20 |
+|   125 | Anil11111 | designer  | 7902 | 2019-12-10 | 34567.00 | 3456.00 |     20 |
++-------+-----------+-----------+------+------------+----------+---------+--------+
+18 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from emp;
++-------+--------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+----------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |   800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 |  1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 |  2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 |  1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 |  2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 |  2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 |  3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 |  5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 |  1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 |  1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |   950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 |  3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 |  1300.00 |    NULL |     10 |
+|   123 | Rajan  | designer  | 7902 | 2020-12-10 | 34567.00 | 3456.00 |     10 |
+|   124 | Revati | designer  | 7902 | 1999-12-10 | 34567.00 | 3456.00 |     20 |
+|   125 | Anil   | designer  | 7902 | 2019-12-10 | 34567.00 | 3456.00 |     20 |
++-------+--------+-----------+------+------------+----------+---------+--------+
+17 rows in set (0.00 sec)
+
+mysql> insert into emp values(125,'Anil11111','designer',7902,'2019-12-10',34567,3456,20);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from emp;
++-------+-----------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME     | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+-----------+-----------+------+------------+----------+---------+--------+
+|  7369 | SMITH     | CLERK     | 7902 | 1980-12-17 |   800.00 |    NULL |     20 |
+|  7499 | ALLEN     | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD      | SALESMAN  | 7698 | 1981-02-22 |  1250.00 |  500.00 |     30 |
+|  7566 | JONES     | MANAGER   | 7839 | 1981-04-02 |  2975.00 |    NULL |     20 |
+|  7654 | MARTIN    | SALESMAN  | 7698 | 1981-09-28 |  1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE     | MANAGER   | 7839 | 1981-05-01 |  2850.00 |    NULL |     30 |
+|  7782 | CLARK     | MANAGER   | 7839 | 1981-06-09 |  2450.00 |    NULL |     10 |
+|  7788 | SCOTT     | ANALYST   | 7566 | 1982-12-09 |  3000.00 |    NULL |     20 |
+|  7839 | KING      | PRESIDENT | NULL | 1981-11-17 |  5000.00 |    NULL |     10 |
+|  7844 | TURNER    | SALESMAN  | 7698 | 1981-09-08 |  1500.00 |    0.00 |     30 |
+|  7876 | ADAMS     | CLERK     | 7788 | 1983-01-12 |  1100.00 |    NULL |     20 |
+|  7900 | JAMES     | CLERK     | 7698 | 1981-12-03 |   950.00 |    NULL |     30 |
+|  7902 | FORD      | ANALYST   | 7566 | 1981-12-03 |  3000.00 |    NULL |     20 |
+|  7934 | MILLER    | CLERK     | 7782 | 1982-01-23 |  1300.00 |    NULL |     10 |
+|   123 | Rajan     | designer  | 7902 | 2020-12-10 | 34567.00 | 3456.00 |     10 |
+|   124 | Revati    | designer  | 7902 | 1999-12-10 | 34567.00 | 3456.00 |     20 |
+|   125 | Anil      | designer  | 7902 | 2019-12-10 | 34567.00 | 3456.00 |     20 |
+|   125 | Anil11111 | designer  | 7902 | 2019-12-10 | 34567.00 | 3456.00 |     20 |
++-------+-----------+-----------+------+------------+----------+---------+--------+
+18 rows in set (0.00 sec)
+
+mysql> set autocommit=1
+    -> ;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from emp
+    -> where ename='Anil11111';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from emp;
++-------+--------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+----------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |   800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 |  1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 |  2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 |  1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 |  2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 |  2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 |  3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 |  5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 |  1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 |  1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |   950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 |  3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 |  1300.00 |    NULL |     10 |
+|   123 | Rajan  | designer  | 7902 | 2020-12-10 | 34567.00 | 3456.00 |     10 |
+|   124 | Revati | designer  | 7902 | 1999-12-10 | 34567.00 | 3456.00 |     20 |
+|   125 | Anil   | designer  | 7902 | 2019-12-10 | 34567.00 | 3456.00 |     20 |
++-------+--------+-----------+------+------------+----------+---------+--------+
+17 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from emp;
++-------+--------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+----------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |   800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 |  1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 |  2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 |  1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 |  2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 |  2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 |  3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 |  5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 |  1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 |  1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |   950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 |  3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 |  1300.00 |    NULL |     10 |
+|   123 | Rajan  | designer  | 7902 | 2020-12-10 | 34567.00 | 3456.00 |     10 |
+|   124 | Revati | designer  | 7902 | 1999-12-10 | 34567.00 | 3456.00 |     20 |
+|   125 | Anil   | designer  | 7902 | 2019-12-10 | 34567.00 | 3456.00 |     20 |
++-------+--------+-----------+------+------------+----------+---------+--------+
+17 rows in set (0.00 sec)
+
+mysql> set autocommit=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from emp
+    -> where ename='Anil'
+    -> ;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from emp;
++-------+--------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+----------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |   800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 |  1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 |  2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 |  1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 |  2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 |  2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 |  3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 |  5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 |  1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 |  1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |   950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 |  3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 |  1300.00 |    NULL |     10 |
+|   123 | Rajan  | designer  | 7902 | 2020-12-10 | 34567.00 | 3456.00 |     10 |
+|   124 | Revati | designer  | 7902 | 1999-12-10 | 34567.00 | 3456.00 |     20 |
++-------+--------+-----------+------+------------+----------+---------+--------+
+16 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from emp;
++-------+--------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+----------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |   800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 |  1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 |  2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 |  1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 |  2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 |  2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 |  3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 |  5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 |  1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 |  1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |   950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 |  3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 |  1300.00 |    NULL |     10 |
+|   123 | Rajan  | designer  | 7902 | 2020-12-10 | 34567.00 | 3456.00 |     10 |
+|   124 | Revati | designer  | 7902 | 1999-12-10 | 34567.00 | 3456.00 |     20 |
+|   125 | Anil   | designer  | 7902 | 2019-12-10 | 34567.00 | 3456.00 |     20 |
++-------+--------+-----------+------+------------+----------+---------+--------+
+17 rows in set (0.00 sec)
+
+mysql> delete from emp
+    -> where ename='Anil'
+    -> ;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from emp;
++-------+--------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+----------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |   800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 |  1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 |  2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 |  1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 |  2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 |  2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 |  3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 |  5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 |  1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 |  1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |   950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 |  3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 |  1300.00 |    NULL |     10 |
+|   123 | Rajan  | designer  | 7902 | 2020-12-10 | 34567.00 | 3456.00 |     10 |
+|   124 | Revati | designer  | 7902 | 1999-12-10 | 34567.00 | 3456.00 |     20 |
++-------+--------+-----------+------+------------+----------+---------+--------+
+16 rows in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from emp;
++-------+--------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+----------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |   800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 |  1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 |  2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 |  1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 |  2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 |  2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 |  3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 |  5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 |  1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 |  1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |   950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 |  3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 |  1300.00 |    NULL |     10 |
+|   123 | Rajan  | designer  | 7902 | 2020-12-10 | 34567.00 | 3456.00 |     10 |
+|   124 | Revati | designer  | 7902 | 1999-12-10 | 34567.00 | 3456.00 |     20 |
++-------+--------+-----------+------+------------+----------+---------+--------+
+16 rows in set (0.00 sec)
+
+mysql> insert into emp(empno,ename,job,hiredate) values(125,'Anil','trader','2019-12-10');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from emp;
++-------+--------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+--------+-----------+------+------------+----------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |   800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 |  1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 |  2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 |  1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 |  2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 |  2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 |  3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 |  5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 |  1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 |  1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |   950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 |  3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 |  1300.00 |    NULL |     10 |
+|   123 | Rajan  | designer  | 7902 | 2020-12-10 | 34567.00 | 3456.00 |     10 |
+|   124 | Revati | designer  | 7902 | 1999-12-10 | 34567.00 | 3456.00 |     20 |
+|   125 | Anil   | trader    | NULL | 2019-12-10 |     NULL |    NULL |   NULL |
++-------+--------+-----------+------+------------+----------+---------+--------+
+17 rows in set (0.00 sec)
+
+mysql>

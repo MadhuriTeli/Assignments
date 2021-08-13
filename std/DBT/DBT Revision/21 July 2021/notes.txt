@@ -1,0 +1,19 @@
+-- to see the source code of trigger
+select text from user_source where name ='&trigger_name' and type ='TRIGGER';
+
+-- enable / disable a trigger
+ALTER TRIGGER trigger_name ENABLE;
+ALTER TRIGGER trigger_name DISABLE;
+
+-- enable / disable all triggers for a specific table
+ALTER TABLE table_name ENABLE ALL TRIGGERS;
+ALTER TABLE table_name DISABLE ALL TRIGGERS;
+
+select TRIGGER_NAME,TABLE_NAME from user_triggers;
+
+select procedure_name,object_name from user_procedures;
+
+select object_name,object_type from USER_objects 
+where object_type='PROCEDURE';
+
+drop trigger trigger_name;

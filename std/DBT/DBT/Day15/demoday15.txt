@@ -1,0 +1,579 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.22 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use iacsdedacmay21
+Database changed
+mysql> create function netsal(psal decimal(9,2)) returns decimal
+    -> begin
+    ->     declare vnetsal decimal(9,2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql>      set vnetsal=psal*0.1-psal*0.08+psal*0.15+psal;
+ERROR 1193 (HY000): Unknown system variable 'vnetsal'
+mysql>     return vnetsal;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'return vnetsal' at line 1
+mysql> end//
+    -> ^C
+mysql>
+mysql> delimiter //
+mysql> create function netsal(psal decimal(9,2)) returns decimal
+    -> begin
+    ->     declare vnetsal decimal(9,2);
+    ->      set vnetsal=psal*0.1-psal*0.08+psal*0.15+psal;
+    ->     return vnetsal;
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create function netsal(psal decimal(9,2)) returns decimal
+    ->     -> begin
+    ->     ->     declare vnetsal decimal(9,2);
+    ->     ->      set vnetsal=psal*0.1-psal*0.08+psal*0.15+psal;
+    ->     ->     return vnetsal;
+    ->     -> end//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> begin
+    ->     declare vnetsal decimal(9,2);
+    ->      set vnetsal=psal*0' at line 2
+mysql> select empno,ename,sal,netsal(sal)
+    -> from emp;
+    -> //
++-------+----------+----------+-------------+
+| empno | ename    | sal      | netsal(sal) |
++-------+----------+----------+-------------+
+|  7521 | WARD     |  2160.00 |        2527 |
+|  7844 | TURNER   |  2160.00 |        2527 |
+|   221 | Swapnali |  3974.40 |        4650 |
+|   222 | Swapnali |  3974.40 |        4650 |
+|   223 | Sonali   |  3975.55 |        4651 |
+|  7369 | SMITH    |  1300.00 |        1521 |
+|  7788 | SCOTT    |  3680.00 |        4306 |
+|   124 | Revati   | 46935.45 |       54914 |
+|     1 | Rajas_D  |  4131.60 |        4834 |
+|   123 | Rajan    | 47070.45 |       55072 |
+|  7934 | MILLER   |  2080.00 |        2434 |
+|  7654 | MARTIN   |  2160.00 |        2527 |
+|  7839 | KING     |  7155.00 |        8371 |
+|  7566 | JONES    |  3492.50 |        4086 |
+|  7900 | JAMES    |  2080.00 |        2434 |
+|  7902 | FORD     |  3680.00 |        4306 |
+|   111 | Devendra |     NULL |        NULL |
+|  7782 | CLARK    |  3025.00 |        3539 |
+|  7698 | BLAKE    |  1760.00 |        2059 |
+|  1111 | Ashwini  |  2696.75 |        3155 |
+|  7499 | ALLEN    |  2160.00 |        2527 |
+|  7876 | ADAMS    |  1690.00 |        1977 |
++-------+----------+----------+-------------+
+22 rows in set, 20 warnings (0.00 sec)
+
+mysql> create function getprformance(pcomm decimal(9,2)) returns varchar(20)
+    -> begin
+    -> declare vperform varchar(20) default '';
+    -> if  pcomm is null or pcomm=0 then
+    ->        set vperform='need improvement';
+    -> elseif pcomm < 300 then
+    ->          set vperform='ok';
+    -> elseif pcomm < 500 then
+    ->         set vperform='good'
+    -> else
+    ->         set vperform='Excellent'
+    -> end if;
+    -> return vperform;
+    ->  end//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'else
+        set vperform='Excellent'
+end if;
+return vperform;
+ end' at line 10
+mysql> create function getprformance(pcomm decimal(9,2)) returns varchar(20)
+    -> begin
+    -> declare vperform varchar(20) default '';
+    -> if  pcomm is null or pcomm=0 then
+    ->        set vperform='need improvement';
+    -> elseif pcomm < 300 then
+    ->          set vperform='ok';
+    -> elseif pcomm < 500 then
+    ->         set vperform='good';
+    -> else
+    ->         set vperform='Excellent';
+    -> end if;
+    -> return vperform;
+    ->  end//
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> create procedure display_empdata(in pdeptno int)
+    -> begin
+    -> select empno,ename,sal,comm, getprformance(comm)
+    -> from emp
+    -> where deptno=pdeptno;
+    ->
+    -> end//
+ERROR 1304 (42000): PROCEDURE display_empdata already exists
+mysql> create procedure display_empdetails(in pdeptno int)
+    -> begin
+    -> select empno,ename,sal,comm, getprformance(comm)
+    -> from emp
+    -> where deptno=pdeptno;
+    ->
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call display_empdetails(10);
+    -> //
++-------+----------+----------+---------+---------------------+
+| empno | ename    | sal      | comm    | getprformance(comm) |
++-------+----------+----------+---------+---------------------+
+|     1 | Rajas_D  |  4131.60 |  345.00 | good                |
+|   111 | Devendra |     NULL |    NULL | need improvement    |
+|   123 | Rajan    | 47070.45 | 3456.00 | Excellent           |
+|   222 | Swapnali |  3974.40 |    NULL | need improvement    |
+|   223 | Sonali   |  3975.55 |    NULL | need improvement    |
+|  7782 | CLARK    |  3025.00 |    NULL | need improvement    |
+|  7839 | KING     |  7155.00 |    NULL | need improvement    |
+|  7934 | MILLER   |  2080.00 |    NULL | need improvement    |
++-------+----------+----------+---------+---------------------+
+8 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table dept_audit(deptno int,
+    -> dname varchar(20),
+    -> username varchar(20),
+    -> dt_action datetime,
+    -> action)
+    -> ;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 5
+mysql> delimiter ;
+mysql> create table dept_audit(
+    -> deptno int,
+    -> dname varchar(20),
+    -> username varchar(20),
+    -> dt_action datetime,
+    -> action varchar(20))
+    -> ;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc dept_audit;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| deptno    | int         | YES  |     | NULL    |       |
+| dname     | varchar(20) | YES  |     | NULL    |       |
+| username  | varchar(20) | YES  |     | NULL    |       |
+| dt_action | datetime    | YES  |     | NULL    |       |
+| action    | varchar(20) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> select * from dept_audit;
+Empty set (0.00 sec)
+
+mysql> create trigger insert_dept before insert on dept
+    -> for each row
+    ->       insert into dept_audit values(NEW.deptno,New.dname,current_user(),now(),'insert');
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from dept;
++--------+------------+----------+
+| DEPTNO | DNAME      | LOC      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     21 | MYDEPT     | Chennai  |
+|     30 | SALES      | CHICAGO  |
+|     40 | OPERATIONS | BOSTON   |
++--------+------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> insert into dept values(50,'xxx','mumbai');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from dept;
++--------+------------+----------+
+| DEPTNO | DNAME      | LOC      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     21 | MYDEPT     | Chennai  |
+|     30 | SALES      | CHICAGO  |
+|     40 | OPERATIONS | BOSTON   |
+|     50 | xxx        | mumbai   |
++--------+------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from dept_audit;
++--------+-------+----------------+---------------------+--------+
+| deptno | dname | username       | dt_action           | action |
++--------+-------+----------------+---------------------+--------+
+|     50 | xxx   | root@localhost | 2021-07-15 10:08:20 | insert |
++--------+-------+----------------+---------------------+--------+
+1 row in set (0.00 sec)
+
+mysql> create trigger delete_dept before delete on dept
+    -> for each row
+    ->       insert into dept_audit values(OLD.deptno,OLD.dname,current_user(),now(),’delete’)
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?delete?)' at line 3
+mysql> create trigger delete_dept before delete on dept
+    -> for each row
+    ->       insert into dept_audit values(OLD.deptno,OLD.dname,current_user(),now(),'delete');
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into dept values(60,'yyyy','mumbai');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * dept_audit;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dept_audit' at line 1
+mysql> select * from dept_audit;
++--------+-------+----------------+---------------------+--------+
+| deptno | dname | username       | dt_action           | action |
++--------+-------+----------------+---------------------+--------+
+|     50 | xxx   | root@localhost | 2021-07-15 10:08:20 | insert |
+|     60 | yyyy  | root@localhost | 2021-07-15 10:22:03 | insert |
++--------+-------+----------------+---------------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> delete from dept
+    -> ^C
+mysql> select * from dept;
++--------+------------+----------+
+| DEPTNO | DNAME      | LOC      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     21 | MYDEPT     | Chennai  |
+|     30 | SALES      | CHICAGO  |
+|     40 | OPERATIONS | BOSTON   |
+|     50 | xxx        | mumbai   |
+|     60 | yyyy       | mumbai   |
++--------+------------+----------+
+7 rows in set (0.00 sec)
+
+mysql> delete from dept
+    -> where deptno>40;
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> select * from dept;
++--------+------------+----------+
+| DEPTNO | DNAME      | LOC      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     21 | MYDEPT     | Chennai  |
+|     30 | SALES      | CHICAGO  |
+|     40 | OPERATIONS | BOSTON   |
++--------+------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from dept_audit;
++--------+-------+----------------+---------------------+--------+
+| deptno | dname | username       | dt_action           | action |
++--------+-------+----------------+---------------------+--------+
+|     50 | xxx   | root@localhost | 2021-07-15 10:08:20 | insert |
+|     60 | yyyy  | root@localhost | 2021-07-15 10:22:03 | insert |
+|     50 | xxx   | root@localhost | 2021-07-15 10:23:41 | delete |
+|     60 | yyyy  | root@localhost | 2021-07-15 10:23:41 | delete |
++--------+-------+----------------+---------------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> root@localhost | 2021-07-15 10:23:41 | delete |
+    -> ^C
+mysql> create trigger update_dept before update on dept
+    -> for each row
+    ->       insert into dept_audit values(OLD.deptno,OLD.dname,current_user(),now(),'update')
+    ->
+    ->
+    -> ;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> update dept
+    -> set dname='newsales'
+    -> where deptno=30;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from dept;
++--------+------------+----------+
+| DEPTNO | DNAME      | LOC      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     21 | MYDEPT     | Chennai  |
+|     30 | newsales   | CHICAGO  |
+|     40 | OPERATIONS | BOSTON   |
++--------+------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from emp_dept;
+ERROR 1146 (42S02): Table 'iacsdedacmay21.emp_dept' doesn't exist
+mysql> select * from dept_audit;
++--------+-------+----------------+---------------------+--------+
+| deptno | dname | username       | dt_action           | action |
++--------+-------+----------------+---------------------+--------+
+|     50 | xxx   | root@localhost | 2021-07-15 10:08:20 | insert |
+|     60 | yyyy  | root@localhost | 2021-07-15 10:22:03 | insert |
+|     50 | xxx   | root@localhost | 2021-07-15 10:23:41 | delete |
+|     60 | yyyy  | root@localhost | 2021-07-15 10:23:41 | delete |
+|     30 | SALES | root@localhost | 2021-07-15 10:29:18 | update |
++--------+-------+----------------+---------------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> use test;
+Database changed
+mysql> select * from product;
++------+---------------+------+--------+------+
+| pid  | pname         | qty  | price  | cid  |
++------+---------------+------+--------+------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |
+|    3 | Pringles123   |   12 | 150.00 |    1 |
+|    4 | Marie gold    |   20 |  50.00 |    2 |
+|    5 | nice1234      |   35 |  45.00 |    2 |
+|    6 | good day123   |   45 |  60.00 |    2 |
+|   20 | Hide and seek |   45 |  40.00 |    2 |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |
+|  145 | bread         |   30 |  40.00 | NULL |
++------+---------------+------+--------+------+
+8 rows in set (0.00 sec)
+
+mysql> create table product_analysis
+    -> (pid int,
+    -> pname varchar(20),
+    -> oldrate  decimal(9,2),
+    -> newrate decimal(9,2),
+    -> uname varchar(20),
+    -> dt_time datetime,
+    -> action varchar(20));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create trigger update_pr after update on product
+    -> for each row
+    ->      insert into product_analysis values(OLD.pid,OLD.pname,OLD.price,,NEW.price,current_user(),now(),’update’)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',NEW.price,current_user(),now(),?update?)' at line 3
+mysql> create trigger update_pr after update on product
+    -> for each row
+    ->      insert into product_analysis values(OLD.pid,OLD.pname,OLD.price,NEW.price,current_user(),now(),'update');
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from product;
++------+---------------+------+--------+------+
+| pid  | pname         | qty  | price  | cid  |
++------+---------------+------+--------+------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |
+|    3 | Pringles123   |   12 | 150.00 |    1 |
+|    4 | Marie gold    |   20 |  50.00 |    2 |
+|    5 | nice1234      |   35 |  45.00 |    2 |
+|    6 | good day123   |   45 |  60.00 |    2 |
+|   20 | Hide and seek |   45 |  40.00 |    2 |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |
+|  145 | bread         |   30 |  40.00 | NULL |
++------+---------------+------+--------+------+
+8 rows in set (0.00 sec)
+
+mysql> update product
+    -> set price=100
+    -> where pid>100;
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from product_analysis;
++------+--------+---------+---------+----------------+---------------------+--------+
+| pid  | pname  | oldrate | newrate | uname          | dt_time             | action |
++------+--------+---------+---------+----------------+---------------------+--------+
+|  123 | sfgdfg |  123.00 |  100.00 | root@localhost | 2021-07-15 10:40:42 | update |
+|  145 | bread  |   40.00 |  100.00 | root@localhost | 2021-07-15 10:40:42 | update |
++------+--------+---------+---------+----------------+---------------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> desc product_analysis;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| pid     | int          | YES  |     | NULL    |       |
+| pname   | varchar(20)  | YES  |     | NULL    |       |
+| oldrate | decimal(9,2) | YES  |     | NULL    |       |
+| newrate | decimal(9,2) | YES  |     | NULL    |       |
+| uname   | varchar(20)  | YES  |     | NULL    |       |
+| dt_time | datetime     | YES  |     | NULL    |       |
+| action  | varchar(20)  | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> create trigger insert_product before insert on product
+    -> for each row
+    ->     insert into product_analysis(pid,pname,newrate,uname,dt_time,'insert');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''insert')' at line 3
+mysql> create trigger insert_product before insert on product
+    -> for each row
+    ->     insert into product_analysis(pid,pname,newrate,uname,dt_time,action) values(NEW.pid,NEW.pname,NEW.rate,current_user(),now(),'insert');
+ERROR 1054 (42S22): Unknown column 'rate' in 'NEW'
+mysql> create trigger insert_product before insert on product
+    -> for each row
+    ->     insert into product_analysis(pid,pname,newrate,uname,dt_time,action) values(NEW.pid,NEW.pname,NEW.price,current_user(),now(),'insert');
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into product values(111,'xxx',30,20.00,1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from product_analysis;
++------+--------+---------+---------+----------------+---------------------+--------+
+| pid  | pname  | oldrate | newrate | uname          | dt_time             | action |
++------+--------+---------+---------+----------------+---------------------+--------+
+|  123 | sfgdfg |  123.00 |  100.00 | root@localhost | 2021-07-15 10:40:42 | update |
+|  145 | bread  |   40.00 |  100.00 | root@localhost | 2021-07-15 10:40:42 | update |
+|  111 | xxx    |    NULL |   20.00 | root@localhost | 2021-07-15 10:55:14 | insert |
++------+--------+---------+---------+----------------+---------------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> desc price
+    -> ;
+ERROR 1146 (42S02): Table 'test.price' doesn't exist
+mysql> desc product;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| pid   | int          | YES  |     | NULL    |       |
+| pname | varchar(25)  | YES  |     | NULL    |       |
+| qty   | int          | YES  |     | NULL    |       |
+| price | decimal(9,2) | YES  |     | NULL    |       |
+| cid   | int          | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_test   |
++------------------+
+| address          |
+| addressmany      |
+| addressmany1     |
+| category         |
+| custtab1         |
+| custtab11        |
+| emptab1          |
+| emptab11         |
+| myemployee       |
+| myprod11         |
+| myproduct        |
+| myuser           |
+| myuser12         |
+| orderitem        |
+| persontab        |
+| pertab11         |
+| product          |
+| product_analysis |
+| quetions         |
+| student          |
+| user             |
+| useraddress      |
+| userentity       |
+| usermany         |
+| usermany1        |
++------------------+
+25 rows in set (0.02 sec)
+
+mysql> desc userentity;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| uid    | int          | NO   | PRI | NULL    |       |
+| uname  | varchar(255) | YES  |     | NULL    |       |
+| addrid | int          | YES  | MUL | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from userentity;
+Empty set (0.01 sec)
+
+mysql> insert into userentity(111,'xxx',1)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '111,'xxx',1)' at line 1
+mysql> insert into userentity values(111,'xxx',1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into userentity values(111,'xxx',1);
+ERROR 1062 (23000): Duplicate entry '111' for key 'userentity.PRIMARY'
+mysql> insert into userentity values(111,3333,1);
+ERROR 1062 (23000): Duplicate entry '111' for key 'userentity.PRIMARY'
+mysql> insert into userentity values(112,3333,1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into userentity values('345',3333,1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into userentity values('xxxx',3333,1);
+ERROR 1366 (HY000): Incorrect integer value: 'xxxx' for column 'uid' at row 1
+mysql> create procedure inset_userentityt(puid int,puname varchar(20),paddrid int)
+    -> begin
+    -> ^C
+mysql> delimiter //
+mysql> create procedure inset_userentityt(puid int,puname varchar(20),paddrid int)
+    -> begin
+    -> declare continue handler for SQLEXCEPTION select 'error occured'
+    ->   insert into userentity values(puid,puname,paddrid);
+    -> select 'done';
+    -> end//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'insert into userentity values(puid,puname,paddrid);
+select 'done';
+end' at line 4
+mysql> create procedure insert_userentityt(puid int,puname varchar(20),paddrid int)
+    -> begin
+    -> declare continue handler for SQLEXCEPTION select 'error occured';
+    ->   insert into userentity values(puid,puname,paddrid);
+    -> select 'done';
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into userentity values(112,3333,1);
+    -> //
+ERROR 1062 (23000): Duplicate entry '112' for key 'userentity.PRIMARY'
+mysql> call insert_userentity(112,'xxx',1);
+    -> //
+ERROR 1305 (42000): PROCEDURE test.insert_userentity does not exist
+mysql> call insert_userentityt(112,'xxx',1);
+    -> //
++---------------+
+| error occured |
++---------------+
+| error occured |
++---------------+
+1 row in set (0.00 sec)
+
++------+
+| done |
++------+
+| done |
++------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> create procedure insert_userentity111(puid int,puname varchar(20),paddrid int)
+    -> begin
+    -> declare exit handler for SQLEXCEPTION select 'error occured';
+    ->   insert into userentity values(puid,puname,paddrid);
+    -> select 'done';
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call insert_userentity111(112,'xxx',1);
+    -> //
++---------------+
+| error occured |
++---------------+
+| error occured |
++---------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>

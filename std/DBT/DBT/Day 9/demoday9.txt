@@ -1,0 +1,1177 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 26
+Server version: 8.0.22 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use iacsdedacmay21
+Database changed
+mysql> select empno,ename,sal
+    -> from emp;
++-------+---------+----------+
+| empno | ename   | sal      |
++-------+---------+----------+
+|     1 | Rajas_D |  3756.00 |
+|   123 | Rajan   | 34867.00 |
+|   124 | Revati  | 34767.00 |
+|  7369 | SMITH   |  1000.00 |
+|  7499 | ALLEN   |  1600.00 |
+|  7521 | WARD    |  1600.00 |
+|  7566 | JONES   |  3175.00 |
+|  7654 | MARTIN  |  1600.00 |
+|  7698 | BLAKE   |  1600.00 |
+|  7782 | CLARK   |  2750.00 |
+|  7788 | SCOTT   |  3200.00 |
+|  7839 | KING    |  5300.00 |
+|  7844 | TURNER  |  1600.00 |
+|  7876 | ADAMS   |  1300.00 |
+|  7900 | JAMES   |  1600.00 |
+|  7902 | FORD    |  3200.00 |
+|  7934 | MILLER  |  1600.00 |
++-------+---------+----------+
+17 rows in set (0.00 sec)
+
+mysql> select empno,ename,deptno
+    -> from emp;
++-------+---------+--------+
+| empno | ename   | deptno |
++-------+---------+--------+
+|     1 | Rajas_D |     10 |
+|   123 | Rajan   |     10 |
+|   124 | Revati  |     20 |
+|  7369 | SMITH   |     20 |
+|  7499 | ALLEN   |     30 |
+|  7521 | WARD    |     30 |
+|  7566 | JONES   |     20 |
+|  7654 | MARTIN  |     30 |
+|  7698 | BLAKE   |     30 |
+|  7782 | CLARK   |     10 |
+|  7788 | SCOTT   |     20 |
+|  7839 | KING    |     10 |
+|  7844 | TURNER  |     30 |
+|  7876 | ADAMS   |     20 |
+|  7900 | JAMES   |     30 |
+|  7902 | FORD    |     20 |
+|  7934 | MILLER  |     10 |
++-------+---------+--------+
+17 rows in set (0.00 sec)
+
+mysql> select * from dept;
++--------+------------+----------+-------------+
+| DEPTNO | DNAME      | LOC      | description |
++--------+------------+----------+-------------+
+|     10 | ACCOUNTING | NEW YORK | NEW YORKACC |
+|     20 | RESEARCH   | DALLAS   | DALLASRES   |
+|     30 | SALES      | CHICAGO  | CHICAGOSAL  |
+|     40 | OPERATIONS | BOSTON   | BOSTONOPE   |
+|     60 | purchase   | Pune     | Punepur     |
+|    150 | Inssurance | pune     | puneIns     |
+|    200 | yyy        | Mumbai   | Mumbaiyyy   |
+|    300 | zzz        | Pune     | Punezzz     |
+|    301 | ccc        | Pune     | Puneccc     |
+|    302 | ccc        | Pune     | Puneccc     |
+|    303 | ccc1       | Pune     | Puneccc     |
+|    304 | ccc1       | Pune     | Puneccc     |
++--------+------------+----------+-------------+
+12 rows in set (0.00 sec)
+
+mysql> delete from dept where deptno>40;
+Query OK, 8 rows affected (0.01 sec)
+
+mysql> select * from dept;
++--------+------------+----------+-------------+
+| DEPTNO | DNAME      | LOC      | description |
++--------+------------+----------+-------------+
+|     10 | ACCOUNTING | NEW YORK | NEW YORKACC |
+|     20 | RESEARCH   | DALLAS   | DALLASRES   |
+|     30 | SALES      | CHICAGO  | CHICAGOSAL  |
+|     40 | OPERATIONS | BOSTON   | BOSTONOPE   |
++--------+------------+----------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from emp;
++-------+---------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME   | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+---------+-----------+------+------------+----------+---------+--------+
+|     1 | Rajas_D | Manager   | 7902 | 1998-02-02 |  3756.00 |  345.00 |     10 |
+|   123 | Rajan   | designer  | 7902 | 2020-12-10 | 34867.00 | 3456.00 |     10 |
+|   124 | Revati  | designer  | 7902 | 1999-12-10 | 34767.00 | 3456.00 |     20 |
+|  7369 | SMITH   | CLERK     | 7902 | 1980-12-17 |  1000.00 |    NULL |     20 |
+|  7499 | ALLEN   | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD    | SALESMAN  | 7698 | 1981-02-22 |  1600.00 |  500.00 |     30 |
+|  7566 | JONES   | MANAGER   | 7839 | 1981-04-02 |  3175.00 |    NULL |     20 |
+|  7654 | MARTIN  | SALESMAN  | 7698 | 1981-09-28 |  1600.00 | 1400.00 |     30 |
+|  7698 | BLAKE   | MANAGER   | 7839 | 1981-05-01 |  1600.00 |    NULL |     30 |
+|  7782 | CLARK   | MANAGER   | 7839 | 1981-06-09 |  2750.00 |    NULL |     10 |
+|  7788 | SCOTT   | ANALYST   | 7566 | 1982-12-09 |  3200.00 |    NULL |     20 |
+|  7839 | KING    | PRESIDENT | NULL | 1981-11-17 |  5300.00 |    NULL |     10 |
+|  7844 | TURNER  | SALESMAN  | 7698 | 1981-09-08 |  1600.00 |    0.00 |     30 |
+|  7876 | ADAMS   | CLERK     | 7788 | 1983-01-12 |  1300.00 |    NULL |     20 |
+|  7900 | JAMES   | CLERK     | 7698 | 1981-12-03 |  1600.00 |    NULL |     30 |
+|  7902 | FORD    | ANALYST   | 7566 | 1981-12-03 |  3200.00 |    NULL |     20 |
+|  7934 | MILLER  | CLERK     | 7782 | 1982-01-23 |  1600.00 |    NULL |     10 |
++-------+---------+-----------+------+------------+----------+---------+--------+
+17 rows in set (0.00 sec)
+
+mysql> select empno,ename,sal,e.deptno,d.deptno,dname
+    -> from emp e,dept d;
++-------+---------+----------+--------+--------+------------+
+| empno | ename   | sal      | deptno | deptno | dname      |
++-------+---------+----------+--------+--------+------------+
+|     1 | Rajas_D |  3756.00 |     10 |     10 | ACCOUNTING |
+|     1 | Rajas_D |  3756.00 |     10 |     20 | RESEARCH   |
+|     1 | Rajas_D |  3756.00 |     10 |     30 | SALES      |
+|     1 | Rajas_D |  3756.00 |     10 |     40 | OPERATIONS |
+|   123 | Rajan   | 34867.00 |     10 |     10 | ACCOUNTING |
+|   123 | Rajan   | 34867.00 |     10 |     20 | RESEARCH   |
+|   123 | Rajan   | 34867.00 |     10 |     30 | SALES      |
+|   123 | Rajan   | 34867.00 |     10 |     40 | OPERATIONS |
+|   124 | Revati  | 34767.00 |     20 |     10 | ACCOUNTING |
+|   124 | Revati  | 34767.00 |     20 |     20 | RESEARCH   |
+|   124 | Revati  | 34767.00 |     20 |     30 | SALES      |
+|   124 | Revati  | 34767.00 |     20 |     40 | OPERATIONS |
+|  7369 | SMITH   |  1000.00 |     20 |     10 | ACCOUNTING |
+|  7369 | SMITH   |  1000.00 |     20 |     20 | RESEARCH   |
+|  7369 | SMITH   |  1000.00 |     20 |     30 | SALES      |
+|  7369 | SMITH   |  1000.00 |     20 |     40 | OPERATIONS |
+|  7499 | ALLEN   |  1600.00 |     30 |     10 | ACCOUNTING |
+|  7499 | ALLEN   |  1600.00 |     30 |     20 | RESEARCH   |
+|  7499 | ALLEN   |  1600.00 |     30 |     30 | SALES      |
+|  7499 | ALLEN   |  1600.00 |     30 |     40 | OPERATIONS |
+|  7521 | WARD    |  1600.00 |     30 |     10 | ACCOUNTING |
+|  7521 | WARD    |  1600.00 |     30 |     20 | RESEARCH   |
+|  7521 | WARD    |  1600.00 |     30 |     30 | SALES      |
+|  7521 | WARD    |  1600.00 |     30 |     40 | OPERATIONS |
+|  7566 | JONES   |  3175.00 |     20 |     10 | ACCOUNTING |
+|  7566 | JONES   |  3175.00 |     20 |     20 | RESEARCH   |
+|  7566 | JONES   |  3175.00 |     20 |     30 | SALES      |
+|  7566 | JONES   |  3175.00 |     20 |     40 | OPERATIONS |
+|  7654 | MARTIN  |  1600.00 |     30 |     10 | ACCOUNTING |
+|  7654 | MARTIN  |  1600.00 |     30 |     20 | RESEARCH   |
+|  7654 | MARTIN  |  1600.00 |     30 |     30 | SALES      |
+|  7654 | MARTIN  |  1600.00 |     30 |     40 | OPERATIONS |
+|  7698 | BLAKE   |  1600.00 |     30 |     10 | ACCOUNTING |
+|  7698 | BLAKE   |  1600.00 |     30 |     20 | RESEARCH   |
+|  7698 | BLAKE   |  1600.00 |     30 |     30 | SALES      |
+|  7698 | BLAKE   |  1600.00 |     30 |     40 | OPERATIONS |
+|  7782 | CLARK   |  2750.00 |     10 |     10 | ACCOUNTING |
+|  7782 | CLARK   |  2750.00 |     10 |     20 | RESEARCH   |
+|  7782 | CLARK   |  2750.00 |     10 |     30 | SALES      |
+|  7782 | CLARK   |  2750.00 |     10 |     40 | OPERATIONS |
+|  7788 | SCOTT   |  3200.00 |     20 |     10 | ACCOUNTING |
+|  7788 | SCOTT   |  3200.00 |     20 |     20 | RESEARCH   |
+|  7788 | SCOTT   |  3200.00 |     20 |     30 | SALES      |
+|  7788 | SCOTT   |  3200.00 |     20 |     40 | OPERATIONS |
+|  7839 | KING    |  5300.00 |     10 |     10 | ACCOUNTING |
+|  7839 | KING    |  5300.00 |     10 |     20 | RESEARCH   |
+|  7839 | KING    |  5300.00 |     10 |     30 | SALES      |
+|  7839 | KING    |  5300.00 |     10 |     40 | OPERATIONS |
+|  7844 | TURNER  |  1600.00 |     30 |     10 | ACCOUNTING |
+|  7844 | TURNER  |  1600.00 |     30 |     20 | RESEARCH   |
+|  7844 | TURNER  |  1600.00 |     30 |     30 | SALES      |
+|  7844 | TURNER  |  1600.00 |     30 |     40 | OPERATIONS |
+|  7876 | ADAMS   |  1300.00 |     20 |     10 | ACCOUNTING |
+|  7876 | ADAMS   |  1300.00 |     20 |     20 | RESEARCH   |
+|  7876 | ADAMS   |  1300.00 |     20 |     30 | SALES      |
+|  7876 | ADAMS   |  1300.00 |     20 |     40 | OPERATIONS |
+|  7900 | JAMES   |  1600.00 |     30 |     10 | ACCOUNTING |
+|  7900 | JAMES   |  1600.00 |     30 |     20 | RESEARCH   |
+|  7900 | JAMES   |  1600.00 |     30 |     30 | SALES      |
+|  7900 | JAMES   |  1600.00 |     30 |     40 | OPERATIONS |
+|  7902 | FORD    |  3200.00 |     20 |     10 | ACCOUNTING |
+|  7902 | FORD    |  3200.00 |     20 |     20 | RESEARCH   |
+|  7902 | FORD    |  3200.00 |     20 |     30 | SALES      |
+|  7902 | FORD    |  3200.00 |     20 |     40 | OPERATIONS |
+|  7934 | MILLER  |  1600.00 |     10 |     10 | ACCOUNTING |
+|  7934 | MILLER  |  1600.00 |     10 |     20 | RESEARCH   |
+|  7934 | MILLER  |  1600.00 |     10 |     30 | SALES      |
+|  7934 | MILLER  |  1600.00 |     10 |     40 | OPERATIONS |
++-------+---------+----------+--------+--------+------------+
+68 rows in set (0.00 sec)
+
+mysql> select empno,ename,sal,e.deptno,d.deptno,dname
+    -> from emp e,dept d
+    -> where e.deptno=d.deptno;
++-------+---------+----------+--------+--------+------------+
+| empno | ename   | sal      | deptno | deptno | dname      |
++-------+---------+----------+--------+--------+------------+
+|     1 | Rajas_D |  3756.00 |     10 |     10 | ACCOUNTING |
+|   123 | Rajan   | 34867.00 |     10 |     10 | ACCOUNTING |
+|  7782 | CLARK   |  2750.00 |     10 |     10 | ACCOUNTING |
+|  7839 | KING    |  5300.00 |     10 |     10 | ACCOUNTING |
+|  7934 | MILLER  |  1600.00 |     10 |     10 | ACCOUNTING |
+|   124 | Revati  | 34767.00 |     20 |     20 | RESEARCH   |
+|  7369 | SMITH   |  1000.00 |     20 |     20 | RESEARCH   |
+|  7566 | JONES   |  3175.00 |     20 |     20 | RESEARCH   |
+|  7788 | SCOTT   |  3200.00 |     20 |     20 | RESEARCH   |
+|  7876 | ADAMS   |  1300.00 |     20 |     20 | RESEARCH   |
+|  7902 | FORD    |  3200.00 |     20 |     20 | RESEARCH   |
+|  7499 | ALLEN   |  1600.00 |     30 |     30 | SALES      |
+|  7521 | WARD    |  1600.00 |     30 |     30 | SALES      |
+|  7654 | MARTIN  |  1600.00 |     30 |     30 | SALES      |
+|  7698 | BLAKE   |  1600.00 |     30 |     30 | SALES      |
+|  7844 | TURNER  |  1600.00 |     30 |     30 | SALES      |
+|  7900 | JAMES   |  1600.00 |     30 |     30 | SALES      |
++-------+---------+----------+--------+--------+------------+
+17 rows in set (0.00 sec)
+
+mysql> select empno,ename,sal,dname
+    -> from emp e,dept d
+    -> where e.deptno=d.deptno;
++-------+---------+----------+------------+
+| empno | ename   | sal      | dname      |
++-------+---------+----------+------------+
+|     1 | Rajas_D |  3756.00 | ACCOUNTING |
+|   123 | Rajan   | 34867.00 | ACCOUNTING |
+|  7782 | CLARK   |  2750.00 | ACCOUNTING |
+|  7839 | KING    |  5300.00 | ACCOUNTING |
+|  7934 | MILLER  |  1600.00 | ACCOUNTING |
+|   124 | Revati  | 34767.00 | RESEARCH   |
+|  7369 | SMITH   |  1000.00 | RESEARCH   |
+|  7566 | JONES   |  3175.00 | RESEARCH   |
+|  7788 | SCOTT   |  3200.00 | RESEARCH   |
+|  7876 | ADAMS   |  1300.00 | RESEARCH   |
+|  7902 | FORD    |  3200.00 | RESEARCH   |
+|  7499 | ALLEN   |  1600.00 | SALES      |
+|  7521 | WARD    |  1600.00 | SALES      |
+|  7654 | MARTIN  |  1600.00 | SALES      |
+|  7698 | BLAKE   |  1600.00 | SALES      |
+|  7844 | TURNER  |  1600.00 | SALES      |
+|  7900 | JAMES   |  1600.00 | SALES      |
++-------+---------+----------+------------+
+17 rows in set (0.00 sec)
+
+mysql> use test
+Database changed
+mysql> select * from product;
++------+---------------+------+--------+------+
+| pid  | pname         | qty  | price  | cid  |
++------+---------------+------+--------+------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |
+|    3 | Pringles123   |   12 | 150.00 |    1 |
+|    4 | Marie gold    |   20 |  50.00 |    2 |
+|    5 | nice1234      |   35 |  45.00 |    2 |
+|    6 | good day123   |   45 |  60.00 |    2 |
+|   20 | Hide and seek |   45 |  40.00 |    2 |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |
++------+---------------+------+--------+------+
+7 rows in set (0.00 sec)
+
+mysql> select * from category;
++------+-------------+-------------------------+
+| cid  | cname       | cdesc                   |
++------+-------------+-------------------------+
+|    1 | chips       | very crispy             |
+|    2 | biscuits    | sweet and tasty         |
+|    3 | chocolate   | yummmmmy                |
+|    4 | cold drinks | thanda thanda cool cool |
++------+-------------+-------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select *
+    -> from product p,category c
+    -> ;
++------+---------------+------+--------+------+------+-------------+-------------------------+
+| pid  | pname         | qty  | price  | cid  | cid  | cname       | cdesc                   |
++------+---------------+------+--------+------+------+-------------+-------------------------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |    1 | chips       | very crispy             |
+|    2 | Nachos123     |  302 | 150.00 |    1 |    2 | biscuits    | sweet and tasty         |
+|    2 | Nachos123     |  302 | 150.00 |    1 |    3 | chocolate   | yummmmmy                |
+|    2 | Nachos123     |  302 | 150.00 |    1 |    4 | cold drinks | thanda thanda cool cool |
+|    3 | Pringles123   |   12 | 150.00 |    1 |    1 | chips       | very crispy             |
+|    3 | Pringles123   |   12 | 150.00 |    1 |    2 | biscuits    | sweet and tasty         |
+|    3 | Pringles123   |   12 | 150.00 |    1 |    3 | chocolate   | yummmmmy                |
+|    3 | Pringles123   |   12 | 150.00 |    1 |    4 | cold drinks | thanda thanda cool cool |
+|    4 | Marie gold    |   20 |  50.00 |    2 |    1 | chips       | very crispy             |
+|    4 | Marie gold    |   20 |  50.00 |    2 |    2 | biscuits    | sweet and tasty         |
+|    4 | Marie gold    |   20 |  50.00 |    2 |    3 | chocolate   | yummmmmy                |
+|    4 | Marie gold    |   20 |  50.00 |    2 |    4 | cold drinks | thanda thanda cool cool |
+|    5 | nice1234      |   35 |  45.00 |    2 |    1 | chips       | very crispy             |
+|    5 | nice1234      |   35 |  45.00 |    2 |    2 | biscuits    | sweet and tasty         |
+|    5 | nice1234      |   35 |  45.00 |    2 |    3 | chocolate   | yummmmmy                |
+|    5 | nice1234      |   35 |  45.00 |    2 |    4 | cold drinks | thanda thanda cool cool |
+|    6 | good day123   |   45 |  60.00 |    2 |    1 | chips       | very crispy             |
+|    6 | good day123   |   45 |  60.00 |    2 |    2 | biscuits    | sweet and tasty         |
+|    6 | good day123   |   45 |  60.00 |    2 |    3 | chocolate   | yummmmmy                |
+|    6 | good day123   |   45 |  60.00 |    2 |    4 | cold drinks | thanda thanda cool cool |
+|   20 | Hide and seek |   45 |  40.00 |    2 |    1 | chips       | very crispy             |
+|   20 | Hide and seek |   45 |  40.00 |    2 |    2 | biscuits    | sweet and tasty         |
+|   20 | Hide and seek |   45 |  40.00 |    2 |    3 | chocolate   | yummmmmy                |
+|   20 | Hide and seek |   45 |  40.00 |    2 |    4 | cold drinks | thanda thanda cool cool |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |    1 | chips       | very crispy             |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |    2 | biscuits    | sweet and tasty         |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |    3 | chocolate   | yummmmmy                |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |    4 | cold drinks | thanda thanda cool cool |
++------+---------------+------+--------+------+------+-------------+-------------------------+
+28 rows in set (0.00 sec)
+
+mysql> select *
+    -> from product p,category c
+    -> where p.cid=c.cid;
++------+---------------+------+--------+------+------+-----------+-----------------+
+| pid  | pname         | qty  | price  | cid  | cid  | cname     | cdesc           |
++------+---------------+------+--------+------+------+-----------+-----------------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |    1 | chips     | very crispy     |
+|    3 | Pringles123   |   12 | 150.00 |    1 |    1 | chips     | very crispy     |
+|    4 | Marie gold    |   20 |  50.00 |    2 |    2 | biscuits  | sweet and tasty |
+|    5 | nice1234      |   35 |  45.00 |    2 |    2 | biscuits  | sweet and tasty |
+|    6 | good day123   |   45 |  60.00 |    2 |    2 | biscuits  | sweet and tasty |
+|   20 | Hide and seek |   45 |  40.00 |    2 |    2 | biscuits  | sweet and tasty |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |    3 | chocolate | yummmmmy        |
++------+---------------+------+--------+------+------+-----------+-----------------+
+7 rows in set (0.00 sec)
+
+mysql> select pid,pname,qty,cid,cname
+    -> from product p,category c
+    -> where p.cid=c.cid;
+ERROR 1052 (23000): Column 'cid' in field list is ambiguous
+mysql> select p.pid,p.pname,p.cid,c.cname
+    -> from product p,category c
+    -> where p.cid=c.cid;
++------+---------------+------+-----------+
+| pid  | pname         | cid  | cname     |
++------+---------------+------+-----------+
+|    2 | Nachos123     |    1 | chips     |
+|    3 | Pringles123   |    1 | chips     |
+|    4 | Marie gold    |    2 | biscuits  |
+|    5 | nice1234      |    2 | biscuits  |
+|    6 | good day123   |    2 | biscuits  |
+|   20 | Hide and seek |    2 | biscuits  |
+|  123 | sfgdfg        |    3 | chocolate |
++------+---------------+------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> select pid,pname,qty,price, cname,cdesc
+    -> from product p  inner join category c on p.cid=c.cid
+    -> where price>50;
++------+-------------+------+--------+-----------+-----------------+
+| pid  | pname       | qty  | price  | cname     | cdesc           |
++------+-------------+------+--------+-----------+-----------------+
+|    2 | Nachos123   |  302 | 150.00 | chips     | very crispy     |
+|    3 | Pringles123 |   12 | 150.00 | chips     | very crispy     |
+|    6 | good day123 |   45 |  60.00 | biscuits  | sweet and tasty |
+|  123 | sfgdfg      |   45 | 123.00 | chocolate | yummmmmy        |
++------+-------------+------+--------+-----------+-----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from saleman;
+ERROR 1146 (42S02): Table 'test.saleman' doesn't exist
+mysql> select * from salesman;
+ERROR 1146 (42S02): Table 'test.salesman' doesn't exist
+mysql> show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| address        |
+| addressmany    |
+| addressmany1   |
+| category       |
+| custtab1       |
+| custtab11      |
+| emptab1        |
+| emptab11       |
+| myemployee     |
+| myprod11       |
+| myproduct      |
+| myuser         |
+| myuser12       |
+| orderitem      |
+| persontab      |
+| pertab11       |
+| product        |
+| quetions       |
+| student        |
+| user           |
+| useraddress    |
+| userentity     |
+| usermany       |
+| usermany1      |
++----------------+
+24 rows in set (0.00 sec)
+
+mysql> use iacsdedacmay21;
+Database changed
+mysql> select * from emp;
++-------+---------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME   | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+---------+-----------+------+------------+----------+---------+--------+
+|     1 | Rajas_D | Manager   | 7902 | 1998-02-02 |  3756.00 |  345.00 |     10 |
+|   123 | Rajan   | designer  | 7902 | 2020-12-10 | 34867.00 | 3456.00 |     10 |
+|   124 | Revati  | designer  | 7902 | 1999-12-10 | 34767.00 | 3456.00 |     20 |
+|  7369 | SMITH   | CLERK     | 7902 | 1980-12-17 |  1000.00 |    NULL |     20 |
+|  7499 | ALLEN   | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD    | SALESMAN  | 7698 | 1981-02-22 |  1600.00 |  500.00 |     30 |
+|  7566 | JONES   | MANAGER   | 7839 | 1981-04-02 |  3175.00 |    NULL |     20 |
+|  7654 | MARTIN  | SALESMAN  | 7698 | 1981-09-28 |  1600.00 | 1400.00 |     30 |
+|  7698 | BLAKE   | MANAGER   | 7839 | 1981-05-01 |  1600.00 |    NULL |     30 |
+|  7782 | CLARK   | MANAGER   | 7839 | 1981-06-09 |  2750.00 |    NULL |     10 |
+|  7788 | SCOTT   | ANALYST   | 7566 | 1982-12-09 |  3200.00 |    NULL |     20 |
+|  7839 | KING    | PRESIDENT | NULL | 1981-11-17 |  5300.00 |    NULL |     10 |
+|  7844 | TURNER  | SALESMAN  | 7698 | 1981-09-08 |  1600.00 |    0.00 |     30 |
+|  7876 | ADAMS   | CLERK     | 7788 | 1983-01-12 |  1300.00 |    NULL |     20 |
+|  7900 | JAMES   | CLERK     | 7698 | 1981-12-03 |  1600.00 |    NULL |     30 |
+|  7902 | FORD    | ANALYST   | 7566 | 1981-12-03 |  3200.00 |    NULL |     20 |
+|  7934 | MILLER  | CLERK     | 7782 | 1982-01-23 |  1600.00 |    NULL |     10 |
++-------+---------+-----------+------+------------+----------+---------+--------+
+17 rows in set (0.00 sec)
+
+mysql> select * fom salgrade;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'fom salgrade' at line 1
+mysql> select * from salgrade;
++-------+-------+-------+
+| GRADE | LOSAL | HISAL |
++-------+-------+-------+
+|     1 |   700 |  1200 |
+|     2 |  1201 |  1400 |
+|     3 |  1401 |  2000 |
+|     4 |  2001 |  3000 |
+|     5 |  3001 |  9999 |
++-------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select *
+    -> from emp e,salgrade s;
++-------+---------+-----------+------+------------+----------+---------+--------+-------+-------+-------+
+| EMPNO | ENAME   | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO | GRADE | LOSAL | HISAL |
++-------+---------+-----------+------+------------+----------+---------+--------+-------+-------+-------+
+|     1 | Rajas_D | Manager   | 7902 | 1998-02-02 |  3756.00 |  345.00 |     10 |     1 |   700 |  1200 |
+|     1 | Rajas_D | Manager   | 7902 | 1998-02-02 |  3756.00 |  345.00 |     10 |     2 |  1201 |  1400 |
+|     1 | Rajas_D | Manager   | 7902 | 1998-02-02 |  3756.00 |  345.00 |     10 |     3 |  1401 |  2000 |
+|     1 | Rajas_D | Manager   | 7902 | 1998-02-02 |  3756.00 |  345.00 |     10 |     4 |  2001 |  3000 |
+|     1 | Rajas_D | Manager   | 7902 | 1998-02-02 |  3756.00 |  345.00 |     10 |     5 |  3001 |  9999 |
+|   123 | Rajan   | designer  | 7902 | 2020-12-10 | 34867.00 | 3456.00 |     10 |     1 |   700 |  1200 |
+|   123 | Rajan   | designer  | 7902 | 2020-12-10 | 34867.00 | 3456.00 |     10 |     2 |  1201 |  1400 |
+|   123 | Rajan   | designer  | 7902 | 2020-12-10 | 34867.00 | 3456.00 |     10 |     3 |  1401 |  2000 |
+|   123 | Rajan   | designer  | 7902 | 2020-12-10 | 34867.00 | 3456.00 |     10 |     4 |  2001 |  3000 |
+|   123 | Rajan   | designer  | 7902 | 2020-12-10 | 34867.00 | 3456.00 |     10 |     5 |  3001 |  9999 |
+|   124 | Revati  | designer  | 7902 | 1999-12-10 | 34767.00 | 3456.00 |     20 |     1 |   700 |  1200 |
+|   124 | Revati  | designer  | 7902 | 1999-12-10 | 34767.00 | 3456.00 |     20 |     2 |  1201 |  1400 |
+|   124 | Revati  | designer  | 7902 | 1999-12-10 | 34767.00 | 3456.00 |     20 |     3 |  1401 |  2000 |
+|   124 | Revati  | designer  | 7902 | 1999-12-10 | 34767.00 | 3456.00 |     20 |     4 |  2001 |  3000 |
+|   124 | Revati  | designer  | 7902 | 1999-12-10 | 34767.00 | 3456.00 |     20 |     5 |  3001 |  9999 |
+|  7369 | SMITH   | CLERK     | 7902 | 1980-12-17 |  1000.00 |    NULL |     20 |     1 |   700 |  1200 |
+|  7369 | SMITH   | CLERK     | 7902 | 1980-12-17 |  1000.00 |    NULL |     20 |     2 |  1201 |  1400 |
+|  7369 | SMITH   | CLERK     | 7902 | 1980-12-17 |  1000.00 |    NULL |     20 |     3 |  1401 |  2000 |
+|  7369 | SMITH   | CLERK     | 7902 | 1980-12-17 |  1000.00 |    NULL |     20 |     4 |  2001 |  3000 |
+|  7369 | SMITH   | CLERK     | 7902 | 1980-12-17 |  1000.00 |    NULL |     20 |     5 |  3001 |  9999 |
+|  7499 | ALLEN   | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |     1 |   700 |  1200 |
+|  7499 | ALLEN   | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |     2 |  1201 |  1400 |
+|  7499 | ALLEN   | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |     3 |  1401 |  2000 |
+|  7499 | ALLEN   | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |     4 |  2001 |  3000 |
+|  7499 | ALLEN   | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |     5 |  3001 |  9999 |
+|  7521 | WARD    | SALESMAN  | 7698 | 1981-02-22 |  1600.00 |  500.00 |     30 |     1 |   700 |  1200 |
+|  7521 | WARD    | SALESMAN  | 7698 | 1981-02-22 |  1600.00 |  500.00 |     30 |     2 |  1201 |  1400 |
+|  7521 | WARD    | SALESMAN  | 7698 | 1981-02-22 |  1600.00 |  500.00 |     30 |     3 |  1401 |  2000 |
+|  7521 | WARD    | SALESMAN  | 7698 | 1981-02-22 |  1600.00 |  500.00 |     30 |     4 |  2001 |  3000 |
+|  7521 | WARD    | SALESMAN  | 7698 | 1981-02-22 |  1600.00 |  500.00 |     30 |     5 |  3001 |  9999 |
+|  7566 | JONES   | MANAGER   | 7839 | 1981-04-02 |  3175.00 |    NULL |     20 |     1 |   700 |  1200 |
+|  7566 | JONES   | MANAGER   | 7839 | 1981-04-02 |  3175.00 |    NULL |     20 |     2 |  1201 |  1400 |
+|  7566 | JONES   | MANAGER   | 7839 | 1981-04-02 |  3175.00 |    NULL |     20 |     3 |  1401 |  2000 |
+|  7566 | JONES   | MANAGER   | 7839 | 1981-04-02 |  3175.00 |    NULL |     20 |     4 |  2001 |  3000 |
+|  7566 | JONES   | MANAGER   | 7839 | 1981-04-02 |  3175.00 |    NULL |     20 |     5 |  3001 |  9999 |
+|  7654 | MARTIN  | SALESMAN  | 7698 | 1981-09-28 |  1600.00 | 1400.00 |     30 |     1 |   700 |  1200 |
+|  7654 | MARTIN  | SALESMAN  | 7698 | 1981-09-28 |  1600.00 | 1400.00 |     30 |     2 |  1201 |  1400 |
+|  7654 | MARTIN  | SALESMAN  | 7698 | 1981-09-28 |  1600.00 | 1400.00 |     30 |     3 |  1401 |  2000 |
+|  7654 | MARTIN  | SALESMAN  | 7698 | 1981-09-28 |  1600.00 | 1400.00 |     30 |     4 |  2001 |  3000 |
+|  7654 | MARTIN  | SALESMAN  | 7698 | 1981-09-28 |  1600.00 | 1400.00 |     30 |     5 |  3001 |  9999 |
+|  7698 | BLAKE   | MANAGER   | 7839 | 1981-05-01 |  1600.00 |    NULL |     30 |     1 |   700 |  1200 |
+|  7698 | BLAKE   | MANAGER   | 7839 | 1981-05-01 |  1600.00 |    NULL |     30 |     2 |  1201 |  1400 |
+|  7698 | BLAKE   | MANAGER   | 7839 | 1981-05-01 |  1600.00 |    NULL |     30 |     3 |  1401 |  2000 |
+|  7698 | BLAKE   | MANAGER   | 7839 | 1981-05-01 |  1600.00 |    NULL |     30 |     4 |  2001 |  3000 |
+|  7698 | BLAKE   | MANAGER   | 7839 | 1981-05-01 |  1600.00 |    NULL |     30 |     5 |  3001 |  9999 |
+|  7782 | CLARK   | MANAGER   | 7839 | 1981-06-09 |  2750.00 |    NULL |     10 |     1 |   700 |  1200 |
+|  7782 | CLARK   | MANAGER   | 7839 | 1981-06-09 |  2750.00 |    NULL |     10 |     2 |  1201 |  1400 |
+|  7782 | CLARK   | MANAGER   | 7839 | 1981-06-09 |  2750.00 |    NULL |     10 |     3 |  1401 |  2000 |
+|  7782 | CLARK   | MANAGER   | 7839 | 1981-06-09 |  2750.00 |    NULL |     10 |     4 |  2001 |  3000 |
+|  7782 | CLARK   | MANAGER   | 7839 | 1981-06-09 |  2750.00 |    NULL |     10 |     5 |  3001 |  9999 |
+|  7788 | SCOTT   | ANALYST   | 7566 | 1982-12-09 |  3200.00 |    NULL |     20 |     1 |   700 |  1200 |
+|  7788 | SCOTT   | ANALYST   | 7566 | 1982-12-09 |  3200.00 |    NULL |     20 |     2 |  1201 |  1400 |
+|  7788 | SCOTT   | ANALYST   | 7566 | 1982-12-09 |  3200.00 |    NULL |     20 |     3 |  1401 |  2000 |
+|  7788 | SCOTT   | ANALYST   | 7566 | 1982-12-09 |  3200.00 |    NULL |     20 |     4 |  2001 |  3000 |
+|  7788 | SCOTT   | ANALYST   | 7566 | 1982-12-09 |  3200.00 |    NULL |     20 |     5 |  3001 |  9999 |
+|  7839 | KING    | PRESIDENT | NULL | 1981-11-17 |  5300.00 |    NULL |     10 |     1 |   700 |  1200 |
+|  7839 | KING    | PRESIDENT | NULL | 1981-11-17 |  5300.00 |    NULL |     10 |     2 |  1201 |  1400 |
+|  7839 | KING    | PRESIDENT | NULL | 1981-11-17 |  5300.00 |    NULL |     10 |     3 |  1401 |  2000 |
+|  7839 | KING    | PRESIDENT | NULL | 1981-11-17 |  5300.00 |    NULL |     10 |     4 |  2001 |  3000 |
+|  7839 | KING    | PRESIDENT | NULL | 1981-11-17 |  5300.00 |    NULL |     10 |     5 |  3001 |  9999 |
+|  7844 | TURNER  | SALESMAN  | 7698 | 1981-09-08 |  1600.00 |    0.00 |     30 |     1 |   700 |  1200 |
+|  7844 | TURNER  | SALESMAN  | 7698 | 1981-09-08 |  1600.00 |    0.00 |     30 |     2 |  1201 |  1400 |
+|  7844 | TURNER  | SALESMAN  | 7698 | 1981-09-08 |  1600.00 |    0.00 |     30 |     3 |  1401 |  2000 |
+|  7844 | TURNER  | SALESMAN  | 7698 | 1981-09-08 |  1600.00 |    0.00 |     30 |     4 |  2001 |  3000 |
+|  7844 | TURNER  | SALESMAN  | 7698 | 1981-09-08 |  1600.00 |    0.00 |     30 |     5 |  3001 |  9999 |
+|  7876 | ADAMS   | CLERK     | 7788 | 1983-01-12 |  1300.00 |    NULL |     20 |     1 |   700 |  1200 |
+|  7876 | ADAMS   | CLERK     | 7788 | 1983-01-12 |  1300.00 |    NULL |     20 |     2 |  1201 |  1400 |
+|  7876 | ADAMS   | CLERK     | 7788 | 1983-01-12 |  1300.00 |    NULL |     20 |     3 |  1401 |  2000 |
+|  7876 | ADAMS   | CLERK     | 7788 | 1983-01-12 |  1300.00 |    NULL |     20 |     4 |  2001 |  3000 |
+|  7876 | ADAMS   | CLERK     | 7788 | 1983-01-12 |  1300.00 |    NULL |     20 |     5 |  3001 |  9999 |
+|  7900 | JAMES   | CLERK     | 7698 | 1981-12-03 |  1600.00 |    NULL |     30 |     1 |   700 |  1200 |
+|  7900 | JAMES   | CLERK     | 7698 | 1981-12-03 |  1600.00 |    NULL |     30 |     2 |  1201 |  1400 |
+|  7900 | JAMES   | CLERK     | 7698 | 1981-12-03 |  1600.00 |    NULL |     30 |     3 |  1401 |  2000 |
+|  7900 | JAMES   | CLERK     | 7698 | 1981-12-03 |  1600.00 |    NULL |     30 |     4 |  2001 |  3000 |
+|  7900 | JAMES   | CLERK     | 7698 | 1981-12-03 |  1600.00 |    NULL |     30 |     5 |  3001 |  9999 |
+|  7902 | FORD    | ANALYST   | 7566 | 1981-12-03 |  3200.00 |    NULL |     20 |     1 |   700 |  1200 |
+|  7902 | FORD    | ANALYST   | 7566 | 1981-12-03 |  3200.00 |    NULL |     20 |     2 |  1201 |  1400 |
+|  7902 | FORD    | ANALYST   | 7566 | 1981-12-03 |  3200.00 |    NULL |     20 |     3 |  1401 |  2000 |
+|  7902 | FORD    | ANALYST   | 7566 | 1981-12-03 |  3200.00 |    NULL |     20 |     4 |  2001 |  3000 |
+|  7902 | FORD    | ANALYST   | 7566 | 1981-12-03 |  3200.00 |    NULL |     20 |     5 |  3001 |  9999 |
+|  7934 | MILLER  | CLERK     | 7782 | 1982-01-23 |  1600.00 |    NULL |     10 |     1 |   700 |  1200 |
+|  7934 | MILLER  | CLERK     | 7782 | 1982-01-23 |  1600.00 |    NULL |     10 |     2 |  1201 |  1400 |
+|  7934 | MILLER  | CLERK     | 7782 | 1982-01-23 |  1600.00 |    NULL |     10 |     3 |  1401 |  2000 |
+|  7934 | MILLER  | CLERK     | 7782 | 1982-01-23 |  1600.00 |    NULL |     10 |     4 |  2001 |  3000 |
+|  7934 | MILLER  | CLERK     | 7782 | 1982-01-23 |  1600.00 |    NULL |     10 |     5 |  3001 |  9999 |
++-------+---------+-----------+------+------------+----------+---------+--------+-------+-------+-------+
+85 rows in set (0.00 sec)
+
+mysql> select empno,ename,sal,grade
+    -> from emp e inner join salgrade s on e.sal between s.losal and s.hisal;
++-------+---------+---------+-------+
+| empno | ename   | sal     | grade |
++-------+---------+---------+-------+
+|     1 | Rajas_D | 3756.00 |     5 |
+|  7369 | SMITH   | 1000.00 |     1 |
+|  7499 | ALLEN   | 1600.00 |     3 |
+|  7521 | WARD    | 1600.00 |     3 |
+|  7566 | JONES   | 3175.00 |     5 |
+|  7654 | MARTIN  | 1600.00 |     3 |
+|  7698 | BLAKE   | 1600.00 |     3 |
+|  7782 | CLARK   | 2750.00 |     4 |
+|  7788 | SCOTT   | 3200.00 |     5 |
+|  7839 | KING    | 5300.00 |     5 |
+|  7844 | TURNER  | 1600.00 |     3 |
+|  7876 | ADAMS   | 1300.00 |     2 |
+|  7900 | JAMES   | 1600.00 |     3 |
+|  7902 | FORD    | 3200.00 |     5 |
+|  7934 | MILLER  | 1600.00 |     3 |
++-------+---------+---------+-------+
+15 rows in set (0.00 sec)
+
+mysql> select empno,ename,sal,grade,dname
+    -> from emp e,salgrade s,dept d
+    -> where e.deptno=d.deptno and sal between losal and hisal
+    -> ;
++-------+---------+---------+-------+------------+
+| empno | ename   | sal     | grade | dname      |
++-------+---------+---------+-------+------------+
+|     1 | Rajas_D | 3756.00 |     5 | ACCOUNTING |
+|  7369 | SMITH   | 1000.00 |     1 | RESEARCH   |
+|  7499 | ALLEN   | 1600.00 |     3 | SALES      |
+|  7521 | WARD    | 1600.00 |     3 | SALES      |
+|  7566 | JONES   | 3175.00 |     5 | RESEARCH   |
+|  7654 | MARTIN  | 1600.00 |     3 | SALES      |
+|  7698 | BLAKE   | 1600.00 |     3 | SALES      |
+|  7782 | CLARK   | 2750.00 |     4 | ACCOUNTING |
+|  7788 | SCOTT   | 3200.00 |     5 | RESEARCH   |
+|  7839 | KING    | 5300.00 |     5 | ACCOUNTING |
+|  7844 | TURNER  | 1600.00 |     3 | SALES      |
+|  7876 | ADAMS   | 1300.00 |     2 | RESEARCH   |
+|  7900 | JAMES   | 1600.00 |     3 | SALES      |
+|  7902 | FORD    | 3200.00 |     5 | RESEARCH   |
+|  7934 | MILLER  | 1600.00 |     3 | ACCOUNTING |
++-------+---------+---------+-------+------------+
+15 rows in set (0.00 sec)
+
+mysql> select empno,ename,sal,grade,dname
+    -> from emp e inner join dept d on e.deptno=d.deptno inner join salgrade s on e.sal between s.losal and s.hisal;
++-------+---------+---------+-------+------------+
+| empno | ename   | sal     | grade | dname      |
++-------+---------+---------+-------+------------+
+|     1 | Rajas_D | 3756.00 |     5 | ACCOUNTING |
+|  7369 | SMITH   | 1000.00 |     1 | RESEARCH   |
+|  7499 | ALLEN   | 1600.00 |     3 | SALES      |
+|  7521 | WARD    | 1600.00 |     3 | SALES      |
+|  7566 | JONES   | 3175.00 |     5 | RESEARCH   |
+|  7654 | MARTIN  | 1600.00 |     3 | SALES      |
+|  7698 | BLAKE   | 1600.00 |     3 | SALES      |
+|  7782 | CLARK   | 2750.00 |     4 | ACCOUNTING |
+|  7788 | SCOTT   | 3200.00 |     5 | RESEARCH   |
+|  7839 | KING    | 5300.00 |     5 | ACCOUNTING |
+|  7844 | TURNER  | 1600.00 |     3 | SALES      |
+|  7876 | ADAMS   | 1300.00 |     2 | RESEARCH   |
+|  7900 | JAMES   | 1600.00 |     3 | SALES      |
+|  7902 | FORD    | 3200.00 |     5 | RESEARCH   |
+|  7934 | MILLER  | 1600.00 |     3 | ACCOUNTING |
++-------+---------+---------+-------+------------+
+15 rows in set (0.00 sec)
+
+mysql> select * from emp
+    -> ;
++-------+---------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME   | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+---------+-----------+------+------------+----------+---------+--------+
+|     1 | Rajas_D | Manager   | 7902 | 1998-02-02 |  3756.00 |  345.00 |     10 |
+|   123 | Rajan   | designer  | 7902 | 2020-12-10 | 34867.00 | 3456.00 |     10 |
+|   124 | Revati  | designer  | 7902 | 1999-12-10 | 34767.00 | 3456.00 |     20 |
+|  7369 | SMITH   | CLERK     | 7902 | 1980-12-17 |  1000.00 |    NULL |     20 |
+|  7499 | ALLEN   | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD    | SALESMAN  | 7698 | 1981-02-22 |  1600.00 |  500.00 |     30 |
+|  7566 | JONES   | MANAGER   | 7839 | 1981-04-02 |  3175.00 |    NULL |     20 |
+|  7654 | MARTIN  | SALESMAN  | 7698 | 1981-09-28 |  1600.00 | 1400.00 |     30 |
+|  7698 | BLAKE   | MANAGER   | 7839 | 1981-05-01 |  1600.00 |    NULL |     30 |
+|  7782 | CLARK   | MANAGER   | 7839 | 1981-06-09 |  2750.00 |    NULL |     10 |
+|  7788 | SCOTT   | ANALYST   | 7566 | 1982-12-09 |  3200.00 |    NULL |     20 |
+|  7839 | KING    | PRESIDENT | NULL | 1981-11-17 |  5300.00 |    NULL |     10 |
+|  7844 | TURNER  | SALESMAN  | 7698 | 1981-09-08 |  1600.00 |    0.00 |     30 |
+|  7876 | ADAMS   | CLERK     | 7788 | 1983-01-12 |  1300.00 |    NULL |     20 |
+|  7900 | JAMES   | CLERK     | 7698 | 1981-12-03 |  1600.00 |    NULL |     30 |
+|  7902 | FORD    | ANALYST   | 7566 | 1981-12-03 |  3200.00 |    NULL |     20 |
+|  7934 | MILLER  | CLERK     | 7782 | 1982-01-23 |  1600.00 |    NULL |     10 |
++-------+---------+-----------+------+------------+----------+---------+--------+
+17 rows in set (0.00 sec)
+
+mysql> select * from emp;
++-------+---------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME   | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+---------+-----------+------+------------+----------+---------+--------+
+|     1 | Rajas_D | Manager   | 7902 | 1998-02-02 |  3756.00 |  345.00 |     10 |
+|   123 | Rajan   | designer  | 7902 | 2020-12-10 | 34867.00 | 3456.00 |     10 |
+|   124 | Revati  | designer  | 7902 | 1999-12-10 | 34767.00 | 3456.00 |     20 |
+|  7369 | SMITH   | CLERK     | 7902 | 1980-12-17 |  1000.00 |    NULL |     20 |
+|  7499 | ALLEN   | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD    | SALESMAN  | 7698 | 1981-02-22 |  1600.00 |  500.00 |     30 |
+|  7566 | JONES   | MANAGER   | 7839 | 1981-04-02 |  3175.00 |    NULL |     20 |
+|  7654 | MARTIN  | SALESMAN  | 7698 | 1981-09-28 |  1600.00 | 1400.00 |     30 |
+|  7698 | BLAKE   | MANAGER   | 7839 | 1981-05-01 |  1600.00 |    NULL |     30 |
+|  7782 | CLARK   | MANAGER   | 7839 | 1981-06-09 |  2750.00 |    NULL |     10 |
+|  7788 | SCOTT   | ANALYST   | 7566 | 1982-12-09 |  3200.00 |    NULL |     20 |
+|  7839 | KING    | PRESIDENT | NULL | 1981-11-17 |  5300.00 |    NULL |     10 |
+|  7844 | TURNER  | SALESMAN  | 7698 | 1981-09-08 |  1600.00 |    0.00 |     30 |
+|  7876 | ADAMS   | CLERK     | 7788 | 1983-01-12 |  1300.00 |    NULL |     20 |
+|  7900 | JAMES   | CLERK     | 7698 | 1981-12-03 |  1600.00 |    NULL |     30 |
+|  7902 | FORD    | ANALYST   | 7566 | 1981-12-03 |  3200.00 |    NULL |     20 |
+|  7934 | MILLER  | CLERK     | 7782 | 1982-01-23 |  1600.00 |    NULL |     10 |
++-------+---------+-----------+------+------------+----------+---------+--------+
+17 rows in set (0.00 sec)
+
+mysql> select e.empno,e.ename,m.empno mgrno,m.ename mname
+    -> from emp e,emp m
+    -> where e.mgr=m.empno;
++-------+---------+-------+-------+
+| empno | ename   | mgrno | mname |
++-------+---------+-------+-------+
+|     1 | Rajas_D |  7902 | FORD  |
+|   123 | Rajan   |  7902 | FORD  |
+|   124 | Revati  |  7902 | FORD  |
+|  7369 | SMITH   |  7902 | FORD  |
+|  7499 | ALLEN   |  7698 | BLAKE |
+|  7521 | WARD    |  7698 | BLAKE |
+|  7566 | JONES   |  7839 | KING  |
+|  7654 | MARTIN  |  7698 | BLAKE |
+|  7698 | BLAKE   |  7839 | KING  |
+|  7782 | CLARK   |  7839 | KING  |
+|  7788 | SCOTT   |  7566 | JONES |
+|  7844 | TURNER  |  7698 | BLAKE |
+|  7876 | ADAMS   |  7788 | SCOTT |
+|  7900 | JAMES   |  7698 | BLAKE |
+|  7902 | FORD    |  7566 | JONES |
+|  7934 | MILLER  |  7782 | CLARK |
++-------+---------+-------+-------+
+16 rows in set (0.00 sec)
+
+mysql> select e.empno,e.ename,m.empno,m.ename
+    -> from emp e,emp m
+    -> where e.mgr=m.empno;
++-------+---------+-------+-------+
+| empno | ename   | empno | ename |
++-------+---------+-------+-------+
+|     1 | Rajas_D |  7902 | FORD  |
+|   123 | Rajan   |  7902 | FORD  |
+|   124 | Revati  |  7902 | FORD  |
+|  7369 | SMITH   |  7902 | FORD  |
+|  7499 | ALLEN   |  7698 | BLAKE |
+|  7521 | WARD    |  7698 | BLAKE |
+|  7566 | JONES   |  7839 | KING  |
+|  7654 | MARTIN  |  7698 | BLAKE |
+|  7698 | BLAKE   |  7839 | KING  |
+|  7782 | CLARK   |  7839 | KING  |
+|  7788 | SCOTT   |  7566 | JONES |
+|  7844 | TURNER  |  7698 | BLAKE |
+|  7876 | ADAMS   |  7788 | SCOTT |
+|  7900 | JAMES   |  7698 | BLAKE |
+|  7902 | FORD    |  7566 | JONES |
+|  7934 | MILLER  |  7782 | CLARK |
++-------+---------+-------+-------+
+16 rows in set (0.00 sec)
+
+mysql> select e.empno,e.ename,m.empno mgrno,m.ename mname
+    -> from emp e,emp m
+    -> where e.mgr=m.empno;
++-------+---------+-------+-------+
+| empno | ename   | mgrno | mname |
++-------+---------+-------+-------+
+|     1 | Rajas_D |  7902 | FORD  |
+|   123 | Rajan   |  7902 | FORD  |
+|   124 | Revati  |  7902 | FORD  |
+|  7369 | SMITH   |  7902 | FORD  |
+|  7499 | ALLEN   |  7698 | BLAKE |
+|  7521 | WARD    |  7698 | BLAKE |
+|  7566 | JONES   |  7839 | KING  |
+|  7654 | MARTIN  |  7698 | BLAKE |
+|  7698 | BLAKE   |  7839 | KING  |
+|  7782 | CLARK   |  7839 | KING  |
+|  7788 | SCOTT   |  7566 | JONES |
+|  7844 | TURNER  |  7698 | BLAKE |
+|  7876 | ADAMS   |  7788 | SCOTT |
+|  7900 | JAMES   |  7698 | BLAKE |
+|  7902 | FORD    |  7566 | JONES |
+|  7934 | MILLER  |  7782 | CLARK |
++-------+---------+-------+-------+
+16 rows in set (0.00 sec)
+
+mysql> select * from emp;
++-------+---------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME   | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+---------+-----------+------+------------+----------+---------+--------+
+|     1 | Rajas_D | Manager   | 7902 | 1998-02-02 |  3756.00 |  345.00 |     10 |
+|   123 | Rajan   | designer  | 7902 | 2020-12-10 | 34867.00 | 3456.00 |     10 |
+|   124 | Revati  | designer  | 7902 | 1999-12-10 | 34767.00 | 3456.00 |     20 |
+|  7369 | SMITH   | CLERK     | 7902 | 1980-12-17 |  1000.00 |    NULL |     20 |
+|  7499 | ALLEN   | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD    | SALESMAN  | 7698 | 1981-02-22 |  1600.00 |  500.00 |     30 |
+|  7566 | JONES   | MANAGER   | 7839 | 1981-04-02 |  3175.00 |    NULL |     20 |
+|  7654 | MARTIN  | SALESMAN  | 7698 | 1981-09-28 |  1600.00 | 1400.00 |     30 |
+|  7698 | BLAKE   | MANAGER   | 7839 | 1981-05-01 |  1600.00 |    NULL |     30 |
+|  7782 | CLARK   | MANAGER   | 7839 | 1981-06-09 |  2750.00 |    NULL |     10 |
+|  7788 | SCOTT   | ANALYST   | 7566 | 1982-12-09 |  3200.00 |    NULL |     20 |
+|  7839 | KING    | PRESIDENT | NULL | 1981-11-17 |  5300.00 |    NULL |     10 |
+|  7844 | TURNER  | SALESMAN  | 7698 | 1981-09-08 |  1600.00 |    0.00 |     30 |
+|  7876 | ADAMS   | CLERK     | 7788 | 1983-01-12 |  1300.00 |    NULL |     20 |
+|  7900 | JAMES   | CLERK     | 7698 | 1981-12-03 |  1600.00 |    NULL |     30 |
+|  7902 | FORD    | ANALYST   | 7566 | 1981-12-03 |  3200.00 |    NULL |     20 |
+|  7934 | MILLER  | CLERK     | 7782 | 1982-01-23 |  1600.00 |    NULL |     10 |
++-------+---------+-----------+------+------------+----------+---------+--------+
+17 rows in set (0.00 sec)
+
+mysql> select * from dept;
++--------+------------+----------+-------------+
+| DEPTNO | DNAME      | LOC      | description |
++--------+------------+----------+-------------+
+|     10 | ACCOUNTING | NEW YORK | NEW YORKACC |
+|     20 | RESEARCH   | DALLAS   | DALLASRES   |
+|     30 | SALES      | CHICAGO  | CHICAGOSAL  |
+|     40 | OPERATIONS | BOSTON   | BOSTONOPE   |
++--------+------------+----------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select empno,ename,e.deptno,dname
+    -> from emp e,dept d
+    -> where e.deptno=d.deptno;
++-------+---------+--------+------------+
+| empno | ename   | deptno | dname      |
++-------+---------+--------+------------+
+|     1 | Rajas_D |     10 | ACCOUNTING |
+|   123 | Rajan   |     10 | ACCOUNTING |
+|  7782 | CLARK   |     10 | ACCOUNTING |
+|  7839 | KING    |     10 | ACCOUNTING |
+|  7934 | MILLER  |     10 | ACCOUNTING |
+|   124 | Revati  |     20 | RESEARCH   |
+|  7369 | SMITH   |     20 | RESEARCH   |
+|  7566 | JONES   |     20 | RESEARCH   |
+|  7788 | SCOTT   |     20 | RESEARCH   |
+|  7876 | ADAMS   |     20 | RESEARCH   |
+|  7902 | FORD    |     20 | RESEARCH   |
+|  7499 | ALLEN   |     30 | SALES      |
+|  7521 | WARD    |     30 | SALES      |
+|  7654 | MARTIN  |     30 | SALES      |
+|  7698 | BLAKE   |     30 | SALES      |
+|  7844 | TURNER  |     30 | SALES      |
+|  7900 | JAMES   |     30 | SALES      |
++-------+---------+--------+------------+
+17 rows in set (0.00 sec)
+
+mysql> insert into emp(empno,ename,sal,job) values(1111,'Ashwini',2345,'ANALYST')
+    -> ;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from emp;
++-------+---------+-----------+------+------------+----------+---------+--------+
+| EMPNO | ENAME   | JOB       | MGR  | HIREDATE   | SAL      | COMM    | DEPTNO |
++-------+---------+-----------+------+------------+----------+---------+--------+
+|     1 | Rajas_D | Manager   | 7902 | 1998-02-02 |  3756.00 |  345.00 |     10 |
+|   123 | Rajan   | designer  | 7902 | 2020-12-10 | 34867.00 | 3456.00 |     10 |
+|   124 | Revati  | designer  | 7902 | 1999-12-10 | 34767.00 | 3456.00 |     20 |
+|  1111 | Ashwini | ANALYST   | NULL | NULL       |  2345.00 |    NULL |   NULL |
+|  7369 | SMITH   | CLERK     | 7902 | 1980-12-17 |  1000.00 |    NULL |     20 |
+|  7499 | ALLEN   | SALESMAN  | 7698 | 1981-02-20 |  1600.00 |  300.00 |     30 |
+|  7521 | WARD    | SALESMAN  | 7698 | 1981-02-22 |  1600.00 |  500.00 |     30 |
+|  7566 | JONES   | MANAGER   | 7839 | 1981-04-02 |  3175.00 |    NULL |     20 |
+|  7654 | MARTIN  | SALESMAN  | 7698 | 1981-09-28 |  1600.00 | 1400.00 |     30 |
+|  7698 | BLAKE   | MANAGER   | 7839 | 1981-05-01 |  1600.00 |    NULL |     30 |
+|  7782 | CLARK   | MANAGER   | 7839 | 1981-06-09 |  2750.00 |    NULL |     10 |
+|  7788 | SCOTT   | ANALYST   | 7566 | 1982-12-09 |  3200.00 |    NULL |     20 |
+|  7839 | KING    | PRESIDENT | NULL | 1981-11-17 |  5300.00 |    NULL |     10 |
+|  7844 | TURNER  | SALESMAN  | 7698 | 1981-09-08 |  1600.00 |    0.00 |     30 |
+|  7876 | ADAMS   | CLERK     | 7788 | 1983-01-12 |  1300.00 |    NULL |     20 |
+|  7900 | JAMES   | CLERK     | 7698 | 1981-12-03 |  1600.00 |    NULL |     30 |
+|  7902 | FORD    | ANALYST   | 7566 | 1981-12-03 |  3200.00 |    NULL |     20 |
+|  7934 | MILLER  | CLERK     | 7782 | 1982-01-23 |  1600.00 |    NULL |     10 |
++-------+---------+-----------+------+------------+----------+---------+--------+
+18 rows in set (0.00 sec)
+
+mysql> select empno,ename,e.deptno,dname
+    -> from emp e,dept d
+    -> where e.deptno=d.deptno;
++-------+---------+--------+------------+
+| empno | ename   | deptno | dname      |
++-------+---------+--------+------------+
+|     1 | Rajas_D |     10 | ACCOUNTING |
+|   123 | Rajan   |     10 | ACCOUNTING |
+|  7782 | CLARK   |     10 | ACCOUNTING |
+|  7839 | KING    |     10 | ACCOUNTING |
+|  7934 | MILLER  |     10 | ACCOUNTING |
+|   124 | Revati  |     20 | RESEARCH   |
+|  7369 | SMITH   |     20 | RESEARCH   |
+|  7566 | JONES   |     20 | RESEARCH   |
+|  7788 | SCOTT   |     20 | RESEARCH   |
+|  7876 | ADAMS   |     20 | RESEARCH   |
+|  7902 | FORD    |     20 | RESEARCH   |
+|  7499 | ALLEN   |     30 | SALES      |
+|  7521 | WARD    |     30 | SALES      |
+|  7654 | MARTIN  |     30 | SALES      |
+|  7698 | BLAKE   |     30 | SALES      |
+|  7844 | TURNER  |     30 | SALES      |
+|  7900 | JAMES   |     30 | SALES      |
++-------+---------+--------+------------+
+17 rows in set (0.00 sec)
+
+mysql> select empno,ename,e.deptno,d.deptno,dname
+    -> from emp e right join dept d on e.deptno=d.deptno
+    -> ;
++-------+---------+--------+--------+------------+
+| empno | ename   | deptno | deptno | dname      |
++-------+---------+--------+--------+------------+
+|     1 | Rajas_D |     10 |     10 | ACCOUNTING |
+|   123 | Rajan   |     10 |     10 | ACCOUNTING |
+|  7782 | CLARK   |     10 |     10 | ACCOUNTING |
+|  7839 | KING    |     10 |     10 | ACCOUNTING |
+|  7934 | MILLER  |     10 |     10 | ACCOUNTING |
+|   124 | Revati  |     20 |     20 | RESEARCH   |
+|  7369 | SMITH   |     20 |     20 | RESEARCH   |
+|  7566 | JONES   |     20 |     20 | RESEARCH   |
+|  7788 | SCOTT   |     20 |     20 | RESEARCH   |
+|  7876 | ADAMS   |     20 |     20 | RESEARCH   |
+|  7902 | FORD    |     20 |     20 | RESEARCH   |
+|  7499 | ALLEN   |     30 |     30 | SALES      |
+|  7521 | WARD    |     30 |     30 | SALES      |
+|  7654 | MARTIN  |     30 |     30 | SALES      |
+|  7698 | BLAKE   |     30 |     30 | SALES      |
+|  7844 | TURNER  |     30 |     30 | SALES      |
+|  7900 | JAMES   |     30 |     30 | SALES      |
+|  NULL | NULL    |   NULL |     40 | OPERATIONS |
++-------+---------+--------+--------+------------+
+18 rows in set (0.00 sec)
+
+mysql> select empno,ename,e.deptno,d.deptno,dname
+    -> from dept d left join emp e on e.deptno=d.deptno;
++-------+---------+--------+--------+------------+
+| empno | ename   | deptno | deptno | dname      |
++-------+---------+--------+--------+------------+
+|     1 | Rajas_D |     10 |     10 | ACCOUNTING |
+|   123 | Rajan   |     10 |     10 | ACCOUNTING |
+|  7782 | CLARK   |     10 |     10 | ACCOUNTING |
+|  7839 | KING    |     10 |     10 | ACCOUNTING |
+|  7934 | MILLER  |     10 |     10 | ACCOUNTING |
+|   124 | Revati  |     20 |     20 | RESEARCH   |
+|  7369 | SMITH   |     20 |     20 | RESEARCH   |
+|  7566 | JONES   |     20 |     20 | RESEARCH   |
+|  7788 | SCOTT   |     20 |     20 | RESEARCH   |
+|  7876 | ADAMS   |     20 |     20 | RESEARCH   |
+|  7902 | FORD    |     20 |     20 | RESEARCH   |
+|  7499 | ALLEN   |     30 |     30 | SALES      |
+|  7521 | WARD    |     30 |     30 | SALES      |
+|  7654 | MARTIN  |     30 |     30 | SALES      |
+|  7698 | BLAKE   |     30 |     30 | SALES      |
+|  7844 | TURNER  |     30 |     30 | SALES      |
+|  7900 | JAMES   |     30 |     30 | SALES      |
+|  NULL | NULL    |   NULL |     40 | OPERATIONS |
++-------+---------+--------+--------+------------+
+18 rows in set (0.00 sec)
+
+mysql> select empno,ename,e.deptno,d.deptno,dname
+    -> from dept d left join emp e on e.deptno=d.deptno
+    -> where ename is null;
++-------+-------+--------+--------+------------+
+| empno | ename | deptno | deptno | dname      |
++-------+-------+--------+--------+------------+
+|  NULL | NULL  |   NULL |     40 | OPERATIONS |
++-------+-------+--------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> select empno,ename,e.deptno,d.deptno,dname
+    -> from dept d right join emp e on e.deptno=d.deptno;
++-------+---------+--------+--------+------------+
+| empno | ename   | deptno | deptno | dname      |
++-------+---------+--------+--------+------------+
+|     1 | Rajas_D |     10 |     10 | ACCOUNTING |
+|   123 | Rajan   |     10 |     10 | ACCOUNTING |
+|   124 | Revati  |     20 |     20 | RESEARCH   |
+|  1111 | Ashwini |   NULL |   NULL | NULL       |
+|  7369 | SMITH   |     20 |     20 | RESEARCH   |
+|  7499 | ALLEN   |     30 |     30 | SALES      |
+|  7521 | WARD    |     30 |     30 | SALES      |
+|  7566 | JONES   |     20 |     20 | RESEARCH   |
+|  7654 | MARTIN  |     30 |     30 | SALES      |
+|  7698 | BLAKE   |     30 |     30 | SALES      |
+|  7782 | CLARK   |     10 |     10 | ACCOUNTING |
+|  7788 | SCOTT   |     20 |     20 | RESEARCH   |
+|  7839 | KING    |     10 |     10 | ACCOUNTING |
+|  7844 | TURNER  |     30 |     30 | SALES      |
+|  7876 | ADAMS   |     20 |     20 | RESEARCH   |
+|  7900 | JAMES   |     30 |     30 | SALES      |
+|  7902 | FORD    |     20 |     20 | RESEARCH   |
+|  7934 | MILLER  |     10 |     10 | ACCOUNTING |
++-------+---------+--------+--------+------------+
+18 rows in set (0.00 sec)
+
+mysql> select empno,ename,e.deptno,d.deptno,dname
+    -> from emp e left join dept d on e.deptno=d.deptno;
++-------+---------+--------+--------+------------+
+| empno | ename   | deptno | deptno | dname      |
++-------+---------+--------+--------+------------+
+|     1 | Rajas_D |     10 |     10 | ACCOUNTING |
+|   123 | Rajan   |     10 |     10 | ACCOUNTING |
+|   124 | Revati  |     20 |     20 | RESEARCH   |
+|  1111 | Ashwini |   NULL |   NULL | NULL       |
+|  7369 | SMITH   |     20 |     20 | RESEARCH   |
+|  7499 | ALLEN   |     30 |     30 | SALES      |
+|  7521 | WARD    |     30 |     30 | SALES      |
+|  7566 | JONES   |     20 |     20 | RESEARCH   |
+|  7654 | MARTIN  |     30 |     30 | SALES      |
+|  7698 | BLAKE   |     30 |     30 | SALES      |
+|  7782 | CLARK   |     10 |     10 | ACCOUNTING |
+|  7788 | SCOTT   |     20 |     20 | RESEARCH   |
+|  7839 | KING    |     10 |     10 | ACCOUNTING |
+|  7844 | TURNER  |     30 |     30 | SALES      |
+|  7876 | ADAMS   |     20 |     20 | RESEARCH   |
+|  7900 | JAMES   |     30 |     30 | SALES      |
+|  7902 | FORD    |     20 |     20 | RESEARCH   |
+|  7934 | MILLER  |     10 |     10 | ACCOUNTING |
++-------+---------+--------+--------+------------+
+18 rows in set (0.00 sec)
+
+mysql> select empno,ename,e.deptno,d.deptno,dname
+    -> from emp e,dept d where e.deptno(+)=d.deptno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')=d.deptno' at line 2
+mysql> select empno,ename,e.deptno,d.deptno,dname
+    -> from emp e left join dept d on e.deptno=d.deptno;
++-------+---------+--------+--------+------------+
+| empno | ename   | deptno | deptno | dname      |
++-------+---------+--------+--------+------------+
+|     1 | Rajas_D |     10 |     10 | ACCOUNTING |
+|   123 | Rajan   |     10 |     10 | ACCOUNTING |
+|   124 | Revati  |     20 |     20 | RESEARCH   |
+|  1111 | Ashwini |   NULL |   NULL | NULL       |
+|  7369 | SMITH   |     20 |     20 | RESEARCH   |
+|  7499 | ALLEN   |     30 |     30 | SALES      |
+|  7521 | WARD    |     30 |     30 | SALES      |
+|  7566 | JONES   |     20 |     20 | RESEARCH   |
+|  7654 | MARTIN  |     30 |     30 | SALES      |
+|  7698 | BLAKE   |     30 |     30 | SALES      |
+|  7782 | CLARK   |     10 |     10 | ACCOUNTING |
+|  7788 | SCOTT   |     20 |     20 | RESEARCH   |
+|  7839 | KING    |     10 |     10 | ACCOUNTING |
+|  7844 | TURNER  |     30 |     30 | SALES      |
+|  7876 | ADAMS   |     20 |     20 | RESEARCH   |
+|  7900 | JAMES   |     30 |     30 | SALES      |
+|  7902 | FORD    |     20 |     20 | RESEARCH   |
+|  7934 | MILLER  |     10 |     10 | ACCOUNTING |
++-------+---------+--------+--------+------------+
+18 rows in set (0.00 sec)
+
+mysql> select empno,ename,e.deptno,d.deptno,dname
+    -> from emp e full join dept d on e.deptno=d.deptno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'full join dept d on e.deptno=d.deptno' at line 2
+mysql> select empno,ename,e.deptno,d.deptno,dname
+    -> from emp e left join dept d on e.deptno=d.deptno
+    -> union
+    -> select empno,ename,e.deptno,d.deptno,dname
+    -> from emp e right join dept d on e.deptno=d.deptno;
++-------+---------+--------+--------+------------+
+| empno | ename   | deptno | deptno | dname      |
++-------+---------+--------+--------+------------+
+|     1 | Rajas_D |     10 |     10 | ACCOUNTING |
+|   123 | Rajan   |     10 |     10 | ACCOUNTING |
+|   124 | Revati  |     20 |     20 | RESEARCH   |
+|  1111 | Ashwini |   NULL |   NULL | NULL       |
+|  7369 | SMITH   |     20 |     20 | RESEARCH   |
+|  7499 | ALLEN   |     30 |     30 | SALES      |
+|  7521 | WARD    |     30 |     30 | SALES      |
+|  7566 | JONES   |     20 |     20 | RESEARCH   |
+|  7654 | MARTIN  |     30 |     30 | SALES      |
+|  7698 | BLAKE   |     30 |     30 | SALES      |
+|  7782 | CLARK   |     10 |     10 | ACCOUNTING |
+|  7788 | SCOTT   |     20 |     20 | RESEARCH   |
+|  7839 | KING    |     10 |     10 | ACCOUNTING |
+|  7844 | TURNER  |     30 |     30 | SALES      |
+|  7876 | ADAMS   |     20 |     20 | RESEARCH   |
+|  7900 | JAMES   |     30 |     30 | SALES      |
+|  7902 | FORD    |     20 |     20 | RESEARCH   |
+|  7934 | MILLER  |     10 |     10 | ACCOUNTING |
+|  NULL | NULL    |   NULL |     40 | OPERATIONS |
++-------+---------+--------+--------+------------+
+19 rows in set (0.00 sec)
+
+mysql> use test;
+Database changed
+mysql> select * from emp;
+ERROR 1146 (42S02): Table 'test.emp' doesn't exist
+mysql> select * from product;
++------+---------------+------+--------+------+
+| pid  | pname         | qty  | price  | cid  |
++------+---------------+------+--------+------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |
+|    3 | Pringles123   |   12 | 150.00 |    1 |
+|    4 | Marie gold    |   20 |  50.00 |    2 |
+|    5 | nice1234      |   35 |  45.00 |    2 |
+|    6 | good day123   |   45 |  60.00 |    2 |
+|   20 | Hide and seek |   45 |  40.00 |    2 |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |
++------+---------------+------+--------+------+
+7 rows in set (0.00 sec)
+
+mysql> select * from category;
++------+-------------+-------------------------+
+| cid  | cname       | cdesc                   |
++------+-------------+-------------------------+
+|    1 | chips       | very crispy             |
+|    2 | biscuits    | sweet and tasty         |
+|    3 | chocolate   | yummmmmy                |
+|    4 | cold drinks | thanda thanda cool cool |
++------+-------------+-------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select *
+    -> from product p  right join  catetegory c on p.cid=c.cid;
+ERROR 1146 (42S02): Table 'test.catetegory' doesn't exist
+mysql> select *
+    -> from product p  right join  category c on p.cid=c.cid;
++------+---------------+------+--------+------+------+-------------+-------------------------+
+| pid  | pname         | qty  | price  | cid  | cid  | cname       | cdesc                   |
++------+---------------+------+--------+------+------+-------------+-------------------------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |    1 | chips       | very crispy             |
+|    3 | Pringles123   |   12 | 150.00 |    1 |    1 | chips       | very crispy             |
+|    4 | Marie gold    |   20 |  50.00 |    2 |    2 | biscuits    | sweet and tasty         |
+|    5 | nice1234      |   35 |  45.00 |    2 |    2 | biscuits    | sweet and tasty         |
+|    6 | good day123   |   45 |  60.00 |    2 |    2 | biscuits    | sweet and tasty         |
+|   20 | Hide and seek |   45 |  40.00 |    2 |    2 | biscuits    | sweet and tasty         |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |    3 | chocolate   | yummmmmy                |
+| NULL | NULL          | NULL |   NULL | NULL |    4 | cold drinks | thanda thanda cool cool |
++------+---------------+------+--------+------+------+-------------+-------------------------+
+8 rows in set (0.00 sec)
+
+mysql> desc product;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| pid   | int          | YES  |     | NULL    |       |
+| pname | varchar(25)  | YES  |     | NULL    |       |
+| qty   | int          | YES  |     | NULL    |       |
+| price | decimal(9,2) | YES  |     | NULL    |       |
+| cid   | int          | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> insert into product(pid,pname,qty,price) values(145,'bread',30,40.00);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from product;
++------+---------------+------+--------+------+
+| pid  | pname         | qty  | price  | cid  |
++------+---------------+------+--------+------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |
+|    3 | Pringles123   |   12 | 150.00 |    1 |
+|    4 | Marie gold    |   20 |  50.00 |    2 |
+|    5 | nice1234      |   35 |  45.00 |    2 |
+|    6 | good day123   |   45 |  60.00 |    2 |
+|   20 | Hide and seek |   45 |  40.00 |    2 |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |
+|  145 | bread         |   30 |  40.00 | NULL |
++------+---------------+------+--------+------+
+8 rows in set (0.00 sec)
+
+mysql> select *
+    -> from product p  inner join  category c on p.cid=c.cid;
++------+---------------+------+--------+------+------+-----------+-----------------+
+| pid  | pname         | qty  | price  | cid  | cid  | cname     | cdesc           |
++------+---------------+------+--------+------+------+-----------+-----------------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |    1 | chips     | very crispy     |
+|    3 | Pringles123   |   12 | 150.00 |    1 |    1 | chips     | very crispy     |
+|    4 | Marie gold    |   20 |  50.00 |    2 |    2 | biscuits  | sweet and tasty |
+|    5 | nice1234      |   35 |  45.00 |    2 |    2 | biscuits  | sweet and tasty |
+|    6 | good day123   |   45 |  60.00 |    2 |    2 | biscuits  | sweet and tasty |
+|   20 | Hide and seek |   45 |  40.00 |    2 |    2 | biscuits  | sweet and tasty |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |    3 | chocolate | yummmmmy        |
++------+---------------+------+--------+------+------+-----------+-----------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from category;
++------+-------------+-------------------------+
+| cid  | cname       | cdesc                   |
++------+-------------+-------------------------+
+|    1 | chips       | very crispy             |
+|    2 | biscuits    | sweet and tasty         |
+|    3 | chocolate   | yummmmmy                |
+|    4 | cold drinks | thanda thanda cool cool |
++------+-------------+-------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select *
+    -> from product p  right join  category c on p.cid=c.cid;
++------+---------------+------+--------+------+------+-------------+-------------------------+
+| pid  | pname         | qty  | price  | cid  | cid  | cname       | cdesc                   |
++------+---------------+------+--------+------+------+-------------+-------------------------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |    1 | chips       | very crispy             |
+|    3 | Pringles123   |   12 | 150.00 |    1 |    1 | chips       | very crispy             |
+|    4 | Marie gold    |   20 |  50.00 |    2 |    2 | biscuits    | sweet and tasty         |
+|    5 | nice1234      |   35 |  45.00 |    2 |    2 | biscuits    | sweet and tasty         |
+|    6 | good day123   |   45 |  60.00 |    2 |    2 | biscuits    | sweet and tasty         |
+|   20 | Hide and seek |   45 |  40.00 |    2 |    2 | biscuits    | sweet and tasty         |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |    3 | chocolate   | yummmmmy                |
+| NULL | NULL          | NULL |   NULL | NULL |    4 | cold drinks | thanda thanda cool cool |
++------+---------------+------+--------+------+------+-------------+-------------------------+
+8 rows in set (0.00 sec)
+
+mysql> select *
+    -> from product p  left join  category c on p.cid=c.cid;
++------+---------------+------+--------+------+------+-----------+-----------------+
+| pid  | pname         | qty  | price  | cid  | cid  | cname     | cdesc           |
++------+---------------+------+--------+------+------+-----------+-----------------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |    1 | chips     | very crispy     |
+|    3 | Pringles123   |   12 | 150.00 |    1 |    1 | chips     | very crispy     |
+|    4 | Marie gold    |   20 |  50.00 |    2 |    2 | biscuits  | sweet and tasty |
+|    5 | nice1234      |   35 |  45.00 |    2 |    2 | biscuits  | sweet and tasty |
+|    6 | good day123   |   45 |  60.00 |    2 |    2 | biscuits  | sweet and tasty |
+|   20 | Hide and seek |   45 |  40.00 |    2 |    2 | biscuits  | sweet and tasty |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |    3 | chocolate | yummmmmy        |
+|  145 | bread         |   30 |  40.00 | NULL | NULL | NULL      | NULL            |
++------+---------------+------+--------+------+------+-----------+-----------------+
+8 rows in set (0.00 sec)
+
+mysql> select *
+    -> from product p  left join  category c on p.cid=c.cid
+    -> union
+    -> select *
+    -> from product p  right join  category c on p.cid=c.cid
+    -> ;
++------+---------------+------+--------+------+------+-------------+-------------------------+
+| pid  | pname         | qty  | price  | cid  | cid  | cname       | cdesc                   |
++------+---------------+------+--------+------+------+-------------+-------------------------+
+|    2 | Nachos123     |  302 | 150.00 |    1 |    1 | chips       | very crispy             |
+|    3 | Pringles123   |   12 | 150.00 |    1 |    1 | chips       | very crispy             |
+|    4 | Marie gold    |   20 |  50.00 |    2 |    2 | biscuits    | sweet and tasty         |
+|    5 | nice1234      |   35 |  45.00 |    2 |    2 | biscuits    | sweet and tasty         |
+|    6 | good day123   |   45 |  60.00 |    2 |    2 | biscuits    | sweet and tasty         |
+|   20 | Hide and seek |   45 |  40.00 |    2 |    2 | biscuits    | sweet and tasty         |
+|  123 | sfgdfg        |   45 | 123.00 |    3 |    3 | chocolate   | yummmmmy                |
+|  145 | bread         |   30 |  40.00 | NULL | NULL | NULL        | NULL                    |
+| NULL | NULL          | NULL |   NULL | NULL |    4 | cold drinks | thanda thanda cool cool |
++------+---------------+------+--------+------+------+-------------+-------------------------+
+9 rows in set (0.00 sec)
+
+mysql>

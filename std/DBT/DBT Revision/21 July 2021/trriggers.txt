@@ -1,0 +1,81 @@
+Triggers are stored programs, which are automatically executed or fired when some events occur.
+
+Triggers are, in fact, written to be executed in response to any of the following events:
+
+    A database manipulation (DML) statement (DELETE, INSERT, or UPDATE).
+
+    A database definition (DDL) statement (CREATE, ALTER, or DROP).
+
+    A database operation (SERVERERROR, LOGON, LOGOFF, STARTUP, or SHUTDOWN).
+
+Triggers could be defined on the table, view, schema, or database with which the event is associated. 
+
+CREATE [OR REPLACE ] TRIGGER trigger_name 
+{BEFORE | AFTER | INSTEAD OF } 
+{INSERT [OR] | UPDATE [OR] | DELETE} 
+[OF col_name] 
+ON table_name 
+[REFERENCING OLD AS o NEW AS n] 
+[FOR EACH ROW] 
+WHEN (condition)  
+DECLARE
+   Declaration-statements
+BEGIN 
+   Executable-statements
+EXCEPTION
+   Exception-handling-statements
+END;
+
+    CREATE [OR REPLACE] TRIGGER trigger_name: Creates or replaces an existing trigger with the trigger_name.
+
+    {BEFORE | AFTER | INSTEAD OF} : This specifies when the trigger would be executed. The INSTEAD OF clause is used for creating trigger on a view.
+
+    {INSERT [OR] | UPDATE [OR] | DELETE}: This specifies the DML operation.
+
+    [OF col_name]: This specifies the column name that would be updated.
+
+    [ON table_name]: This specifies the name of the table associated with the trigger.
+
+    [REFERENCING OLD AS o NEW AS n]: This allows you to refer new and old values for various DML statements, like INSERT, UPDATE, and DELETE.
+
+    [FOR EACH ROW]: This specifies a row level trigger, i.e., the trigger would be executed for each row being affected. Otherwise the trigger will execute just once when the SQL statement is executed, which is called a table level trigger.
+
+    WHEN (condition): This provides a condition for rows for which the trigger would fire. This clause is valid only for row level triggers.
+
+Types of PL/SQL Triggers
+
+There are two types of triggers based on the which level it is triggered.
+1) Row level trigger - An event is triggered for each row upated, inserted or deleted.
+2) Statement level trigger - An event is triggered for each sql statement executed.
+PL/SQL Trigger Execution Hierarchy
+
+The following hierarchy is followed when a trigger is fired.
+1) BEFORE statement trigger fires first.
+2)  BEFORE row level trigger fires, once for each row affected.
+3) AFTER row level trigger fires once for each affected row. 
+4) AFTER statement level trigger fires.
+
+
+
+uses / advantage of triggers
+========================
+log file
+backup
+replication / parallel 
+maintain 
+restrict the user
+
+
+
+insert only :new
+delete only :old
+update :old value as well as :new
+
+
+
+
+
+SELECT * FROM user_triggers WHERE trigger_name = 'Before_Update_Stat_product';
+DROP TRIGGER trigger_name;
+
+

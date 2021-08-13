@@ -1,0 +1,17 @@
+declare
+  salary emp.sal%type;
+  workas emp.job%type;
+begin
+select sal,job into salary,workas
+from emp;
+
+dbms_output.put_line('salary '||salary);
+dbms_output.put_line('work as '||workas);
+
+EXCEPTION 
+
+WHEN TOO_MANY_ROWS THEN
+DBMS_OUTPUT.PUT_LINE (' Your SELECT statement retrieved multiple rows.');
+
+end;
+/
