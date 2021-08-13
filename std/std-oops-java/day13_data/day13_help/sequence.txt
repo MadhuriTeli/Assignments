@@ -1,0 +1,96 @@
+Revision
+Sorting in Java
+
+Enter custom ordering
+Using separate class 
+Sort emps as per emp salary
+
+Sort emps as per join date & salary.
+
+Sort emps as per dept : anonymous inner class (lab work)
+
+
+Using anonymous inner class
+Sort emps as per join date & salary.
+
+
+2. Generic Methods 
+Generic method example : Arrays.toList
+java.util.Arrays class
+public static <T> List<T> asList(T... a)
+: generic method from a non generic class(Arrays)
+i/p : T... a : This method can accept : no args or T[] or T t1,T t2....
+o/p : FIXED size list
+How will you use it for getting a fixed size integer list ?
+
+
+3. More about generic syntax : ? , extends ,super
+
+API : public ArrayList​(Collection<? extends E> c)
+
+Above Constr creates a populated list of type Emp from : AL/LL/Vector/HS/LHS/TS
+of the generic type : Emp or it's sub type
+
+
+Generic syntax :
+? : wild card in generic syntax (it can be replaced by ANY type) : un bounded wild card
+extends : Represents upper bound
+super : Represents lower bound
+? extends E : ANY type E or its sub type 
+? super E : E or its super type
+
+What will happen ? (javac error or no error?)
+1. Vector<Mgr> mgrs=new Vector<>();
+mgs.add(m1)....m10
+ArrayList<Emp> emps=new AL<>(mgrs);//?????????????
+
+2. HashSet<HRMgr> hrMgrs=new HS<>();
+hrMgrs.add(hrm1)....hrm10
+ArrayList<Emp> emps=new AL<>(hrMgrs);//?????????????
+
+3.
+ArrayList<Mgr> mgrs=new AL<>();
+mgrs.add(m1).....m10
+LinkedList<HRMgr> hrMgrs=new LinkedList<>(mgrs);//?????????????
+
+
+4.
+ArrayList<Mgr> mgrs=new AL<>();
+mgrs.add(m1).....m10
+ArrayList<? extends Emp> emp=new AL<>(mgrs);//?????????????
+ArrayList<? extends Object> objs=mgrs;//?????????????
+
+
+
+5.Collections class(Non generic class) :  Can contain a generic Method
+eg : super keyword in generics : lower bound
+Method of Collections class
+public static <T> void sort(List<T> list,Comparator<? super T> c)
+generic method : 
+where does type declaration fit ? : It's placed between method modifiers n ret type
+1st arg : List<T> list : You can pass List of ANY type (eg : AL/LL/Vector : ???
+HS/LHS/TS : ???
+HM/LHM/TM : ???) : 
+Can you pass List of the following types :  
+T --Customer , Student(extends Person) , BankAccount,Flight, Movie,Person , DacStudent (extends Student)
+if above classes have not imple Comparable or Comparator : 
+
+2nd arg : Comparator<? super T> c
+Instance of the class which imple Comparator
+eg : Collections.sort(studentList,comp);//comp : imple Comparator<Student> 
+ Collections.sort(studentList,comp);//comp : imple Comparator<Fruit> 
+Collections.sort(studentList,comp);//comp : imple Comparator<Person> 
+Collections.sort(studentList,comp);//comp : imple Comparator<Object> 
+Collections.sort(studentList,comp);//comp : imple Comparator<eDacStudent> 
+
+
+Extra help : Refer : https://howtodoinjava.com/java/generics/java-generics-what-is-pecs-producer-extends-consumer-super/
+
+
+------------------------------
+Enter Sets
+HashSet , LinkedHashSet , TreeSet
+
+Hashing Algorithm
+
+

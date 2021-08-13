@@ -1,0 +1,108 @@
+1. Revise n complete hashing algorithm
+
+Why Hashing  ?
+
+Hashing is a technique to make things more efficient by effectively narrowing down the search 
+
+What is hashing?
+
+Hashing means using some function or algorithm to map object data to some representative integer value.
+
+This so-called hash code (or simply hash) can then be used as a way to narrow down our search when looking for the item in the hash-based data structure (eg : HashSet,LinkedHashSet,HashMap)
+
+If you want to add elements(refereneces) in hashing based data structure, which contract to be followed ???? (Contract exists between overriding of hashCode n equals)
+
+Mandatory : Equal objects MUST produce SAME hashCode
+eg : b1 & b2 : book type of references
+If you want to add book details in a HashSet
+if (b1.equals(b2)) ---then ---> b1.hashCode() = b2.hashCode()
+
+Optional BUT Recommended : Un equal objects SHOULD produce different hash codes (for the improvement of the hash-based D.S)
+
+HOW ?
+1. Identify PK n use PK members to override equals method
+2. Use the SAME PK data members to override hashCode method.
+
+
+2. Internal working of the hash table
+(refer to a diagram)
+
+
+3.Enter Maps
+
+Objective : 
+
+Create java app for simple banking system.
+BankAccount : acctNo(int : PK) , customer name , type(enum) , balance , opening date (Use Java 8 API : java.time.LocalDate)
+
+4.1Store a/c details in a suitable map to ensure const time performance for : put/get/remove...
+Which is the most suitable D.S ? 
+HashMap<K,V>
+
+
+What will the generic type of the map ?
+HashMap <Integer,BankAccount>
+
+Based upon hashing algo (uses : hashCode n equals)
+Which methods you will have to override to follow the contract , in your BannAccount class?
+1. hashCode
+2. equals
+3. both
+4. NOA
+
+Ans : 4
+
+
+How will you arrange the books in library , for ensuring constant time performance ?
+HashMap<String,Book> : lab work !
+
+
+4.2  Create a populated map of accounts with sample data
+
+4.3 Create A/C
+
+4.7 Display details of all accts
+
+4.4 Get A/C summary
+
+4.5 Funds Transfer
+
+4.6 Close A/C 
+
+4.7 Display balance of all accounts of specific type
+i/p : ac type
+Searching by a/c type : search criteria (value based)
+which method of Map to use ? CAN NOT use any direct MAP API : get/containsKey
+convert Map --> Collection
+
+4.8 Sort bank accounts as per asc order of acct nos (key based criteria)
+key based sorting : can be managed using TreeMap
+
+------------Pending ----------------
+4.9 Sort bank accounts as per acct balance (value based criteria)
+
+
+
+
+Java 8 Date/Time related APIs
+Java 8 New Features 
+java.time : new package is introduced
+LocalDate : Date (immutable)(yr-mon-day)  : inherently thrd safe.
+API 
+1. public static LocalDate now()
+Obtains the current date from the system clock in the default time-zone.
+eg : 
+LocalTime : Time (immutable)(hr-min-sec)  : inherently thrd safe.
+LocalDateTime : Date n Time :  inherently thrd safe.
+eg : ???
+2. public static LocalDate of(int year,int month,int dayOfMonth)
+Obtains an instance of LocalDate from a year, month and day.
+eg : ?????
+3. public static LocalDate parse(CharSequence text)
+Obtains an instance of LocalDate from a text string such as 2007-12-03.
+eg : LocalDate dt=parse(sc.next());//0 based dates
+4. Methods :
+isBefore,isAfter,isEqual
+5. Can you change default DateTime format ? : YES
+
+

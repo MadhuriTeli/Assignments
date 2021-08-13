@@ -1,0 +1,37 @@
+Lab discussion
+
+public ArrayList​(Collection<E> c)
+
+E : Emp 
+Can you populate AL<Emp> from AL<Mgr> ? NO
+Can you populate AL<Emp> from HS<Emp> ? YES
+BUT 
+if you have a List or Set of Mgrs --is it logical to populate it in the AL<Emp> ? YES
+
+
+public ArrayList​(Collection<? extends E> c)
+E : BankAcct 
+(BankAcct <--- SavingAcct , LoanAcct)
+Vector<LoanAcct> accts=new Vector<>();
+accts.add()..... : add 4 loan accts
+
+AL<BankAcct> bankAccts=new AL<>(accts);
+------------------------
+public static <T> void sort(List<T> list, Comparator<? super T> comp)
+
+Vector<BankAccount> accts=new Vector<>();
+accts.add(a1);accts.add(a2);accts.add(a3);
+//BankAccount class has not imple Comparable / Comparator
+Collections.sort(accts,new Comparator<BankAcct>() {....});//javac err or no err? : NO err
+
+Collections.sort(accts,new Comparator<SavingAcct>() {....});//javac err or no err? Yes (for the wrong type of the Comparator)
+
+
+
+
+
+
+
+
+
+

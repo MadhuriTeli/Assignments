@@ -1,0 +1,151 @@
+Revision
+Sorting in Java
+Sort emp details as per dept(asc) n salary(desc)
+Collections.sort(empList,new Comparator<Emp>()
+{
+@Override
+public int compare(Emp e1,Emp e2)
+{
+  int ret=e1.getDept().compareTo(e2.getDept());
+  if(ret == 0)
+   return ((Double)e2.getSal()).compareTo(e1.getSal());
+  return ret
+}
+});
+-----------------------------------------
+1. Iterator & ListIterator
+Iterable<t> : i/f
+iterator() ---> Iterator instance => instance of the cls imple Iterator
+
+
+2. Generic Methods 
+Generic method example : Arrays.toList
+java.util.Arrays class
+public static <T> List<T> asList(T... a)
+: generic method from a non generic class(Arrays)
+i/p : T... a : This method can accept : no args or T[] or T t1,T t2....
+o/p : FIXED size list
+How will you use it for getting a fixed size String list ?
+------------------------
+
+3. More about generic syntax : ? , extends ,super
+(invariance,co-variance,contra-variance)
+invariance : Holder<T> 
+T -- Emp/Customer/Integer...
+Holder<Emp> : what wil happen if u try to add a Fruit / Customer/Date ...class instance? : javac err
+
+What will happen ?
+Consider this : Inheritance hierarchy : Emp <---Mgr <----HRMgr
+Emp <--- Worker <--- TempWorker
+eg : 
+Emp e =new Emp(...);
+Mgr m=new Mgr(..);
+e=m;//no err : upcasting
+List<Emp> emps=new AL<>();//no err
+//add emps in the list
+
+List<Mgr> mgrs=new ArrayList<>();//no err
+emps=mgr; //javac err : even though Mgr IS A EMP , List<Mgr> IS NOT A List<Emp>
+
+List<Object> objects=new AL<>();
+objects.add(123);
+objects.add("fdgsdf");
+objects.add(new Date());
+objects.add(new Emp(....));//no errs
+
+objects=emps;//javac err
+
+API : public ArrayList​(Collection<? extends E> c)
+Above Constr creates a populated list of type Emp from : AL/LL/Vector/HS/LHS/TS
+of the generic type : Emp or it's sub type
+
+
+1. public ArrayList(Collection<? extends E> c)
+eg : ArrayList<Emp> emps=new AL<>(c);
+c : AL/LL/Vector/HS/LHS/TS
+of the generic type : Emp or it's sub type
+
+
+Generic syntax :
+? : wild card in generic syntax (it can be replaced by ANY type) : un bounded wild card
+extends : Represents upper bound
+super : Represents lower bound
+? extends E : ANY type E or its sub type 
+? super E : E or its super type
+
+What will happen ? (javac error or no error?)
+1. Vector<Mgr> mgrs=new Vector<>();
+mgs.add(m1)....m10
+ArrayList<Emp> emps=new AL<>(mgrs);//no javac err
+
+2. HashSet<HRMgr> hrMgrs=new HS<>();
+hrMgrs.add(hrm1)....hrm10
+ArrayList<Emp> emps=new AL<>(hrMgrs);//HS IS A Collection n HRMgr IS A Emp : no err
+3.
+ArrayList<Mgr> mgrs=new AL<>();
+mgrs.add(m1).....m10
+LinkedList<HRMgr> hrMgrs=new LinkedList<>(mgrs);//AL IS A Collection n MGR IS NOT A HRMgr
+
+Ans this !
+ArrayList<Mgr> mgrs=new AL<>();
+mgrs.add(m1).....m10
+ArrayList<? extends Emp> emp=new AL<>(mgrs);//Mgr IS A Emp
+ArrayList<? extends Object> objs=mgrs;//Mgr IS A Object
+
+
+
+3.Collections class(Non generic class) :  Can contain a generic Method
+eg : super keyword in generics : lower bound
+Method of Collections class
+public static <T> void sort(List<T> list,Comparator<? super T> c)
+generic method : 
+where does type declaration fit ? : It's placed between method modifiers n ret type
+1st arg : List<T> list : You can pass List of ANY type (eg : AL/LL/Vector : YES
+HS/LHS/TS : NO
+HM/LHM/TM : NO) : 
+Can you pass List of the following types :  
+T --Customer , Student(extends Person) , BankAccount,Flight, Movie,Person , DacStudent (extends Student)
+if above classes have not imple Comparable or Comparator : 
+
+2nd arg : Comparator<? super T> c
+Instance of the class which imple Comparator
+eg : Collections.sort(studentList,comp);//comp : imple Comparator<Student> 
+ Collections.sort(studentList,comp);//comp : imple Comaprator<Fruit> 
+Collections.sort(studentList,comp);//comp : imple Comaprator<Person> 
+Collections.sort(studentList,comp);//comp : imple Comaprator<Object> 
+Collections.sort(studentList,comp);//comp : imple Comaprator<eDacStudent> 
+
+
+Refer : https://howtodoinjava.com/java/generics/java-generics-what-is-pecs-producer-extends-consumer-super/
+
+
+------------------------------
+Enter Sets
+HashSet , LinkedHashSet , TreeSet
+
+Hashing Algorithm
+-------------------
+Pending!!!!
+
+Java 8 Date/Time related APIs
+Java 8 New Features 
+java.time : new package is introduced
+LocalDate : Date (immutable)(yr-mon-day)  : inherently thrd safe.
+API 
+1. public static LocalDate now()
+Obtains the current date from the system clock in the default time-zone.
+eg : 
+LocalTime : Time (immutable)(hr-min-sec)  : inherently thrd safe.
+LocalDateTime : Date n Time :  inherently thrd safe.
+eg : sop("curnt date "+now());
+2. public static LocalDate of(int year,int month,int dayOfMonth)
+Obtains an instance of LocalDate from a year, month and day.
+eg : ?????
+3. public static LocalDate parse(CharSequence text)
+Obtains an instance of LocalDate from a text string such as 2007-12-03.
+eg : LocalDate dt=parse(sc.next());//0 based dates
+4. Methods :
+isBefore,isAfter,isEqual
+5. Can you change default DateTime format ? : YES
+
+

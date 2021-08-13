@@ -1,0 +1,34 @@
+O(n) performance
+
+in student's hashCode
+Added true
+in student's hashCode
+in student's equals
+Added true
+in student's hashCode
+in student's equals
+in student's equals
+Added true
+in student's hashCode
+in student's equals
+Added false
+Student [rollNo=100, name=Rama, address=Pune]
+Student [rollNo=10, name=Kishor, address=Mumbai]
+Student [rollNo=56, name=Rama, address=Pune]
+Size 3
+-------------------------------------
+O(1) performance
+
+in student's hashCode
+Added true
+in student's hashCode
+Added true
+in student's hashCode
+Added true
+in student's hashCode
+in student's equals
+Added false
+Student [rollNo=100, name=Rama, address=Pune]
+Student [rollNo=56, name=Rama, address=Pune]
+Student [rollNo=10, name=Kishor, address=Mumbai]
+Size 3
