@@ -1,0 +1,85 @@
+Revise : inheritance , polymorphism , up casting , downcasting , with code sample
+co-variance
+
+What will happen?
+Consider Fruit, Apple,Orange,Mango entities
+Can u you organize it in the inhertiance hierarchy? YES
+
+How ?
+Object <----Fruit <-----Mango
+Fruit <-----Apple ....
+
+
+
+Suppose you have added a common taste method in all classes
+eg : public void taste() {.....}
+
+Fruit : "NO specific Taste"
+Apple : Sween n sour
+Orange : sour 
+Mango  : Sweet
+
+In Mango class : you have added a new functionality
+public void pulp() {...}
+
+What will happen ? 
+Fruit f=new Apple(...);//no err : up casting
+f.taste();//o/p : Sween n sour
+f=new Orange(...);
+f.taste();//sour
+f=new Mango();
+f.taste();//sweet
+
+If you want to create a Fruit Basket , which will be the data structure?
+Fruit[] basket=new Fruit[10];
+int counter=0;
+
+How will you add mango,apple,orange to the fruit basket ?
+case 1 : //add an apple
+basket[counter++]=new Apple(....);//up casting
+break;
+case 2 , 3 
+
+How will you display tastes of all the fruits in the basket ?
+{a1,m1,a2,m2,m3,m4,o1,o2,null,null}
+for(Fruit f : basket)
+  if(f != null)
+   f.taste();//no down casting required : taste() to be called on which object : this decision is taken by 
+JVM : run time poly (Dyn method dispatch)
+
+
+f=new Mango();//up casting
+f.pulp();//javac err : since there is no pulp() : Fruit (javac chks by the type of ref)
+((Mango)f).pulp();//no javac err,no runtime err : o/p
+
+
+f=new Orange(..);//up casting
+((Mango) f).pulp();//no javac err, run time err : ClassCastException : Orange can't be cast into Mango
+
+Any solution ? : instanceof : testing RTTI
+
+How will you apply it ?
+
+f=new Orange(..);//up casting
+if(f instanceof Mango)
+ ((Mango) f).pulp();
+else
+ sop("Invalid Fruit : Can't be pulped");
+
+
+When will you need to apply downcasting?
+Iff super cls ref  ------> sub class object & trying to invoke some sub class specific func .
+Before down casting : always perform "instanceof" checking , to avoid run time error
+
+
+equals method
+
+Continue with shapes example (abstraction)
+
+final
+
+
+interfaces
+
+
+

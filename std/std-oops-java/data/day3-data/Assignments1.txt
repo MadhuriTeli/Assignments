@@ -1,0 +1,202 @@
+Day 1
+1. Refer to "Installation Instructions" from day1-data\day1_help & complete.
+
+2. MUST go through "readme_day1"  from day1-data\day1_help\readmes & day1-data\day1_help\slides\PPTDay1.pdf
+
+3. Go through simple code samples from day1-data\code\src
+
+4. Solve 
+1
+Accept  i/ps from User , till user enters "quit" or any other option.
+I/P : operation(add|sub|mult|div) , number1(double) , number2(double) 
+Display the result of the operation.
+It should be done in a loop , till user enters "quit" 
+
+
+2. Accept 2 double values from User (using Scanner). Check data type.
+. If arguments are not doubles , supply suitable error message & terminate.
+If numbers are double values , print its average.
+eg :
+sop("Enter 2 double nos");
+boolean flag=sc.hasNextDouble();
+if(flag)
+{
+   //read off the 1st token
+ double d1=sc.nextDouble();
+   if(....)
+   {
+       double d2=sc.nextDouble();
+       sop("Avg+....);
+   }
+else {...}
+}
+else {...}
+
+
+
+
+3. Display food menu to user. User will select items from menu along with the quantity. (eg 1. Dosa 2. Samosa .......10 . Generate Bill ) Assign fixed prices to food items
+When user enters 'Generate Bill' option(10) , display total bill & exit.
+
+Day2
+1. Do complete revision of class work & then solve today's assignemnts
+
+2. 
+Solve Tank assignment along with memory picture.
+
+What will be the output ?
+
+class Tank {
+  private int level;
+  Tank(int l)
+   {
+     level=l;
+   }
+  public void setLevel(int level1)
+  {
+    level=level1;
+  }
+  public int getLevel()
+  {
+    return level;
+  }
+}	
+
+public class Assignment {
+  public static void main(String[] args) {
+    Tank t1 = new Tank(10);
+    Tank t2 = new Tank(20);
+     s.o.p("1: t1.level: " + t1.getLevel() +
+          ", t2.level: " + t2.getLevel());
+    t1 = t2;//1st tank obj is marked GC
+    s.o.p("2: t1.level: " + t1.getLevel() +
+          ", t2.level: " + t2.getLevel());
+    t1.setLevel(27);
+     s.o.p("3: t1.level: " + t1.getLevel() +
+          ", t2.level: " + t2.getLevel());
+    t2.setLevel(t1.getLevel()+10);
+     s.o.p("4: t1.level: " + t1.getLevel() +
+          ", t2.level: " + t2.getLevel());
+  }
+}
+
+
+3. Solve
+Create Point class Point2D   : for representing a point in x-y co-ordinate system.
+
+
+3.1 Create a parameterized constructor to accept x & y co-ords.
+
+3.2 Add public String getDetails()) --to return string form point's x & y co-ords
+eg : public String getDetails()
+{
+   return "Point ("+x+","+y+")";
+}
+
+
+3.3 Add isEqual method to Point2D class : boolean returning method : must return true if both points are having same x,y co-ords or false otherwise. 
+eg : p1 , p2
+p1.isEqual(p2) --> true/false
+Method in Point2D class
+boolean isEqual(Point2D anotherPoint)
+{...}
+
+
+
+3.4 Add a method to Point2D class -- to create and return new point having given x & y offset.
+eg : Point2D p1=new Point2D(10,20);
+Point2d p3=p1.createNewPoint(5,-2);//p3 : 15,18
+If user supplies offset of (5, -2) : your method should return a new point object placed at (15,18)
+eg : Point2D createNewPoint(int xOff,iny yOff){
+Point2D newPoint=new Point2D(this.x+xOff,this.y+yOff);
+return newPoint;
+}
+
+3.5 Add calculateDistance method to calculate distance between current point & specified point & return the distance to the caller.
+(eg double  calcDistance(Point2D anotherPoint))
+Hint : Use distance formula . Use java.lang.Math class methods --sqrt, pow etc.
+
+3.6 Write TestPoint class ,  with a main method
+Accept co ordinates of 2 points from user (Scanner) --p1 & p2
+
+3.7 Use getDetails method to display point details.(p1's details & p2's details)
+
+3.8 Invoke isEqual & display if points are same or different (i.e p1 & p2 are located at the same position)
+
+3.9 Create new point p3 , with the dimensions offset from p1.
+input --x offset & y offset
+eg : p1 : 50,100
+Point2D p1=new Point2D(sc.nextInt(),sc.nextInt());//50,100
+sop("Enter x off n y offset);
+Point2D p3=p1.createNewPoint(sc.nextInt(),sc.nextInt());// 5 -3
+//p3 : 55 97
+
+
+
+
+
+
+
+
+3.10 Display distance between 2 points.(between p1 & p2)
+-------------------------------
+Tomorrow's topics
+packages, classpath setting, access specifiers, revising arrays , intro to inheritance
+
+
+Day 3
+1. Revise entire class work.
+
+1.5 
+Copy earlier created Point2D class  n place it under the package "com.geometry"
+Copy earlier created TestPoint class n place it under "tester" package.
+Solve compiler errors n run it without IDE (set CLASSPATH , so that you can run it from anywhere)
+eg : day3_lab/src
+javac -d ..\bin tester\TestPoint.java
+cd ..\bin
+java tester.TestPoint
+
+
+2. Solve
+Create new eclipse project "day3_assgnment"
+Copy Point2D class n TestPoints classalong with the packages in IDE.
+
+2.1 Create a new tester in package "com.tester" : TestPointArray
+ Prompt user , how many points to plot?
+Create suitable array , to store Point2D type of references.
+eg : Point2D[] points=new Point2D[sc.nextInt()];//10 --- 1 obj --filled with 10 nulls
+
+2.2 Add a menu , Run the application till user chooses option 10 (exit)
+
+1 Plot a new point
+I/P --index , x & y
+eg : If user supplies 5 50 100
+Create a Point2D with x, y of (50,100) & its reference should be stored at the 5th index position in array.
+eg : case 1 : sop("Enter index x & y");
+read index , x, y
+boundary checking (0---points.length-1)
+points[index]=new Point2D(x,y);
+break;
+
+2 Display all points plotted so far. (Use for-each)
+Will null checking be required? : YESSS
+eg : for(Point2D p : points)//p=points[0]
+         if(p != null)
+          sop(p.getDetails());
+
+
+3. Test equality of 2 points
+I/P : index1 , index 2
+eg If user enters 1 7 , you have to check if point at 1st n 7th index is same.
+If same , print "SAME" , otherwise print "DIFFERENT"
+
+4. Calculate distance
+I/P strt , end point indexes.
+eg : If user enters 2 6
+Find out the distance between 2nd & 6th point. (array indexes start from 0)
+
+10. Exit
+
+Note : Boundary condition checking & null checking is expected.
+(Meaning : if user supplies invalid index , then give error message : invalid index --out of range
+If no point is plotted at user specified index , then give error message : invalid index -- no point plotted here.)

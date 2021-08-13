@@ -1,0 +1,109 @@
+Today's Topics
+
+static keyword
+Inheritance 
+Polymorphism
+
+Revise
+Arrays Mem Pic
+Assignment help
+Q. Test equality of 2 points
+I/P : index1 , index 2
+eg If user enters 1 7 , you have to check if point at 1st n 7th index is same.
+If same , print "SAME" , otherwise print "DIFFERENT"
+
+eg : 
+Point2D[] points=new Point2D[sc.nextInt()];//10 --- 1 obj --filled with 10 nulls
+boolean exit=false;
+while(!exit)
+{
+ sop("Menu ....");
+ switch (sc.nextInt())
+ {
+    case 3 : sop("Enter index1 n index2")
+    int index1=sc.nextInt();
+    int index2=sc.nextInt();
+    if(index1 >= 0 && index1 < points.length && index2 >= 0 && index2 < points.length)
+   {
+       Point2D p1=points[index1];
+       Point2D p2=points[index2];
+       if (p1 != null && p2 != null)
+          sop(p1.isEqual(p2)?"SAME":"DIFFERENT")
+       else
+         sop("No point plotted!!!!!!!!!!!!!");
+
+   }
+   else
+         sop("Index out of range!!!!!!!!!!!!!!!!!!");
+
+    break;
+    case 10 : exit=true;
+    break;
+ }
+}
+
+
+
+Dynamic init of arrays
+
+
+API --java.util.Arrays : helper class for array handling
+Method 
+public static String toString(double[] a)
+Returns a string representation of the contents of the specified array.
+
+Solve
+ Double box width for all boxes having volume > 100.(USE for-each & solve this)
+--lab assignment
+
+
+
+1. Multi dimensional arrays : Array of arrays (array of references)
+What will be the memory diagram for 
+double[][] data=new double[3][4];
+
+2. Solve this
+int[][] data = new int[2][];
+data[0]=new data[3];
+data[1]=new data[4];
+
+How will you init them ? : nested for loop
+How will you display them ? Arrays.deepToString
+
+Dynamic init of arrays 
+int[][] data={{1,2,3},{4,5},{6,7,8,9}};
+Display it : Arrays.deepToString
+
+
+
+2. static keyword
+refer : "regarding static"
+
+3. Inheritance 
+refer to "readme inheritance.txt" from today's help.
+Person-Student-Faculty scenarion (constr invocation in inheritance hierarchy)
+refer to assgn1 pic.(Fruits / taste scenario)
+
+refer to "readme inheritance.txt" from today's help.
+4.1 What is inheritance  n Why 
+4.2 Real life Examples 
+4.3 Types
+4.4 constr invocation in inheritance hierarchy
+super keyword
+4.5 Show details : via toString : method overriding
+
+Objective : Arrange an event to invite students n faculties
+(eg : EventOrganizer app : tester --main / scanner)
+Prompt user for event capacity.
+Create suitable data structure to hold the participant details
+eg : Person[] participants=....
+Options 
+1. Register Student : 
+2. Register Faculty : 
+3. Display participant details : for-each (is null checking required : YESSS)
+10. Exit
+
+
+
+
+
