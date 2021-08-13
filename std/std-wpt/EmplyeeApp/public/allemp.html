@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+         <title>Employee Details</title>
+         <script src="scripts/jquery.min.js"></script>
+    </head>
+    <body>
+            <button id="btndisplay">Getemployee</button>
+           
+            <p id="para"> </p>
+            <script>
+                    $(document).ready(function(){
+                      $("#btndisplay").click(function(){
+                           var p=document.getElementById("para");
+                     
+                           $.get("/api/employees", function(data, status){
+                                console.log(data);
+                                for(var i=0;i<data.length;i++)
+                                {  
+                                    p.innerHTML=p.innerHTML + " " +data[i].id+" " +data[i].firstname+" " 
+                                    +data[i].lastname+" " +data[i].email+" " +data[i].phone+" " 
+                                    +data[i].salary+"<br />";
+                                    
+                                }                                                                             
+                                });
+                       });
+                    });
+            </script>
+    </body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "demosforrevision",
+  "version": "1.0.0",
+  "description": "Its Demo package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sonali Mogal",
+  "license": "ISC",
+  "dependencies": {
+    "nodemailer": "^6.6.3"
+  }
+}

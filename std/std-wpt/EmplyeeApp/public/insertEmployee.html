@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Insert New Employee</title>
+    <script src="scripts/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var url="http://localhost:9898/api/employees";
+          $("#btninsert").click(function(){
+            // var newEmployee={
+            //         "id":4,
+            //         "firstname":"kavita",
+            //         "lastname":"sharma",
+            //         "email":"kavitas@gamil.com",
+            //         "phone":"7585956535",
+            //         "salary":20000
+            //     };
+           var id=$('#id').val();
+           var firstname=$('#firstname').val();
+           var lastname=$('#lastname').val();
+           var email=$('#email').val();
+           var phone=$('#phone').val();
+           var salary=$('#salary').val();
+
+             var newEmployee={
+                    "id":id,
+                    "firstname":firstname,
+                    "lastname":lastname,
+                    "email":email,
+                    "phone":phone,
+                    "salary":salary
+                };
+                console.log(newEmployee);
+                $.ajax({
+                        url: url,  // url of rest api
+                        type: 'POST',// request type of rest api
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data:JSON.stringify(newEmployee), // data to be sent through request body
+                        success: function (result) {
+                           console.log("new Employee is posted to server ");
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                });
+           });
+        });
+</script>
+</head>
+<body>
+    <h1>Insert New Employee</h1>
+    <hr/>
+     <form  action="/api/employees" method="POST">
+        <table>
+            <tr>
+                <td><label>ID</label></td>
+                <td><input type="text" name="id" id="id" required /></td>
+            </tr>
+            <tr>
+                <td><label>First Name</label></td>
+                <td><input type="text" name="firstname" id="firstname"  required/></td>
+            </tr>
+            <tr>
+                <td><label>Last Name</label></td>
+                <td><input type="text" name="lastname" id="lastname" required /></td>
+            </tr>
+            <tr>
+                <td><label>Email Address</label></td>
+                <td><input type="eamil" name="email" id="email"  required/></td>
+            </tr>
+            <tr>
+                <td><label>Contact Number</label></td>
+                <td><input type="text" name="phone" id="phone"  required/></td>
+            </tr>
+            <tr>
+                <td><label>Salary</label></td>
+                <td><input type="text" name="salary" id="salary"  required/></td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td><input type="button" id="btninsert" name="btninsert" value="Insert"/></td>
+            </tr>  
+        </table>
+     </form>
+</body>
+</html>
