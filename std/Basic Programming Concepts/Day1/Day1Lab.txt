@@ -1,0 +1,29 @@
+1:write program to test Hello World.
+
+2:Write a program to adddition of two numbers also addition of two characters.
+
+3:Find the compound amount and compound interest on the principal Rs.20,000 borrowed at 6% compounded annually for 3 years.
+
+4:Write a program to calculate power of a number.
+
+5:Write a program to swap two numbers.
+ 
+6:Write a program to find factorial of a given number.
+
+7:Write a program to find m to the power n
+
+8:Check if number is a prime number or not.
+
+9:Sum of series :
+	1+2+3+….+n
+10:Check whether the number is palindrome or not?
+
+11:Write a  program to find sum of all even and odd numbers between 1 to n. 
+
+12: Write a  program to enter a number and print its reverse.
+
+13:Write a  program to print all Prime numbers between 1 to n. 
+
+14:Write a program to check entered number is Armstrong number or not.
+
+15:Write a program to find greatest of three numbers using nested if-else.

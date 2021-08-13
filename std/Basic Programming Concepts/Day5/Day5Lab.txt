@@ -1,0 +1,57 @@
+Problem Statement 1
+1.1:Create 2 classes Student and Batch. Student class is in pack1 and Batch
+class is in pack2. Write accept() and  display() methid in both the class to accept and to display info.
+Write a Test class to print Student and Batch
+information.
+1.2:Use the Student and Batch classes created earlier. It should contain
+public  rollNo,Public  Name, private  Grade and default  totalMarks attributes and using Batch
+class, check accessibility of there attributes in same package .
+1.3:
+Create new package pack2.
+create class testStudent in pack3;
+create object of Student class from pack1 and access methods.Try to check accessibility.
+
+
+Problem Statement 2:
+2.1: Create Employee class with empid,name,address,salary.Use Getter Setters
+2.2 :create array of 5 employees...show all employees using for loop as well as for each loop...in same assignment
+2.3:create array of 5 employees ...show those employee who are getting salary >20000.
+
+
+
+Problem STatement3
+3->Create Date Class with Data Members day,month, year
+
+3.1:
+Create an object and initialize it using mutator methods and accesses it using
+accessor methods. Print the date.
+
+3.2
+Create two objects and initialize them using no-argument and parameterized
+constructor respectively. Print the date. 
+
+Problem Statement 4:
+->Create a java applicstion for the following.
+ Create a Customer class , with data members (all private : tight encapsulation)
+name(String),email(String),age(int), creditLimit(double)
+
+4.1 Supply a parameterized constructor to accept all details from user
+
+4.2 Supply an argument less  constructor to init default name to "Riya" , email to "riya@gmail.com",age=25,creditLimit=10000
+(Must use constructor chaining)
+
+4.3 Write a method , getDetails to return String form of customer name & credit limit only.
+4.4 Supply getter & setter for creditLimit.
+
+Naming convention : public void setCreditLimit(double limit) {...}
+public double getCreditLimit(){...}
+
+4.5 Create a TestCustomer class . Use scanner to accept user i/ps.
+Create 2 customers using 2 different constructors(4.1 : customer1 ,4.2 : customer2)
+Display customer details of both customers.
+Prompt user , for changing creditLimit of the customer2.
+Display new credit limit on the console.
+
+
+	
+

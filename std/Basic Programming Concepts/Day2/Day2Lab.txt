@@ -1,0 +1,35 @@
+1:Java program to print the following pattern on the console
+*
+* *
+* * *
+* * * *
+* * * * *
+
+2:Write a program which will accept student information like rollno,name,5 subject marks.calculate total and percentage.calculate grade.. 
+           per >75 grade :A
+           per<74 and >60 :B
+           per<59  :C
+
+3:Write function to swap two numbers.
+
+4:Write functions for making addition of diffrent types(use FunctionOverloading);
+
+5:Write a program to accept array of 5 numbers and display it.
+
+6:Write a program which read aaray of 5 elements and print reverse array.
+
+7:Write a Java program , accept array ,accept number from user and  find the index of number in array if present else show message not exist.
+
+8:Write a Java program to find the maximum and minimum value of an array.
+
+9: Write a program to create an array of integers and perform following operations on that array like 
+finding the sum, average, maximum and minimum number in that array. Accept the numbers of the 
+array from user.
+
+10: Write a  program to input basic salary of an employee and calculate its Gross salary according to 
+following: Basic Salary <= 10000 : HRA = 20%, DA = 80% Basic Salary <= 20000 : HRA = 25%, DA = 90% 
+Basic Salary > 20000 : HRA = 30%, DA = 95%
+
+11:Write a menu driven program for stationary shop.Items are 1:Pen 2:Pencil 3:NoteBook 4:Bottle 5:ColorBox.
+1 pen cost is 10Rs,Pencil is 5 rs.NoteBook is 20 rs Bottle is 30 rs and ColorBox is at 50 Rs.
+Calculate Total of all purchesed items. 

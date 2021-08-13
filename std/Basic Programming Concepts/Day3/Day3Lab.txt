@@ -1,0 +1,14 @@
+1:Write a function to accept array of string.Display all elements in uppercase.
+2:Write a Java program to accept 2D aaray elements.Display all elements.
+3:Write a java program to make the addition of two 2D array And store result in Third array.
+4.Write a function /method which takes variable no of int numbers as an argument and returns the sum of these arguments as an output.
+5:Write a program to  merge two arrays into a single array.
+6:Write a java program to sort array.
+7:Write a java program to convert char array into String.
+8: Create a java application for the following.
+ Create a Customer class , with data members (all private : tight encapsulation)
+name(String),email(String),age(int).Supply a parameterized constructor to accept all details from user.Supply an argument less  constructor to init default name to "Riya" , email to "riya@gmail.com",age=25.Write a method displayCustomer to display customer details.
+9:Create Date class with  data members day,month,year.create getter setter for data members.writ display function to display date.
+
+
+

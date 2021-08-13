@@ -1,0 +1,48 @@
+1:Create Date class with  data members day,month,year.
+Write a method to accept all data members.write display function to display date.
+--------------------------------------------------------------------------------
+2:>Create a java applicstion for the following.
+ Create a Customer class , with data members (all private : tight encapsulation)
+name(String),email(String),age(int), creditLimit(double)
+
+2.1 Write acceptInfo() method to accept customer details:
+
+2.2 Write a method , showDetails to display customer name & credit limit only.
+
+Naming convention : public void setCreditLimit(double limit) {...}
+public double getCreditLimit(){...}
+
+2.3 Create a TestCustomer class . Use scanner to accept user i/ps.
+Create 2 customers object.
+Display customer details of both customers.
+Prompt user , for changing creditLimit of the customer2.
+Display new credit limit on the console.
+
+----------------------------------------------------------------------------------
+
+3:Consider that payroll software needs to be developed for computerization of
+operations of an ABC organization. The organization has employees.
+3.1. Construct a class Employee with following members using private access
+specifies:
+ Employee Id integer
+ Employee Name string
+ Basic Salary double
+ HRA double
+ Medical double
+ PF double
+PT double
+ Net Salary double
+ Gross Salary double
+Please use following expressions for calculations:
+ * HRA = 50% of Basic Salary
+* PF = 12% of Basic Salary
+* PT = Rs. 200
+
+3.2. Write methods to display the details of an employee and calculate the gross
+and net salary.
+* Goss Salary = Basic Salary + HRA + Medical
+* Net Salary = Gross Salary – (PT + PF)
+
+Create a TestEmployee Class.Create Object of employee class and assign values and display Details.
+------------------------------------------------------------------------
+4:

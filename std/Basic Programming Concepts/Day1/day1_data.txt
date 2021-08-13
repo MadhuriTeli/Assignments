@@ -1,0 +1,52 @@
+What Is JAVA?
+Java is a general-purpose, class-based, object-oriented programming language designed for having lesser implementation dependencies. It is a computing platform for application development. 
+
+History of Java Programming Language
+Here are important landmarks from the history of the Java language:
+The Java language was initially called OAK.
+Originally, it was developed for handling portable devices and set-top boxes. Oak was a massive failure.
+In 1995, Sun changed the name to "Java" and modified the language to take advantage of the burgeoning www (World Wide Web) development business.
+Later, in 2009, Oracle Corporation acquired Sun Microsystems and took ownership of three key Sun software assets: Java, MySQL, and Solaris.
+
+Components Of Java Programming Language
+A Java Programmer writes a program in a human-readable language called Source Code. Therefore, the CPU or Chips never understand the source code written in any programming language.
+
+These computers or chips understand only one thing, which is called machine language or code. These machine codes run at the CPU level. Therefore, it would be different machine codes for other models of CPU.
+
+However, you need to worry about the machine code, as programming is all about the source code. The machine understands this source code and translates them into machine understandable code, which is an executable code.
+
+All these functionalities happen inside the following 3 Java platform components:
+
+Java Development kit (JDK)
+JDK is a software development environment used for making applets and Java applications. The full form of JDK is Java Development Kit. Java developers can use it on Windows, macOS, Solaris, and Linux. JDK helps them to code and run Java programs. It is possible to install more than one JDK version on the same computer.
+
+Why use JDK?
+Here are the main reasons for using JDK:
+
+JDK contains tools required to write Java programs and JRE to execute them.
+It includes a compiler, Java application launcher, Appletviewer, etc.
+Compiler converts code written in Java into byte code.
+Java application launcher opens a JRE, loads the necessary class, and executes its main method.
+Java Virtual Machine (JVM):
+Java Virtual Machine (JVM) is an engine that provides a runtime environment to drive the Java Code or applications. It converts Java bytecode into machine language. JVM is a part of the Java Run Environment (JRE). In other programming languages, the compiler produces machine code for a particular system. However, the Java compiler produces code for a Virtual Machine known as Java Virtual Machine.
+
+Why JVM?
+Here are the important reasons of using JVM:
+
+JVM provides a platform-independent way of executing Java source code.
+It has numerous libraries, tools, and frameworks.
+Once you run a Java program, you can run on any platform and save lots of time.
+JVM comes with JIT (Just-in-Time) compiler that converts Java source code into low-level machine language. Hence, it runs faster than a regular application.
+Java Runtime Environment (JRE)
+JRE is a piece of software that is designed to run other software. It contains the class libraries, loader class, and JVM. In simple terms, if you want to run a Java program, you need JRE. If you are not a programmer, you don't need to install JDK, but just JRE to run Java programs.
+
+Why use JRE?
+Here are the main reasons of using JRE:
+
+JRE contains class libraries, JVM, and other supporting files. It does not include any tool for Java development like a debugger, compiler, etc.
+It uses important package classes like math, swing, util, lang, awt, and runtime libraries.
+If you have to run Java applets, then JRE must be installed in your system.
+
+
+
+
