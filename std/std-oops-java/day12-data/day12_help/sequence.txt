@@ -1,0 +1,67 @@
+
+Revise
+
+Collection Framework Overview
+What is it ? : Readymade implementation of dynamic data structures(List,Set,Map) + DSA
+
+Why ? : Supports dynamic data structures, insertion /deletion , searching /sorting , CRUD operations
+
+Inheritance Hierarchy
+(refer to diagram)
+
+List Features & implementation classes
+
+---------------------------
+Objectives
+
+0. Create CollectionUtils , to populate a list of 5 emps
+Access it from the tester
+
+1. Attaching Iterator n list iterator
+Display emp details using iterator
+Display emp names from a specific department , joined after specific date.
+Remove emp details drawing salary > specific salary
+Display emp details in reverse order.
+
+2. Complete ArrayList based objectives
+
+2.1. Create empty AL to store emp info.
+Emp : id , name , salary , deptId(enum),joinDate (Date)
+
+2.2 Accept emp details from user n store it in AL
+i/p : id , name , salary , deptId(enum), joinDate (Date)
+Hint : add method
+
+2.3 Fetch Emp details from AL
+i/p : emp id
+o/p : in case of success : display emp details o.w throw custom exception
+Hint : indexOf & get
+
+2.4. Update emp salary n dept .
+i/p : id , salry incr , new dept id
+Hint : indexOf & get methods of ArrayList 
+Then use setters for salary increment & new department.
+
+2.5 Delete emp info
+i/p : emp id
+Hint : remove method of ArrayList 
+
+2.6 Sort emps as per emp ids
+----------------------
+Pending
+
+
+2.7 Sort emps as per emp salary
+
+2.8 Sort emps as per join date & salary.
+
+3. Enter Sets
+
+
+
+
+
+
+
+
+
