@@ -1,0 +1,85 @@
+Today's Topics
+Revise interfaces
+Exception Handling 
+String Handling
+
+Revise 
+What is an interface (i/f) : Blue print/template for a class
+Why ? 
+1. 100 % abstraction
+2. alternative to multiple inheritance
+3. loose coupling (separation between WHAT n HOW)
+
+
+Till JDK 7 : What does it mainly contain ?
+data members : public static final
+methods : public abstract
+
+Relationship between i/f n imple class : 
+Can 1 class imple multiple i/f : YES (implements)
+Can 1 i/f extend from multiple i/f :  YES (extends)
+Can 1 class extend from multiple classes : NO
+Can 1 i/f be imple by multiple imple classes ? : YES
+
+Solve Vehicle equality assignment
+
+--------------------------
+Exception Handling : run time errors
+Flow , inheritance hierarchy , checked vs un checked excs
+keywords : try, catch , throws , finally, throw , try-with-resources
+Java : built-in / custom exception
+
+Objective : Validate speed of vehicle , running on highway
+min speed : 40 
+max speed : 80
+If vehicle's speed  < 40 : alert the driver (Too slow!!!!!!)
+If vehicle's speed  > 80 : alert the driver (Too fast!!!!!!)
+within range : ok mesg
+
+classes : 
+1. Custom exception class
+eg : public class SpeedOutOfRangeException extends Exception
+{
+   public SpeedOutOfRangeException (String mesg)
+   {
+      super(mesg);
+   }
+}
+
+
+2. utils.ValidationRules 
+Add a static method for validating the speed.
+Check the speed
+if(speed < MIN_SPEED)
+ throw new SpeedOutOfRangeException("too slow!!!!!");
+.....
+  
+
+3. Tester : Scanner 
+will invoke validateSpeed method of the ValidationRules .
+
+
+
+
+
+
+
+String Handling
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
