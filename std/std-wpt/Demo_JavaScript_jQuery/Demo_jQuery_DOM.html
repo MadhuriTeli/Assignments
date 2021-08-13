@@ -1,0 +1,90 @@
+<html>
+<head>
+    <style>
+        .cls1{
+            background-color: aquamarine;
+            color: crimson;
+            width: 200px;
+            font-family: cursive;
+            
+        }
+        .cls2{
+            background-color: yellow;
+            color: blue;
+            width: 200px;
+            font-family: cursive;
+            
+        }
+    
+    </style>
+    
+    <script src="jquery.js"></script>
+    <script type="text/javascript">
+    
+        $(document).ready(function(){
+          $("#btn1").click( function(){
+              
+        var str=    $("h1").text();    //get text from <h1>
+              alert(str);
+        $("h1").text("Welcome To IACSD"); //set text to <h1>        
+          });  
+        
+            
+ $("#btn2").click(function(){
+     var txt=$("#txt1").val();//get  text from text control
+     alert(txt);
+     $("h1").text(txt);
+     
+ });           
+            
+            
+   $("#btn3").click(function(){
+       
+       $("ul").append("<li>"+$("#txt1").val()+"</li>");
+       
+   });         
+            
+  $("#btn4").click(function(){
+      
+      $("h2").addClass("cls1");
+  })  ; 
+            
+             $("#btn5").click(function(){
+      
+      $("h2").removeClass("cls1");
+  })  ;
+            
+   $("#btn6").click(function(){
+      
+      $("h2").toggleClass("cls1");
+  })  ;           
+            
+        });
+    
+    
+    </script>
+    </head>
+<body>
+    <center><h1>Welcome To jQuery</h1>
+    <button id="btn1">Get Text</button><br>
+        <br>
+        <input type="text" id="txt1"><br><br>
+    <button id="btn2">Set Text</button>
+    <br><br>
+    <button id="btn3">Append </button>
+    
+    </center>
+    <ul>
+    <li> Red</li>
+    </ul>
+    <center>
+    <h2> Good Morning</h2>
+    <button id="btn4"> Apply CSS</button><br><br>
+        <button id="btn5">Remove CSS</button>
+        <br><br>
+        <button id="btn6">Toggle CSS</button>
+    </center>
+    </body>
+
+
+</html>

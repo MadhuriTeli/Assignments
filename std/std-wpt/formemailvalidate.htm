@@ -1,0 +1,65 @@
+<html>
+<body>
+<script>  
+function validate_form()  
+{  
+    var name=document.myform.name.value;  
+    var password=document.myform.password.value;  
+  
+    if (name==null || name==""){  
+    alert("Name can't be blank");  
+    return false;  
+    }else if(password.length<8){  
+    alert("Password must be at least 8 characters long.");  
+    return false;  
+    }  
+
+ // email validation
+    var x=document.myform.email.value;  
+    //var x=document.getElementById("email_id").value;
+    alert(x);
+    var atposition=x.indexOf("@");  
+    var dotposition=x.lastIndexOf(".");  
+    
+    if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){  
+    //alert("Please enter a valid e-mail address \n atpostion:"+atposition+"\n dotposition:"+dotposition+"\n length:"+x.length);  
+    document.getElementById("emailspan").innerHTML="Please enter a valid e-mail address";
+    //document.getElementById("emailspan").innerText="Please enter a valid e-mail address";
+    return false;  
+    }else{
+        document.getElementById("emailspan").innerHTML="";
+        //document.getElementById("emailspan").innerText="";
+    } 
+
+    //
+    var num=document.myform.num.value;  
+    if (isNaN(num) || num=="")
+    {  
+    document.getElementById("numloc").innerHTML="Enter Numeric value only";  
+    return false;  
+    }else{
+        alert(num.length);
+        if(num.length<8){  
+        alert("Password must be at least 8 characters long.");  
+        return false;  }
+
+    }
+
+}  
+</script>  
+<body>  
+<form name="myform"  method="POST" action="nextpage.php" onsubmit="return validate_form();">  
+
+    Name: <input type="text" name="name"><br/>  
+    Password: <input type="password" name="password"><br/> 
+    Email: <input type="text" name="email" id="email_id"><span id="emailspan" style="color:red" ></span>
+    <br/>  
+    Mobile Number: <input type="text" name="num"><span id="numloc" style="color:red" ></span><br/>  
+  
+<input type="submit" value="register">  
+<input type="reset" value="reset">  
+</form>  
+</body>
+</html>
+
+ 

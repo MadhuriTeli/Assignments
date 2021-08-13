@@ -1,0 +1,102 @@
+<html>
+    <head><script type="text/javascript">
+    function show()
+    {
+        alert(" You are here in show function");
+    }
+        //show();
+        function createTable()
+        {
+            alert("Ok");
+            //<table>
+       document.write("<table border='1' bgcolor='cyan'>")     
+        //5 rows
+        var i=0,j=0;
+        for(i=0;i<5;i++)
+        {
+         document.write("<tr>")  ;//<tr> 
+             for(j=0;j<3;j++)
+                 {
+                   document.write("<td>"+ j  +"</td>");//<td>  </td>  
+                 }
+         document.write("</tr>")  ;//<tr>     
+        }
+            
+          
+       document.write("</table>");  //</table>
+            
+        }
+        function MyBlur()
+        {
+            
+       //     alert("Losing focus ");
+            
+        }
+        
+        function addition()
+        {
+         var no1=parseInt( document.getElementById("txtNo1").value);
+            var no2=parseInt( document.getElementById("txtNo2").value);
+         var c=no1+no2;
+            document.getElementById("result").innerHTML=c;
+        }
+        function changeText()
+        {
+     //read content from<h2>
+            var str=document.getElementById("heading2").innerHTML;
+            alert(str);
+          
+    //to whom we need to assign text
+            //<h2> with id heading2
+     
+    document.getElementById("heading2").innerHTML="Welcome to IASCD";
+        }
+
+        function changeStyle()
+        {
+    document.getElementById("heading2").style.color="blue";        
+     document.getElementById("heading2").style.backgroundColor="yellow";
+ document.getElementById("heading2").style.fontFamily="cursive";
+        }
+        </script>
+    </head>
+    <body>
+    
+    <h1>Event Demo</h1>
+        
+<input type="button" onclick="show()" value="Click Here">
+        
+ <button onclick="createTable()">Create Table</button>   
+        <br>
+        
+        
+Name:<input type="text" id="txtName"  onblur="MyBlur()"><br>
+pwd :<input type="text" id="txtPwd"><br>
+        <hr>
+        
+No1:<input type="text" id="txtNo1" ><br>
+No2:<input type="text" id="txtNo2"><br>
+        <button onclick="addition()" >Add</button> 
+        <label>Result</label><p id="result"><i></i></p>
+ <hr>
+<h2 id="heading2"> Welcome To JavaScript</h2>  
+<button onclick="changeText()">Change Text</button>
+        <br>
+<button onclick="changeStyle()">Change Style</button>        
+        
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

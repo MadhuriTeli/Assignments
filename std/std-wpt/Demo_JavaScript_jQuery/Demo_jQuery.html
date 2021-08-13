@@ -1,0 +1,70 @@
+<html>
+<head>
+    <style type="text/css">
+        .center{
+            text-align: center;
+            text-transform: uppercase;
+            
+        }
+    
+    
+    </style>
+    <script type="text/javascript" src="jquery.js">
+    </script>
+    <script type="text/javascript">
+   $(document).ready(function(){
+      // alert("ready......");
+       
+       $("#btnHide").click(function(){
+           $("h1").hide();
+       });
+       
+       $("#btnShow").click(function()
+                         {
+       $("h1").show();   
+       });
+       
+       
+       $("#btnToggle").click(function(){
+           $("h1").toggle();
+       });
+       
+       $("#HideH1").click(function(){
+           
+           $("#myH1").hide();
+       })
+       
+       $("#btnHideP").click(function(){
+           $("p.center:first").hide();
+       })
+   });
+    
+    
+    
+    </script>
+    </head>
+
+<body bgcolor="cyan">
+    <center><h1> jQuery Demo</h1>
+    <h1> Welcome To jQuery </h1>
+         <h1 id="myH1"> Welcome   </h1>
+    <input type="button" id="btnHide" value="Hide H1">
+    <br><br>
+     <input type="button" id="btnShow" value="Show H1">
+        <br>
+      <br><br>
+    
+        
+    <input type="button" id="HideH1" value="Hide Single H1">
+       
+    </center>
+    <p class="center">This is para 1<br>674263472364782 478 478624762847624</p>
+    <p class="center" >This is para 2<br> sdghfgsdh gfjsdgsfjgsfsdf</p>
+    
+    <p class="center" >This is para 3<br>#%$#%$#$% 64%$%^$%^$%^$%^$%^ </p>
+    <h2 class="center"> This is H2</h2>
+  <center> <button id="btnHideP">Hide With Class</button></center> 
+    </body>
+
+
+</html>s

@@ -1,0 +1,98 @@
+<html>
+<head>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+    
+$(document).ready(function(){
+  //alert("Doc is ready") ; 
+ 
+    $("#btn1").click(function(){
+        $("h1").hide(5000);
+    });
+    
+    $("#btn2").click(function(){
+        
+        $("#hd1").hide();
+    });
+    
+     $("#btn3").click(function(){
+        $("h1").show();
+    });
+    
+    $("#btn4").click(function(){
+        
+      //  $(".test").hide();
+        $(".test").toggle();
+    });
+
+$("#btn5").click(function(){
+    
+ var str=   $("#hd3").text();//read content of <h3 id="hd3">
+    alert(str);
+    //assign text to hd3
+    
+    $("#hd3").text("This is Changing Text of H3");
+});
+
+    $("#btn6").click(function(){
+        
+     var str=   $("#txtData").val();//get data from textbox
+     alert(str); 
+     $("#hd3").text(str);   
+        
+        
+    });
+});    
+  
+    
+    
+</script> 
+    <style>
+    .test
+        {
+            width: 800px;
+            background-color: cyan;
+            color: darkblue;
+            font-family: cursive;
+        }
+    
+    </style>
+</head>
+    <body>
+    <h1>This is Heading H1</h1>
+    <h1 id="hd1">This is Heading H1</h1>
+    
+ <h1>This is Heading H1</h1>
+    <button id="btn1"> Hide All H1</button>
+   <br>
+<button id="btn2"> Hide With id hd1</button>  
+        <br><br>
+    <button id="btn3"> Show All H1</button> 
+        <h1 class="test">This is Heading H1 with class Test</h1>
+    <button id="btn4">Hide H1 With Class Test</button>
+        
+        
+<hr>
+        <h3>jQuery DOM</h3>
+    <h3 id="hd3"> This is jQuery DOM</h3>    
+     <button id="btn5">Get H3 Text</button>   
+    <br><input type="text" id="txtData">
+        <br><button id="btn6">Get And Change Text</button>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </body>
+</html>

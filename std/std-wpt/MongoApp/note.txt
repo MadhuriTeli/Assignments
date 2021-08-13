@@ -1,0 +1,20 @@
+npm init
+
+npm install mongodb --save
+
+Download and install mongodb package:
+
+npm install mongodb
+
+Creating a Database
+specify a connection URL with the correct ip address and the name of the database you want to create.
+
+var MongoClient = require('mongodb').MongoClient;
+//Create a database named "mydb":
+var url = "mongodb://localhost:27017/mydb";
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  console.log("Database created!");
+  db.close();
+});
