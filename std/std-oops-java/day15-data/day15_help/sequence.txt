@@ -1,0 +1,56 @@
+Revise Hashing algorithm using HashMap
+
+Java 8 new features.
+1. Refer to "java8_new_features.txt"
+
+2. Refer to "regarding lambdas.txt"
+Objectives
+
+1. Create your own functional interface n use it in lambda expression
+eg : Perform ANY arithmetic operation on 2 double values & return the result
+eg --add/multiply/subtract/divide....
+
+1.1 Declare func i/f
+@FunctionalInterface
+interface Computable
+{
+  double compute(double a,double b);
+}
+
+1.2 Utils class 
+Add a static method : to perform any op on 2 double nums
+public static double testCompute(double num1,double num2,Computable ref)
+{
+  return ref.compute(num1,num2);
+}
+
+1.3 Tester 
+main(...)
+{
+//1 : add 2 doubles
+//2 : subtract....
+}
+
+
+Explore Existing higher order functions
+
+2. Collection : forEach 
+Objective : display all emp details from the list.
+eg : AL<Emp> list=populateData();
+list.forEach(t->sop(t));//arg of forEach : Consumer i/f --func i/f : SAM : public void accept(T o)
+
+eg : Increment salary of all emps by 1000
+List<Emp> empList=new AL<>(Arrays.asList(e1,e2,e3,e4));//e1 5000
+empList.forEach((e)->e.setSalary(e.getSalary()+1000));
+
+3. Collection : removeIf
+
+4. Map : forEach
+
+5. Sorting : custom ordering
+Objective : sort products from the list , as per price
+eg : Collections.sort(list,new Comp<Product>() {compare});
+
+
+ 
+

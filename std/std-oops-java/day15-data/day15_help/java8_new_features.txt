@@ -1,0 +1,84 @@
+1. Addition of "default" keyword to add default method implementation ,  in interfaces.
+
+Java 8 enables us to add non-abstract method implementations to interfaces by utilizing the default keyword. This feature is also known as Extension Methods. 
+
+Why default keyword ?
+1. To maintain backward compatibility with earlier Java SE versions
+2. To avoid implementing new functionality in all implementation classes.
+eg : Java added in Iterable<T> interface
+default void forEach(Consumer<? super T> action) -- as a default method implementation
+
+eg :
+
+interface Formula {
+    double calculate(double a);//public n abstract
+	//public 
+    default double sqrt(double a,double b) {
+        return Math.sqrt(a+b);
+    }
+}
+
+In case of ambiguity or to refer to def imple. from i/f -- use InterfaceName.super.methodName(...) syntax
+
+2  Can add static methods in java interfaces --- It's a better alternative to writing static library methods in helper class(eg --Arrays or Collections)
+
+Such static methods can't be overridden in implementation class.
+BUT can be re-declared.
+
+They have to be invoked using interface name , even in implementation or non implementation classes.(otherwise compiler error)
+
+3. Functional interfaces ---An interface which has exactly single abstract method(SAM)  is called functional interface. (were present earlier versions of Java)
+
+eg Runnable,Comparable,Comparator,Iterable,Consumer,Predicate...
+New annotation introduced -- @FunctionalInterface
+(since Java SE 8 : a new package --java.util.function --functional interfaces)
+
+Functional i/f references can be substituted by lambda expressions, method references, or constructor references.
+
+
+Solve --  Is following valid functional interface ?
+public interface A { double calc(int a,int b);} : YES (contains SAM)
+public interface B extends A {} : YES (inherits SAM)
+public interface C extends A { void show();} : NO ( 2 abstract methods)
+public interface D {} --NO (marker / tag i/f)
+public interface E extends A {default void show(){...}
+static boolean test(int data) {...}
+} --YES (SAM)
+
+
+4. Refer to readme of lambda expressions.
+
+5. Date/Time APIs
+Java 8 Date/Time related APIs
+Java 8 New Features 
+java.time : new package is introduced
+LocalDate : Date (immutable)(yr-mon-day)  : inherently thrd safe.
+API 
+1. public static LocalDate now()
+Obtains the current date from the system clock in the default time-zone.
+eg : 
+LocalTime : Time (immutable)(hr-min-sec)  : inherently thrd safe.
+LocalDateTime : Date n Time :  inherently thrd safe.
+eg : sop("curnt date "+now());
+2. public static LocalDate of(int year,int month,int dayOfMonth)
+Obtains an instance of LocalDate from a year, month and day.
+eg : ?????
+3. public static LocalDate parse(CharSequence text)
+Obtains an instance of LocalDate from a text string such as 2007-12-03.
+eg : LocalDate dt=parse(sc.next());//0 based dates
+4. Methods :
+isBefore,isAfter,isEqual
+5. Can you change default DateTime format ? : YES
+How : use java.time.format.DateTimeFormatter
+
+
+
+
+
+
+
+
+
+
+
+

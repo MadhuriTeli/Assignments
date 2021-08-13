@@ -1,0 +1,49 @@
+Memory diagram
+Revise Collection Framework Overview
+
+Enter : List implementation classes : ArrayList
+
+Objective 
+1. Create empty AL to store emp info.
+Emp : id , name , salary , deptId(enum),joinDate (Date)
+
+2. Accept emp details from user n store it in AL
+i/p : id , name , salary , deptId(enum), joinDate (Date)
+Hint : add method
+
+3. Fetch Emp details from AL
+i/p : emp id
+o/p : in case of success : display emp details o.w throw custom exception
+Hint : indexOf & get
+
+4. Update emp salary n dept .
+i/p : id , salry incr , new dept id
+Hint : indexOf & get methods of ArrayList 
+Then use setters for salary increment & new department.
+
+
+5. Delete emp info
+i/p : emp id
+Hint : remove method of ArrayList 
+
+10. Exit
+
+
+Design 
+1. Emp class
+2. Custom exception class
+3. Tester (UI) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

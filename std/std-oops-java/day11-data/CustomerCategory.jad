@@ -1,0 +1,75 @@
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) 
+// Source File Name:   CustomerCategory.java
+
+package com.app.core;
+
+import java.util.Arrays;
+
+public final class CustomerCategory extends Enum
+{
+
+    private CustomerCategory(String s, int i, double charges, String services[])
+    {
+        super(s, i);
+        this.charges = charges;
+        this.services = services;
+    }
+
+    public double getCharges()
+    {
+        return charges;
+    }
+
+    public String[] getServices()
+    {
+        return services;
+    }
+
+    public String toString()
+    {
+        return (new StringBuilder(String.valueOf(name()))).append(" charges : ").append(charges).append(" Services ").append(Arrays.toString(services)).toString();
+    }
+
+    public static CustomerCategory[] values()
+    {
+        CustomerCategory acustomercategory[];
+        int i;
+        CustomerCategory acustomercategory1[];
+        System.arraycopy(acustomercategory = ENUM$VALUES, 0, acustomercategory1 = new CustomerCategory[i = acustomercategory.length], 0, i);
+        return acustomercategory1;
+    }
+
+    public static CustomerCategory valueOf(String s)
+    {
+        return (CustomerCategory)Enum.valueOf(com/app/core/CustomerCategory, s);
+    }
+
+    public static final CustomerCategory SILVER;
+    public static final CustomerCategory GOLD;
+    public static final CustomerCategory DIAMOND;
+    public static final CustomerCategory PLATINUM;
+    private double charges;
+    private String services[];
+    private static final CustomerCategory ENUM$VALUES[];
+
+    static 
+    {
+        SILVER = new CustomerCategory("SILVER", 0, 500D, new String[] {
+            "Platform"
+        });
+        GOLD = new CustomerCategory("GOLD", 1, 1000D, new String[] {
+            "Platform", "Web Server"
+        });
+        DIAMOND = new CustomerCategory("DIAMOND", 2, 1500D, new String[] {
+            "Platform", "Web Server", "App Deployment"
+        });
+        PLATINUM = new CustomerCategory("PLATINUM", 3, 2000D, new String[] {
+            "Platform", "Web Server", "App Deployment", "Docker"
+        });
+        ENUM$VALUES = (new CustomerCategory[] {
+            SILVER, GOLD, DIAMOND, PLATINUM
+        });
+    }
+}
