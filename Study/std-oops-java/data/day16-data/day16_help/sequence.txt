@@ -1,0 +1,90 @@
+Revise
+Functional interfaces
+i/f containing SAM + optionally default /static methods
+eg : Comparator,Consumer,Supplier,BiConsumer, Runnable,Predicate...
+Annotation : @FunctionalInterface
+package : java.util.function
+
+lambda expression : ano function to add conciseness to the code
+Can be passed as the arg to the higher order function.
+eg : forEach , removeIf,Collections.sort,List's sort
+Can be returned from the higher order function.
+(arg list) -> {body}
+
+Functional i/f ---can be directly assigned to lambda expr
+
+Function literal : assigning func defintion to a var.
+
+eg : Display all product details(list) using declarative(func) style
+productList.forEach(product -> sop(product));
+
+Is there any further shortcut : sometimes YES !
+(refer to "regarding method reference")
+eg : productList.forEach(System.out::println);
+
+Objective : List<Integer> list=Arrays.asList(1,2,3,4,5,6,7);
+Display it's elems
+list.forEach(System.out::println);//
+Display the elems on the same line , space separated
+list.forEach(i -> System.out.print(i+" "));//can't be further concised by meth ref.
+//display squares of these nums from the list
+list.forEach(i -> System.out.println(i*i));
+
+
+eg : Sort product details(list) as per Date (asc) , w/o touching Product class (Product class is not Comparable)
+
+Using lambda expression
+Comparator<Product> comp=(p1,p2)->p1.getManufactureDate().compareTo(p2.getManufactureDate());
+productList.sort(comp);
+productList.forEach(System.out::println);
+
+OR
+
+productList.sort(Comparator.comparing(p -> p.getManufactureDate()));
+
+
+OR
+Using method reference 
+productList.sort(Comparator.comparing(Product::getManufactureDate));
+
+Sort product details as per price (desc)
+
+Enter Java 8 Functional streams (Pending!)
+Solve assignment on streams
+1. Remove all old products
+2. Sort the products in map as per date
+
+--------------------------
+
+Enter I/O
+Objective : Read data from text file using buffer , till EOF(end of file) , display it.
+
+Objective : Copy files using buffer.
+i/p : src file name 
+dest file name
+
+Objective : Copy only lines from src file with length > 40 :  using buffer.
+i/p : src file name 
+dest file name
+
+Objective : Copy length of lines  from src file with line length > 40 :  using buffer.
+i/p : src file name 
+dest file name
+
+Objective : Take populated products(list) from sample data.
+Accept product category from user. 
+Filter out the products from the specified category (List<Product> - (stream())--> Stream<Product> --> filter(.....))
+eg :PW pw=new PW(new FW(....));
+ Category cat=Category.valueOf(sc.next());
+
+list.stream(). //Stream<Product>  : all products
+filter(p -> p.getCategory().equals(cat)). // Stream<Product> : filtered products
+sorted(Comparator.comparing(Product::getPrice). //Stream<Product> : filtered n sorted products
+forEach(pw :: println);//terminal op.
+Sort them as per their price 
+Save sorted product details in a text file using buffer.
+
+
+
+
+
