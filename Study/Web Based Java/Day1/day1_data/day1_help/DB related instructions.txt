@@ -1,0 +1,20 @@
+1. login to mysql db (either using workbench or cmd line client)
+2. From cmd line client : type
+show databases
+
+3. Check if "iacsd" db exists
+If not : give command
+create database iacsd
+
+4. Extract eclipse project : day1.1 n import it in your workspace.
+
+
+5. From utils : DBUtils 
+String url = "jdbc:mysql://localhost:3306/iacsd?useSSL=false&allowPublicKeyRetrieval=true";
+//url userName password
+line  : return DriverManager.getConnection(url, "root", "root");
+After url , edit  as per your db username n then db password.
+
+6. Run the Tester : TestConnection.java
+Should show you the o/p
+connected to DB com.mysql.cj.jdbc.ConnectionImpl@hashcode 
