@@ -1,0 +1,22 @@
+Revise
+Using Blocking triggers & un blocking triggers
+Using code sample : day18.3
+Identify the problem
+
+Synchronization : refer to readme
+Solve the problem
+2 different techniques.
+
+
+ITC : need & implementation
+
+SerialVersionUniqueID
+
+transient keyword
+-------------------------------------
+Enter JDBC
+
+DB related instructions
+
+
+
