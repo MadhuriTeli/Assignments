@@ -1,0 +1,25 @@
+Objective 
+1. display all emps details
+sql : select * from my_emp;
+
+2. Display details(id,name,salary,join date) of all emps from a specific dept , joined between strt date n end date
+sql : select empid,name,salary,join_date from my_emp where deptid=? and join_date between ? and ?
+
+List<Emp> getEmpDetails(String deptId,String beginDate,String endDate) throws SqlException
+
+3. Add 1 emp details  in the DB
+DB : no change
+POJO : no change
+DAO
+i/f : String addEmpDetails(Employee e) throws SE
+imple class
+Tester
+
+4. Update emp details 
+i/p emp id , new dept , sal incr
+DB : no change
+POJO : no change
+DAO
+i/f : String updateEmpDetails(emp id , new dept , sal incr) throws SE
+imple class
+Tester

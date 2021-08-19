@@ -1,0 +1,16 @@
+Day 2
+1. Revise JDBC steps & layered architecture , by importing day2.2 eclipse project
+Layers involved : Tester --DAO --DBUtils --POJO --DB
+Edit DBUtils as per your DB settings
+
+2. Solve
+Delete emp details
+i/p : emp id
+o/p : message
+
+3. Observe the flow diagram of topics -tutorials case study.
+3.1 Refer to day2-data\day2_help\sql\topics-tutorials.txt
+3.2 Solve customer login , using all layers.
+i/p : email password
+o/p : User POJO containing all details in case of success or null
+Display suitable message
