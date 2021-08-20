@@ -1,0 +1,56 @@
+Assignment status
+
+Revise 
+JDBC Steps
+1. Add JDBC drvr in runt time classpath
+mysql -connector (Type IV JDBC Driver)
+2. load jdbc driver : 
+Class.forName("com.mysql.cj.jdbc.Driver");
+3. DriverManager.getConnection(url,userName,pwd) --sql exc
+url : jdbc URL : jdbc:mysql://localhost:3306?.....
+fixed connection
+
+3. create statement : ST <-----PST
+PST pst=cn.prepareStatement(sql);//select id,adr,salary from emp where salary > ? and join_date > ?
+4. set IN params
+pst.setDouble(1,sal);
+pst.setDate(2,joinDate);
+
+5. select : RST : executeQuery
+DDL/DML : executeUpdate
+exec of stored proc/func : execute
+
+6. RST : while/if rst.next() ---rst.getInt(1) rst.getString(2) 
+arg(1, 2)  : col pos(1....) as it appears in the RST
+
+7. close RST , ST/PSTs/cn
+
+
+Layers in typical DB based apps
+Bottoms up layers
+1. DB : Table , rows , cols
+2. Object representation of DB data 
+Table : POJO class
+row : POJO 
+col : POJO property
+3.DAL / DAO : data access logic
+3.1 i/f : String deleteEmpDetails(int empId) throws SE
+3.2 imple class
+state : cn , psts , sts , csts
+constr : get cn , create psts (delete from my_emp where empid=?), csts
+cleanUp : close
+CRUD : delete
+set in param
+int rowCount=pst.executeUpdate();
+
+4. Tester
+
+
+
+Delete emp details : emp id
+
+Execute stored procedure
+
+Enter Java EE
+Follow readme.
+
