@@ -1,0 +1,163 @@
+Today's main topics
+Servlet JDBC integration
+Page Navigation
+Session Tracking
+-------------------
+Revise
+
+What is Java EE/Jakarta EE ?
+ Specifications for primary services , required to build enterprise apps
+eg : Servlet API, JSP API, JSTL,JPA, JMS ,Java Mail , REST.....
+
+Why J2EE 1.8/Java EE 8 /Jakarata EE 8 
+1. supports variety of clnts (thin clnts,thick clnt,smart clnt)
+2. J2EE server independent
+3. J2EE servers provide rdy made imple of prim services
+
+
+Who provides Specs of prim service : Oracle/Sun / Eclipse foundation
+Imple : J2EE server vendors
+
+Popular vendors & their products 
+(Apache : Tomcat / Tomee, Oracle --Glassfish , Jboss , weblogic....)
+
+Request response flow(Layers)
+URL --- http://www.abc.com:8080/day3.1
+
+Revise request response flow
+http : scheme / protocol
+www.abc.com : DNS qualified host name or can be replaced by IP address : Host
+8080 : port (TCP ) --> web server (Tomcat)
+W.S delegates req handling to ---> WC
+
+What is WC ?
+
+WC : server side JVM. 
+Manages web apps. 
+Provides run time env for server side dynamic web comps(servlets, JSP,filter)
+
+1. Server side JVM residing within web server.
+Its run-time environment for dynamic web components(Servlet & JSP,Filter) . 
+Jobs ---
+1. Creating Http Request & Http response objects 
+2. Controlling life-cycle of dyn web comps (manages life cycle of servlet,JSP,Filters)
+3. Giving ready-made support for services --- Naming,security,Conn pooling .
+4. Handling concurrent request from multiple clients .
+5. Managing session tracking...
+
+
+HTTP request 
+HTTP response
+(refer to HTTP basics)
+
+
+8. What is web.xml? --- Deployment descriptor one per web appln
+created by -- developer(with help of IDE)
+who reads it -- Web Container(WC)
+when ---at the web app deployment time
+what does it consist of --- deployment instructions --- welcome page, servlet deployment tags, sess config, sec config......
+
+
+J2EE compliant folder structure of dynamic web application
+refer to revision diagram
+
+
+9. Why servlets? --- To add dynamic nature to the web application
+
+What is a servlet ?
+-- Java class (with NO main method) -- represents dynamic web component - whose life cycle will be managed by WC(web container : server side JVM)
+no main method
+life cycle methods --- init,service,destroy
+
+
+Job list
+1. Request processing
+2. B.L 
+3. Dynamic response generation
+4. Data access logic(DAO class --managing DAO layer)
+5. Page navigation
+
+Servlet API details --refer to diag servlet-api.png or revision diagram
+
+Steps of creating servlet n deployment
+2 ways of deployment
+1. annotation
+class level
+eg :
+@WebServlet(urlPatterns="/login",loadOnStartup=1)
+public class LoginServlet extends HttpServlet
+{...}
+
+WC creates an empty Map : @ app dep time (meant for req mapping purpose)
+key : /login
+value : F.Q servlet cls name (pages.LoginServlet )
+loading policy : eager
+OR
+
+2. XML tags
+servlet : servlet-name(abc) , servlet-class (pages.LoginServlet ), load-on-startup :1
+servlet-mapping : servlet-name(abc) , url-pattern (/hello)
+
+
+
+How to read request params sent from the clnt ?
+
+javax.servlet.ServletRequest i/f methods
+1. public String getParameter(String paramName)
+
+2. public String[] getParameterValues(String paramName)
+----------------------------------------------------
+
+
+Objective 1 : Servlet --JDBC Integration
+0. JDBC JAR : <WEB-INF>/lib OR <tomcat> / lib
+Layers involved : Servlet --DAO (Uses DBUtils) --POJO -- DB
+
+Design 
+1. Table : users
+2. POJO : User
+3. DBUtils : add a static method to ret fixed DB connection
+4. IUserDao : login
+User authenticateUser(String email,String pwd) throws SqlExc
+5. Implementation class (JDBC based DAO )
+5.1 data members : cn , pst1
+5.2 constr : get cn from DBUtils, pst1 : select query
+5.3 clean up : cleaing up of db resources
+
+6. welcome page : login.html(post) --> LoginServlet
+
+7. --> LoginServlet
+7.1 --init , destroy, doGet
+
+
+Centralized err handling in Servlets
+How ?
+@Override
+public void init() throws ServletException
+{
+try {
+ // create dao inst
+} catch(Exception e)
+{
+//re throw the exception back to WC , so that WC doesn't continue to service.
+  throw new ServletException("err in init" +getClass().getName(),e);
+}
+}
+
+
+API of javax.servlet.ServletException
+Constructor :
+public ServletException(String message,Throwable rootCause)
+
+
+Objective 2
+Complete login--logout flow in online topcis & tutorial
+(login.html -- LoginServlet --successful login --redirect to TopicsServlet n display logged in user details & topic names  --logout link --LogOutServlet)
+
+Redirection to Topics servlet
+(refer to : day4-data\day4_help\page navigation\page navigation techniques.txt)
+
+ Need of session tracking
+ Techniques
+(refer to : day4-data\day4_help\session tracking\session tracking techniques.txt)
+

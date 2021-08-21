@@ -1,0 +1,141 @@
+Day 2
+1. Revise JDBC steps & layered architecture , by importing day2.2 eclipse project
+Layers involved : Tester --DAO --DBUtils --POJO --DB
+Edit DBUtils as per your DB settings
+
+2. Solve
+Delete emp details
+i/p : emp id
+o/p : message
+
+3. Observe the flow diagram of topics -tutorials case study.
+3.1 Refer to day2-data\day2_help\sql\topics-tutorials.txt
+3.2 Solve customer login , using all layers.
+i/p : email password
+o/p : User POJO containing all details in case of success or null
+Display suitable message
+1. DB table : users
+2. POJO : User : properties , def constr, all setters n getters + toString
+3. DAO : i/f (IUserDao): User validateUser(String email,String pwd) throws SQLExc.
+imple class (UserDaoImpl) : 
+state :  connection,pst1 
+constr : connection instance  , pst1(select * from users where email=? and password=?)
+cleanUp : close pst1, close cn
+public User validateUser(String email,String pwd) throws SQLExc. {
+//set IN params : 2
+pst1.setString(1,email);
+pst1.setString(1,pwd);
+executeQuery : RST ---if (rst.next) -- lift data from RST --User POJO --ret it to the caller
+ret null
+try(ResultSet rst=pst1.executeQuery())
+{
+  if(rst.next())
+   return new User(rst.getInt(1)......);
+  return null;
+}
+4. Tester : main --create DAO instance --call DAO's method --chk null / not null --display mesg
+}
+
+
+Day 3
+
+0.First  ensure that , you have added Tomcat web server in your J2EE workspace & you have created n tested 1st dyn web project m having index.html content
+(refer to day3-data\day3_help\common help\steps in tomcat.txt)
+
+With lab facutly's  help : 
+1. Understand how to  import existing dynamic web project n fix errors if any .
+
+2.Identify all possible clean up instructions , in case of errors
+(I will show this , after I join !)
+
+Do the revsion , along with hands-on today.
+
+Create a new dynamic web project (check web.xml checkbox) : eg day3_lab1
+Solve following
+3. Create a welcome page : index.html
+Add a link : to invoke the servlet (which will be deployed using @WebServlet annoatation)
+
+Create FirstServlet.java , override life cycle methods & trace the life cycle.
+Use @WebServlet annoatation . WC should load this servlet lazily(i.e after client sends 1st request)
+URLs
+1. After clicking on the 1st link
+http://localhost:8080/day3_lab1/first
+
+Change lazy loading to eager loading
+Check if one servlet can be deployed under mutiple url patterns ? YES
+
+4. Add another link in index.html : to invoke the servlet (which will be deployed using xml tags)
+
+Create SecondServlet.java , override life cycle methods & trace the life cycle.
+Do NOT Use @WebServlet annoatation , instead add xml tags in web.xml
+WC should load this servlet eagerly
+
+5. Add / in anchor tag's href. Observe n conclude
+URL : http://localhost:8080/second => HTTP 404 (missing web ctx path!)
+
+6. Remove / from the url-pattern . Observe n conclude
+WC throws : IllegalArgumentException : Invalid url-pattern => web app DOES NOT get deployed !!!!
+
+7. Give same url-pattern to both of these servlets . Observe n conclude
+Tomcat server fails to start : IllegalArgumentException => multiple servlets CAN NOT be deplyed using SAME url pattern
+
+8. Copy input.html from "day3-data\day3_help\HTML pages" , under src\main\webapp
+URL : after submitting the form
+http://localhost:8080/day3_lab1/test_input?f1=Rutuj&clr=blue&clr=red&browser=chrome&myselect=delhi&info=some+info.....
+
+
+Write a servlet to send following response to the clnt
+Hello , user name
+Favorite Colors : ...
+Chosen Browser : ..
+Selected City : 
+About Yourself : 
+
+API Help (refer to Java EE docs for further clarity)
+
+How to read request params sent from the clnt ?
+
+javax.servlet.ServletRequest i/f methods
+1. public String getParameter(String paramName)
+
+2. public String[] getParameterValues(String paramName)
+ 
+
+Mandatory reading from (day1_data\day1_help\web_prog_prerequisites\web basics)
+1. HTTP basics
+2. web basics
+
+Mandatory reading from (day3_data\day3_help)
+readme
+regarding HttpServlet
+
+Day 4
+1. Import day4.1 in your worspace. Edit DB settings (url,user name , pwd)
+Test entire flow , with cookies enabled n later disabled.
+(use Inspect option on clnt browser , to understand the internals)
+
+2. Continue with the case study.
+2.1 Create Topic POJO , as per "topics" table.
+2.2 Create Topic Dao i/f & implementation class : to fetch all topic names.
+eg : List<String> getAllTopics() throws SQLException
+2.3 Test it using JUnit Testing framework (I will show you how after I join the session)
+2.4 Create Tutorial POJO as per "tutorials" table
+2.5 Create Tutorial Dao i/f & implementation class : to fetch all tutorial  names , for a selected topic.
+eg : List<String> getAllTutorialsByTopic(String topicName) throws SQLException
+2.6 Test it using JUnit Testing framework
+
+3. Edit TopicServlet .
+After successful login message n user details :
+Display all topic names. 
+
+4. After this , time permitting , we will discuss further steps.
+
+Mandatory Reading 
+1. day4-data\day4_help\page navigation\page navigation techniques.txt
+(at least : client pull)
+
+2. day4-data\day4_help\session tracking\cookie.png
+day4-data\day4_help\session tracking\regarding session tracking
+
+
+
