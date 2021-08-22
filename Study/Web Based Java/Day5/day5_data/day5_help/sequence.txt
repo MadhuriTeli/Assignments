@@ -1,0 +1,86 @@
+Assignment status
+
+Today's topics
+HttpSession i/f based session tracking
+Complete online topics tuts case study
+Complete Servlet Life cycle + ServletConfig
+Executor Framework (used by WC to support concurrent handling of multiple client requests)
+CGI Vs Servlets
+Server pull
+Scopes of attributes in web programming
+ServletConfig vs ServletContext
+Web app listener
+-----------------------
+Revision
+
+What will WC do ?
+In Servlet1 : /s1
+in doPost(rq,rs) :
+pw.print("some mesg!!!!");//ignored 
+//pw.flush();//illgal state exc : WC : can't redirect after committing resp
+Cookie c1=new Cookie("client_id",user.getEmail());
+rs.addCookie(c1);
+rs.sendRedirect("s2");
+
+What will happen ?
+WC : Clears the PW's buffer.
+SC 302 | Headers --location="s2" , Set-cookie : client_id : abc@gmail.com , content-length=0
+body : empty
+Temp redirect resp is sent to the clnt.
+clnt browser : auto generates NEXT request
+URL : http://host:port/day5.1/s2
+method : GET
+in case of cookies enabled 
+req header : cookie : client_id : abc@gmail.com
+
+
+Servlet2 : /s2
+doGet : Cookie[] cookies=request.getCookies();
+null => no cookies 
+not null --for-each : identify the clnt
+
+
+Solve
+eg : remote server IP address is  --ip1 
+In web app(/day3.1) --- /s1(is a servlet) ---
+Creates a  cookie  --- name --"clnt_info" , value --"details1234"  & sends it to a clnt.
+
+clnt IP adr--  ip2
+
+1.4 Will Clnt browser of ip2  send the cookies in request header ?
+
+1. clnt sends the URL --- http://ip3:8080/..... : NO (different IP address of the server)
+2. clnt sends the URL --- http://ip1:8080/day2/.... : NO (different web site)
+3. clnt sends the URL --- http://ip1:8080/day3.1/s2 : YES
+4. clnt sends the URL --- http://ip1:8080/day3.1/s10 : YES
+
+Default behaviour : cookies are by default sent to the SAME web app of origin
+
+Can it be modified by Cookie class methods? YES
+
+Which ones ? setPath : allows the cookie/s to be shared across multiple web apps hosted on the same server.
+
+ setDomain : allows the cookie/s to be shared across multiple hosts from the same domain
+
+Dis advantages of plain cookie based approach 
+
+
+Http Session along with internals
+With code & diagrams
+
+Case study
+1. LoginServlet
+
+2. TopicsServlet
+
+3. TutorialsServlet
+
+4. TutorialDetailsServlet
+
+5. LogoutServlet
+
+
+
+
+
+
