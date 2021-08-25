@@ -1,0 +1,36 @@
+Assignment status
+
+Today's topics
+Executor Framework (used by WC to support concurrent handling of multiple client requests)
+CGI Vs Servlets
+Server pull
+Scopes of attributes in web programming
+ServletConfig vs ServletContext
+Web app listener
+Enter JSP
+
+-----------------------
+Revision
+
+Steps in HttpSession i/f  based Session Tracking 
+1. HttpSession hs=request.getSession();
+2. hs.setAttribute("user_details",user);
+3. User details=(User)hs.getAttribute("user_details");
+4. HttpSession API
+boolean isNew() 
+5. HttpSession API
+String getId()
+6. void invalidate()
+
+
+What is a ServletConfig ? : i/f javax.servlet.ServletConfig
+Who creates it ? : WC
+When ? : After creating servlet instance(default constr) n before init method
+How many copies ? 1 per Servlet
+Use case : To parametrize the servlet(to pass init param to the servlet)
+eg : to create a web app : db independent (partially!)
+
+init params : can be passed via @WebServlet or xml tags
+<servlet> <init-param> <param-name>..
+<param-value>
+.....

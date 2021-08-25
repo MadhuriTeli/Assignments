@@ -1,63 +1,107 @@
 package utils;
 
-import com.app.custom_exception.CustomerHandlingException;
-import com.app.customer.CustomerCategory;
-
-import static com.app.customer.Customer.sdf;
+import static com.app.student.Student.sdf;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+
+import com.app.core.Customer;
+import com.app.custom_exception.StudentHandlingException;
+import com.app.student.Student;
+import com.app.student.StudentCourses;
+
+import custom_exception.CustomerHandlingException;
 
 public class ValidationRules {
 	public static final int MIN_LENGTH;
 	public static final int MAX_LENGTH;
 	public static Date thresholdDate;
 	static {
-		MIN_LENGTH = 4;
+		MIN_LENGTH = 5;
 		MAX_LENGTH = 10;
 		try {
-			thresholdDate = sdf.parse("1-1-1995");
+			thresholdDate = sdf.parse("1-1-1999");
 		} catch (ParseException e) {
 			System.out.println("err in static init block " + e);
 		}
 	}
 
-	public static String validateEmail(String email) throws CustomerHandlingException {
-		if (email.contains("@") && email.endsWith(".com"))
-			return email;
-		throw new CustomerHandlingException("Invalid Email Format");
+	public static String validatePRN(String prnNo, ArrayList<Student> std) throws StudentHandlingException {
+		Student st = new Student(prnNo);
+		// System.out.println(std.contains(st)?"PRN Exist":"New PRN");
+		System.out.println(std.contains(st));
+		if (std.contains(st))
+
+			throw new StudentHandlingException("PRN Exists Already!!");
+		return prnNo; // System.out.println(std.contains(st));
 	}
 
-	public static String validatePassword(String password) throws CustomerHandlingException {
-		if (password.length() < MIN_LENGTH || password.length() > MAX_LENGTH) {
-			throw new CustomerHandlingException("Invalid Password");
+	public static String validateEmail(String email) throws StudentHandlingException {
+		if (email.length() < MIN_LENGTH || email.length() > MAX_LENGTH) {
+			throw new StudentHandlingException("Invalid Email");
 		}
-		return password;
+		return email;
 	}
 
-	public static double validateAmount(double amount) throws CustomerHandlingException {
-		if (amount % 500 != 0) {
-			throw new CustomerHandlingException("Invalid Amount");
+	public static String validatePassWord(String password) throws StudentHandlingException {
+		if (password.length() >= MIN_LENGTH && (password.contains("@") || password.contains("#")
+				|| password.contains("$") || password.contains("%") || password.contains("*")))
+			return password;
+		throw new StudentHandlingException("Invalid Password");
+
+	}
+
+	/*
+	 * course : a valid course name having available capacity , to admit a new
+	 * studentmin GPA : 7 dup student validation
+	 */
+	public static double validateGPA(double gpa) throws StudentHandlingException {
+		if (gpa < 7) {
+			throw new StudentHandlingException("Invalid GPA");
 		}
-		return amount;
+		return gpa;
 	}
 
-	public static Date convertDate(String dob) throws ParseException, CustomerHandlingException {
+	public static Date convertDate(String dob) throws ParseException, StudentHandlingException {
 		Date d1 = sdf.parse(dob);
 		if (d1.after(thresholdDate))
-			throw new CustomerHandlingException("Invalid Date");
+			throw new StudentHandlingException("Invalid Date");
 		return d1;
 	}
 
-	public static CustomerCategory validateCategory(String category) throws CustomerHandlingException {
+	public static StudentCourses validateCourses(String course) throws StudentHandlingException {
 		try {
-			return CustomerCategory.valueOf(category.toUpperCase());
+			return StudentCourses.valueOf(course.toUpperCase());
 		} catch (IllegalArgumentException e) {
 			StringBuilder sb = new StringBuilder("Invalid Category Chosen \n");
 			sb.append("Valid Categories: \n");
-			sb.append(Arrays.toString(CustomerCategory.values()));
-			throw new CustomerHandlingException(sb.toString());
+			sb.append(Arrays.toString(StudentCourses.values()));
+			throw new StudentHandlingException(sb.toString());
 		}
+//			System.out.println(StudentCourses.valueOf(course).getCapacity() );
+//			if (StudentCourses.valueOf(course).getCapacity() != 0) {
+//				StudentCourses.setCapacity(StudentCourses.valueOf(course).getCapacity() - 1);
+//				return StudentCourses.valueOf(course.toUpperCase());
+//			}
+//			else {
+//				throw new StudentHandlingException("Course capaciy full!!");
+//			}
+
+	}
+	
+	
+	public static Student findStudentByPRN(String prn,ArrayList<Student> std) throws StudentHandlingException
+	{
+		//done by Customer's equals
+		//create customer instance by wrapping email (unique id)
+		Student c1=new Student(prn);
+		for(Student c: std)
+			if(c != null && c.equals(c1))
+				return c;
+		throw new StudentHandlingException("Customer not found : invalid email id!!!!!!");
+				
+		
 	}
 }
