@@ -1,0 +1,322 @@
+Today's Topics
+URL rewriting
+JSP Directives
+JSP Actions
+JSP using JavaBean
+JSTL
+----------------------------
+Revise
+JSP life cycle
+
+JSP Syntax (2.x)
+
+JSP implicit objs : accessible from scriptlets(<% java code %>  n expressions (<%= dynamic expr %>)
+request,response, session, config,out,application,page , pageContext, exception
+eg : one.jsp --- one_jsp.java 
+<%= page %>
+o/p  : org.apache.jsp.one_jsp@543567
+page => instance of current ("this") translated page class
+
+pageContext : JSP implicit obj : accessible from scriptlets n exprs
+
+javax.servlet.jsp.PageContext class --abstract --- concrete sub class ---server supplied jar (jasper.jar)
+--PageContextImpl --current page environment
+
+It holds the references of all other implicit objects
+eg : request,response, session, config,out....
+Methods : getSession, getOut,getRequest.....
++ to store page scoped attr.
+eg : <%
+    pageContext.setAttribute(nm,val);
+%>
+
+
+Which is better alternative to <%= .... %> JSP exprs ?
+EL syntax 
+${...} : appears directly in <body>
+EL implicit objs (names of maps created by WC , except pageContext)
+param,pageScope,requestScope,sessionScope,applicationScope,cookie,initParam
++ pageContext
+eg : ${param.email} 
+WC : param.get(email) ---> value --sent to clnt
+OR
+request.getParameter(email) --value --sent to clnt
+
+
+Solve : ${requestScope.user_info}
+WC : request.getAttribute("user_info")---User --toString --sent to clnt
+
+eg : ${cart}
+WC : pageContext.getAttribute("cart") --null
+request.getAttribute("cart") -- null
+session.getAttribute("cart") --not null --tostring --sent to clnt
+
+eg : In one.jsp 
+<%
+    pageContext.setAttribute("nm",val);
+%>
+
+How to acces this attribute from one.jsp ? 
+Options
+1. ${nm}
+2. ${pageContext.nm}
+3. ${page.nm}
+4. ${pageScope.nm}
+5. <%= pageContext.getAttribute("nm") %>
+
+Ans : 1,4,5
+
+eg : In test.jsp
+<%
+   request.setAttribute("nm",val);
+%>
+To get it via  EL syntax
+${nm}  : WC has to perform 2 searches (page , request)
+OR 
+${requestScope.nm} : WC has to perform only 1  search (request)
+
+Q. How to get a cookie value , with a name JSESSIONID ?
+
+JSP expression
+<%= session.getId() %>
+
+OR 
+via cookie : EL syntax 
+${cookie.JSESSIONID.value}
+WC : cookie.get("JSESSIOID").getValue()
+
+
+pageContext : can be accessed from
+1. declaration
+2. expression
+3. EL
+4 scriptlets
+Ans : 2,3,4
+----------------
+Various uses of pageContext
+Solve
+
+eg : ${pageContext.session.id} -- 
+WC : 
+
+What will be o/p for
+http://host:port/day7/one.jsp
+${pageContext.request.contextPath} --
+WC : 
+
+
+How will you get the value of session time out ?
+?
+1. session = HttpSession
+2. sessionScope = name of the map containing session scoped attrs
+
+Ans : 
+
+HOW via  EL syntax
+
+
+How to set session scoped attribute ?
+
+<%
+   session.setAttribute("nm",val); 
+%>
+
+How to retrieve using following options ?
+1. session => HttpSession
+<%= session.getAttribute("nm") %>
+
+2. sessionScope = name of the map containing session scoped attrs
+Better option (EL syntax) : ${nm} OR ${sessionScope.nm}
+
+Reading H.W : refer to params vs attrs
+-------------------------------
+URL Rewriting (Are there any problems observed in client pull , if cookies are disabled?)
+Refer to day7_lab_assignment
+
+URL : http://localhost:8080/day8.1/details.jsp;jsessionid=36D89D3C3A64C450B8DC535EAF46B3B9
+
+http://localhost:8080/day8.1/logout.jsp
+
+
+JSP Directives : commands meant for WC : to be processed in the translation phase
+
+Centralized err handling in JSP : errorPage , isErrorPage
+
+
+
+Enter JSP Using Java Beans
+1. What is a java bean ?
+2. Why Java Beans ?
+case study : Voting case study (admin role)
+voter role
+Layers to bo copied from earlier (servlet based) assgnment
+Tables, POJOs, DAOs , DBUtils
+VoterDao
+CandidateDao
+
+Steps
+1. VoterBean : for user authentication of user
+1.1 public n packged class
+1.2 properties : email, pwd , voter dao , Voter pojo ref
+1.3 arg less constr : voter dao instance
+1.4 all setters n getters
+1.5 Add B.L method
+public String authenticateUser() throws Exception
+{
+   details=voterDao.authenticateVoter(email,pwd);
+   //null chk 
+//null => invalid login --"login"
+   //not null => chk role --admin : "admin_status"
+  //voter : chk voting status : true => "voter_status"
+ //false : "candidate_list"
+}
+
+3. JSP standard Actions Using java beans 
+3.1
+<jsp:useBean id="bean id" class="Fully qualified bean class name" scope="page|request|session|application"/>
+default scope : page
+eg : <jsp:useBean id="voter" class="beans.VoterBean" scope="session"/>
+Internal working : refer to diag (JSP usebean)
+
+
+3.2 <jsp:setProperty name="voter" property="email" value="abc@gmail.com"/>
+
+
+
+<jsp:setProperty name="voter" property="email" value="${param.em}"/>
+
+
+
+<jsp:setProperty name="voter" property="email" param="em"/>
+
+
+
+<jsp:setProperty name="voter" property="*"/>
+
+eg : em, pass: req param names
+JB property names : email , password : 
+How many setters will WC call ?
+
+
+
+
+WC : Tries to call ALL MATCHING setters
+Request param names MUST MATCH with JB property setters
+eg : http://host:port/day6.1/validate.jsp?email=abc&password=1234
+validate.jsp
+<jsp:useBean id="voter" class="beans.VoterBean" scope="session"/>
+<jsp:setProperty name="voter" property="*"/>
+
+VoterBean : setEmail n setPassword
+How many setters ? 
+
+4. How to invoke B.L method of a java bean  w/o java code(i.e scriptlet)
+Via EL syntax.
+
+
+
+5. How to invoke getters of JB ?
+5.1 <jsp:getProperty name="voter" property="validatedUser"/>
+
+
+OR 
+EL syntax :
+
+
+WC : 
+
+Objective : forward the client to login.jsp in case of invalid login or to candidate_list.jsp in case of valid login (if voter has not yet voted) or to admin_status page in case of admin user
+<jsp:forward> action
+
+Any problems observed with server pull ?
+YES : If user refreshes (sends additional reqs)  admin_status  page : because of server pull : URL is still validate.jsp ---so it hit's validation query un necessarily...
+Well known problem : double submit issue
+(refer in <diags>)
+
+What's the solution ? (Double submit guard)
+replace server pull ---> clnt pull
+<c:redirect> : JSTL action --- only candidate list  related DB query gets fired.
+
+Which tag will you use in JSP for clnt pull ?(redirect scenario) --no standard action exists : so use 
+JSTL action
+
+Import JSTL core tag lib n use tag.
+Steps
+1. Copy/confirm jstl1.2.jar under <tomcat> / lib
+2. Import JSTL supplied core tag lib
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+3. Use the tag
+eg : In one.jsp : 
+<c:redirect url="two.jsp"/>
+WC : 
+If cookies are enabled ,WC sends resp : 
+
+WC sends resp :    if cookies are disabled
+
+
+Objective : Display candidate list
+<c:forEach>
+
+Other JSTL Tags
+
+1. <c:set var="abc" value="${param.name}" scope="session"/>
+WC : session.setAttribute("abc",request.getParameter("name"));
+
+2. <c:remove var="abc"  scope="session"/>
+WC : session.removeAttribute("abc") (equivalent to Map's remove)
+
+3. <c:set var="abc" value="${param.name}"/>
+WC : pageContext.setAttribute("abc",request.getParameter("name"));
+
+4. eg : In HTML form 
+<input type="submit" name="btn" value="Withdraw">
+<input type="submit" name="btn" value="Deposit">
+In transactions.jsp
+<c:if test="${param.btn eq 'Withdraw'}">
+ In withdraw 
+</c:if>
+WC : 
+if(request.getParameter("btn").equals("Withdraw")
+ out.print("in withdraw")
+Use case : voter login --success -not yet voted --list.jsp ---status.jsp
+voter login --success -alrdy  voted ----status.jsp
+
+status.jsp : after casting a vote => increment votes n change voting status
+directly : u have alrdy voted => no action --display a message
+eg : 
+<c:if test="${sessionScope.voter.status}">
+ You have alrdy voted....
+</c:if>
+
+
+5. 
+<c:choose>
+ <c:when test="${param.btn eq 'Withdraw'}">
+ In withdraw 
+ </c:when>
+ <c:when test="${param.btn eq 'Deposit'}">
+In Deposit
+ </c:when>
+ <c:otherwise>
+ some other btn ......
+ </c:otherwise>
+</c:choose>
+
+URL :  
+http://host:port/one.jsp?name="Ranjana"
+
+In one.jsp
+<c:set var="abc" value="${param.name}" scope="session"/> 
+<c:redirect url="two.jsp"/>
+WC : response.sendRedirect(response.encodeRedirectURL("two.jsp"));
+
+In two.jsp
+${sessionScope.abc} : Ranjana  ---Even if cookies are enabled/disabled
+
+eg : 
+<c:redirect url="${sessionScope.user.validateUser()}.jsp"/>
+
+Objective : In case of invalid login , forward the clnt to login page BUT with error mesg
+
+
+

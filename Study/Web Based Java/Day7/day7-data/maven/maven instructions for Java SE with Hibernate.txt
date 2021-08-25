@@ -1,0 +1,15 @@
+Steps in Eclipse IDE for creating a Maven Project with Hibernate MySql : Java SE project
+
+1. Choose File --New (or from drop down list) --Maven project --Create a simple project (no archetype)--finish
+(refer to screenshots)
+
+2. Copy entries from pom.xml 
+Change finalName as (typically) artifact name 
+
+3. R click on project --maven --update project
+
+4. In case of any errors , choose Project tab at the top ---clean project (NOT Maven clean!!!!!!)
+
+5. Confirm if maven dependencies are pulled in.
+JDK version updated to JDK 11
+
