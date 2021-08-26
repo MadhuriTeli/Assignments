@@ -1,0 +1,109 @@
+Today's topics
+Add New Tutorial assignment
+Refer to jstl_demo , along with JSTL sequence
+Enter Hibernate
+----------------
+Revision
+JSP standard actions
+eg : useBean , setProperty,getProperty
+forward , include , param
+
+Layers involved in JSP ---JavaBean -- DAO (DBUtils) ---POJO --DB
+What is a java bean ?
+public n packed java class , server side attribute(entry=key:String n value:Object pair) , created by WC & stored under specified scope.
+
+Why Java Bean ?
+1. Separation of concerns
+(separation between P.L n B.L)
+2. Re usable
+3. eg : Suppose clnt sends request param as emp age to the servlet
+Who does the translation from String --> int (Servlet prog)
+WC performs auto translation from string based req params ---> primitive types
+eg : EmpBean : id(int) , name(string), salary(double), joinDate: Date --Prog
+
+
+
+Java bean Contents 
+1. data members (properties) : clnt specific state , application state....+ dao ref + pojos , messges
+eg : 
+private String name,party,dob : String ;
+private double depositAmount;
+private String message;
+2. constr : default : dao instance
+3. setters n getters : strict Javabean naming convention
+eg : public void setDob(String dob){...}
+public String getDob(){..}
+
+4. B.L method: public scope
+
+
+1. Consider this
+Bean : DiscountBean => discount scheme for all clients
+data members : sale period , % amount
+
+In one.jsp : clnt # 1 (any clnt sending 1st request to this web app)
+<jsp:useBean id="disc" class="beans.DiscountBean" scope="application"/>
+
+WC : refer to diag. (creates the bean instance n adds it to the app scope)
+
+Clnt # 2 :
+sends the request to ten.jsp from the SAME web app 
+<jsp:useBean id="disc" class="beans.DiscountBean" scope="application"/>
+
+WC : does nothing!!!!
+
+1.5 In general , <jsp:useBean> will invoke JB def constr : once / scope
+
+2. <jsp:setProperty name="disc" property="*"/>
+WC : tries to call ALL MATCHING setters
+(request param names MUST MATCH with JB property setters)
+eg : DiscountBean : 
+data members :private int salePeriod;
+private double percentAmount;
+//setters
+what should be the names of req params : salePeriod ,percentAmount
+
+
+3. <jsp:setProperty name="disc" property="salePeriod" value="10"/>
+WC : getServletContext().getAttribute("disc").setSalePeriod(10);
+
+4. <jsp:setProperty name="disc" property="salePeriod" value="${param.period}"/>
+WC : getServletContext().getAttribute("disc").setSalePeriod(Integer.parseInt(request.getParameter("period")));
+
+
+5. <jsp:setProperty name="disc" property="salePeriod" param="period123"/>
+WC : getServletContext().getAttribute("disc").setSalePeriod(Integer.parseInt(request.getParameter("period123")));
+
+6. <jsp:getProperty name="disc" property="salePeriod"/>
+WC : getServletContext().getAttribute("disc").getSalePeriod() -- to string --sent to clnt
+
+OR EL syntax
+${applicationScope.disc.salePeriod} 
+WC :  getServletContext().getAttribute("disc").getSalePeriod() -- to string --sent to clnt
+
+7. Suppose in DiscountBean : B.L method
+public void applyDiscount(...) {...}
+
+How to invoke this method from JSP , w/o scriptlet ?
+${applicationScope.disc.applyDiscount(...)}
+WC : getServletContext().getAttribute("disc").applyDiscount(...);
+
+
+8. Solve Add New Tutorial
+8.1 Replace server pull by client pull (to avoid double submit issue) , using JSTL action
+<c:redirect>
+8.2 DB table n POJOs : no change
+DAO : TopicDao
+List<Topic> getAllTopics() throws SE
+8.3 TopicTutorialBean 
+properties : Topic Dao
+def constr : dao instancr
+s/g ...
+B.L method : List<Topic> getTopics() ....
+8.4 In show_tut_form.jsp
+import JSTL core tag lib (taglib directive)
+Add a form 
+Only dynamic element : options
+For iterating over options : use <c:forEach>
+Assign option value : topic id n lable as topic name
+
