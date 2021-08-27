@@ -1,0 +1,266 @@
+Day 2
+1. Revise JDBC steps & layered architecture , by importing day2.2 eclipse project
+Layers involved : Tester --DAO --DBUtils --POJO --DB
+Edit DBUtils as per your DB settings
+
+2. Solve
+Delete emp details
+i/p : emp id
+o/p : message
+
+3. Observe the flow diagram of topics -tutorials case study.
+3.1 Refer to day2-data\day2_help\sql\topics-tutorials.txt
+3.2 Solve customer login , using all layers.
+i/p : email password
+o/p : User POJO containing all details in case of success or null
+Display suitable message
+1. DB table : users
+2. POJO : User : properties , def constr, all setters n getters + toString
+3. DAO : i/f (IUserDao): User validateUser(String email,String pwd) throws SQLExc.
+imple class (UserDaoImpl) : 
+state :  connection,pst1 
+constr : connection instance  , pst1(select * from users where email=? and password=?)
+cleanUp : close pst1, close cn
+public User validateUser(String email,String pwd) throws SQLExc. {
+//set IN params : 2
+pst1.setString(1,email);
+pst1.setString(1,pwd);
+executeQuery : RST ---if (rst.next) -- lift data from RST --User POJO --ret it to the caller
+ret null
+try(ResultSet rst=pst1.executeQuery())
+{
+  if(rst.next())
+   return new User(rst.getInt(1)......);
+  return null;
+}
+4. Tester : main --create DAO instance --call DAO's method --chk null / not null --display mesg
+}
+
+
+Day 3
+
+0.First  ensure that , you have added Tomcat web server in your J2EE workspace & you have created n tested 1st dyn web project m having index.html content
+(refer to day3-data\day3_help\common help\steps in tomcat.txt)
+
+With lab facutly's  help : 
+1. Understand how to  import existing dynamic web project n fix errors if any .
+
+2.Identify all possible clean up instructions , in case of errors
+(I will show this , after I join !)
+
+Do the revsion , along with hands-on today.
+
+Create a new dynamic web project (check web.xml checkbox) : eg day3_lab1
+Solve following
+3. Create a welcome page : index.html
+Add a link : to invoke the servlet (which will be deployed using @WebServlet annoatation)
+
+Create FirstServlet.java , override life cycle methods & trace the life cycle.
+Use @WebServlet annoatation . WC should load this servlet lazily(i.e after client sends 1st request)
+URLs
+1. After clicking on the 1st link
+http://localhost:8080/day3_lab1/first
+
+Change lazy loading to eager loading
+Check if one servlet can be deployed under mutiple url patterns ? YES
+
+4. Add another link in index.html : to invoke the servlet (which will be deployed using xml tags)
+
+Create SecondServlet.java , override life cycle methods & trace the life cycle.
+Do NOT Use @WebServlet annoatation , instead add xml tags in web.xml
+WC should load this servlet eagerly
+
+5. Add / in anchor tag's href. Observe n conclude
+URL : http://localhost:8080/second => HTTP 404 (missing web ctx path!)
+
+6. Remove / from the url-pattern . Observe n conclude
+WC throws : IllegalArgumentException : Invalid url-pattern => web app DOES NOT get deployed !!!!
+
+7. Give same url-pattern to both of these servlets . Observe n conclude
+Tomcat server fails to start : IllegalArgumentException => multiple servlets CAN NOT be deplyed using SAME url pattern
+
+8. Copy input.html from "day3-data\day3_help\HTML pages" , under src\main\webapp
+URL : after submitting the form
+http://localhost:8080/day3_lab1/test_input?f1=Rutuj&clr=blue&clr=red&browser=chrome&myselect=delhi&info=some+info.....
+
+
+Write a servlet to send following response to the clnt
+Hello , user name
+Favorite Colors : ...
+Chosen Browser : ..
+Selected City : 
+About Yourself : 
+
+API Help (refer to Java EE docs for further clarity)
+
+How to read request params sent from the clnt ?
+
+javax.servlet.ServletRequest i/f methods
+1. public String getParameter(String paramName)
+
+2. public String[] getParameterValues(String paramName)
+ 
+
+Mandatory reading from (day1_data\day1_help\web_prog_prerequisites\web basics)
+1. HTTP basics
+2. web basics
+
+Mandatory reading from (day3_data\day3_help)
+readme
+regarding HttpServlet
+
+Day 4
+1. Import day4.1 in your worspace. Edit DB settings (url,user name , pwd)
+Test entire flow , with cookies enabled n later disabled.
+(use Inspect option on clnt browser , to understand the internals)
+
+2. Continue with the case study.
+2.1 Create Topic POJO , as per "topics" table.
+2.2 Create Topic Dao i/f & implementation class : to fetch all topic names.
+eg : List<String> getAllTopics() throws SQLException
+2.3 Test it using JUnit Testing framework (I will show you how after I join the session)
+2.4 Create Tutorial POJO as per "tutorials" table
+2.5 Create Tutorial Dao i/f & implementation class : to fetch all tutorial  names , for a selected topic.
+eg : List<String> getAllTutorialsByTopic(String topicName) throws SQLException
+2.6 Test it using JUnit Testing framework
+
+3. Edit TopicServlet .
+After successful login message n user details :
+Display all topic names. 
+
+4. After this , time permitting , we will discuss further steps.
+
+Mandatory Reading 
+1. day4-data\day4_help\page navigation\page navigation techniques.txt
+(at least : client pull)
+
+2. day4-data\day4_help\session tracking\cookie.png
+day4-data\day4_help\session tracking\regarding session tracking
+
+Day 5
+1. Import day5.2 in your workspace ,e dit DB settings (url,user name , pwd)
+Test entire flow , with special ficus on HttpSession based tracking
+(use Inspect option on clnt browser , to understand the internals)
+
+2. Complete case study (tutorial details page)
+2.1 No changes in Tutorial POJO n table
+2.2 Add Tutorial DAO layer methods to 
+1. view complete tutorial details of the selected tutorial
+ITutorialDao i/f
+Tutorial getTutorialDetails(String tutName) throws SQLExc
+2. update visit count
+ITutorialDao i/f
+String updateVisits(String tutName) throws SQLExc
+
+2.3 Optionally test these methods by writing test cases
+2.4 Add the TutorialDetailsServlet N test entire application
+1. override only doGet
+2. set cont type , get PW
+3. get HttpSession
+4. retrieve Tutorial dao instance from HttpSession
+5. get selected tut name  : from request param
+6. tut dao's methods
+ update visits
+ get tut details , send it to the clnt (pw)
+7. add links.
+
+
+
+3. Additional work will be discussed later.
+Revise ServletConfig & apply the same
+Create a copy of the existing web app . Using ServletConfig n init-params , develop it in DB independent manner.
+
+4. Weekend OPTIONAL assignment
+Refer to admin login part & implement it.
+
+Mandatory reading assignment
+1. Go through a diagram : day5_lab_data\diagrams\whiteboard-redirect-scenario.png
+2. Go through a diagram : day5_data\day5_help\diagrams\servlet life cycle.png
+3. Go through a diagram : day5_data\day5_help\diagrams\HttpSession internals.png
+4. Popular question : what's the difference between overloaded init methods of GenericServlet
+Ans : refer to a diagram : day5_data\day5_help\diagrams\servlet's init methods.png
+5. Read : day5_data\day5_help\readmes : all of the supplied readmes
+(ServletContext will be covered on Monday)
+
+Day 6
+1. MUST complete MANDATORY part of the  servlet (online topic tutorial ) assignment.
+(customer login part)
+
+2. Import day6.1 , to revise Server Pull , forward scenario.
+
+3. Import day6.2 , to revise Server Pull , forward scenario.
+
+4. Import day6.3 to revise basic JSP syntax.
+
+5. Import any servlet based project (eg : day5.2 ) . Use ServletConfig to make it DB independent.
+(I will discuss this & get it done!)
+
+6. Time permitting JSP assignment
+refer : day6-data\JSP Assignemnt.png
+(I will discuss this & get it done!)
+
+Day 7
+1. import day7.1 in your workspace & revise completely using links from index.jsp , readme JSP & diagrams
+
+2. refer to flow diagram : from day7-data \JSP Assignment.png
+(We have already solved it in day7.1)
+Replace client pull II (redirect) by RequestDispatcher's forward scenario , make necessary changes n test
+
+3. Layered architecture : (After I join the lab )
+JSP --JavaBean -- DAO --POJO --DB
+For admin login in topic n tutorial assignment.
+(If possible keep it ready till DAO layer)
+Objective : Create above layers , for user validation.
+Use role based authorization .
+Then Solve admin part of the case study
+Steps 
+1. Which layers can be copied from earlier work ? 
+
+
+Day 8
+1. Import day8-data\eclipse_projects\day8_hibernate_maven , as existing Maven project
+(File --import --Maven --Existing Maven Project)
+
+2. R click on the project --Maven --Update Project
+Confirm if hibernate n mysql dependencies(i.e JAR files) are getting  downloaded correctly.
+Check if JDK version has been updated to JDK 11
+
+Please take our help , if it does not work !
+
+3. Import day8.1 in your workspace as normal Java project
+(File --import --General --Existing Projects into Workspace)
+Trace entire flow from login.jsp to DB
+eg : <c:forEach var="topic" items="${sessionScope.topic_tut.topics}">
+						<option value="${topic.topicId}">${topic.topicName}</option>
+</c:forEach>
+WC : for(Topic topic : session.getAttribute("topic_tut").getTopics())
+         out.print("<option value='"+topic.getId()+"'>"+topic.getName()+"</option>");
+
+4. Will discuss assignment later.
+Mandatory assignment
+When customer logs in successfully : show him list of topic names , from topics.jsp
+
+Day 9
+
+1.Import  day9.1 into your workspace as maven project & revise.
+2. Will discuss assignments later.
+Just complete pending work (if any !)
+
+Mandatory reading exercise
+1. Diagrams : day8-data\day8_help\hibernate-help\diags\hibernate overview 2.png
+2. day8-data\day8_help\hibernate-help\readmes\Hibernate_help.txt
+3. For referring to the steps of Maven n Hibernate based project creation , refer to : day9-data\day9_help\lab sequence.txt
+4. read : day9-data\day9_help\hibernate session api.txt (at least till Session's get API)
+5. read : day9-data\day9_help\Automatic dirty checking.txt
+
+
+
+
+
+
+
+
+
+
+
+
