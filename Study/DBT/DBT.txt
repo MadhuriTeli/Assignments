@@ -1,0 +1,5980 @@
+﻿
+////////////////////////////////////////day 1-2/////////////////////////////////////////////////////////////////////
+
+
+
+Types of Databases
+SQL Data  ------Tabular ,  Structured
+Oracle -------- Licensed  ------ Java is managed by Oracle
+mysql-------- freeware -------java
+postgreSQL------freeware
+SQL Server ------ Microsoft ----- Licensed  ------- .NET technology
+NoSQL data--------unstructured,  JSON (java script object notation)
+      MongoDB
+      Cassendra
+      CouchbaseDB
+      Hbase
+    
+GraphDB
+Neo4j
+
+Memory Database (HQL,Memdb)
+Research type project
+memory database-----  data is less------faster ---- volatile
+
+
+Server-------
+Those companies are going to store data, programs , bakups
+to store these data multiple servers are required.
+Data centres
+
+MySQL -------- Table format -------RDBMS(Relational Database Management System)
+to store data in persistent way.------- ways of storing file, 
+Features
+retrieval of data is very easy
+Sharing data becomes extremely easy.
+redundancy of data decreases (repeatation)
+Transaction control ----- ACID ----- every SQL database supports ACID property
+Secure ----- financial application, voting, census ------- RDBMS
+        Atomicity ----- every transaction gets executed as a single unit.
+       Consistency ----- after every transaction data should be in   correct state
+       Isolation ----- any user when login to data base should read same data
+       durability ----- longer period of time consistency will be maintained by application
+         
+SQL DataBase
+NoSQL
+In all secure applications----financial app
+Less security-----social media
+Structured
+Unstructured
+Table
+Collection
+Transaction control
+Less transaction control
+
+
+SQL Database ------MySQL
+Tabular ------ Rules
+every row should be uniquely identifiable.
+primary key ---- account no
+     minimal subset of attributes which identifies the row uniquely
+composite key------- many times your primary key is formed by more than one column, then the key is called as composite key
+candidate key ------ account num, passport num, adhar num
+minimal subset of attributes that identifies the row uniquely and which may become primary key 
+unique key ----- It doesnot allow duplicate values in the column, but it allows to store multiple null values.
+foreign key -----before we enter data in a column, if we refer primary key of same table or different table then it is called as foreign key
+use foreign key to maintain correctness of data
+surrogate key ----- if you want to identify the row uniquely with database, then we need to add some external or virtual column in the table which id not part of data is calles as surrogate key.
+
+super key ------ any combination that identifies the row uniquely
+account no, passport, adhar number, account no+cusid, account num+cname, account no+cname+custid+passport
+Bank store ---- account number
+
+Account table
+accno ----primary key
+cust id ---- foreign key
+Custid
+Accno
+Balance
+Type 
+relmgr
+1
+1
+12345
+Saving
+AA
+1
+2
+123451
+Current
+AA
+1
+3
+12345
+demat
+AA
+2
+4
+1111111
+Saving
+BB
+3
+11
+444444
+Saving
+BB
+
+
+customer
+Custid
+Cname
+Address
+Email
+Adhar card
+Passport 
+1
+Kishori
+Aundh
+a.b@gmail.com
+22222222
+1234555
+2
+Rajan
+Baner
+r.b@gmail.com
+
+
+
+
+ 3
+Revati
+Aundh
+Zdvnxj
+233333
+
+
+
+
+
+
+studid ,subject ----- primary key ----- composite key
+Studid
+Subjectid
+marks
+1
+100
+98
+1
+200
+98
+2
+100 
+95
+2
+200
+99
+
+
+SQL(structured query language) ----PLSQL(procedural language --- structured query language)
+loops , if  statement ,variable declaration is not there ---- 4GL (4 generation Language)
+loops , if  statement ,variable declaration, cursor --- PLSQL(procedural language --- structured query language)
+
+employee
+primary------ empid
+candidate key----empid, adhar no, passport no
+unique key---- adhar no, passport no
+foreign key ---- mgrno ---- references empno , deptno ----reference deptid of dept
+Empid
+Ename
+Sal
+Adhar no
+Mgrno
+Passport no
+deptno
+1
+Rajan
+11111
+
+
+3
+
+
+10
+2
+Revati
+2221
+
+
+3
+
+
+20
+3
+Anil
+444444
+
+
+
+
+
+
+10
+4
+Rajasi
+
+
+
+
+10
+
+
+40
+10
+Sunil
+44444
+
+
+
+
+
+
+
+
+
+
+
+
+
+department
+primary-----deptid
+candidate key- deptid, dname
+super key --deptid+dname, deptid, dname, deptid+dname+dloc
+foreign key
+Deptid
+Dname
+loc
+10
+HR
+Mumbai
+20
+Accounts
+Pune
+
+
+
+
+
+
+
+
+
+
+
+Types of statement
+
+
+
+
+DQL
+Data query language
+Select
+DDL
+Data definition language
+Create table,Alter table,Truncate,drop, 
+DML
+Data Manipulation Language
+Insert, update, delete
+DCL
+Data control language
+Grant , revoke
+TCL
+Transaction Control Language
+Commit, Rollback,savepoint
+
+
+install mysql on your machine
+
+
+step 1:
+open mysql client window
+step 2: 
+To create database 
+create database iacsdedacmay21
+step 3
+To switch to the database
+use iacsdedacmay21
+step 4
+------download demobldmysql.sql
+and store it in d:\mydata
+
+mysql>source d:\mydata\demobldmysql.sql
+---to create database
+create database iacsdedacmay21;
+------- switch to the database
+use iacsdedacmay21
+----see list of tables within the database
+show tables;
+----- to see the columns within table emp and dept
+desc emp
+
+desc dept
+-------- to see all the fields and all the rows within the table
+select * from emp;
+
+-------to empno,ename,sal,deptno
+select empno,ename,sal,deptno
+from emp;
+--------to display rows in which sal > 2000
+select empno,ename,sal
+from emp
+where sal >2000
+
+------- to display all employees with sal>2000 and ename=’BLAKE’
+select empno,ename,sal,deptno
+    -> from emp
+    -> where sal>2000 and ename='BLAKE';
+
+sal>2000 ----- will get checked 14 time  it is true for 6 times
+ename=’BLAKE’ ------ will get checked 6 times
+total condition  14+6=20
+select empno,ename,sal,deptno
+    -> from emp
+    -> where ename='BLAKE' and sal>2000;
+ename=’BLAKE’ ------ will get checked 14 times this is true only once
+
+sal>2000 ----- will get checked 1 time  
+total condition  14+1=15
+hence this is more time efficient
+
+------ display all employees with sal>2000 or ename=’BLAKE’
+select empno,ename,sal,deptno
+   from emp
+   where ename='BLAKE' or sal>2000;
+
+ename=’BLAKE’ ---- 14 times     it is false 13 times
+Hence sal>2000 -----🡪  13 times
+total condition checked ----- 14+13
+
+select empno,ename,sal,deptno
+   from emp
+   where sal>2000 or ename=’BLAKE’
+
+sal>2000  ------ this will get checked 14 ------- 8 times false
+ename=’BLAKE’ -------  8 times
+total condition check ------ 14+8
+
+--------rule to improve efficiency of the query
+in and operator the condition which is false more times should be the first condition
+in or operator the condition which is true more times should be the first condition
+-------the 1 st query  is less efficient than the 2nd
+select *
+from product
+where price>2000 and pname=’bag’
+
+select *
+from product
+where pname=’bag’ and price>2000
+
+----fina all employee who joined on 28 sept 1981
+select *
+from emp
+where hiredate=’1981-09-28’
+
+----to find all employees who do not earn commission
+select *
+ from emp
+ where comm is null or comm=0;
+
+----to find all employees who earn commission
+select *
+ from emp
+ where comm is not null or comm!=0;
+
+
+------to find all employees with sal >= 1500 and sal <= 3000
+select *
+ from emp
+ where sal>=1500 and sal <=3000;
+
+to check range of data
+ select *
+ from emp
+ where sal  between 1500 and 3000;
+--------- between …and 1500 and 3000 are inclusive
+------to find all employees with sal >1500 and sal < 3000
+select *
+ from emp
+ where sal  between 1501and 2999;
+------to find all employees with  sal not  >=1500 and sal not <= 3000
+select *
+ from emp
+ where sal  not between 1500 and 3000;
+
+-------  to find all employees with sal is either 1600 or 2000 or 1250
+select *
+from emp
+where sal=1250 or sal=1600 or sal=2000
+use in operator
+select *
+from emp
+where sal in (1250,1600,2000)
+
+----to display names of all employees who work in deptno either 10 ,20
+select *
+from emp
+where deptno in (10,20)
+----to display names of all employees who do not work in deptno either 10 ,20
+select *
+from emp
+where deptno not in (10,20)
+
+------ to find all employees with name starts with A
+to chek the pattern use like operator
+% --- matches with 0 or more character 
+_ ------ matches with one character
+
+select *
+from emp 
+where ename like ‘A%’
+
+------to find all employees with name ends with N
+%N
+select *
+from emp 
+where ename like ‘%N’;
+
+------to find all employees with name has A at second position and ends with N
+_A%N
+select *
+from emp 
+where ename like ‘_A%N’;
+
+----to find all employees with name has A at second position
+select *
+from emp 
+where ename like ‘_A%’;
+
+----to find all employees with L at 3 rd position or starts with M or  I at second last position
+__L%
+M%
+%L_
+
+select *
+from emp
+where ename like ‘__L%’ or ename like ‘M%’ or ename like ‘%I_’
+----to find all employees with A  at 2 nd position or does not starts with M or not having   I at second last position
+select *
+from emp
+where ename like ‘__L%’ or ename not like ‘M%’ or ename not like ‘%I_’
+
+---to find all employees name starts with M or starts with A or starts with B
+select *
+from emp
+where ename like ‘A%’ or ename  like ‘M%’ or ename not like ‘B%’
+
+-------- REGEXP
+^ ----- match the pattern at the beginning
+$ ---- matches the pattern at the end
+*-----  matches with 0 or more characters
++ ------ matches with 1 or more characters
+? ----- matches with 0 or one character
+[a-zA-Z0-9] ---- it matches with any one character or number
+[aeiou] --- it matches with any vowel
+[^aeiou] ----- anything other vowel 
+[^0-9] ----except numbers every character
+. ------ matches with any one character
+{m}—exactly m occurrences
+{m,n} ---- minimum m and maximum n occurrences
+( a|b |c)    ---- multiple patterns
+---to find all employees name starts with M or starts with A or starts with B
+^[MAB]
+(^M|^B|^A)
+select *
+from emp
+where ename REGEXP ‘^[MAB]’
+----to find all employees with A  at 2 nd position or does not starts with M or not having   I at second last position
+^.A
+^[^M]
+[^I].$
+select *
+from emp
+where ename REGEXP ‘(^.A|^[^M]|[^I].$)’
+
+-----to find all names which starts with A and ends with N and L at 3 rd position
+select *
+from emp
+where ename like ‘A_L%N’
+
+select *
+from emp
+where ename  REGEXP ‘^A.L.*N$’
+
+
+AL*N
+AN
+ALN
+ALLN
+ALLLLLN
+AL+N
+ALN
+ALLN
+ALLLLLN
+AB?C
+AC
+ABC
+ABBC
+AB{3}C
+ABBC
+ABBBC
+AB.{3}C
+
+---- to find all name which has LL anywhere in the name
+‘LL’
+‘L{2}’
+
+select *
+from emp
+where ename like ‘%LL%’;
+or
+select *
+from emp
+where ename REGEXP ‘L{2}’;
+or
+select *
+from emp
+where ename REGEXP ‘LL’;
+
+---- to find all names which starts with any character between range A to H
+select *
+from emp
+where ename REGEXP ‘^[A-Ha-h]’
+
+-------to calculate net sal = sal+ commission and displat column names as net sal, commission , Name
+select empno,ename "Name",sal "salary",comm,ifnull(comm,0) "commision",sal+ifnull(comm,0) "net sal"
+  from emp;
+
+------display empno,ename, sal and increased salary by 10%
+sal+0.10* sal ==🡺  sal*1.10 “new sal”
+select empno,ename,sal,sal*1.10 “new sal”
+from emp;
+
+-----display all employees arranged on name
+select empno,ename,job,sal,sal*1.10 "new sal"
+    from emp
+    order by ename;
+-----display all employees arranged by job and if job is same then arrange on ename in descending order
+in order by clause we can use maximum 255 columns 
+select empno,ename,job,sal,sal*1.10 "new sal"
+from emp
+order by job, ename desc;
+
+-------built in functions are available
+2 types 
+aggregate function ------ functions those work on group of rows 
+single row functions  ----- the functions which works once on each row is called as single row function
+number—abs,round,truncate,floor,ceil,sqrt
+character
+dates
+
+-------display ename and email of every employee
+email ----- ename followed by “@mycompany.com”
+select empno,ename,concat(ename,’@mycompany.com’) email
+from emp
+
+--------to display name,job and email 
+email      ename followed by . followed by 2,3 and 4 character of job followed by @mycompany.com
+concat(ename,’.’,substr(job,2,3),’@mycompany.com’)
+select empno,ename,job, concat(ename,’.’,substr(job,2,3),’@mycompany.com’) “email”
+from emp;
+
+----- find how many characters are there ename
+select ename,length(ename)
+from emp;
+number and character related functions
+Function
+Use
+Example
+abs()
+To convert -ve number to +ve number
+Select abs (20-30)----🡪10
+round()
+It will round the number to specified number of digits after decimal point
+Select round(20.5634,2)-🡪 20.56
+Select round(20.5650,2)-🡪 20.57
+truncat()
+It will truncat the number to specified number of digits after decimal point
+Select truncat(20.5634,2)-🡪 20.56
+Select truncat(20.5650,2)-🡪 20.56
+ceil()
+It will remove all digits after decimal point and always show next number
+Ceil(20.57)--🡪21
+Ceil(20.13)--🡪21
+floor()
+It will remove all digits after decimal point and always show same number
+floor(20.57)--🡪20
+floor(20.13)--🡪20
+Sqrt()
+It will display square root of the number
+Sqrt(4) --🡪 2
+ASCII(‘A’)
+This will print ascii value of  given character
+ASCII(‘A’)----🡪 65
+Upper()
+Convert given string in uppercase
+Upper(“hEllo”)---🡪HELLO
+lower()
+Convert given string in lowercase
+lower(“hEllo”)---🡪hello
+Concat(expr1,expr2,expr3,…..)
+It will concatenate all the strings
+Concat(‘a’,’xx’,’c’)--🡪axxc
+Left(expr,n)
+This will retrieve n characters from leftmost side of the string
+Left(“Hello”,3)----🡪Hel
+right(expr,n)
+This will retrieve n characters from rightmost side of the string
+rigth(“Hello”,3)----🡪llo
+Substr(str,start,n)
+This will retrieve n characters from the start position from the given string
+Substr(“welcome”,3,4)-🡪lcom
+Reverse(str)
+It will display string in reverse order
+Reverse(‘Hello’)--🡪olleH
+Trim(str)
+It will remove extra spaces from both sides
+Trim(‘    Hello   ‘)---🡪Hello
+(Without spaces)
+LTrim(str)
+It will remove extra spaces from left sides
+ltrim(‘    Hello   ‘)---🡪Hello
+(Without spaces from left side)
+rtrim(str)
+It will remove extra spaces from right sides
+rtrim(‘    Hello   ‘)---🡪Hello
+(Without spaces from right side)
+Length(str)
+Will display number of characters in the string
+Length(‘Welcome’)---🡪7
+LPAD(str,length,char)
+It will add char on left side to make length number of characters
+Lpad(“Hello”,10,”-“)--🡪  -----Hello
+RPAD(str,length,char)
+It will add char on right side to make length number of characters
+Rpad(“Hello”,10,”-“)--🡪  Hello-----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////day 3/////////////////////////////////////////////////////////////////////
+
+
+Date functions in mysql
+
+To get the current date and time, you use NOW() function. This will print date and time both
+
+Mysql >SELECT NOW();
+To get only date part of a DATETIME value, you use the DATE() function. Removes time portion
+
+SELECT DATE(NOW());
+To get the current system date, you use  CURDATE() function as follows: 
+
+SELECT CURDATE();
+
+
+‘22/11/1981’
+Str_to_date(22/11/1982,’%d/%b/%y’)    1982-11-22
+1982-11-22
+To format a date value, you use  DATE_FORMAT function. The following statement formats the date as mm/dd/yyyy using the date format pattern %m/%d/%Y :
+
+
+SELECT DATE_FORMAT(CURDATE(), '%m/%d/%Y') today;
++------------+
+| today      |
++------------+
+| 07/13/2015 |
++------------+
+1 row in set (0.02 sec)
+
+SELECT DATE_FORMAT(CURDATE(), '%M, %D %y') today;  ----- y will show 2 digit year
+Y --- will display 4 digit year
+M- month name in character
+m-month in number
+d- date in number
+D- display th or st after date
++--------------------+
+| today              |
++--------------------+
+| September, 21st 18 |
++--------------------+
+1 row in set (0.00 sec)
+To calculate the number of days between two date values, you use the DATEDIFF function as follows:
+
+
+SELECT DATEDIFF('2015-11-04','2014-11-04') days;
++------+
+| days |
++------+
+|  365 |
++------+
+1 row in set (0.02 sec)
+To add a number of days, weeks, months, years, etc., to a date value, you use the DATE_ADD function:
+
+SELECT 
+    '2015-01-01' start,
+    DATE_ADD('2015-06-30', INTERVAL 1 DAY) 'one day later',
+    DATE_ADD('2015-01-01', INTERVAL 1 WEEK) 'one week later',
+    DATE_ADD('2015-01-01', INTERVAL 1 MONTH) 'one month later',
+    DATE_ADD('2015-01-01', INTERVAL 1 YEAR) 'one year later';
+Date_add(DATE_ADD('2015-01-01', INTERVAL 2 YEAR), INTERVAL 6 MONTH)
+Similarly, you can subtract an interval from a date using the DATE_SUB function:
+
+SELECT 
+    '2015-01-01' start,
+    DATE_SUB('2015-01-01', INTERVAL 1 DAY) 'one day before',
+    DATE_SUB('2015-01-01', INTERVAL 1 WEEK) 'one week before',
+    DATE_SUB('2015-01-01', INTERVAL 1 MONTH) 'one month before',
+    DATE_SUB('2015-01-01', INTERVAL 1 YEAR) 'one year before';
+
+If you want to get the day, month, quarter, and year of a date value, you can use the corresponding function DAY, MONTH, QUARTER, and YEAR as follows:
+
+SELECT DAY('2000-12-31') day, 
+       MONTH('2000-12-31') month, 
+       QUARTER('2000-12-31') quarter, 
+       YEAR('2000-12-31') year;
++------+-------+---------+------+
+| day  | month | quarter | year |
++------+-------+---------+------+
+|   31 |    12 |       4 | 2000 |
++------+-------+---------+------+
+1 row in set (0.00 sec)
+To get the week information week related functions. For example, WEEK function returns the week number, WEEKDAY function returns the weekday index, and WEEKOFYEAR function returns the calendar week.
+
+SELECT 
+    WEEKDAY('2000-12-31') weekday,
+    WEEK('2000-12-31') week,
+    WEEKOFYEAR('2000-12-31') weekofyear;
++---------+------+------------+
+| weekday | week | weekofyear |
++---------+------+------------+
+|       6 |   53 |         52 |
++---------+------+------------+
+1 row in set (0.04 sec)
+The week function returns the week number with the zero-based index if you don’t pass the second argument or if you pass 0. If you pass 1, it will return week number with 1-indexed.
+
+SELECT 
+    WEEKDAY('2000-12-31') weekday,
+    WEEK('2000-12-31',1) week,
+    WEEKOFYEAR('2000-12-31') weekofyear;
++---------+------+------------+
+| weekday | week | weekofyear |
++---------+------+------------+
+|       6 |   52 |         52 |
++---------+------+------------+
+1 row in set (0.00 sec)
+2nd argument in week function
+https://www.mysqltutorial.org/mysql-week/
+Mode
+First day of week
+Range
+Week 1 is the first week …
+0
+Sunday
+0-53
+with a Sunday in this year
+1
+Monday
+0-53
+with more than 3 days this year
+2
+Sunday
+1-53
+with a Sunday in this year
+3
+Monday
+1-53
+with more than 3 days this year
+4
+Sunday
+0-53
+with more than 3 days this year
+5
+Monday
+0-53
+with a Monday in this year
+6
+Sunday
+1-53
+with more than 3 days this year
+7
+Monday
+1-53
+with a Monday in this year
+
+
+
+
+
+
+
+--------------------------------------------
+select extract(day from curdate());
+select extract(month from curdate()); ------------- to retrieve month
+select extract(year from curdate());  -------------to retrieve year
+
+
++-----------------------------+
+| extract(day from curdate()) |
++-----------------------------+
+|                          21 |
++-----------------------------+
+
+-------- to display month in characters
+select monthname(curdate());
++----------------------+
+| monthname(curdate()) |
++----------------------+
+| September            |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select dayname(curdate());
++--------------------+
+| dayname(curdate()) |
++--------------------+
+| Friday             |
++--------------------+
+1 row in set (0.00 sec)
+
+
+if alias name contains space then it is mandatory to enclose it in quotes. otherwise it is not mandatory to enclose it in quotes.
+-------to display a code which is combination of first 3 characters of name and last 3 characters of job
+whose sal is eitherr1250 or 2000 or 1600
+
+select ename,job,concat(left(ename,3),right(job,3)) code
+from emp
+where sal in (1250,2000,1600)
+or
+select ename,job,concat(substr(ename,1,3),substr(job,length(job)-3,3)) “emp code”
+from emp
+where sal in (1250,2000,1600)
+
+------- find length of job, and display name in reverse order
+select ename,job,length(job),reverse(ename)
+from emp;
+
+------ find all name which has A at 2nd position or A at 3rd position or E at the end
+select empno,ename,job
+from emp
+where ename like ‘_A%’ or ename like ‘__A%’ or ename like ‘%E’
+
+select empno,ename,job
+from emp
+where ename REGEXP ‘^..?A|E$’
+-------- display all employees who do not earn commission and name has A at 2nd or 3rd position and ends with E
+select ename,job,ifnull(comm,0)
+from emp
+where (comm is null or comm=0)and ename like ‘_A%E’ or ename like ‘__A%E’
+or
+select ename,job
+from emp
+where (comm is null or comm=0) and ename REGEXP ‘^..?A.*E$’
+
+--------select all employees who works in deptno 10 or 20 and sal  >=1200 or <=3000
+select empno,ename,sal,deptno
+from emp
+where deptno in (10,20) and sal between 1200 and 3000
+
+---------date related function
+date_add ---to find date after 2 years
+select date_add(curdate(),interval 2 years)
+
+----find date after 2 years 4 moths 2 days
+select date_add(date_add(date_add(curdate(),interval 2 year),interval 4 month),interval 2 day)
+
+-----find all employees who joined in 1981
+select *
+from emp
+where year(hiredate)=81
+
+---find all employees who joined in 1 st of aug
+select *
+from emp
+where month(hiredate)=8 and day(hiredate)=1
+
+
+
+
+
+
+
+
+-------find  all employees who joined in either aug or September
+select empno,ename,hiredate
+  from emp
+  where month(hiredate)=08 or month(hiredate)=09;
+or
+select empno,ename,hiredate
+  from emp
+  where month(hiredate) in (8,9)
+
+-------to display date before one year
+select date_sub(curdate(), interval of 1 year)
+
+-----find all employees who joined before 1 aug 1982
+select *
+from emp
+where hiredate   <   ’1982-08-01’
+
+--------- to find the week
+select weekday(‘2000-12-31’),week(‘2000-12-31’),weekofyear(‘2000-12-31’)
+----to find monthname, dayname
+select date_format(curdate(),'%M'),monthname(curdate()),dayname(curdate())
+
+---------
+set autocommit=1
+insert one record
+select * from emp;
+rollback;
+select * from emp;
+
+DML ---- insert,delete, update
+
+
+
+
+
+
+
+////////////////////////////////////////day 4/////////////////////////////////////////////////////////////////////
+functions those are divided 2 types
+aggregate 
+sum, min, max, avg, count
+
+
+single row
+character
+numbers
+date
+> select deptno,job,round(sum(sal),1),count(*),min(sal)
+    -> from emp
+    -> group by deptno,job
+
+
+------find sum of sal for all employees in deptno 10
+select deptno,sum(sal)
+from emp
+where deptno=10
+----------find sum of sal and avg for each department for all employees who are managers
+select deptno,sum(sal),avg(sal)
+from emp
+where job=’MANAGER’
+group by deptno
+order by deptno;
+
+-----find min sal for each department and arrange data based on min sal
+ select deptno,sum(sal),avg(sal),min(sal)
+from emp
+group by deptno
+order by min(sal);
+
+
+
+
+select deptno,sum(sal),sum(sal+ifnull(comm,0)) “snetsal”,min(comm)
+ from emp
+ group by deptno
+order by sum(sal+ifnull(comm,0));
+
+------display sum of sal , min sal, avg sal for each department, if the department has more than 5 employees
+select deptno,sum(sal),min(sal),avg(sal),count(*)
+from emp
+group  by deptno
+having count(*)>5;
+
+------display min sal, avg of  sal+10% sal, avg comm
+for all departments which has 2 managers
+select deptno,min(sal),avg(sal+sal*0.10),avg(ifnull(comm,0))
+from emp
+where job=’MANAGER’ 
+group by deptno
+having count(*)>2
+
+rules to remember for group by clause.
+if condition is based on aggregate function then put condition in having clause
+if condition is based on existing column or any derived column then add it in where clause
+in select statement you can use only columns other than aggregate function, which are used in group by clause.
+---------display sum,min,max,avg of sal and count of employees if there sal is>=1250 and <=3000
+and if their manager is either 7698 or 7566
+select sum(sal),min(sal),max(sal),avg(sal),count(*)
+from emp
+where sal between 1250 and 3000 and mgr in (7698 , 7566)
+
+
+------ display sum , avg, min, max, count for all employees who are working under same manager
+
+select mgr,sum(sal),min(sal),max(sal),avg(sal),count(*)
+from emp
+group by mgr;
+
+
+-------distinct keyword ----- this will show you unique values
+select distinct deptno
+from emp;
+
+select distinct job
+from emp
+
+select distinct mgr
+from emp
+
+-----DML -----Data manipulation language
+insert, delete, update
+--------insert all columns into a table
+insert into dept
+    -> values(100,'xxxx','chennai');
+----insert all columns but not following column sequence of desc atatement
+insert into dept(dname,deptno,dloc)
+    -> values('xxxx',300,'chennai');
+
+
+-------- insert few columns in a table
+insert into dept(dname,deptno)
+    -> values(‘purchase’,40),
+----- to insert multiple rows in one statement    
+insert into dept(deptno,dname,dloc)
+    -> values(100,'xxxx','chennai'),
+    -> (200,'yyy','Mumbai'),
+    -> (300,'zzz','Pune');
+
+-------insert into dept(deptno,dloc) values(233,’Pune’)
+
+---------modify data in existing rows
+update dept
+set loc=’Chennai’,dname=’HR’
+where dname=’inssurance’;
+-----delete data from table
+delete 
+from emp
+where deptno=10;
+
+----which of the following will delete all rows from table
+delete * from emp;
+delete from emp;
+delete from emp where deptno is null;
+both A and B
+
+-------if you want to undo
+rollback;
+set autocommit=0;
+commit;
+
+rollback, commit, save point these are called as TCL (Transaction control language)
+if I have dept table with 10 rows and autocommit is off
+insert     ----100
+insert ---200
+
+insert ----300
+commit;
+rollback;
+select * from dept;
+-------------if I have student table with 13 rows in it and autocommit is off
+
+insert  -----100
+insert -----200
+insert--- 300
+commit;
+update -----100
+delete 200
+update 300
+select * from student;
+13
+15
+16
+10
+
+------------student -----10 rows are there
+100 rows
+10 rows
+savepoint A
+7 –rows
+savepoint B
+
+8 rows
+savepoint  C
+51
+52
+53
+rollback To C
+
+------to take backup of data 
+c:\mydata> mysqldump -u root -p root123  > d:\data\mydata.sql
+------to upload data in sql
+c:\mydata\data>mysql -u root -p root123 < d:\data\mydata.sql
+or
+mysql> source d:\data\mydata.sql
+emp,dept,salgrade
+
+mysql>source d:\data\mydata.sql
+------to delete all table
+drop table emp
+drop table dept
+drop table salgrade
+
+
+
+
+
+
+
+ 
+
+
+
+
+////////////////////////////////////////day 5/////////////////////////////////////////////////////////////////////
+-------to find sum,min,max,avg of sal for each department for all employees with bonus= sal*0.15  and if I want to display all rows with bonus>700
+10 325345
+20 23453453
+30 3453
+select deptno,sum(sal),min(sal),max(sal),avg(sal)
+from emp
+where sal*0.15>700
+group by deptno
+order by deptno
+product
+prno,pname,price,qty, discount =price*8%
+--------to display min of sal+comm for each job if count of the job is > 3
+select job,min(sal+ifnull(comm,0)) ,count(*)  count_F
+from emp
+group by job
+having count(*)>3
+order by job
+
+----List all names and job so that the length of name should be 15 if it is smaller then add spaces to left.
+name ----10
+select ename,lpad(ename,15,” “)     
+from emp;
+or
+select concat(space(15-length(ename)),ename)
+from emp;
+28) Display thousand separator and $ symbol for commission, if it is null then display it as 0 for all employees whose name starts with A and ends with N
+
+12 ksdhfsh 23434   sdhkjshd 23,456,675
+select ename,sal,   concat(‘$’,format(ifnull(comm,0)))
+from emp
+where ename like ‘A%N’
+
+or 
+select ename,sal,   concat(‘$’,format(ifnull(comm,0)))
+from emp
+where ename like ‘^A.*N$’
+
+select ename,sal,format(sal,2,en_US)
+13,234.00
+
+1356,67.00
+select ename,sal,format(sal,2,en_UK)
+
+192.34.45.101
+
+Group by, having,aggregate function
+DML ---insert , update, delete
+TCL ---- commit, rollback, savepoint
+
+case statement
+DDL -data definition language
+if comm is null then need improvement
+  comm<500   ok
+comm>=500 and <1000  good
+com>=1000    excellent
+
+
+
+
+
+select empno,ename,sal,comm,case when comm is null then ‘need improvement’
+when comm<500 then ‘ok’
+when comm<1000 then ‘good’
+else ‘excellent’ end “Remark”
+from emp;
+
+------display pid,pname,price from product table
+price<50   less expensive
+>=50 <100  moderate
+>=100  expenssive
+if price is null wrong price
+select pid,pname,price,case when price is null or price=0 then ‘wrong price’
+when price<50 then ‘less expenssive’
+when price>=50 and price<100 then ‘moderate’
+else ‘expenssive’ end “remark”
+from product;
+
+
+-------display pid,pname,price,cid  
+if cid=1  then chips
+cid=2   biscuits
+cid =3  snackes
+otherwise others
+
+select pid,pname,price,case when cid=1 then ‘chips’
+when cid=2 then ‘biscuits’
+when cid=3 then ‘snacks’
+else ‘others’ end “category”
+from product;
+or
+
+select pid,pname,price,case cid when 1 then ‘chips’
+when 2 then ‘biscuits’
+when 3 then ‘snacks’
+else ‘others’ end “category”
+from product;
+-----to display grade level based on job
+
+select empno,ename,job,case when job in ('CLERK','salesman') then 'grade 1'
+    -> when job='Manager' then 'grade 2'
+    -> when job in ('ANALYST','designer') then 'grade 3'
+    -> when job='president' then 'grade 4' end "grade"
+    -> from emp;
+
+DDL statements 
+create table  -----new table
+alter table ----- modify existing table
+drop table------ delete table
+truncate-------delete only data
+all DDL statements are autocommit
+
+------to delete entire table
+drop table emp;
+drop table dept;
+------delete all records but keep empty table 
+truncate table emp;
+or
+delete 
+from emp;
+
+
+
+
+
+Truncate
+Delete
+DDL
+DML
+
+
+Autocommit --🡪 no rollback
+Rollback is possible till we commit;
+Cannot use where condition
+We may use where condition to remove few rows
+Nested query cannot be used
+Nested query is possible to use
+
+
+Data types in mysql
+Numeric
+Date and Time
+String Types.
+enum
+Numeric Data Types
+MySQL uses all the standard ANSI SQL numeric data types, so if you're coming to MySQL from a different database system, these definitions will look familiar to you. The following list shows the common numeric data types and their descriptions −
+INT− A normal-sized integer that can be signed or unsigned. If signed, the allowable range is from -2147483648 to 2147483647. If unsigned, the allowable range is from 0 to 4294967295. You can specify a width of up to 11 digits.
+TINYINT − A very small integer that can be signed or unsigned. If signed, the allowable range is from -128 to 127. If unsigned, the allowable range is from 0 to 255. You can specify a width of up to 4 digits.
+SMALLINT − A small integer that can be signed or unsigned. If signed, the allowable range is from -32768 to 32767. If unsigned, the allowable range is from 0 to 65535. You can specify a width of up to 5 digits.
+MEDIUMINT − A medium-sized integer that can be signed or unsigned. If signed, the allowable range is from -8388608 to 8388607. If unsigned, the allowable range is from 0 to 16777215. You can specify a width of up to 9 digits.
+BIGINT − A large integer that can be signed or unsigned. If signed, the allowable range is from -9223372036854775808 to 9223372036854775807. If unsigned, the allowable range is from 0 to 18446744073709551615. You can specify a width of up to 20 digits.
+FLOAT(M,D) − A floating-point number that cannot be unsigned. You can define the display length (M) and the number of decimals (D). This is not required and will default to 10,2, where 2 is the number of decimals and 10 is the total number of digits (including decimals). Decimal precision can go to 24 places for a FLOAT.
+DOUBLE(M,D) − A double precision floating-point number that cannot be unsigned. You can define the display length (M) and the number of decimals (D). This is not required and will default to 16,4, where 4 is the number of decimals. Decimal precision can go to 53 places for a DOUBLE. REAL is a synonym for DOUBLE.
+DECIMAL(M,D) − An unpacked floating-point number that cannot be unsigned. In the unpacked decimals, each decimal corresponds to one byte. Defining the display length (M) 
+
+Date and Time Types
+The MySQL date and time datatypes are as follows −
+DATE − A date in YYYY-MM-DD format, between 1000-01-01 and 9999-12-31. For example, December 30th, 1973 would be stored as 1973-12-30.
+DATETIME − A date and time combination in YYYY-MM-DD HH:MM:SS format, between 1000-01-01 00:00:00 and 9999-12-31 23:59:59. For example, 3:30 in the afternoon on December 30th, 1973 would be stored as 1973-12-30 15:30:00.
+TIMESTAMP − A timestamp between midnight, January 1st, 1970 and sometime in 2037. This looks like the previous DATETIME format, only without the hyphens between numbers; 3:30 in the afternoon on December 30th, 1973 would be stored as 19731230153000 ( YYYYMMDDHHMMSS ).
+TIME − Stores the time in a HH:MM:SS format.
+YEAR(M) − Stores a year in a 2-digit or a 4-digit format. If the length is specified as 2 (for example YEAR(2)), YEAR can be between 1970 to 2069 (70 to 69). If the length is specified as 4, then YEAR can be 1901 to 2155. The default length is 4.
+
+String Types
+Although the numeric and date types are fun, most data you'll store will be in a string format. This list describes the common string datatypes in MySQL.
+CHAR(M) − A fixed-length string between 1 and 255 characters in length (for example CHAR(5)), right-padded with spaces to the specified length when stored. Defining a length is not required, but the default is 1.
+citycode   ------1000 ----char(5)
+Asc
+asr
+
+
+VARCHAR(M) − A variable-length string between 1 and 255 characters in length. For example, VARCHAR(25). You must define a length when creating a VARCHAR field.
+       city name   varchar(30)
+      pune     -------30    4
+      Calcutta    -------30   8 
+      Mumbai   ------30     6
+     dkjk jk sjdkfljskldsjfks jdlkfjsdklj   ----30
+
+BLOB or TEXT − A field with a maximum length of 65535 characters. BLOBs are "Binary Large Objects" and are used to store large amounts of binary data, such as images or other types of files. Fields defined as TEXT also hold large amounts of data. The difference between the two is that the sorts and comparisons on the stored data are case sensitive on BLOBs and are not case sensitive in TEXT fields. You do not specify a length with BLOB or TEXT.
+TINYBLOB or TINYTEXT − A BLOB or TEXT column with a maximum length of 255 characters. You do not specify a length with TINYBLOB or TINYTEXT.
+MEDIUMBLOB or MEDIUMTEXT − A BLOB or TEXT column with a maximum length of 16777215 characters. You do not specify a length with MEDIUMBLOB or MEDIUMTEXT.
+LONGBLOB or LONGTEXT − A BLOB or TEXT column with a maximum length of 4294967295 characters. You do not specify a length with LONGBLOB or LONGTEXT.
+ENUM − An enumeration, which is a fancy term for list. When defining an ENUM, you are creating a list of items from which the value must be selected (or it can be NULL). For example, if you wanted your field to contain "A" or "B" or "C", you would define your ENUM as ENUM ('A', 'B', 'C') and only those values (or NULL) could ever populate that field.
+
+create table mytab(id int,name varchar(10));
+
+constraints
+2 types of constraints
+table level –primary key,unique,check,foreign key   auto_increment is technique which allows to insert unique values.
+field level  ---- not null , default
+table level constraints can be written immediate after the field or  at the end in create table query
+field level  constraints has to be written immediate after the field 
+
+
+
+
+
+create table myemployee(empid int primary key,
+ename varchar(30) not null,
+price decimal(11,2) default 100,
+qty int check(qty>10),
+passportnum int unique,
+adharnum int unique not null)
+
+product(pid,pname,qty,price,cid)
+category(catid,cname,desc)
+
+create table category(catid int,
+cname varchar(20) not null,
+description varchar(20),
+primary key(catid));
+
+create table product(
+pid int primary key,
+pname varchar(20) not null,
+qty int check(qty>0),
+price decimal(11,2) check(price>0),
+cid int,
+foreign key fk_cid(cid) references category(catid) 
+on delete set null
+on update cascade)
+
+faculty(fid,fname,skill)
+room(rid,rname,loc)
+course(cid,cname,fid,rid)
+
+
+
+create table faculty(
+fid int primary key,
+fname varchar(20) not null,
+skill varchar(20)
+)
+room(rid,rname,rloc)
+
+create table room(
+rid int,
+rname varchar(20),
+rloc varchar(50)
+primary key(rid)
+)
+course(cid,cname,fid,rid)
+create table course(
+cid int primary key,
+cname varchar(20),
+fid int,
+rid int,
+foreign key fk_fid(fid) references faculty(fid)
+on delete set null
+on update cascade,
+foreign key fk_rid(rid) references room(rid)
+on delete set null
+on update cascade
+)
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////day 6/////////////////////////////////////////////////////////////////////
+
+Constraints on the table
+not null-----within a field null values are not allowed
+unique------ no duplicate values are allowed
+check-----allows data only if it satisfies given condition
+primary key--------no duplicates and no null values
+default-----if user enters null then the given value will be assigned
+foreign key--------- checks the value exists in other column of same table or different table
+on delete <action>
+on update <action>
+3 different actions
+cascade-----changes made in parent table will be reflected in the child table
+set null---------if parent table primary key values are changed then those values in child table are set to null
+no action-------if any value is present in child table, then that value is not allowed to be removed or change from parent table
+
+Why we use constraints
+security
+to avoid wrong input from user
+data integrity
+
+
+vehicle(vid,vname,price)
+customer(custno,cname,address,email)
+cust-vehicle(custid,vid, purachse date, discounted price)
+one customer can have many vehicle
+
+
+
+
+
+
+
+
+Vehicle
+Vid
+Vname
+price
+100
+Activa
+80000
+200
+santro
+700000
+300
+Jupiter
+83000
+
+
+
+
+
+
+
+
+customer
+cid
+Cname
+Adress
+10
+Revati
+Aundh
+20
+Rajan
+Aundh
+30
+Anil
+Baner
+
+
+vehicle-cust
+Custid
+Vid
+Registration num
+Purchasedate
+Discounted price
+10
+100
+Mh12-1234
+2010-02-05
+70000
+10
+200
+Mh12-1111
+2012-04-27
+645000
+20
+100
+Mh12-1235
+2010-02-05
+70000
+10
+100
+Mh12-1567
+2010-02-05
+70000
+
+
+create table vehicle_cust(
+vid int,
+custid int,
+p_date date,
+dis_price decimal(9,2),
+foreign key fk_vid(vid) references vehicle(vid)
+on delete no action
+on update cascade,
+foreign key fk_cid(custid) references customer(cid)
+on delete no action
+on update cascade,
+primary key(vid,custid)
+)
+create table customer(
+cid int primary key,
+cname varchar(20) not null,
+address varchar(20)
+)
+create table vehicle(
+vid int,
+vname varchar(20),
+price decimal(9,2),
+primary key(vid)
+)
+
+create table myemp(
+empid int primary key,
+ename varchar(20),
+mgr int,
+job varchar(20),
+foreign key fk_mgr(mgr) references myemp(empid)
+)
+
+---------create table using auto_increment
+create table mytable(
+    -> id int primary key auto_increment,
+    -> name varchar(20) not null,
+    -> email varchar(20));
+-------change the starting value for auto_increment
+alter table mytable auto_increment=1001;
+
+////////////////////////////////////////day 7/////////////////////////////////////////////////////////////////////
+
+Alter table
+if we have vehicle table (vid,vname,registration number,description, chasie number)
+cust_vehicle(custid,vid,date of purchase,discounte price)
+cust(cid,cname,address)
+if table contains 5 rows.
+
+add column 
+alter table vehicle
+add reg_no int after vname,
+add chasie_num int;
+
+
+
+add constraint  ---- to add table level constraint(primary key, foreign key,unique, check )
+alter table cust_vehicle
+add constraint fk_vid foreign key  vid references vehicle(vid)
+
+------- to add primary key constraint on customer
+    alter table customer
+    add constraint pk_cid primary key (cid)
+ 
+drop a column
+alter table vehicle
+drop column reg_no
+
+drop constraint
+alter table cust_vehicle
+drop constraint fk_vid
+
+modify column data type or constraint
+
+alter table vehicle
+modify chasie_num int not null
+
+------ to change data type suppose initial size of description is varchar(10) change it to varchar(50)
+lkajka kj sdh ahdjh
+alter table vehicle
+modify description varchar(50)
+
+
+rename table
+alter table vehicle
+rename to myvehicle;
+
+rename the column
+alter table vehicle
+change column reg_no registration varchar(20) not null
+                alter table vehicle
+                rename column reg_no to registration   
+
+------- create table order table
+order1 (orderid,orderdate)
+customer1(cid,cname,address,email)
+create both tables
+create table customer1(
+ cid int,
+cname varchar(20),
+address varchar(20),
+email varchar(20)
+)
+
+create table order1(
+orderid int,
+ord_dt date
+)
+
+add bill_amt and cid,description  columns in order1 table
+alter table order1
+add bill_amt int,
+add cid int,
+add description varchar(20);
+
+add primary key constraint in both table
+alter table customer1
+add primary key(cid)
+
+alter table order1
+add primary key(orderid)
+
+add foreign key constraint in order1 table
+alter table order1
+add constraint fk_order_cust1 foreign key (cid) references customer1(cid)
+or
+alter table order1
+add foreign key fk_order_cust1(cid) references customer1(cid)  
+
+
+---------- to see constrain name on a table
+select column_name,constriant_name,table_name
+     from information_schema.key_column_usage
+   where table_name='order1';
+
+change column name bill_amt to billamt
+alter table order1
+rename column bill_amt to billamt 
+
+change data type of billamt to decimal(9,2)
+alter table order1
+modify billamt decimal(9,2)
+
+drop column description from order table
+alter table order1
+drop column description;
+
+drop primary key constraint from order table
+alter table order1
+drop primary key
+ 
+drop foreign key constraint from order table
+alter table order1
+drop constraint fk_order_cust1;
+
+rename order table to myorder
+alter table order1
+rename to myorder;
+
+
+
+-------- nested queries or joins
+-------to find empno,ename,sal for all employees with sal >2000
+select empno,ename,sal
+from emp
+where sal>2000
+
+-----to find all employees with salary > blake’s sal
+select sal    
+from emp
+where ename=’BLAKE’
+
+
+
+
+
+
+select empno,ename,sal
+from emp
+where sal >   (select sal    
+                       from emp
+                         where ename=’BLAKE’
+                        )
+
+-------find all employees who are working in department accounts
+select empno,ename,deptno
+from emp
+where deptno = (select deptno
+                               from dept
+                              where dname=’ACCOUNTING’
+)
+
+
+--------find all employee with sal > avg salary of deptno 10
+select empno,ename,sal
+from emp
+where sal> (select avg(sal)
+from emp
+where deptno=10)
+
+------ find all employee who are working in same dept of scott or CLARK
+select empno,ename,sal
+from emp
+where deptno  in (select deptno
+from emp
+where ename in (‘SCOTT’,’CLARK’))
+
+-----find all employees with sal > scott’s or Clarks salary
+select empno,ename,sal
+from emp
+where sal > any (select sal     
+from emp
+where ename in (‘scott’,’clark’))
+
+
+
+////////////////////////////////////////day 8/////////////////////////////////////////////////////////////////////
+--------when you write query within query then it is nested query
+----outer query is called as parent query and inner query is called as child query
+----output of child query is used as input to outer query
+-------if child query is independent query then it is called as nested query and it gets executed only once.
+------ if child query is dependent on outer query then it is called as co-related query. and child query will get executed once for each row in the outer query
+
+
+-nested query  joins
+use nested query if you need data only from one table in the output
+use joins if you need data from multiple table. avoid joins as much as possible because it is time consuming.
+--------maximum level of nesting is 255
+--------find all employees with sal = either blake salary or smith salary
+select empno,ename,sal
+from emp
+where sal in (select sal
+        from emp
+   where ename in (‘BLAKE’,’SMITH’))
+
+-------  select all employees with sal > all salaries of avg salary of dept 10 and 20
+select empno,ename,sal
+from emp
+where sal> all (
+                          select avg(sal)
+                         from emp
+                          where deptno in (10,20) 
+                          group by deptno
+)
+
+
+
+
+---------select all employees with sal  > avg sal of deptno 10 and < max sal of deptno 20
+select empno,ename,sal
+from emp
+where sal between (select avg(sal) from emp where deptno=10) and (select max(sal) from emp where deptno=20)
+
+------------nested queries in DML statement
+update martin’s sal with blake’s sal
+update, delete, insert
+update emp
+set sal=(select sal 
+                 from (select sal from emp where ename=’BLAKE’) s
+                 )
+               
+where ename=’Martin’
+
+
+
+--------- change salary of all employees who working in ALLEN's department to the salary of Miller.
+update emp
+set sal=(select sal from (select sal from emp where ename=’Miller’) s)
+where deptno = (
+                             select deptno
+                              from (select deptno from emp where 
+                             where ename=’ALLEN’) d
+)
+
+
+
+
+-------- delete all employees who are working in blake’s dept and If sal > 3000
+delete 
+from emp
+where deptno=(select deptno from (select deptno from emp where ename=’BLAKE’) d) and sal> 3000
+
+--------delete all employees who are working in Allen’s dept and sal > avg(sal of deptno 10)
+delete from emp
+where deptno=(select deptno from (select deptno from emp where ename=’ALLEN’) d) and 
+sal > (select avg(sal) from (select sal from emp where deptno=10) a)
+
+--------- find all employees with sal > min(sal) of its own dept
+corelated queries
+select empno,ename,sal,deptno
+    from emp e
+ where sal> (select min(sal) from emp  d where d.deptno=e.deptno)
+order by deptno;
+
+
+
+-------find all employees with sal > avg sal of all employee who work under his  manager
+select empno,ename,sal,mgr
+from emp e
+where sal > (select avg(sal) from emp a where a.mgr=e.mgr);
+
+-------exists , not exists
+exists -------- it return true if child query returns one or more rows otherwise returns false
+not exists -------------  it returns true if child query do not return any rows otherwise returns false
+
+----display all departments in which no employess are there
+select deptno,dname
+from dept d
+where not exists(select *
+                                from emp e
+                                where e.deptno=d.deptno) 
+-------- display department in which employees are there
+select deptno,dname
+from dept d
+where exists(select *
+                                from emp e
+                                where e.deptno=d.deptno) 
+
+
+
+
+
+
+-----display all employees who are not working as managers
+select *
+from emp e
+where not exists (select *
+                                from emp m
+                                 where m.mgr=e.empno)
+
+
+------faculty(fid,fname,skills)
+10   rohit        java
+20    sarika        python
+30    Narendra    database
+40     Tejashree    security
+-------room(rid,rname,loc)
+100  lotus       1st floor
+200  jasmin     1st floor
+300  Mogra      2nd floor
+400  Rose         1 st floor
+--------course(cid,cname,rid,fid)
+1    eDAC    100   10
+2    eDBDA   200   30
+3    eDTISS    
+4    eDAI        
+-------find all faculties who are not assigned to any course
+select *
+from faculty f
+where not exists(select *
+                              from course c
+                              where c.fid=f.fid)  and skills=’python’
+-------find all vacant room
+select *
+from room r
+where not exists (select *
+                               from course c
+                     where c.rid=r.rid)
+
+---------find all departments in which no employees are there, and department location is pune
+select *
+from dept d
+where not exists (select * from emp e
+                                where e.deptno=d.deptno) and loc=’pune’;
+
+
+
+
+
+
+
+
+////////////////////////////////////////day 9/////////////////////////////////////////////////////////////////////
+Nested Queries
+only if you want to retrieve data from single table
+corelated queries and nested queries
+Nested  Query
+Co related query
+Is not dependent on parent query
+Dependent on parent query
+The child query get executed only once
+Child query gets executed once per each row in parent query
+Exists and not exists cannot be used
+We use exists and not exists operator to check whether child query returns rows or not
+
+
+
+maximum nesting level can be 255
+when to use Joins
+To display data from multiple tables
+Types of joins
+cross join
+Inner join
+equi join
+nonequijoin
+self join
+Outer join
+left outer join
+right outer join
+full outer join -------- this is not directly supported in mysql
+-------to display employee details and department in which employee works
+this is cross join
+if emp table contains 17 rows
+if dept table contains 4 rows then 
+cross join will contain 68 rows
+
+select empno,ename,sal,d.deptno,e.deptno,dname
+from emp e,dept d;
+
+if we add condition to get required data
+then it is called inner join   ----------in mathematics(natural join)
+
+
+select empno,ename,sal,d.deptno,e.deptno,dname
+from emp e,dept d
+where e.deptno=d.deptno and sal>2000;
+
+select empno,ename,sal,d.deptno,dname
+from emp e inner join dept d on e.deptno=d.deptno
+where sal >2000;
+in joins if you are joining n tables then n-1 conditions will be there
+-----display all products pid,pname,qty,price, cname,description for all products with price>50
+select pid,pname,qty,price, cname,cdesc
+from product p ,category c
+where p.cid=c.cid and price>50;
+
+select pid,pname,qty,price, cname,cdesc
+from product p  inner join category c on p.cid=c.cid
+where price>50;
+
+
+vehicle (vid,vname,chasienumber)
+customer(cid,cname,address)
+cust_vehicle(custid ,vehid,date purchase dt, price)
+
+select vid,vname,cid,cname
+from customer c,vehicle v,cust_vehicle cv
+where c.cid=cv.custid and v.vid=cv.vehid;
+
+select vid,vname,cid,cname
+from customer c inner join cust_vehicle cv on c.cid=cv.custid inner join vehicle v on v.vid=cv.vehid ;
+
+-----display empno,ename,grade,sal of all employees (example nonequi join)
+select empno,ename,sal,grade
+    -> from emp e inner join salgrade s on e.sal between s.losal and s.hisal;
+
+-----display empno,ename,dname,sal,grade
+select empno,ename,sal,grade,dname
+from emp ,salgrade ,dept 
+where emp.deptno=dept.deptno and sal between losal and hisal
+
+
+select empno,ename,sal,grade,dname
+from emp e inner join dept d on e.deptno=d.deptno inner join salgrade s on e.sal between s.losal and s.hisal;
+
+----to combine table with itself is called as self join
+select e.empno,e.ename,m.empno mgrno,m.ename mname
+    -> from emp e,emp m
+    -> where e.mgr=m.empno;
+
+select e.empno,e.ename,m.empno,m.ename mname
+    -> from emp e inner join emp m
+    -> on e.mgr=m.empno;
+--------- to bring matching as well as non matching rows in the o/p then use outer join 
+select empno,ename,e.deptno,d.deptno,dname
+from emp e right join dept d on e.deptno=d.deptno
+
+select empno,ename,e.deptno,d.deptno,dname
+from dept d left  join emp e on e.deptno=d.deptno
+
+
+
+
+
+
+----to display all matching rows aswell as non matching rows from bot emp and dept table
+select empno,ename,e.deptno,d.deptno,dname
+    -> from emp e left join dept d on e.deptno=d.deptno
+    -> union
+    -> select empno,ename,e.deptno,d.deptno,dname
+    -> from emp e right join dept d on e.deptno=d.deptno;
+
+
+faculty(fid,fname,skills)
+room(rid,rname,loc)
+course(cid,cname,rid,fid)
+--------to find course and faculty assigned to the course
+select cid,cname,fid,fname
+from course c inner join faculty f on c.fid=f.fid;
+---------to find all rooms assigned to course
+select cname,rname
+from course c inner join room r on c.rid=r.rid;
+-------- to find all courses, room assigned to the course and faculty assigned to the course
+select cname,rname,fname
+from course c inner join room r on c.rid=r.rid inner join faculty f on c.fid=f.fid;
+
+----display all rooms assigned to course as well as rooms not assigned to course
+select cid,cname,rid,rname
+from course c    right join   room r on c.rid=r.rid;
+----display all rooms assigned to course as well as rooms not assigned to course and courses which 
+donot have any room
+
+
+
+
+select rid,rname,cid,cname
+from course c left join room r on c.rid=r.rid
+union
+select rid,rname,cid,cname
+from course c right join room r on c.rid=r.rid;
+
+
+
+
+
+
+////////////////////////////////////////day 10///////////////////////////////////////////////////////////////////
+-------list all faculties who are not allocated to any course and rooms which are not allocated to any course
+select f.fid,fname,cname,rname
+from faculty f left join course c on f.fid=c.fid  left join room r on c.rid=r.rid
+union
+select f.fid,fname,cname,rname
+from faculty f left join course c on f.fid=c.fid  right join room r on c.rid=r.rid
+-------to insert records from existing table
+if dept table is there and it contains 3 rows if you want to store the data into another
+create table mydept
+(
+id int 
+name varchar(20)
+)
+----create a table from existing table and also populate with data
+create table mydept as
+select * from dept
+where detptno>20
+
+create table mydept as
+select deptno,dname from dept
+where 1=2;
+
+-------to insert data using nested query
+insert into mydept(deptno,dname)
+select deptno,dname
+from dept;
+ 
+
+
+
+-----if you want to create temporary table
+create temporary table mytemp
+(id int,
+name varchar(20)
+)
+
+Storage engines
+InnoDB – it is most widely used if you want to perform secure transaction,
+it supports ACCID property
+supports row level locking
+
+MyISAM—this origin engine. it is fast storage engine, usually used in data warehousing
+or if you need table level locking 
+Archive
+Federated
+create table mytab(
+id int,
+name varchar(20))ENGINE=’MyISAM’
+
+------to change the engine
+alter table mytab ENGINE=’InnoDB’
+
+------ to see the engine
+select Engine from information_schema.tables
+    -> where table_name='dept' and table_schema='iacsdedacmay21';
+
+---------indexes in mysql
+select * from dept
+where deptno=200;
+
+------indexes are created automatically for primary key and unique
+create index my_sal_idx
+on emp(sal)
+create index my_sal_idx1
+on myemp(sal)
+-----to create index using alter table
+alter  table emp add index(sal)
+drop index my_sal_idx on emp;
+
+Empno
+Ename
+Sal
+Deptno
+desg
+12
+Rajas
+34000
+20
+CLERK
+14
+Rashmi
+45000
+30
+SALESman
+15
+Anil
+150000
+10
+CEO
+16
+Swapnali
+25000
+20
+Programmer
+17
+Swapnali
+25000
+20
+Programmer
+18
+Sonali
+30000
+30
+Programmer
+19
+Sonali
+35000
+30
+Programmer
+
+
+
+
+
+
+
+
+
+
+
+
+product(pid,pname,qty,price)    --------2000 , 3000
+select * from emp where sal between 20000 and 50000
+my_sal_idx
+sal
+position
+25000
+4,5
+30000
+6
+34000
+1
+35000
+7
+45000
+2
+150000
+3
+
+
+Why to use index
+to run queries faster which uses where clause or order by clause
+optimize the query execution for group by clause
+finding min() and max() faster
+----drawback 
+DML(insert, delete, update)  operations will become slow
+memory requirements will grow
+
+-----to create composite index
+create index my_sal_idx
+on emp(sal desc ,job)
+
+Types of indexes
+unique index
+this does not allow duplicate values in the column
+
+create unique index passport_idx
+on emp(passport)
+primary key
+to create this index automatically add primary key constraint on table
+
+regular index or normal index
+create index sal_idx
+on emp(sal,job)
+
+
+Full text
+these indexes helps to search certain words in large text
+these indexes are uses in e-commerce site, search engines
+
+fulltext indexes are supported by InnoDB,MyISAM’can be created only on columns of type char, varchar,text
+
+create  fulltext index sal_idx
+on emp(sal,job)
+
+spatial index
+not widely used
+ these are created on column which may contain most of the values null and we want to add only not null values in the column.
+
+create  spatial index sal_idx
+on emp(sal,job)
+
+descending index 
+create  index sal_idx
+      on emp(sal desc,job)
+
+------- to see all indexes
+show indexes from emp
+
+--------to drop index
+drop index indexname on tablename
+ 
+-------- to check which index is used in the table for the query
+explain select * from emp where ename=’BLAKE’
+
+
+select * from emp 
+use index(ename_idx,sal_idx)
+where ename=’BLAKE’
+
+------ create views
+
+why to create view
+to give only restricted information
+to hide complexity of the query
+to increase the security  ---- by hiding table name
+
+
+create view mgr10
+as 
+select empno,ename,job from emp
+where deptno=10
+-------to allow to add only rows with deptno =10
+create view mgr10
+as 
+select empno,ename,job, sal,deptno from emp
+where deptno=10
+with check option
+with read only;  ----------------------- works in oracle
+
+insert into mgr10 values(223,'Sonali','analyst',3457,10);
+insert into mgr10 values(223,'Sonali','analyst',3457,20);
+
+create view myempdept
+as
+select empno,ename,sal,dname
+from emp e inner join dept d on e.deptno=d.deptno;
+
+
+insert into myempdept values(123,’xxx’,3456,’HR’)
+
+emp_india (  empno,ename,sal,job,location)
+emp_US (  empno,ename,sal,job,location)
+emp_Japan (  empno,ename,sal,job,location)
+create view allemp
+as
+select * from emp_india
+union
+select * from emp_us
+union
+select * from emp_japan
+-------use views
+select * from allemp
+
+
+
+
+
+
+
+////////////////////////////////////////day 11///////////////////////////////////////////////////////////////////
+
+
+-------to list all faculties and rooms which are not allocated as well as which are allocated
+
+select f.fid, fname, cname, rname
+    from faculty f left join course c on f.fid=c.fid left join room r on c.rid=r.rid
+    
+    union
+    select f.fid, fname, cname, rname
+     from faculty f right join course c on f.fid=c.fid right join room r on c.rid=r.rid
+----list all faculties and rooms which are not allocated to any course    
+
+select fname, cname,'' rname”,cname
+    ->   from faculty f left join course c on c.fid=f.fid
+    ->     where cname is null
+    -> union
+    ->
+    -> select '' fname'', cname, rname, cname
+    ->     from room r left join course c on r.rid=c.rid
+    ->    where cname is null;
+
+--------to list all the view in mysql
+select Table_name from information_schema.Tables where table_type like ‘view’ and table_schema=’iacsdedacmay21’
+
+create view myview
+as
+select deptno,max(sal),min(sal),avg(sal),count(*)
+from emp
+where job=’analyst’
+group by deptno
+having count(*) >=2;
+
+select * from myview
+
+create view managerview as
+select *
+from emp
+where job=’Manager’
+with read only;
+
+---------materialized
+budgeting purpose
+data analytics decision 
+bournvita--- order
+bournvita       9000   
+                   
+
+create materialized view myview
+as 
+select * 
+from product
+where type=’consumable’
+
+select * from myview
+
+--------- how to find first 12 record in mysql
+uses limit clause
+select *
+from emp
+limit 12;
+--------- how to find 12th record in mysql
+select *
+from emp
+limit 11,1;
+
+--------to display employee which are highly paid
+select *
+from emp
+order by sal desc
+limit 1;
+--------to display employee which is 3rd highest
+select *
+from emp
+order by sal desc
+limit 2,1
+ 
+select *
+from emp
+where sal=(select max(sal)
+from emp)
+
+select deptno,max(sal)
+from emp
+group by deptno
+order by max(sal)
+
+select max(sal)
+from emp;
+---------- to find nth highest in oracle
+Select sal          
+From  emp e1
+Where n-1=(select count(distinct(sal))   
+                        from emp e2
+                         where e1.sal>e2.sal)
+
+
+DCL---data control language
+------to assign previleges
+grant <previleges> on <tablename> to <username>@<server ip>
+all------- all previleges
+* ------- all employee
+grant all on noticetab to ‘*’@’localhost’
+
+---to remove previleges
+revoke <previleges> on  <tablename> from ‘user’@’localhost’
+Select
+Delete
+Insert
+Update
+Index
+Create
+Alter
+Drop
+All
+Grant option
+
+
+grant select,insert on category to 'u1'@'localhost' with grant option
+
+DQL,DML,TCL,DCL,DDL,views,indexes,temporary table,limit---- top n analysis   --- SQL
+
+
+PL-SQL -----procedural language
+if statement, loops, variable declaration,cursors, exception handling, procedures,functions,triggers
+Normalization
+1NF,2NF,3NF,BCNF (Boyce code NF)
+to divide the data into multiple tables to reduce redundancy is called as nomaliztion
+Custid
+Cname
+address
+Accno
+Balance
+Type 
+relmgr
+1
+Kishori
+Aundh
+1
+12345
+Saving
+AA
+1
+Kishori
+Baner
+2
+123451
+Current
+AA
+1
+Kishori
+Baner
+3
+12345
+demat
+AA
+2
+Rajan
+Aundh
+4
+1111111
+Saving
+BB
+3
+Revati
+Aundh
+11
+444444
+Saving
+BB
+4
+Sachin
+Deccan
+
+
+
+
+
+
+
+
+
+
+insertion anamoly ------
+updation anamoly
+deletion anamoly
+
+Custid
+Accno
+Balance
+Type 
+relmgr
+1
+1
+12345
+Saving
+AA
+1
+2
+123451
+Current
+AA
+1
+3
+12345
+demat
+AA
+2
+4
+1111111
+Saving
+BB
+3
+11
+444444
+Saving
+BB
+
+
+
+
+
+
+
+
+
+
+
+
+Custid
+Cname
+address
+1
+Kishori
+Baner
+2
+Rajan
+Aundh
+3
+Revati
+Aundh
+4
+Sachin
+Deccan
+5 
+Sonali
+deccan
+
+
+
+
+
+
+
+
+insertion anamoly , updation anamoly,deletion anamoly these drawbacks will be removed
+and redundancy will be also removed.
+Normalization------Data modelling, E-R diagram
+1NF --- if every row and column in the table contains atomic value
+Studentid
+Sname
+subid
+Subject name
+marks
+Phone number
+1
+Aditya
+15
+Java
+99
+1234,345,678
+1
+Aditya
+12
+Dbms
+98
+1234,345,678
+1
+Aditya
+13
+Web
+97
+1234,345,678
+2
+Akash
+15
+Java
+95
+111,222
+2
+Akash
+12
+dbms
+94
+111,222
+2
+Akash
+13
+web
+91
+111,222
+3
+Ajit
+14
+Java
+99
+1234,345,678
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+in the table column  phone number contains more than one value, so the table is not in 1 NF.
+phone number
+Studentid
+Phone number
+1
+1234
+1
+345
+1
+678
+2
+111
+2
+222
+3
+1234
+3
+345
+3
+678
+Studentid
+Sname
+subid
+Subject name
+marks
+1
+Aditya
+15
+Java
+99
+1
+Aditya
+12
+Dbms
+98
+1
+Aditya
+13
+Web
+97
+2
+Akash
+15
+Java
+95
+2
+Akash
+12
+dbms
+94
+2
+Akash
+13
+web
+91
+3
+Ajit
+14
+Java
+99
+
+
+To check the table is in 2 NF or Not
+The tables should be in 1 NF
+The table should not have any partial dependency.
+What is partial dependency
+if any non prime attribute(the attribute which is not part of candidate key) is dependent on portion of the candidate key
+
+candicate key---minimal set of attributes that identify the row uniquely and which may become a primary key 
+
+non prime attribute --🡪 subject name, marks, student name
+prime attributes--🡪 studenid,subjectid
+
+studenid+subjectid---🡪marks
+studentid--🡪sname
+subjectid-🡪 subject name
+
+Studentid
+subid
+marks
+1
+15
+99
+1
+12
+98
+1
+13
+97
+2
+15
+95
+2
+12
+94
+2
+13
+91
+3
+14
+99
+
+
+subid
+Subject name
+15
+Java
+12
+Dbms
+13
+Web
+14
+Java
+
+
+
+
+
+
+
+Studentid
+Sname
+1
+Aditya
+2
+Akash
+3
+Ajit
+
+
+
+is it in 1 NF, is it in 2NF   if not then convert it into 2 NF
+Proj 	Proj	Proj	Empno	Ename	Grade	Sal	Proj	             Alloc
+Code	Type	Desc				scale	Join Date            Time	
+001	APP	LNG	46	JONES	A1	5	12/1/1998            24	
+001	APP	LNG	92	SMITH	A2	4	2/1/1999	       24	
+001	APP	LNG	96	BLACK	B1	9	2/1/1999	       18	
+004	MAI	SHO	72	JACK	A2	4	2/4/1999	        6	
+004	MAI	SHO	92	SMITH	A2	4	5/5/1999	        6	
+002       APP        LNG       72          JACK       A2          4        12/1/1998                 12
+
+
+example 2 --- is the given table in 2 NF if not convert it
+
+Orderno
+Orderdate
+Itemno
+Qty
+Price
+Cname
+Custno
+Email
+Orderamt
+Salespersonno
+Salespersonname
+Locationid ----------location from where  item dispatched
+Location name
+One customer can place many order
+One order contains many items
+One order will be managed by many salesperson
+One order belong to one customer
+One order can be dispatched from different location
+Order no
+orderdate
+Item no
+qty
+price
+cname
+custno
+email
+amt
+Salesperson no
+sname
+locid
+lname
+1
+8 jun
+1
+1
+1000
+gayatri
+1
+g.cv
+2050
+100
+x
+11
+delhi
+1
+8 jun
+2
+2
+500
+gayatri
+1
+g.cv
+2050
+101
+y
+11
+delhi
+1
+8 jun
+3
+1
+50
+gayatri
+1
+g.cv
+2050
+100
+y
+12
+mumbai
+2
+9 jun
+1
+2
+900
+yogesh
+2
+y.v
+1060
+102
+z
+14
+Gujarath
+2
+9 jun
+5
+1
+60
+yogesh
+2
+y.v
+1060
+102
+z
+14
+Gujarath
+3
+9jun
+5
+1
+60
+sagar
+3
+s.v
+4200
+100
+x
+100
+x
+3
+9jun
+10
+2
+70
+sagar
+3
+s.v
+4200
+102
+z
+14
+Gujarath
+3
+9jun
+2
+4
+1000
+sagar
+3
+s.v
+4200
+100
+x
+100
+x
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////day 12///////////////////////////////////////////////////////////////////
+
+
+-------to list all faculties and rooms which are not allocated as well as which are allocated
+
+select f.fid, fname, cname, rname
+    from faculty f left join course c on f.fid=c.fid left join room r on c.rid=r.rid
+    
+    union
+    select f.fid, fname, cname, rname
+     from faculty f right join course c on f.fid=c.fid right join room r on c.rid=r.rid
+----list all faculties and rooms which are not allocated to any course    
+
+select fname, cname,'' rname”,cname
+    ->   from faculty f left join course c on c.fid=f.fid
+    ->     where cname is null
+    -> union
+    ->
+    -> select '' fname'', cname, rname, cname
+    ->     from room r left join course c on r.rid=c.rid
+    ->    where cname is null;
+
+--------to list all the view in mysql
+select Table_name from information_schema.Tables where table_type like ‘view’ and table_schema=’iacsdedacmay21’
+
+create view myview
+as
+select deptno,max(sal),min(sal),avg(sal),count(*)
+from emp
+where job=’analyst’
+group by deptno
+having count(*) >=2;
+
+select * from myview
+
+create view managerview as
+select *
+from emp
+where job=’Manager’
+with read only;
+
+---------materialized
+budgeting purpose
+data analytics decision 
+bournvita--- order
+bournvita       9000   
+                   
+
+create materialized view myview
+as 
+select * 
+from product
+where type=’consumable’
+
+select * from myview
+
+--------- how to find first 12 record in mysql
+uses limit clause
+select *
+from emp
+limit 12;
+--------- how to find 12th record in mysql
+select *
+from emp
+limit 11,1;
+
+--------to display employee which are highly paid
+select *
+from emp
+order by sal desc
+limit 1;
+--------to display employee which is 3rd highest
+select *
+from emp
+order by sal desc
+limit 2,1
+ 
+select *
+from emp
+where sal=(select max(sal)
+from emp)
+
+select deptno,max(sal)
+from emp
+group by deptno
+order by max(sal)
+
+select max(sal)
+from emp;
+---------- to find nth highest in oracle
+Select sal          
+From  emp e1
+Where n-1=(select count(distinct(sal))   
+                        from emp e2
+                         where e1.sal>e2.sal)
+
+
+DCL---data control language
+------to assign previleges
+grant <previleges> on <tablename> to <username>@<server ip>
+all------- all previleges
+* ------- all employee
+grant all on noticetab to ‘*’@’localhost’
+
+---to remove previleges
+revoke <previleges> on  <tablename> from ‘user’@’localhost’
+Select
+Delete
+Insert
+Update
+Index
+Create
+Alter
+Drop
+All
+Grant option
+
+
+grant select,insert on category to 'u1'@'localhost' with grant option
+
+DQL,DML,TCL,DCL,DDL,views,indexes,temporary table,limit---- top n analysis   --- SQL
+
+
+PL-SQL -----procedural language
+if statement, loops, variable declaration,cursors, exception handling, procedures,functions,triggers
+Normalization
+1NF,2NF,3NF,BCNF (Boyce code NF)
+to divide the data into multiple tables to reduce redundancy is called as nomaliztion
+Custid
+Cname
+address
+Accno
+Balance
+Type 
+relmgr
+1
+Kishori
+Aundh
+1
+12345
+Saving
+AA
+1
+Kishori
+Baner
+2
+123451
+Current
+AA
+1
+Kishori
+Baner
+3
+12345
+demat
+AA
+2
+Rajan
+Aundh
+4
+1111111
+Saving
+BB
+3
+Revati
+Aundh
+11
+444444
+Saving
+BB
+4
+Sachin
+Deccan
+
+
+
+
+
+
+
+
+
+
+insertion anamoly ------
+updation anamoly
+deletion anamoly
+
+Custid
+Accno
+Balance
+Type 
+relmgr
+1
+1
+12345
+Saving
+AA
+1
+2
+123451
+Current
+AA
+1
+3
+12345
+demat
+AA
+2
+4
+1111111
+Saving
+BB
+3
+11
+444444
+Saving
+BB
+
+
+
+
+
+
+
+
+
+
+
+
+Custid
+Cname
+address
+1
+Kishori
+Baner
+2
+Rajan
+Aundh
+3
+Revati
+Aundh
+4
+Sachin
+Deccan
+5 
+Sonali
+deccan
+
+
+
+
+
+
+
+
+insertion anamoly , updation anamoly,deletion anamoly these drawbacks will be removed
+and redundancy will be also removed.
+Normalization------Data modelling, E-R diagram
+1NF --- if every row and column in the table contains atomic value
+Studentid
+Sname
+subid
+Subject name
+marks
+Phone number
+1
+Aditya
+15
+Java
+99
+1234,345,678
+1
+Aditya
+12
+Dbms
+98
+1234,345,678
+1
+Aditya
+13
+Web
+97
+1234,345,678
+2
+Akash
+15
+Java
+95
+111,222
+2
+Akash
+12
+dbms
+94
+111,222
+2
+Akash
+13
+web
+91
+111,222
+3
+Ajit
+14
+Java
+99
+1234,345,678
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+in the table column  phone number contains more than one value, so the table is not in 1 NF.
+phone number
+Studentid
+Phone number
+1
+1234
+1
+345
+1
+678
+2
+111
+2
+222
+3
+1234
+3
+345
+3
+678
+Studentid
+Sname
+subid
+Subject name
+marks
+1
+Aditya
+15
+Java
+99
+1
+Aditya
+12
+Dbms
+98
+1
+Aditya
+13
+Web
+97
+2
+Akash
+15
+Java
+95
+2
+Akash
+12
+dbms
+94
+2
+Akash
+13
+web
+91
+3
+Ajit
+14
+Java
+99
+
+
+To check the table is in 2 NF or Not
+The tables should be in 1 NF
+The table should not have any partial dependency.
+What is partial dependency
+if any non prime attribute(the attribute which is not part of candidate key) is dependent on portion of the candidate key
+
+candicate key---minimal set of attributes that identify the row uniquely and which may become a primary key 
+
+non prime attribute --🡪 subject name, marks, student name
+prime attributes--🡪 studenid,subjectid
+
+studenid+subjectid---🡪marks
+studentid--🡪sname
+subjectid-🡪 subject name
+
+Studentid
+subid
+marks
+1
+15
+99
+1
+12
+98
+1
+13
+97
+2
+15
+95
+2
+12
+94
+2
+13
+91
+3
+14
+99
+
+
+subid
+Subject name
+15
+Java
+12
+Dbms
+13
+Web
+14
+Java
+
+
+
+
+
+
+
+Studentid
+Sname
+1
+Aditya
+2
+Akash
+3
+Ajit
+
+
+
+is it in 1 NF, is it in 2NF   if not then convert it into 2 NF
+Proj 	Proj	Proj	Empno	Ename	Grade	Sal	Proj	             Alloc
+Code	Type	Desc				scale	Join Date            Time	
+001	APP	LNG	46	JONES	A1	5	12/1/1998            24	
+001	APP	LNG	92	SMITH	A2	4	2/1/1999	       24	
+001	APP	LNG	96	BLACK	B1	9	2/1/1999	       18	
+004	MAI	SHO	72	JACK	A2	4	2/4/1999	        6	
+004	MAI	SHO	92	SMITH	A2	4	5/5/1999	        6	
+002       APP        LNG       72          JACK       A2          4        12/1/1998                 12
+
+
+example 2 --- is the given table in 2 NF if not convert it
+
+Orderno
+Orderdate
+Itemno
+Qty
+Price
+Cname
+Custno
+Email
+Orderamt
+Salespersonno
+Salespersonname
+Locationid ----------location from where  item dispatched
+Location name
+One customer can place many order
+One order contains many items
+One order will be managed by many salesperson
+One order belong to one customer
+One order can be dispatched from different location
+Order no
+orderdate
+Item no
+qty
+price
+cname
+custno
+email
+amt
+Salesperson no
+sname
+locid
+lname
+1
+8 jun
+1
+1
+1000
+gayatri
+1
+g.cv
+2050
+100
+x
+11
+delhi
+1
+8 jun
+2
+2
+500
+gayatri
+1
+g.cv
+2050
+101
+y
+11
+delhi
+1
+8 jun
+3
+1
+50
+gayatri
+1
+g.cv
+2050
+100
+y
+12
+mumbai
+2
+9 jun
+1
+2
+900
+yogesh
+2
+y.v
+1060
+102
+z
+14
+Gujarath
+2
+9 jun
+5
+1
+60
+yogesh
+2
+y.v
+1060
+102
+z
+14
+Gujarath
+3
+9jun
+5
+1
+60
+sagar
+3
+s.v
+4200
+100
+x
+100
+x
+3
+9jun
+10
+2
+70
+sagar
+3
+s.v
+4200
+102
+z
+14
+Gujarath
+3
+9jun
+2
+4
+1000
+sagar
+3
+s.v
+4200
+100
+x
+100
+x
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+student
+one student can have multiple emails, one student can take admission for only one course
+
+
+(studid   name      adresss        emails     coursid     cname        cdescription)
+
+since email contains multiple emails in one column and one row so it not in 1NF
+
+(studid   name      adresss      coursid     cname        cdescription)
+
+(studid          email)
+
+
+Is this table in 2 NF
+is it 1NF------ yes
+there should not be any partial dependency
+no prime attribute should be dependent on portion of the candidate key
+
+studentid----- candicate key
+since there is only one column in the primary key
+so all non prime attributes are fully dependent on candidate key then the table is in 2NF
+
+To check whether it is in 3 NF
+ the table should be in 2NF
+there should not be any transitive dependency
+x---🡪 y-----🡪z
+
+studid-----🡪courseid-------🡪cname
+studid-----🡪courseid-------🡪cdescription
+
+sid     name      adresss   courseid
+  1      sanjay     aaaa
+   2     ashu        bbb
+3       sanjay        xxxxx
+
+
+(courseid, cname,cdesc)
+
+student data
+Studentid
+Sname
+State
+cid
+cname
+cdesc
+City
+Email
+Phone
+1
+Rajesh
+Bihar
+100
+java
+fjhj
+Patna
+abc@dfg
+1111,2222,333
+1
+Rajesh
+Bihar
+200
+C++
+fjhj
+Patna
+abc@dfg
+1111,2222,333
+1
+Rajesh
+Bihar
+300
+python
+fjhj
+Patna
+abc@dfg
+1111,2222,333
+2
+Amit
+Maharashtra
+100
+java
+fjhj
+Pune
+abc@dfg
+1111,2222,333
+2
+Amit
+Bihar
+200
+C++
+fjhj
+Pune
+abc@dfg
+1111,2222,333
+2
+Amit
+Bihar
+300
+python
+fjhj
+Pune
+abc@dfg
+1111,2222,333
+3
+Deepak
+Maharashtra
+100
+java
+fjhj
+Mumbai
+abc@dfg
+1111,2222,333
+3
+Deepak
+Maharashtra
+200
+C++
+fjhj
+Mumbai
+abc@dfg
+1111,2222,333
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+my table is not in 1NF
+Studentid
+Phone
+1
+1111
+1
+2222
+1
+333
+2
+11111
+2
+22221
+2
+3331
+3
+11112
+3
+2223
+3
+3456
+
+
+Studentid
+Sname
+State
+cid
+cname
+cdesc
+City
+Email
+1
+Rajesh
+Bihar
+100
+java
+fjhj
+Patna
+abc@dfg
+1
+Rajesh
+Bihar
+200
+C++
+fjhj
+Patna
+abc@dfg
+1
+Rajesh
+Bihar
+300
+python
+fjhj
+Patna
+abc@dfg
+2
+Amit
+Maharashtra
+100
+java
+fjhj
+Pune
+abc@dfg
+2
+Amit
+Bihar
+200
+C++
+fjhj
+Pune
+abc@dfg
+2
+Amit
+Bihar
+300
+python
+fjhj
+Pune
+abc@dfg
+3
+Deepak
+Maharashtra
+100
+java
+fjhj
+Mumbai
+abc@dfg
+3
+Deepak
+Maharashtra
+200
+C++
+fjhj
+Mumbai
+abc@dfg
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+are they in 2NF
+candidate key ----------studid+cid
+is it in 1NF -------yes
+is partial dependency there
+prime attributes------sid,, cid
+nonprime ------ sname,state,cname,cdesc,city,email
+
+studid+cid-------🡪
+studid------🡪 sname, state, city, email
+cid-----🡪 cname, cdesc
+Studentid
+Sname
+State
+City
+Email
+1
+Rajesh
+Bihar
+Patna
+abc@dfg
+2
+Amit
+Maharashtra
+Pune
+abc@dfg
+3
+Deepak
+Maharashtra
+Mumbai
+abc@dfg
+4
+Rashmi
+Bihar
+Patna
+abc@dfg
+
+
+cid
+cname
+cdesc
+100
+java
+fjhj
+200
+C++
+fjhj
+300
+python
+fjhj
+
+
+
+
+
+
+
+
+Studentid
+cid
+1
+100
+1
+200
+1
+300
+2
+100
+2
+200
+2
+300
+3
+100
+3
+200
+
+
+
+
+
+
+
+check for 3 NF
+are they in 2NF------yes
+transitive dependency ------    x----🡪y----🡪z
+studid---🡪city-🡪state
+Studentid
+Sname
+city
+Email
+1
+Rajesh
+Patna
+abc@dfg
+2
+Amit
+Pune
+XXX@dfg
+3
+Deepak
+Pune
+YYY@dfg
+4
+Rashmi
+Mumbai
+ZZZZ@dfg
+
+
+
+Rajesh
+Mumbai
+AAAA@DHF
+
+
+State
+City
+Bihar
+Patna
+Maharashtra
+Pune
+Bihar
+bvcvcvxczvxc
+Maharashtra
+Mumbai
+
+
+check the table in 4 NF (BCNF)
+table should be in 3NF
+for dependency x->y   then x should be super key 
+x cannot be non prime attribute if y is prime attribute
+
+one student can take many courses
+one faculty can teach only one course
+Studid
+Subject
+faculty
+1
+Java
+Rashmi
+1
+C++
+Deepa
+2
+Java
+Rajan
+2
+DBMS
+Tejas
+3
+java
+Rashmi
+
+
+fname--🡪subject
+fid
+Subject
+faculty
+1
+Java
+Rashmi
+2
+C++
+Deepa
+3
+Java
+Rajan
+4
+DBMS
+Tejas
+
+
+Studid
+fid
+1
+1
+1
+2
+2
+3
+2
+4
+3
+1
+
+
+
+
+many doctors in the hospital
+patientid     
+    pname     
+Address
+date        
+time        
+drid   
+dname       
+speciality
+receptionist
+1
+Rishabh
+Aundh
+12 july
+9:00am
+100
+Sanjay
+Orthopedic
+Ashu
+1
+Rishabh
+Aundh
+12 july
+2:00pm
+200
+Archana
+neuro
+Ashu
+1
+Rishabh
+Aundh
+13 july
+2:00pm
+200
+Archana
+neuro
+Deepa
+1
+Rishabh
+Aundh
+13 july
+4:00pm
+200
+Archana
+neuro
+Deepa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+candidate -----patiid+drid+date+time
+functional dependencies
+table is in 1NF------yes
+we want to find is it in 2NF
+prime attribute----🡪 patiid,drid,date,time
+non prime attribute---🡪 pname,dname,address,speciality, receptionist
+patiid+drid+date+time-------🡪 receptionist
+patid🡪 pname, address
+drid---🡪 dname, speciality
+date-🡪
+time----🡪
+patid+drid--🡪
+patientid     
+    pname     
+Address
+1
+Rishabh
+Aundh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+drid   
+dname       
+speciality
+100
+Sanjay
+Orthopedic
+200
+Archana
+neuro
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+patientid     
+date        
+time        
+drid   
+receptionist
+1
+12 july
+9:00am
+100
+Ashu
+1
+12 july
+2:00pm
+200
+Ashu
+1
+13 july
+2:00pm
+200
+Deepa
+1
+13 july
+4:00pm
+200
+Deepa
+
+
+
+
+
+
+
+
+
+
+
+
+
+is it in 1 NF, is it in 2NF   if not then convert it into 2 NF
+one employee works on many projects
+
+Proj 	Proj	Proj	Empno	Ename	Grade	Sal	Proj	             Alloc
+Code	Type	Desc				scale	Join Date            Time	
+001	APP	LNG	46	JONES	A1	5	12/1/1998            24	
+001	APP	LNG	92	SMITH	A2	4	2/1/1999	  24	
+001	APP	LNG	96	BLACK	B1	9	2/1/1999	   18	
+004	MAI	SHO	72	JACK	A2	4	2/4/1999	        6	
+004	MAI	SHO	92	SMITH	A2	4	5/5/1999	        6	
+002       App      LNG       72          JACK       A2          4        12/1/1998                 12
+
+is the table in 1NF ----🡪yes
+is the table in 2NF --🡪
+
+proj code+empno--🡪proj joining date,alloc time
+proj code--🡪proj type,proj desc
+empno->ename,grade,sal scale
+Proj 	Proj	Proj	
+Code	Type	Desc				
+001	APP	LNG	
+004	MAI	SHO	
+002       App      LNG       
+
+
+	Empno	Ename	Grade	Sal	
+				scale	
+	46	JONES	A1	5	
+	92	SMITH	A2	4	
+	96	BLACK	B1	9	
+	72	JACK	A2	4		
+	
+empono-🡪grade-🡪sal scale
+Grade	Sal	
+	scale	
+A1	5	
+A2	4	
+B1	9	
+	
+ 
+Empno	Ename	Grade		
+			
+46	JONES	A1	
+92	SMITH	A2		
+96	BLACK	B1		
+72	JACK	A2		
+
+Proj 	empno		Proj	             Alloc
+Code			Join Date            Time	
+001	46		12/1/1998            24	
+001	92		2/1/1999	  24	
+001	96		2/1/1999	   18	
+004	 72		2/4/1999	        6	
+004	 92		5/5/1999	        6	
+002          72         	12/1/1998                 12
+
+check for 3NF
+
+
+
+is It in 1NF  ----------atomic value
+
+
+Order no
+orderdate
+Item no
+qty
+Buying _price
+cname
+custno
+email
+amt
+Salesperson no
+sname
+locid
+lname
+1
+8 jun
+1
+3
+1000
+gayatri
+1
+g.cv
+2050
+100
+x
+11
+delhi
+1
+8 jun
+2
+2
+500
+gayatri
+1
+g.cv
+2050
+101
+y
+11
+delhi
+1
+8 jun
+3
+1
+50
+gayatri
+1
+g.cv
+2050
+100
+y
+12
+mumbai
+2
+9 jun
+1
+2
+900
+yogesh
+2
+y.v
+1060
+102
+z
+14
+Gujarath
+2
+9 jun
+5
+1
+60
+yogesh
+2
+y.v
+1060
+102
+z
+14
+Gujarath
+3
+9jun
+5
+1
+60
+sagar
+3
+s.v
+4200
+100
+x
+100
+x
+3
+9jun
+10
+2
+70
+sagar
+3
+s.v
+4200
+102
+z
+14
+Gujarath
+3
+9jun
+2
+4
+1000
+sagar
+3
+s.v
+4200
+100
+x
+100
+x
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+item table
+1       tshirt        1100        10%
+One customer can place many order
+One order contains many items
+One order will be managed by many salesperson
+One order belong to one customer
+One order can be dispatched from different location
+
+The table is in 1 NF
+check ---🡪 is it in 2 NF
+candidate key (order no+ itemno)
+prime attribute---order no, item no
+non prime
+orderno+itemno---🡪qty,buying price,salemanno,sname,lname,locid
+itemno----🡪
+orderno ----🡪orderdate,custname,custno,email,amt
+Order no
+orderdate
+Item no
+qty
+Buying _price
+cname
+custno
+email
+amt
+Salesperson no
+sname
+locid
+lname
+1
+8 jun
+1
+3
+1000
+gayatri
+1
+g.cv
+2050
+100
+x
+11
+delhi
+1
+8 jun
+2
+2
+500
+gayatri
+1
+g.cv
+2050
+101
+y
+11
+delhi
+1
+8 jun
+3
+1
+50
+gayatri
+1
+g.cv
+2050
+100
+y
+12
+mumbai
+2
+9 jun
+1
+2
+900
+yogesh
+2
+y.v
+1060
+102
+z
+14
+Gujarath
+2
+9 jun
+5
+1
+60
+yogesh
+2
+y.v
+1060
+102
+z
+14
+Gujarath
+3
+9jun
+5
+1
+60
+sagar
+3
+s.v
+4200
+100
+x
+100
+x
+3
+9jun
+10
+2
+70
+sagar
+3
+s.v
+4200
+102
+z
+14
+Gujarath
+3
+9jun
+2
+4
+1000
+sagar
+3
+s.v
+4200
+100
+x
+100
+x
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+order
+Order no
+orderdate
+cname
+custno
+email
+amt
+1
+8 jun
+gayatri
+1
+g.cv
+2050
+1
+8 jun
+gayatri
+1
+g.cv
+2050
+1
+8 jun
+gayatri
+1
+g.cv
+2050
+2
+9 jun
+yogesh
+2
+y.v
+1060
+2
+9 jun
+yogesh
+2
+y.v
+1060
+3
+9jun
+sagar
+3
+s.v
+4200
+3
+9jun
+sagar
+3
+s.v
+4200
+3
+9jun
+sagar
+3
+s.v
+4200
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Order no
+Item no
+qty
+Buying _price
+Salesperson no
+sname
+locid
+lname
+1
+1
+3
+1000
+100
+x
+11
+delhi
+1
+2
+2
+500
+101
+y
+11
+delhi
+1
+3
+1
+50
+100
+y
+12
+mumbai
+2
+1
+2
+900
+102
+z
+14
+Gujarath
+2
+5
+1
+60
+102
+z
+14
+Gujarath
+3
+5
+1
+60
+100
+x
+100
+x
+3
+10
+2
+70
+102
+z
+14
+Gujarath
+3
+2
+4
+1000
+100
+x
+100
+x
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+are they in 3NF
+check for transitive dependency
+
+order table is not in 3NF
+orderno->custno->cname
+orderno->custno->email
+
+cname
+custno
+email
+gayatri
+1
+g.cv
+gayatri
+1
+g.cv
+gayatri
+1
+g.cv
+yogesh
+2
+y.v
+yogesh
+2
+y.v
+sagar
+3
+s.v
+sagar
+3
+s.v
+sagar
+3
+s.v
+
+
+
+
+
+
+
+
+Order no
+orderdate
+custno
+amt
+1
+8 jun
+1
+2050
+1
+8 jun
+1
+2050
+1
+8 jun
+1
+2050
+2
+9 jun
+2
+1060
+2
+9 jun
+2
+1060
+3
+9jun
+3
+4200
+3
+9jun
+3
+4200
+3
+9jun
+3
+4200
+
+
+
+
+
+
+
+
+
+
+in order item table
+orderid+itemid--🡪 salamanid->sname
+orderid+itemid-🡪locid--🡪lname
+
+Order no
+Item no
+qty
+Buying _price
+Salesperson no
+locid
+1
+1
+3
+1000
+100
+11
+1
+2
+2
+500
+101
+11
+1
+3
+1
+50
+100
+12
+2
+1
+2
+900
+102
+14
+2
+5
+1
+60
+102
+14
+3
+5
+1
+60
+100
+100
+3
+10
+2
+70
+102
+14
+3
+2
+4
+1000
+100
+100
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Salesperson no
+sname
+100
+x
+101
+y
+102
+z
+
+
+
+
+
+
+locid
+lname
+11
+delhi
+11
+delhi
+12
+mumbai
+14
+Gujarath
+14
+Gujarath
+100
+x
+14
+Gujarath
+100
+x
+
+
+
+
+
+
+
+Normalization ----- 1NF,2NF,3Nf,4NF(BCNF)
+Sometimes to improve performance of the data you may need to keep deformalize
+
+
+productid
+pname
+categoryid
+cname
+price
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Catid
+Cname
+Desc
+
+
+
+
+
+
+
+
+
+PL – SQL
+Procedural Language----🡪(if,loops,exceptions,cursors,procedures,functions,triggers)
+
+
+
+////////////////////////////////////////day 13///////////////////////////////////////////////////////////////////
+code blocks in mysql
+Why we use PLSQL
+security
+speed
+to reduce traffic
+to hide complexity
+
+3 types of code blocks
+procedure -------- this is block of code which does not return any value
+no return statement
+procedures cannot be used in select statement
+function
+we can call function in select statement
+returns single value
+trigger
+the block which gets called implicitly, automatically after or before some DML operation happens on the table
+
+
+how we write Procedure
+write a procedure to insert data into a table
+#change the delimiter to //
+/* comment     */
+---   comment
+delimiter //
+create procedure insertDeptRec(pdno int,pdnm varchar(20),pdloc varchar(20))
+begin
+      insert into dept values(pdno,pdnm,pdloc);
+end//
+delimiter ;
+
+call insertDeptRec(17,’HR’,Mumbai’);
+
+#to see the list of procedure within database
+show procedure status where db='iacsdedacmay21';
+
+within a procedure you can pass parameters of 3 types
+in ------- when you want to pass data as i/p to a procedure
+these are readonly parameter
+by default the parameters are in type
+
+out ------ when you want to get o/p from a procedure then you can use out type parameter
+these are write only parameter
+inout ------ these parameters can be used to pass data as i/p and also get the o/p
+these are read write parameters
+we can modify the value of these parameters and we can also pass the i/p to the procedure
+----write a procedure to find number of employees in dept 10
+delimiter //
+create procedure getempcnt(in pdno int,out pcnt int,out pmin decimal(9,2))
+begin 
+select count(*),min(sal) into pcnt,pmin
+from emp
+where deptno=pdno;
+
+end//
+delimiter ;
+call getempcnt(10,@cnt,@m);
+select @cnt,@m
+
+----to pass count to a procedure and increase the count by 10
+delimiter //
+create procedure increasecnt(inout pcnt int)
+begin
+     set pcnt=pcnt+10;
+               end//
+set @cnt=12
+call increasecnt(@cnt)
+select @cnt
+
+
+-------to find ename,job,deptno,sal of a employee whose id is given
+delimiter //
+create procedure getemp(in peid int,out pename varchar(20),out pjob varchar(20),out psal decimal(9,2),out pdno int)
+begin
+      select ename,job,sal,deptno into pename,pjob,psal,pdno
+from emp
+where empno=peid;
+end//
+
+delimiter ;
+call getemp(7902,@enm,@j,@s,@dno)
+select @enm,@j,@s,@dno;
+
+rules for select ……into statement
+this can be used inside procedure or function
+select ……into  this query should return only one row.
+number of columns in select statement and number of variable after into should be same
+
+
+if else
+loops
+cursors
+
+syntax of if
+if condition then
+      statements
+else
+      statements
+end if
+or  if ….elseif…else
+if condition then
+      statements
+elseif condition then
+          statemenst
+elseif condition then
+          statemenst
+else
+      statements
+end if
+
+
+-----to write a procedure to calculate bonus
+sal< 2000        bonus=sal*10%+comm
+otherwise       bonus=sal*15%+comm
+delimiter //
+create procedure calcBonus(pnm varchar(20))
+begin
+   declare vsal, vcomm, vbonus int;
+  declare vjob varchar(20);
+    select sal,comm into vsal,vcomm
+  from emp
+where ename=pnm;
+if vsal<2000 then
+      set vbonus=vsal*0.10+ifnull(vcomm,0);
+else
+        set vbonus=vsal*0.15+ifnull(vcomm,0);
+end if;
+select pnm,vsal,vcomm,vbonus;
+end//
+delimiter ;
+call calBonus(‘WARD’);
+
+scope of variable
+local variables--- the variables declared inside procedure are call as local variables and can be used only inside procedure
+session variables------- these are variable whose name starts with @and are called as session variables 
+these variables are accessible till you logout.
+
+Loops in PLSQL
+while  ------ top tested loop
+while condition do
+statements
+               end while;
+Repeat loop is called as bottom tested.
+Repeat 
+statements
+until condition  
+end repeat; 
+
+
+loop
+   statement
+   if condtion then
+           leave label
+   end if 
+
+end loop  
+
+leave ---🡪 break statement in java
+iterate--🡪 continue
+
+------ to test while loop
+1,2,3,4,5
+delimiter //
+create procedure test_while()
+begin
+declare i int default 0;
+declare data varchar(20);
+set data=’’;
+while i<=5 do
+     set data=concat(data,i,’,’)    
+     set i=i+1;   
+end while
+select data;
+end//
+
+-------to declare variable
+declare x int default 0;
+declare y int default 20;
+declare y int
+
+declare x,y int;
+declare vd date;
+declare vnm varchar(2);
+
+------Repeat until
+bottom tested loop
+it gets executed minimum once
+it gets executed until given condition is false,as soon as condition becomes true it terminates the loop
+------ to print 1,2,3,4,5
+
+delimiter //
+create procedure test_repeat()
+begin
+declare i int default 1;
+declare data varchar(20);
+set data=’’;
+Repeat
+      set data=concat(data,i,’,’);   
+      set i=i+1;     
+until i>5
+end repeat;
+select data;
+end //
+-------test loop
+----leave is same as break
+-----iterate     it is same as continue
+
+label1:loop
+statements
+if condition then
+          iterate label1;
+else
+      leave label1;
+end if
+end loop
+
+------ to print 1,2,3,4,5,
+delimiter //
+create procedure test_loop()
+begin
+    declare i int default 1;
+     declare data varchar(20) default ‘’;
+     xyz:loop
+    if i>5 then
+        leave xyz;
+    end if;
+   set data=concat(data,i,’,’);    
+   set i=i+1;   
+  end loop;
+select data;
+end//
+
+---------- write a procedure to display all numbers between 1 to 20 which are divisible by 5
+5,10,15,20,
+loop ------  
+if x mod 5==0 then
+create procedure test_loop1()
+begin
+declare i int default 1;
+declare data varchar(20) default ‘’;
+label1:loop
+      if i>20 then 
+            leave label1;
+      end if;
+      if i mod 5=0 then
+              set data=concat(data,i,’,’);
+      end if;
+      set i=i+1;
+end loop;
+select data
+end//
+
+or
+
+create procedure test_loop1()
+begin
+declare i int default 1;
+declare data varchar(20) default ‘’;
+label1:loop
+      if i>20 then 
+            leave label1;
+      end if;
+     set i=i+1;
+      if i mod 5!=0 then
+           iterate label1;
+     end if;
+     set data=concat(data,i,’,’);
+end loop;
+select data
+end//
+
+--------write a procedure to calculate experience of an employee whose name is given
+delimiter //
+create procedure calexp(in pname varchar(20),out pexp int,out pdt date)
+begin
+    select hiredate into pdt
+     from emp
+      where ename=pname;
+       set pexp=floor(datediff(hiredate,curdate())/365);
+       select pexp;
+end//
+delimiter ;
+call calexp(‘SMITH’,@e,@dt);
+select @e,@dt;
+
+
+
+////////////////////////////////////////day 14///////////////////////////////////////////////////////////////////
+------we have a table mytab(color1, color2,pname)
+pname     color1   color2
+table         brown   walnut
+chair         white     brown
+
+-------write the procedure to find colors available for given product
+i/p pname    display colors in which product is available
+and the color that you are getting 
+find other product with same color as color2 option
+
+delimiter //
+create procedure findcolor(in pname varchar(20), out pcolor varchar(20))
+begin
+declare vc1,vc2,vname2 varchar(20);
+select col1,col2 into vc1,vc2
+from mytab
+where name=pname;
+select name into vname2
+from mytab
+where col2=vc1;
+select vname2,vc1
+select pname,vc1,vc2
+end//
+
+
+cursors in plsql
+cursors are similar to arrays
+and is  used when select statement within procedure uses multiple rows then we use cursor
+if we want to read rows line by line from a table and process them
+steps to use cursor
+declare cursor
+declare <cursor_ name> cursor for select statement(this returns multiple rows)
+declare continue handler for not found set cset=1
+open cursor  -------when you open the cursor then the query will get executed and the data will be populated within cursor
+open <cursor_ name>
+read next row from the cursor
+fetch <cursor_ name> into <list of variable>
+check whether we have reached to last row
+if cset=1 then
+     leave lable1
+end if
+process the data
+repeate step 3 to 5 till you reach to end of cursor
+close cursor
+close <cursor_ name>
+
+----- write a procedure to display all employee names and hire date for all employees working department 10
+select *  
+from emp 
+where deptno=10;
+delimiter //
+create procedure display_empdata()
+begin
+declare cset int default 0;
+declare vname varchar(20);
+declare vdt date;
+declare empcur cursor for select ename,hiredate from emp where deptno=10;
+declare continue handler for NOT FOUND set cset=1;
+open empcur;
+lable1:loop
+fetch empcur into vname,vdt;
+if cset=1 then
+       leave lable1;
+end if;
+select vname,vdt;
+end loop;
+close empcur;
+end//
+delimiter ;
+
+
+
+
+end//
+
+
+
+
+-------to delete the procedure with name myproc
+drop procedure myproc
+
+----------------
+
+
+----------find discounted price for the product based on price
+price=price-discount
+if price< 100  discount    15%     
+>=100    bt < 150         10%
+> = 150         8%
+
+select *
+from emp;
+delimiter //
+create procedure calculatediscount()
+begin
+declare cset int default 0;
+declare vnm varchar(20);
+declare vprice,vdispr decimal(9,2);
+declare prcur cursor for select pname,price from product;
+declare continue handler for NOT FOUND set cset=1;
+open prcur;
+label1: loop
+fetch prcur into vnm,vprice;
+if cset=1 then
+      leave label1;
+end if;
+if vprice <100 then
+       set vdispr=vprice-vprice*0.15;
+elseif vprice < 150 then
+       set vdispr=vprice-vprice*0.10;
+else
+        set vdispr=vprice-vprice*0.08;
+end if;
+select vnm,vprice, vdispr;
+
+end loop;
+close prcur;
+end//
+
+
+
+
+create procedure calculatediscount()
+begin
+declare cset int default 0;
+declare vnm varchar(20);
+declare vprice,vdispr decimal(9,2);
+declare prcur cursor for select pname,price from product limit 1000;
+declare continue handler for Not found set cset=1 ;     
+open prcur
+label1:loop
+     fetch prcur into vnm,vprice;
+    if cset=1 then
+         leave lable1;
+    end if;
+      --------process
+     
+ end loop;
+end//
+
+
+--------- to write a procedure to display all employeenames and job
+smith----CLERK,BLAKE-----MANAGER,WARD----CLERK
+delimiter //
+create procedure disp_empdata(in psal int)
+begin
+declare cset int default 0;
+declare vnm,vjob varchar(20);
+declare data varchar(500) default ‘’; 
+declare empcur cursor for select ename,job from emp;
+declare continue handler for NOT FOUND set cset=1;
+open empcur;
+label1: loop
+fetch empcur into vnm,vjob;
+if cset=1 then 
+       leave label1
+end if;
+               set  data=concat(data,vnm,’----‘,vjob,’,’);
+end loop;
+select data;
+close empcur;
+end//
+
+--------update salary of employees
+job manager      increase sal by 10%
+analyst              15%
+clerk               30%
+otherwise        35%
+delimiter//
+create procedure update_sal()
+begin
+   declare vempno,vsal int;
+   declare cset int default 0;
+   declare vjob varchar(20);
+   declare empcur cursor for select empno, job,sal from emp;
+   declare continue handler for not found set cset=1;
+   open empcur;
+  label1:loop
+        fetch empcur into vempno,vjob,vsal
+        if cset=1 then
+              leave label1;
+        end if;
+       #procee data
+        if vjob=’MANAGER’ then
+              update emp
+              set sal=vsal*1.10
+               where empno=vempno;
+       elseif  vjob=’ANALYST’ then
+              update emp
+              set sal=vsal*1.15
+               where empno=vempno;
+        elseif  vjob=’CLERK’ then
+              update emp
+              set sal=vsal*1.30
+               where empno=vempno;
+        else
+                update emp
+                set sal=vsal*1.35
+                where empno=vempno;
+      end if;
+end loop;
+close empcur;
+end//
+
+------- if you want to return a single value then you write function
+
+concat(“hello”,”dear”)
+lpad
+
+rpad
+sustr
+datediff
+dateformat
+---------where we use these function
+select 
+where
+inside some procedure
+
+select empno,ename,hiredate,calculateexp(curdate(),hiredate) experience
+from emp
+-------it allows to write functions in mysql
+SET GLOBAL log_bin_trust_function_creators = 1;
+
+delimiter //
+create function calculateexp(dt1 date,dt2 date) returns int
+begin
+declare vexp int;
+set vexp= floor(datediff(dt1,dt2)/365);
+return vexp;
+end//
+
+-----------to see the code for function or procedure
+show create function calculateexp;
+
+
+-----write a function to calculate discount
+price <100 discount 10%
+>=100 and <150       15%
+                                     20 
+create function calculatediscount(ppr decimal(9,2)) returns int
+begin
+declare vdisc int default 0;
+if ppr <100 then
+      set vdisc=ppr-ppr*0.10;
+elseif ppr<150 then
+      set vdisc=ppr-ppr*0.15;
+else
+       set vdisc=ppr-ppr*0.20;
+end if;
+return vdisc;
+end//
+--------to drop function 
+drop function calculatediscount;
+
+-----generate email
+----concat ename with 1 st 3 characters of job followed by @mycompany.com
+create function generateemail(nm varchar(20), job varchar(20)) returns varchar(30)
+begin
+declare vemail varchar(30);
+      set vemail=concat(ename,’.’,substr(job,1,3),’@mycompany.com’);
+      return vemail;
+end//
+
+
+
+
+
+
+
+////////////////////////////////////////day 15///////////////////////////////////////////////////////////////////
+
+when you want to return single value as o/p then use functions
+calculate net for one employee
+DA-10% sal
+HRA ----15%   sal
+pf  ---- 8%  sal
+Net sal=psal+da+hra-pf
+create function netsal(psal decimal(9,2),pda int,phra int,ppf int) returns decimal
+begin
+    declare vnetsal decimal(9,2);
+     set vnetsal=psal*(pda/100)-psal*(ppf/100)+psal*(phra/100)+psal;
+    return vnetsal;
+end//
+
+--------call the function
+select empno,ename,sal,netsal(sal)
+from emp;
+
+----------based on comm we need to display performance of use
+comm null or 0 then “need improvement”
+comm<300     then ok
+com < 500      then good
+else excellent
+
+create function getprformance(pcomm decimal(9,2)) returns varchar(20)
+begin
+declare vperform varchar(20) default ‘’;
+if  pcomm is null or pcomm=0 then
+       set vperform=’need improvement’;
+elseif pcomm < 300 then
+         set vperform=’ok’;
+elseif pcomm < 500 then
+        set vperform=’good’
+else
+        set vperform=’Excellent’
+end if;
+return vperform; 
+ end//
+
+--------write a procedure to display empno,ename,sal,comm,performance of all employees of a particular department
+
+create procedure display_empdetails(in pdeptno int)
+begin
+select empno,ename,sal,comm, getprformance(comm)
+from emp
+where deptno=pdeptno;
+
+end//
+
+------triggers   --- automatically called
+2 types of trigger
+statement level  -------- this deoenot supported by mysql
+row level
+timing
+before 
+after
+instead of -------- views     --doesnot work in mysql
+DML
+insert
+delete
+update
+audit, secure,
+
+
+
+
+step 1:
+      create necessary audit table
+step2:
+      create trigger
+
+in audit table if you want to store
+deptno,dname,username,date,action
+create table dept_audit(
+deptno int,
+olddname varchar(20),
+newname varchare(20),
+username varchar(20),
+dt_action datetime,
+action varchar(20))
+
+
+-------- write a trigger to audit, insert, delete, update information on dept
+create trigger insert_dept before insert on dept
+for each row
+      insert into dept_audit(deptno,newname,username,dt_action,action) values(NEW.deptno,New.dname,current_user(),now(),’insert’)
+
+create trigger delete_dept before delete on dept
+for each row
+      insert into dept_audit values(OLD.deptno,OLD.dname,current_user(),now(),’delete’)
+
+Deptno
+Dname
+location
+10
+HR
+Mumbai
+20
+Accounts
+Chennai
+30
+Purchase
+Pune
+40
+Sales
+Pune
+
+
+update dept
+set dloc=’chennai’
+where deptno=40
+OLD
+40
+Sales
+Pune
+
+
+NEW
+40
+sales
+chennai
+
+
+
+
+insert into dept values(50,’xxx’,’pune’)
+NEW
+50
+xxx
+Pune
+
+
+OLD
+
+
+
+
+
+
+
+
+
+delete from dept
+where deptno>20
+OLD
+30
+Purchase
+Pune
+
+
+NEW
+
+
+
+
+
+
+
+
+OLD
+40
+Sales
+Pune
+
+
+NEW
+
+
+
+
+
+
+
+
+create trigger update_dept before update on dept
+for each row
+      insert into dept_audit values(OLD.deptno,OLD.dname,current_user(),now(),’update’)
+
+-----to write triggers on product table
+create table product_analysis
+(pid int,
+pname varchar(20),
+oldrate  decimal(9,2),
+newrate decimal(9,2),
+uname varchar(20),
+dt_time datetime,
+action varchar(20));
+
+create trigger update_pr after update on product
+for each row
+     insert into product_analysis values(OLD.pid,OLD.pname,OLD.price,,NEW.price,current_user(),now(),’update’)
+
+
+
+--------to delete the trigger
+drop tigger <trigger-name>
+-----to display all triggers
+show trigger
+
+
+Exception handling
+hanlder
+exit
+continue
+condition
+        mysql_error_code
+      SQLEXCEPTION
+       NOT FOUND
+declare continue handler for SQLEXCEPTION select ‘Error Occured’
+declare exit handler for SQLEXCEPTION set cset=1
+
+create procedure insertproduct(ppid int,ppname varchar(20),pqty int,pprice decimal(9,2),pcid int)
+begin
+declare exit handler for SQLEXCEPTION select ‘error occur’;
+insert into product values(ppid,ppname,pqty,pprice,pcid);
+select ‘done’;
+end//
+
+
+create procedure insert_userentity111(puid int,puname varchar(20),paddrid int)
+    -> begin
+    -> declare exit handler for SQLEXCEPTION select 'error occured';
+    ->   insert into userentity values(puid,puname,paddrid);
+    -> select 'done';
+    -> end//
+
+
+create procedure insert_userentity111(puid int,puname varchar(20),paddrid int)
+    -> begin
+    -> declare exit handler for 1062 select ‘duplicate user id';
+          declare exit handler for 1366 select ‘data type mismatch;
+      -> declare exit handler for SQLEXCEPTION select 'error occured';
+    ->   insert into userentity values(puid,puname,paddrid);
+    -> select 'done';
+    -> end//
+
+
+NOSQL ------ MONGODB
+------CRUD ----- create,read,update,delete
+
+use installation step by step to install mongodb
+set up the path to 
+C:\Program Files\MongoDB\Server\4.2\bin
+step 1. start the server
+open cmd
+c:system32>mongod –dbpath c:\data\db
+27017
+step 2: start client
+ open cmd
+c:\system32> mongo
+
+>show dbs          -------- to list all databases
+>use test        ----------------- create and switch to the database
+>show collections     --------- to list all collections
+
+
+step 3: import data
+c:\mydata ----- store json files
+restaurant.json
+movie.json
+
+open new cmd
+c:\system32>mongoimport –db test –collection movie --file c:\mydata\movie.json
+c:\system32>mongoimport –db test –collection restaurent --file c:\mydata\restaurent.json
+---------in mongo client window
+> db.movie.find().pretty()
+>db.restaurent.find().pretty()
+
+JSON---- Javascript object notation
+RDBMS VS MongoDB(NoSQL)
+RDBMS
+NOSQL
+Structured 
+Unstructured 
+Vertical scaling
+Horizontal scaling
+Less available compared to NOSQL
+Highly available----replica is avaialable
+Compare to NOSQL this is slower
+Faster----sharding
+Transaction control(ACID)
+No transaction(CAP)
+
+
+employee(emp int,ename varchar(20))
+
+Media  image,text,video
+comment -----emoji,,image,text,video
+
+Terminologies
+RDBMS
+NOSQL
+Database
+Database
+Table
+Collection
+Record
+Document
+Index
+Index
+
+
+
+
+
+
+Mongodb   ----- stores data internally in Binary-JSON    (BSON)
+create a database iacsdedac
+add 5 documents in emp collection
+{
+    empid:123,
+    ename:'kishori',
+     skills:['java','python','mongodb','spring boot','hibernate'],
+     joining_dt: ISODate('2000-04-27'),
+    dept:{deptno:11,dname:'hr',dloc:'pune'},
+   experience:[{name:'hsbc',years:3},{name:'igate',years:4},{name:'Capgemini',years:5}],
+   maritalStatus:null
+}
+
+{
+    empid:123,
+    ename:’Rajan’,
+     skills:’jzxcjkh’,
+      salary:3456
+     joining_dt: ISODate(’2000-04-27’),
+    experience:[{name:‘hsbc’,years:3},{name:’igate’,years:4},{name:Capgemini,years:5}],
+   maritalStatus:null
+}
+{
+pid:123,
+pname:’kjdhshdg’
+}
+-------create a friend collection
+add 5 documents
+name,bdate,hobbies,address,mobileno
+
+
+
+
+////////////////////////////////////////day 16///////////////////////////////////////////////////////////////////
+create trigger delete_emp before delete on emp
+for each row
+      insert into emp_history values(OLD.empno,OLD.ename,OLD.sal,null,current_user(),now(),’delete’);
+
+create trigger update_emp before update on emp
+for each row
+      insert into emp_history values(OLD.empno,OLD.ename,OLD.sal,NEW.sal,current_user(),now(),’update’);
+
+
+---------exception handling
+declare exit handler for 1062 select ‘duplicate value’
+declare continue handler for 1062 select ‘error occurred’
+declare continue handler for NOT FOUND set cset=1
+
+declare exit handler for SQLEXCEPTION select ‘error occurred’
+
+create procedure myproc1(in pno int,out pnm varchar(20),out pjob varchar(20))
+begin
+declare exit handle for SQLWarning select “warning msg”
+     select empno,ename into pno,pnm
+     from emp
+     where empno=pno;
+end//
+
+NOSQL ---MongoDB
+{
+    empid:123,
+    ename:'kishori',
+     skills:['java','python','mongodb','spring boot','hibernate'],
+     joining_dt: ISODate('2000-04-27'),
+    dept:{deptno:11,dname:'hr',dloc:'pune'},
+   experience:[{name:'hsbc',years:3},{name:'igate',years:4},{name:'Capgemini',years:5}],
+   maritalStatus:null
+}
+“dept.dname”
+“experience.1.name”    igate
+“skills.3”     'spring boot'
+skills
+
+CRUD ----- create , read, update, delete
+db.createCollection(“mycoll111”)
+db.mycoll.insert({name:’xxx’,desg:’yyy’})
+
+-----capped collection
+       ---- restrict number of document
+        ----- you cannot delete data from capped collction
+blog----5 years
+     comments ------- lots comments 
+      latest 100 comments
+ db.createCollection(“mycoll111”,{capped :true,max:2,size:40000 })
+RDBMS indexes for primary key gets created automatically
+
+db.mycoll111.insert({name:”Rajan”,comment:”good blog”})
+ db.mycoll111.insert({name:”Revati”,comment:”excellent”})
+ db.mycoll111.insert({name:”Rajesh”,comment:”good blog”})
+
+--------------- Read data
+db.emp.find()------to find all record        select * from emp;
+db.emp.findOne() -----  to find one record           select * from emp limit 1
+
+db.movie.find({},{name:1,rating:1,_id:0}).sort({rating:-1,name:1}).limit(1).skip(3).pretty();
+db.movie.find({},{ticket_no:0,_id:0}).sort({rating:-1,name:1}).limit(1).skip(3).pretty();
+
+Query --🡪operators
+$in,$nin,$eq,$ne,$gt,$lt,$and,$or,$not,$exists,$size,$mod,$elemMatch,$gte,$lte
+
+--------list all the movies with name=’padmavat’
+db.movie.find({name:'padmavat'}).pretty();
+-----to list all movies with rating = 3
+> db.movie.find({rating:3},{name:1,rating:1,price:1,_id:0}).sort({price:1})
+
+------to find all movies with rating=3 and price=260
+rating:3
+price:260
+db.movie.find({ rating:3, price:260},{name:1,rating:1,ticke_no:1,_id:0})
+$and:[{ rating:3},{ price:260}]
+db.movie.find({ $and:[{ rating:3},{ price:260}]},{name:1,rating:1,ticke_no:1,_id:0})
+------to find all movies with price=200
+db.movie.find({price:200},{name:1,rating:1,price:1}).pretty()
+-------to find all movies with price >200
+db.movie.find({price:{$gte:200}},{name:1,rating:1,price:1}).pretty()
+-------to find movie with rating < 5
+> db.movie.find({rating:{$lt:5}},{name:1,rating:1,price:1}).pretty()
+------to find all movies with rating < 5 and price > 300
+rating:{$lt:5}
+price:{$gt:300}
+db.movie.find({ rating:{$lt:5}, price:{$gt:300}})
+$and:[{ rating:{$lt:5} },{ price:{$gt:300}}]
+db.movie.find({ $and:[{ rating:{$lt:5} },{ price:{$gt:300}}]})
+------to find all movies with rating < 5 or price > 300
+rating:{$lt:5}
+price:{$gt:300}
+
+$or:[{ rating:{$lt:5}},{ price:{$gt:300}}]
+db.movie.find({ $or:[{ rating:{$lt:5} },{ price:{$gt:300}}]})
+-----list all movies with price =260 or 300 or 450
+price:260
+price:300
+price:450
+$or:[{ price:260},{ price:300},{ price:450}]
+same as 
+price:{$in:[260,300,450]}
+db.movie.find({price:{$in:[260,300,450]}})
+
+-----list all movies with price not equal 260 or 300 or 450
+price:{$nin:[260,300,450]}
+db.movie.find({price:{$nin:[260,300,450]}})
+-----to list all movies with price = either 260 or 300 or 450
+and rating> 3
+price:{$in:[260,300,450]}
+rating:{$gt:3}
+$and:[{ price:{$in:[260,300,450]}},{ rating:{$gt:3}}]
+db.movie.find({$and:[{ price:{$in:[260,300,450]}},{ rating:{$gt:3}}]})
+or
+db.movie.find({ price:{$in:[260,300,450]}, rating:{$gt:3}})
+--------to find all movies which has rating key and the value is null
+db.movie.find({rating:{$in:[null],$exists:true}})
+------------to find all movies which do not have rating key 
+db.movie.find({rating:{$exists:false}})
+
+
+
+
+
+????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+create function getprformance(pcomm decimal(9,2)) returns varchar(20)
+     begin
+     declare vperform varchar(20) default '';
+     if  pcomm is null or pcomm=0 then
+    set vperform='need improvement';
+    elseif pcomm < 300 then
+             set vperform='ok';
+     elseif pcomm < 500 then
+             set vperform='good';
+     else
+             set vperform='Excellent';
+     end if;
+     return vperform;
+     end//
+
+create procedure display_empdetails(in pdeptno int) begin select empno,ename,sal,comm, getprformance(comm) from EMP where deptno=pdeptno;  end//
+
+
+> call display_empdetails(10);  
+
+
+
+
+
