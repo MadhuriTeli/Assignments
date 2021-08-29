@@ -1,0 +1,269 @@
+0. Complete integration of hibernate in a web app
+(Copy from day8_lab)
+Objective : User login
+JSP -- Java Bean -- Hibernate based DAO layer(HibernateUtils) ---Hibernate managed POJOs(Entity) --DB
+
+
+
+Continue testing in standalone desktop based apps
+
+1. Save n restore images to / from DB
+
+For easy file handling utilities  from Apache commons-io
+Add this dependency , in pom.xml
+
+<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+FileUtils Methods 
+
+1. public static byte[] readFileToByteArray(File file)
+                                  throws IOException
+Reads the contents of a file into a byte array. The file is always closed.
+
+2. public static void writeByteArrayToFile(File file,
+                        byte[] data)
+                                 throws IOException
+Writes a byte array to a file creating the file if it does not exist.
+
+
+Save an image in the DB
+i/p : user email , image src file path
+Steps
+1.1 get user from email 
+1.2 user : PERSISTENT
+chk if file exists : validation (File class API : exists,isFile,canRead)
+file --> byte[] : Apache supplied commons io jar  : FileUtils
+public static byte[] readFileToByteArray(File file)
+                                  throws IOException
+1.3 setter : setImage --followed commit ---@ commit ---update
+
+
+2. Restore image from db n store it in new bin file
+i/p : user id , image file path , to store the image
+2.1. get : get user details by id
+2.2 not null --u.getImage() --byte[] ----> store it in the file
+public static void writeByteArrayToFile(File file,
+                        byte[] data)
+                                 throws IOException
+
+
+
+
+NOTE :
+MySQL supports 4 types of BLOB data types, which only differ in the maximum length of data they can store. 
+TINYBLOB: Only supports up to 255 bytes.
+BLOB: Can handle up to 65,535 bytes of data.
+MEDIUMBLOB: The maximum length supported is 16,777,215 bytes.
+LONGBLOB: Stores up to 4,294,967,295 bytes of data.
+
+NOTE : Even though , these are default values for MySQL , DB throws exception , even when your are trying to save LONGBLOB > few MBs.
+
+Suggested solution before spring boot
+To change the max allowed packet for everyone to 1GB until the server restarts:
+SET GLOBAL max_allowed_packet=1073741824;
+
+---------------------
+Advanced Hibernate
+Relationship between entities (E-R) n Entity n Embeddables
+
+Types of associations
+one-to-one
+one-to-many
+many-to-one
+many-to-many
+
+eg : Course 1 <----* Student
+
+2 types of associations : uni directional n bi -directional (Object world concept n NOT DB concept)
+
+Course 1 ---->* Student (uni directional) (navigation possible from Course---> Student)
+eg : Course POJO
+courseId,.......+ List<Student> students
+
+Student POJO 
+sid, name..... no course info
+
+eg : Course 1 <---* Student (uni)
+Course : .... no student info
+Student : ...... + Course c;
+
+
+eg :  Course 1<---->* Student (bi dir association)
+Course : ..... +List<Student> students
+Student : .... +Course c;
+
+Tables : courses , stduents(....+ course_id : FK : references PK of courses table)
+
+parent table : courses
+child table  : students
+
+ONLY In a bi-dir association
+owning side table : students (the table which actually contains physical association : FK ) : many side
+non-owning (inverse side) table : courses.
+---------------------------
+students : many , child,owning
+
+courses : one, parent , non owning(inverse)
+
+Course --- id,name(unique),capacity,strt_date,end_date,fees
++
+List<Student> students;
+
+Student --id ,name,email +
+private Course selectedCourse;
+
+
+Objectives :
+Test
+Entity to Entity relationships
+Inheritance : MappedSuperClass
+BaseEntity 
+Course 1<-----* Student (many to one : uni dir)
+Student 1<-----1 Address (one to one uni dir : with shared PK)
+Student * ----->* Project (many to many uni dir )
+
+Entity n Value Types (Composition)
+Student 1  -----> 1 AdharCard
+Student 1------>* EducationalQualifications
+
+Properties of Course 	
+courseId,title,startDate,endDate,fees,capacity
+
+Properties of Student
+studentId,name,email
+
+Properties of Address
+addressId(same as studentId) , city,country,zipCode,phoneNo
+
+Properties of Project 
+projectId,projectTitle ,technology,submissionDate
+
+Properties of AdharCard
+cardNo,createdOn,location
+
+Properties of EducationalQualifications
+eduType(enum : SSC,HSC,DEGREE,DIPLOMA....), year, marks/grade
+
+
+Objective : 
+Course 1<-----* Student (many to one : uni dir)
+Course & Student : JPA Entities : PK ---> unique ID
+
+Apply inheritance
+1. BaseEntity :  JPA annotation @MappedSuperclass
+private Integer id;
+
+2. Course 
+courseId,title,startDate,endDate,fees,capacity
+(courseId will be inherited from BaseEntity class)
+
+3. Student 
+studentId,name,email + Course courseEnrolled
+(studentId will be inherited from BaseEntity class)
+
+JPA annotations for Entity-Entity mapping
+@OneToOne
+@OneToMany
+@ManyToOne
+@ManyToMany
+
+Tables : courses_tbl , students_tbl
+parent : courses_tbl , one side
+child : students_tbl , many side
+
+FK appears : in many side of the association (child side) : references PK of courses_tbl
+
+4. Student 1<------ 1 Address
+Properties of Address
+addressId(same as studentId) , city,country,zipCode,phoneNo
+
+5. Student * <-----* Project (many to many uni dir )
+Project
+Properties of Project 
+projectId,projectTitle ,technology,completionDate
+
+Q : If you need to access , student details from Project , which property should be added to which class ?
+Ans : Add Set<Student> property to Project class
+
+Tables : student ---- project
+students_tbl, projects_tbl + additional link/mapping table
+
+additional link/mapping table
+ columns : project_id , student_id
+
+
+1. If you don't add any mapping annotations, hibernate throws MappingException
+Solution --add suitable annotations
+
+@OneToMany
+@ManyToOne
+@OneToOne
+@ManyToMany
+
+----------------Pending -----------------(to be done in lab)
+1. Launch new course
+i/p course details
+ICourseDao
+String launchNewCourse(Course course);//persist
+
+2. Student admission
+i/p student details(name , email) , course name
+o/p in DB : insertion of a rec in students_tbl , with auto_inc id + FK auto assigned
+IStudentDao
+String admitStudent(Student s, String courseTitle)
+steps :1.  get course details from course title (jpql)
+2. in case of success : link course details to the student(setter)
+3. persist : student
+
+
+3. Display all student details from a specific course
+i/p : course title
+4. Cancel Admission
+i/p : student id
+5. Link student's address details
+i/p : student id n address deatils (city,country,zip,phone)
+6. Update city (i.e some address details)
+i/p student id n new city
+7. Start a new project
+i/p project details
+8. Add student in a project
+i/p project title , student email
+9. Remove student from project
+i/p project title , student email
+10. Display names of all students from a specific project
+i/p project title
+11. Cancel Project
+i/p project id
+12. Cancel Course
+
+-------------------------------
+3. Entity type  vs Value Type
+Objective : Student HAS-A AdharCard
+
+3.1 AdharCard : separate outer class 
+Data members : card number , creation date , location
+
+How to tell hibernate that AdharCard is not an entity : doesn't have independent existence , no PK, no separate table
+
+@Embeddable : value type
+
+Lab Objective : display all student names , having adhar card created between specified dates
+String jpql="select s.name from Student s where s.card.createdOn between :strt and :end"
+
+3.2 eg of Collection of basic value types
+eg : Student 1----->* Hobbies (string)
+
+
+3.3 Student HAS-A Educational Qualifications
+type (enum), year , % marks
+eg of collection of embeddable types
+
+Objective : populate entire student object graph(assign adhar card , hobbies, edu quals)
+I/P : student id/email
+adhar card dtls
+hobbies
+edu qualifications
