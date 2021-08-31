@@ -1,0 +1,70 @@
+1. Launch new course
+i/p course details
+ICourseDao
+String launchNewCourse(Course course);//persist
+
+2. Student admission
+i/p student details(name , email) , course name
+o/p in DB : insertion of a rec in students_tbl , with auto_inc id + FK auto assigned
+IStudentDao
+String admitStudent(Student s, String courseTitle)
+steps :1.  get course details from course title (jpql)
+2. in case of success : link course details to the student(setter)
+3. persist : student
+
+
+3. Display all student details from a specific course
+i/p : course title
+
+4. Cancel Admission
+i/p : student id
+5. Link student's address details
+i/p : student id n address deatils (city,country,zip,phone)
+6. Update city (i.e some address details)
+i/p student id n new city
+7. Start a new project
+i/p project details
+8. Add student in a project
+i/p project title , student email
+9. Remove student from project
+i/p project title , student email
+9.5 Get Project details
+i/p project title
+
+10. Display names of all students from a specific project
+i/p project title
+11. Cancel Project
+i/p project id
+12. Cancel Course
+
+-------------------------------
+3. Entity type  vs Value Type
+Objective : Student HAS-A AdharCard
+
+3.1 AdharCard : separate outer class 
+Data members : card number , creation date , location
+
+How to tell hibernate that AdharCard is not an entity : doesn't have independent existence , no PK, no separate table
+
+@Embeddable : value type
+
+Objective : Link Adhar card details to an existing student
+i/p : student id , Adhar card details
+
+
+Lab Objective : display all student names , having adhar card created between specified dates
+String jpql="select s.name from Student s where s.card.createdOn between :strt and :end"
+
+3.2 eg of Collection of basic value types
+eg : Student 1----->* Hobbies (string)
+
+
+3.3 Student HAS-A Educational Qualifications
+type (enum), year , % marks
+eg of collection of embeddable types
+
+Objective : populate entire student object graph(assign adhar card , hobbies, edu quals)
+I/P : student id/email
+adhar card dtls
+hobbies
+educational qualifications
