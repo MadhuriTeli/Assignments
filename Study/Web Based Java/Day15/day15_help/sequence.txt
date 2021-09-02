@@ -1,0 +1,228 @@
+Today's Topics
+
+Spring MVC n Hibernate integration for User authentication
+
+Spring boot
+
+
+Revise
+Revise Spring MVC flow (with yesterday's project)
+URL : http:/host:port/day14_spring_mvc_lab
+
+Spring MVC is a web app framework based on the model–view–controller pattern. It is based on the Spring framework and supports a wide range of server-side rendering technologies(view layer technology)  as JSP, Thymeleaf, Groovy etc.
+
+Dispatcher Servlet
+It is a front controller that coordinates all the request handling activities. Delegates to the HandlerMapping & request handling controllers. It is automatically created and configured by Spring Boot. If you are not using Spring Boot, you need to configure it in web.xml or using java configuration class.
+
+Controller
+Annotate controllers with @Controller and annotate methods in the controller with @RequestMapping or @GetMapping/@PostMapping ..  to tell Spring which method to execute when processing a particular HTTP GET/POST request. Controllers typically return a logical view name as String.
+Or they can also return ModelAndView
+
+
+
+What is a model attribute?
+server side object(entry=key & value pair) created by Controller(Prog)
+
+Purpose : To share results between controller n view layer
+Who creates  it ?--- created by Controller(Prog)
+Who sends it to whom : Controller ---> D.S
+What will D.S do with model attrbutes ? : pushes(stores) these model attrs under request scope
+Spring MVC : Push MVC Architecture : Front controller (D.S) is pushing the results in to view layer.
+What's the ONLY scope of model attributes ? request
+How to access these model attrs from JSP ? ${requestScope.modelAttrName}
+
+What are different ways for Controller to add model attrs ?
+1. o.s.w.s.ModelAndView class
+2. o.s.ui.Model i/f
+
+What is o.s.w.s.ModelAndView : class => Holder of model attrs + logical view name
+
+Constr ? ModelAndView(String viewName, String attrName,Object attrValue)
+
+eg : what can be valid ret type of req handling method , seen currently ?
+String
+ModelAndView
+
+
+2. Any simpler way to send model attributes to D.S ?
+
+Use  ? o.s.ui.Model : i/f : holder (map) of model attrs
+Implicit generic Type of Model Map -- <String,Object>
+
+How do u add model attributes ?
+public Model addAttribute(String nm,Object value)
+
+eg : How to add multiple  model attrs?
+method chaining is supported.
+
+Who will create  empty Model map ?  : SC
+
+How to tell SC that u need a model map ? : 
+Using D.I (IoC)
+Simply add Model as the method arg in your req handling method.
+
+
+When request handling controller(eg : TestController)  rets string : logical view name , what will it implicitly return ?
+Explictily : logical view name
+Implicltly : model attrs 
+
+1. How to hide index.jsp under WEB-INF? (i.e how to ensure that index page is served to client via D.S)
+
+
+2. Objective : 
+Handling request parameters in Controller 
+eg :User authentication
+2.1 Show Form Phase
+2.2 Process From Phase 
+
+After form submission 
+URL : http://host:post/day15_mvc/user/login
+Form Data : 2 request parameters : email ,password
+
+How to access these request parameters in handler's method ?
+Ans : Use annotation : @RequestParam on request handling method argument.
+
+Recommendation : Match req param names with method arg names.
+
+2. Objective : Integration of Spring MVC n Hibernate
+refer to lab sequence : 
+
+2.1 Comparison of layers between JSP-JB-DAO-POJO-DB Vs Spring MVC layers.
+
+Start with simple case study (customer login only )
+
+Steps 
+
+2.2 Refer to : "Next steps for Spring MVC integration with Hibernate" from the lab sequence , for additional configuration
+
+2.3 DB : already existing tables from : topics-tutorials-sql
+2.4 Refer : POJOs mapped to existing tables (project scenario)
+(from ready code)
+2.5 Complete DAO ,Service Controller n test it.
+-------------------------------
+
+
+Enter Spring boot
+refer to : "regarding spring boot"
+
+refer to : "spring boot sequence 1"
+
+Complete remaining case study using Spring Boot & JPA
+
+
+Any problems observed  ? 
+Multiple submission
+Solution : 
+PRG pattern(Post-redirect-get pattern)
+--- to avoid multiple submission issue in a web app.
+Replace forward view(server pull) by redirect view (clnt pull) --a.k.a double submit guard.
+
+How to replace default forward view by redirect view in spring MVC ?
+Ans -- use redirect keyword.
+eg : return "redirect:/customer/topics";
+D.S invokes response.sendRedirect(response.encodeRedirectURL("/customer/topics"));
+Next request from clnt --- ..../customer/topics
+
+
+How to remember user details till logout?
+Ans : add them in session scope.
+How to access HttpSession in Spring?
+Using D.I
+How  -- Simply add HttpSession as method argument of request handling method.
+
+
+How to remember the details(attributes) till the next request (typically required in PRG --redirect view)
+Ans -- Add the attributes under flash scope.
+(They will be visible till the next request from the same clnt)
+How to add ?
+Use i/f -- o.s.w.s.mvc.support.RedirectAttributes
+Method
+public RedirectAttributes addFlashAttribute(String attrName,Object value)
+
+How to access them in view layer in the next request?
+via request scope attributes.
+
+
+eg : In case of successful login --save user details under session scope(till user log out) & retain status mesg only till the next request.
+In case of invalid login --save status under request scope.
+
+
+How to take care of links(href)/form actions + add URL rewriting support ?
+1. Import spring supplied JSP tag lib.
+(via taglib directive)
+prefix ="spring"
+
+2.  Use the tag.
+<a href="<spring:url value='/user/logout'/>">Log Out</a>
+ / --- root of curnt web app.
+
+
+What will be the URL if cookies are enabled ?
+http://host:port/spring_mvc/user/logout
+
+What will be the URL if cookies are disabled ?
+http://host:port/spring_mvc/user/logout;jsessionid=egD5462754
+
+OR form action example
+<spring:url var="url" value='/admin/list'/>
+eg : <form action="${var}"> 
+form inputs
+</form>
+
+From Logout 
+1. Discard session
+2. Forward the client to logout.jsp
+
+How to auto navigate the clnt to home page after logging out after some dly ?
+Ans : By setting refresh header of HTTP response.
+
+API of HttpServletResponse
+public void setHeader(String name,String value)
+
+name --- refresh
+value --- 10;url=any url you want to redirect to (eg : home page url (root of web app))
+10 : delay in seconds
+
+How to get the root of curnt web app ?
+API of HttpServletRequest
+String getContextPath()
+
+What will happen if any controller returns redirect view name to D.S ?
+eg : UserController -- return "redirect:/admin/list"
+D.S skips the V.R & sends temp redirect response to the clnt browser.
+How ?
+D.S invokes --- response.sendRedirec(response.encodeRedirectURL(".../admin/list");
+So clnt browser will send a next request ---with method=get
+URL --
+http://host:port/spring_mvc/admin/list
+
+
+Complete Admin Flow
+1. List Vendors
+2. vendor deletion
+3. Add New Vendor
+4. Update
+
+
+-----------------------
+SC : def date time format : mon/day/year
+What will happen if you supply  different date time format ?
+
+Problem : HTTP 400 : Bad request => some request data coming from client is invalid
+Def. dat formate : mon/day/yr
+How to tell SC : about exact Date time format : use annotation.
+
+
+eg : 	@RequestParam(name="category") String category123,@RequestParam double price,
+			@RequestParam int qty,@RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date creation_date,Model modelMap)
+
+@RequestParam(name="category") String category123
+SC invokes :String category123=request.getParameter("category")
+
+@RequestParam double price
+double price=Double.parseDouble(request.getParameter("price"))
+
+@RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date creation_date
+SDF sdf=new SDF("yyyy-MM-dd");
+Date creation_date=sdf.parse(request.getParameter("creation_date"));
+
