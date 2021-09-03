@@ -1,0 +1,63 @@
+Revise with Code Spring Boot Based MVC 
+
+Clnt sent requests (URLs)
+1. http://host:port/day16_spring_boot_mvc
+Resp : contents : index.jsp
+
+2. After clicking on the link (User Login)
+http://host:port/day16_spring_boot_mvc/user/login , method=GET
+UserController.showLoginForm() --Rets Log view  name ---> /WEB-INF/views/user/login.jsp
+Resp : login.jsp
+
+3. After submitting form
+http://host:port/day16_spring_boot_mvc/user/login , method=POST
+
+4. In case of customer's successful login --redirect  CP2 (redirect request)
+http://host:port/day16_spring_boot_mvc/customer/topics , method =GET
+
+5. After customer chooses a topic 
+URL : http://localhost:8080/day16_spring_boot_mvc/customer/tutorials?topicId=2
+
+w/o Spring form tags : 
+<c:forEach var="topic" items="${requestScope.topic_list}">
+				<tr>
+					<td><input type="radio" name="topicId" value="${topic.id}" /></td>
+					<td>${topic.topicName}</td>
+				</tr>
+			</c:forEach>
+
+With Spring Form Tags (form data binding)
+<form:radiobuttons path="id" items="${requestScope.topic_list}" itemLabel="topicName" 		itemValue="id" />
+URL : http://localhost:8080/day16_spring_boot_mvc/customer/tutorials?id=2
+
+6. After choosing the tutorial name
+URL : http://localhost:8080/day16_spring_boot_mvc/customer/tutorial_details?tut_name=Spring%20MVC , method=GET
+
+7. After clicking on log out link
+http://localhost:8080/day16_spring_boot_mvc/user/logout
+
+
+
+Complete Customer part at least
+
+Enter REST
+refer to readme
+
+Go through react app n understand it's flow.
+
+Create a backend. Test it with postman.
+Test full stack app.
+
+
+REST API endpoints for User Management CRUD
+1. Get All Users : /users
+2. Add User Details : User or UserDTO as Request Body (json)
+/users + request body
+3. Delete User Details
+/users/userId
+4. Get User details by id
+/users/userId
+5. Update User details 
+/users/userId + User or UserDTO as Request Body (json)
+
+	
