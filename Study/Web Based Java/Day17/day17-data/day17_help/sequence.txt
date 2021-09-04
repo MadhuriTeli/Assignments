@@ -1,0 +1,118 @@
+Revise
+
+Revise REST implementation
+
+refer : RestController vs MVC Controller n Annotations.txt
+
+refer : full stack app revision diag
+refer : RESTful web app layers diag.
+
+Important change in DAO layer : Replace JPA by Spring Data JPA
+refer to : "regarding spring data JPA"
+
+Steps
+1. Create spring boot app : using spring boot starter project (IMPORTANT : choose packaging as JAR)
+2. Use same spring boot starters as earlier.
+Spring web , Mysql driver , Spring data JPA , Lombok , Spring Dev Tools,validation
+3. NO additional dependencies for view layer(i.e no jstl n no tomcat-embeded jasper  dependencies , in pom.xml
+
+4. Copy application.properties from earlier spring boot project
+(Do not add view resolver related properties)
+
+5. Build the layers in bottoms up manner, for the following objectives.
+
+Objective : Complete backend for User management front end
+
+1. Get All Users : /users
+Use ResponseEntity , to wrap response body + response headers.
+2. Add User Details : User or UserDTO as Request Body (json)
+/users + request body
+3. Delete User Details
+/users/userId
+4. Get User details by id
+/users/userId
+5. Update User details 
+/users/userId + User or UserDTO as Request Body (json)
+
+Test it with postman & then with React
+
+2. Objective : Testing E-R with REST API + REST Client(RestTemplate)
+Test setup : Postman -- User Management API invoking REST Banking API
+
+Get Account summary for a bank customer.
+Resource : /accounts
+I/P : JSON containing Customer id & password (DTO : LoginRequest)
+
+O/P : In case of success :  or in case of invalid credentials : Send Error resp code : HTTP 403 (un authorized)
+
+Authenticate Bank Customer
+Method =POST (/accounts/signin)
+I/P : DTO LoginRequest (customer id , password)
+O/P : ResponseEntity<?> : wrap error message n HTTP 403 , otherwise list of accounts in a wrapper DTO(eg : BankAccounts) n HTTP 200
+Understand concept of ResponseEntity<T> 
+(In a real project ,JWT will be sent back in a response by the server n here after in every request it will be sent by client in the auth header , as a Bearer Token)
+
+Layers :
+REST Controller --Service --Repository--POJO --DB
+Customer 1------>* BankAccount
+Customer : customer id(do not auto generate , use assigned id) ,name, password 
+BankAccount : acct id (auto generation) AcctType(enum) ,balance + Customer owner
+
+For  Data Transfer : DTOs
+LoginRequest : customerId , password
+BankAccounts : List<BankAccount> (a wrapper)
+
+
+How to make a REST call from one Java app to another  ?
+Use : org.springframework.web.client.RestTemplate
+
+The RestTemplate class in Spring Framework is a synchronous HTTP client for making HTTP requests to consume RESTful web services. 
+
+It exposes a simple and easy-to-use template method API for sending an HTTP request and also handling the HTTP response. 
+
+The RestTemplate class also provides aliases for all supported HTTP request methods, such as GET, POST, PUT, DELETE, and OPTIONS. 
+
+
+
+
+
+In a service layer : inject
+private RestTemplate template;
+
+	@Autowired
+	public ClntService(RestTemplateBuilder builder) {
+		template = builder.build();
+	}
+
+	
+	// SpEL : spring expression language
+	@Value("${REST_AUTH_URL}")
+	private String authUrl;
+
+Use  Method of o.s.w.c.RestTemplate public <T> ResponseEntity<T>
+		  postForEntity(String url,@Nullable Object request, Class<T> responseType, Object... uriVariables)  throws RestClientException
+
+Req Object : LoginRequest		
+Resp Type : DTO : BankAccounts
+	
+
+Important Tips :
+1 Typically add : ManyToOne : lazy
+
+2. To control json data during serialization / de-serial
+2.1 Add @JsonIgnore : at field level
+2.2 @JsonIgnore on a property getter : to  ignore this property while serialization(marshalling)
+2.3 @JsonProperty  on a property setter if you don't want to  ignore this property while de serialization(un marshalling)
+
+3.To tell serilizer n de-serializer(java---> json , json ---> java), done auto by SC , using Jackson API
+to ignore the asso properties added in bi dir asso.
+Add : @JsonIgnoreProperties("name of the association property")
+
+
+
+1. Spring AOP
+Refer to help\AOP\readme_aop.txt" for concepts 
+Eclipse project : test_aop_simple
+
+2. Hibernate session : get vs load
+refer to hibernate" : get vs load diagrams
