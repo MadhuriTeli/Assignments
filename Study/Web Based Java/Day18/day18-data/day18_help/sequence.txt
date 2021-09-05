@@ -1,0 +1,91 @@
+1. Completion of lab exam assignment
+
+2. Understand React App ---> Spring Boot Back end (User Management) :(Rest API provider : user management)
+
+ Rest Clnt ---> Spring Boot Back end (Rest API provider : banking facilities)
+2.1 Spring Data JPA 
+finder methods
+
+
+In Rest Client : RestTemplate from it's builder
+
+How to make a REST call from one Java app to another  ?
+Use : org.springframework.web.client.RestTemplate
+
+The RestTemplate class in Spring Framework is a synchronous HTTP client for making HTTP requests to consume RESTful web services. 
+
+It exposes a simple and easy-to-use template method API for sending an HTTP request and also handling the HTTP response. 
+
+The RestTemplate class also provides aliases for all supported HTTP request methods, such as GET, POST, PUT, DELETE, and OPTIONS. 
+
+In a service layer : inject
+private RestTemplate template;
+
+	@Autowired  //autowire=constructor
+	public ClntService(RestTemplateBuilder builder) {
+		template = builder.build();
+	}
+
+	
+	// SpEL : spring expression language
+	@Value("${REST_AUTH_URL}")
+	private String authUrl;
+
+Use  Method of o.s.w.c.RestTemplate public <T> ResponseEntity<T>
+		  postForEntity(String url,@Nullable Object request, Class<T> responseType, Object... uriVariables)  throws RestClientException
+
+Req Object : LoginRequest		
+Resp Type : DTO : BankAccounts
+	
+
+
+
+
+
+Test it with postman
+URL : http://localhost:8080/banking/signin 
+Method : POST
+Payload (request body ) 
+{
+    "customerId": "hdfc-1001",
+    "password": "ram#123"
+}
+
+Supply empty customerId , oberve n conclude.
+Is Rest client still making a call to net banking REST server ???
+
+
+
+Validation & centralized exception handling.
+Add validation rules in LoginRequest DTO
+Add @Valid on Request body
+Confirm if rules are getting called.
+BUT what's the error response still being sent to end user ? (currently postman)??? Entire stack trace !!!!!
+
+(refer : day17-data\day17_help\readmes\regarding spring boot exc handling n validations.txt)
+
+Share : ready code (GlobalExceptionHandler)
+
+3. AOP
+
+4. get vs load
+
+5. Transaction Management 
+(Refer : day16-data\day16_help\transactions articles)
+
+6. Thymeleaf overview & implementation
+
+7. Spring Data JDBC
+
+8. Cloning in Java
+
+
+
+
+
+
+
+
+
+
+
