@@ -1,0 +1,224 @@
+drop database training
+run backend project
+Tables will be created.
+
+Added this at table level : to ensure the uniqueness of student_id n course_id in enrollments table
+1. ALTER TABLE enrollment_dtls
+  ADD CONSTRAINT uq_enrollment_dtls UNIQUE(course_id,student_id);
+
+2. Alter table student_dtls auto_increment=2;
+
+3. insert into user_dtls values(1,'admin123','ADMIN');
+
+So only 1 admin user will be there. 
+Whenever student takes admission , automatically record is inserted (auto incr) in stduents tbl & using same student id inserting a rec in users table 
+(ref : AdminController's addStudentDetails(...)  for this)
+
+----------------------------
+1. JSON Data for adding a faculty
+http://localhost:8080/admin/faculty
+{
+"name" : "Madhura",
+"expInYears" : 20,
+"domain" : "java"
+}
+
+2. JSON Data for adding a course with faculty
+http://localhost:8080/admin/course
+{
+    "name": "spring",
+    "start": "2020-01-01",
+    "end": "2020-01-01",
+    "fees": 25000,
+    "availableCapacity": 50,
+    "courseFaculty": {
+        "id": 1
+    }
+}
+
+3. JSON Data for adding another  course with the same faculty
+http://localhost:8080/admin/course
+
+{
+"name" : "hibernate",
+"start" : "2020-05-01",
+"end" : "2020-06-01",
+"fees" : 23000,
+"availableCapacity" : 60,
+"courseFaculty" :
+{
+ "id" : 1
+}
+}
+-----------------------
+fetching specific course details
+http://localhost:8080/admin/course/spring
+{
+    "id": 1,
+    "name": "spring",
+    "start": "2020-01-01",
+    "end": "2020-01-01",
+    "fees": 25000.0,
+    "availableCapacity": 50,
+    "courseFaculty": {
+        "id": 1,
+        "name": "Madhura",
+        "expInYears": 20,
+        "domain": "java"
+    }
+}
+
+http://localhost:8080/admin/course/hibernate
+{
+    "id": 2,
+    "name": "hibernate",
+    "start": "2020-01-01",
+    "end": "2020-01-01",
+    "fees": 25000.0,
+    "availableCapacity": 50,
+    "courseFaculty": {
+        "id": 1,
+        "name": "Madhura",
+        "expInYears": 20,
+        "domain": "java"
+    }
+}
+Fetch All Courses
+http://localhost:8080/admin/course
+[
+    {
+        "id": 1,
+        "name": "spring",
+        "start": "2020-01-01",
+        "end": "2020-01-01",
+        "fees": 25000.0,
+        "availableCapacity": 50,
+        "courseFaculty": {
+            "id": 1,
+            "name": "Madhura",
+            "expInYears": 20,
+            "domain": "java"
+        }
+    },
+    {
+        "id": 2,
+        "name": "hibernate",
+        "start": "2020-01-01",
+        "end": "2020-01-01",
+        "fees": 25000.0,
+        "availableCapacity": 50,
+        "courseFaculty": {
+            "id": 1,
+            "name": "Madhura",
+            "expInYears": 20,
+            "domain": "java"
+        }
+    }
+]
+---------------
+register student 
+http://localhost:8080/admin/student
+{
+ "name" : "Rutuj",
+"email" : "rutuj@gmail.com",
+ "dob" : "1999-05-23"
+
+}
+
+Assign address to alrdy reged student : post
+ http://localhost:8080/admin/student/address
+{
+  "city" : "pune",
+  "state" : "MH",
+  "country" : "India",
+  "zipCode" : "12345",
+  "student" : {
+   "id" : 2
+  }
+}
+--------------------
+student enrollment : post
+ http://localhost:8080/admin/student/enrollment
+{
+"enrollmentDate" : "2020-12-30",
+ "student" : {
+"id" : 2
+},
+"course" : {
+"id" : 1
+}
+}
+
+Another enrollment of the same student in another course
+ http://localhost:8080/admin/student/enrollment
+{
+"enrollmentDate" : "2020-11-25",
+ "student" : {
+"id" : 2
+},
+"course" : {
+"id" : 2
+}
+}
+--------------------
+Got it's response from the server
+{
+    "id": 1,
+    "enrollmentDate": "2020-12-30",
+    "student": {
+        "id": 2,
+        "name": null,
+        "email": null,
+        "dob": null,
+        "adr": null
+    },
+    "course": {
+        "id": 1,
+        "name": null,
+        "start": null,
+        "end": null,
+        "fees": 0.0,
+        "availableCapacity": 0,
+        "courseFaculty": null
+    }
+}
+
+BUT now in above o/p : was getting student n course details : null (& of course expected since in req body we are sending only student n course id)
+So wanted to keep the ids intact during de-serialization(json--> java)  n wanted to ignore them during serialization(java--->json) 
+So added : @JsonIgnore  : property level n in getter 
+& @JsonProperty : in setter 
+in Enrollment POJO
+ 
+
+Then got the response as : 
+{
+    "id": 1,
+    "enrollmentDate": "2020-12-30"
+}
+Can fine tune it further , by putting it in response DTO.
+-------------------------------
+1. To fetch student details by id from Student actor
+(Earlier was getting infinite recursion , since there is a bi-dir asso betweeb Stduent 1<---->1 Address
+So simply added @JsonIgnorePropeties , recursion was gone!!!
+http://localhost:8080/student/1
+Got response  :
+{
+    "id": 1,
+    "name": "Rutuj",
+    "email": "rutuj@gmail.com",
+    "dob": "1999-05-23",
+    "adr": {
+        "city": "pune",
+        "state": "MH",
+        "country": "India",
+        "zipCode": "12345"
+    }
+}
+------------------------
+2. To fetch all enrolled courses
+http://localhost:8080/student/courses/enrolled/1
+
+
+3. To fetch all available courses
+method=get
+http://localhost:8080/student/courses

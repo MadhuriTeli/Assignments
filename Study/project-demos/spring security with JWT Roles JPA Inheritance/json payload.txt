@@ -1,0 +1,61 @@
+After launching the spring boot app , tables will be automatically created.
+(Edit application.properties)
+
+0. Insert  roles , in mysql db
+insert into roles(name) values('ROLE_USER');
+insert into roles(name) values('ROLE_ADMIN');
+
+Test From Postman
+1. Register Admin(signup) : POST
+http://localhost:8080/api/signup/admin
+
+{
+    "userName": "rama",
+    "email": "rama@gmail.com",
+    "password": "1234",
+    "roles": [
+        "ROLE_ADMIN"
+    ],
+    "instituteName": "cdac",
+    "adharNo": "abc13534"
+}
+
+server resp :
+{
+    "id": 3,
+    "email": "rama@gmail.com",
+    "userName": "rama",
+    "instituteName": "cdac",
+    "adharNo": "abc13534"
+}
+
+2. Admin login : POST
+http://localhost:8080/api/signin
+{
+    "userName":"rama",
+    "password":"1234"
+}	
+Server resp :
+{
+    "jwt": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYW1hIiwiaWF0IjoxNjE3MDQyNDgyLCJleHAiOjE2MTcxMjg4ODJ9.aHT_dnt-S1vbI6YLxTojlYOJVijovgz13H38j28mGYiecuDW5r6OOzAFjbfFmbN-LhkTMpkynXX5m2N546eVhA"
+}
+
+
+3. Add Department under Admin role : POST
+http://localhost:8080/admin/department
+{
+"deptName" : "CS"
+}
+
+4. Student login : POST
+http://localhost:7070/api/signin
+{
+    "userName":"Rishabh",
+    "password":"456"
+}
+Resp : 
+{
+    "jwt": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJSaXNoYWJoIiwiaWF0IjoxNjE3MDIxNTAxLCJleHAiOjE2MTcxMDc5MDF9.m1--aCsm8_KLlCbK1sWoL4xmS_TLZixEqJO9Yuih49H9LPx1m4OUMQ6O-gAnyJqCgo4l3OfODNxLKzWltJ6PYA",
+    "role": "ROLE_STUDENT"
+}
+
