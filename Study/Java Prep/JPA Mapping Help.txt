@@ -1,0 +1,231 @@
+Relationship between Entities / Embeddables
+
+Concepts
+1. Role 
+In every relationship there are two entities that are related to one another, and 
+each entity is said to play a role in the relationship.
+eg : A relationship between department & Employee 
+The Employee entity plays the role of working in the department, while the Department entity plays the role of having an employee working in it.
+Other role for the employess can be  working for a manager in its relationship with another Employee entity, working on a project in its relationship with the Project entity etc.
+
+2. Directionality
+The simplest way to add the relationship between entities is is is done is by adding a property/attribute 
+of the related entity type.
+If only one entity has a pointer to the other, the relationship is said to be unidirectional.
+When each entity points to the other, the relationship is bidirectional. 
+eg : Uni directional relationship
+Department <------- Employee
+Bi directional
+Project <------> Employee
+
+3. Cardinality
+It is to specify how many entities exist on each side of the same relationship instance. 
+eg : 
+Department 1-------* Employee
+Project *------ * Employee
+Employee 1-----1 EmployeeDetails
+
+
+Different type of relationships between entities
+One To One
+One To Many 
+Many To One
+Many To Many
+
+1. One To Many bi directional relationship between the entities
+JPA Annotations : @OneToMany & @ManyToOne
+
+eg : Course 1 <----->* Student
+Table Relationship
+courses  Table columns : id,title, start_date , end_date , fees
+students Table columns : id,name,email  + Foreign Key(FK) : course_id
+
+Since  courses table has a OneToMany relationship with the students table , a single course row can be referenced by multiple student rows. 
+
+The course_id  column in the students table , maps this relationship via a foreign key that references the primary key of the courses table. 
+
+Since a student cannot exist without a course ,  
+parent-side (@OneToMany) : course
+child-side (@ManyToOne) : student
+
+The @ManyToOne association is responsible for synchronizing the foreign key column with the Persistence Context (the First Level Cache).
+
+As a thumb rule (for perfomance benefits) : DO NOT use uni directional @OneToMany associations
+
+Owning side of the association
+The side having the join column in its table is called the owning side or the owner of the relationship. 
+
+NOn owning (inverse side)
+The side that does not have the join column is called the nonowning or inverse side.
+
+
+Best Practices to code a bidirectional @OneToMany association
+eg : Course 1 <----->* Student
+Entity Relationships
+Course POJO properties : id,title, startDate , endDate , fees +
+@OneToMany(mappedBy="selectedCourse",cascade=CascadeType.ALL,orphanRemoval=true)
+private List<Student> students=new ArrayList<>();
+Note : Always init collection to empty one , to avoid null pointer excpetion
+
+Student POJO properties : id,name,email +
+@ManyToOne
+@JoinColumn(name="course_id")
+private Course selectedCourse
+
+Detailed explanation
+1.  Add Suitable mapping annotations : @OneToMany & @ManyToOne
+otherwise JPA / Hibernate throws MappingException
+
+2. Add mappedBy attribute in the inverse side of the association
+
+What is mappedBy & when it's mandatory?
+Mandatory only in case of bi-dir associations
+It's attribute of the @OneToMany / @ManyToMany / @OneToOne annotation.
+
+What will happen if you don't add this attribute , in case of one-to-many 
+ Additional table (un necessary for the relationship mapping) gets created
+
+It MUST appear in the inverse side of the association.
+What should be value of mappedBy ?
+name of the association property as it appears in the owning side.
+
+eg : In Course POJO  : inverse side
+@OneToMany(mappedBy="selectedCourse")
+public List<Student> getStudents() {..}
+
+3. Use @JoinColumn to Specify the Join Column Name (FK column)
+Use it to override hibernate's default naming strategy for column names.
+
+4. Cascade from Parent-Side to Child-Side
+If you don't add cascade option : what will happen ?
+eg : When try to save Course object, with multiple students, insert query gets fired only on courses table. 
+Reason -- default cascade type = none
+Solution --Add suitable cascade type & observe.
+eg : @OneToMany(mappedBy="selectedCourse",cascade=CascadeType.ALL)
+public List<Student> getStudents(){...}
+
+5. What will happen if simply add student reference into the list?
+eg : 
+eg : Course newCourse=new Course(....);
+newCourse.getStudents().add(newStudent1);
+newCourse.getStudents().add(newStudent2);
+newCourse.getStudents().add(newStudent3);
+session.persist(newCourse);
+OR if you are using Spring Data JPA 
+In service layer
+courseRepo.save(newCourse);
+
+Ans : 1 record will be inserted into courses table.  Thanks to cascade option , 3 records will be inserted into students table. BUT value of FK will be null.
+Why : No linking from child ----> parent &
+
+Which is the best way to establish bi-dir linking (As per THE founder of Hibernate : Gavin King)
+Add helper methods in the parent side of the POJO
+eg : In Course POJO
+public void addStudent(Student s)
+{
+  students.add(s);
+  s.setSelectedCourse(this);
+}
+
+For removing bi dir link
+public void removeStudent(Student s)
+{
+  students.remove(s);
+  s.setSelectedCourse(null);
+}
+Above approach is recommended to keep both sides of the association in sync.
+ 
+
+6. Set orphanRemoval on the Parent-Side
+Setting orphanRemoval on the parent-side guarantees the removal of children without references. 
+It is good for cleaning up dependent objects that should not exist without a reference from an owner object. 
+
+eg : Cancel Student admission
+
+Excellent reference : https://vladmihalcea.com/orphanremoval-jpa-hibernate/
+
+The two rules, for bidirectional one-to-one associations
+
+1 The @JoinColumn annotation goes on the mapping of the entity that is mapped to
+the table containing the join column, or the owner of the relationship. This might
+be on either side of the association.
+
+2 The mappedBy element should be specified in the @OneToOne annotation in the
+entity that does not define a join column, or the inverse side of the relationship.
+Illegal to  have a bidirectional association that had mappedBy on both sides.
+Incorrect not have it on either side. 
+Hibernate will assume  each side was the owner and each will have a join column.
+
+NOTE : 
+The @ManyToOne association uses default fetching policy as FetchType.LAZY because, otherwise, we’d fall back to EAGER fetching which is bad for performance.
+
+The bidirectional associations should always be updated on both sides, therefore the Parent side should contain the addChild and removeChild helper methods.
+
+These methods ensure we always synchronize both sides of the association, to avoid object or relational data corruption issues.
+
+The child entity, may implement the equals and hashCode methods. Since we cannot always rely on a natural identifier for equality checks, we need to use the entity identifier (@Id)  instead. 
+It’s good practice to override equals and hashCode for the child entity in a bidirectional association.
+
+The @OneToMany association is by definition a parent association, even if it’s a unidirectional or a bidirectional one. Only the parent side of an association makes sense to cascade its entity state transitions to children.
+
+Details : 
+When an entity is associated with a Collection of other entities, it is in form of a one-to-many mapping. 
+When a relationship is bidirectional, there are actually two mappings, one for each direction.
+A bidirectional one-to-many relationship always implies a many-to-one mapping back to the source.
+eg : Course & Students
+
+In this ,  there is a one-to-many mapping from Course -----> Student
+and a many-to-one mapping from Student -----> Course.
+
+Which table must have a foreign key ?
+
+When a Course entity has an  number of Student entities stored in its collection, there is no definite  way to store those references in the database table.
+Instead Student table MUST  have foreign keys back to the Course
+So the one-to-many association  is almost always bidirectional and never the owning side.
+
+In Course entity u need to map the Students with  @OneToMany annotation.
+This doesn't have foreign key , so its an inverse side of relationship.
+Since this is the inverse side of the relationship, MUST include the mappedBy attribute.
+eg : In Course Entity
+
+mappedBy -- must refer to the property name in the associated table --to specify ownership of the association
+@OneToMany(cascade = CascadeType.ALL,mappedBy = "course")
+
+
+ ---mappedBy tells hibernate that instead of having a separate join table --map students  by course i.e course = name of the property appearing in Student class , anno by @ManyToOne
+
+In Student Entity
+@ManyToOne
+@JoinColumn(name = "course_id")
+getter for course
+
+Rules 
+1. The many-to-one side is the owning side, so the join column is defined on that
+side.
+2. The one-to-many mapping is the inverse side, so the mappedBy element must be
+used.
+
+
+Association between Entity & Embeddables(Value Types)
+
+Collection of 3 types --- entities , embeddables & basic types.
+
+In Course  1<----->n Student 
+the Course  entity has a collection of Student instances.
+
+It is called a multivalued relationship.
+
+BUT  collections of embeddable and basic types are not relationships; they are simply collections of elements .
+
+They are  called element collections. 
+
+Relationships define associations between independent entities , whereas element
+collections contain objects that are dependent upon the referencing entity, and can be retrieved only through the entity that contains them.
+
+Annotation Used -- @ElementCollection --mandatory
+BUT then hibernate creates its own table to store these embeddables
+If u want to name the table , optional anno is @CollectionTable
+
+@ElementCollection
+@CollectionTable(name = "table_name", joinColumns = @JoinColumn(name = "join_col_name"))
+Followed by getter of embeddables or basic types.

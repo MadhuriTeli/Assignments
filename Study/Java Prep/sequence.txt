@@ -1,0 +1,11 @@
+Revise 
+0. Hibernate Help
+1. Basic Spring Help
+(Mainly dependency injection)
+2. Spring MVC 
+3. Transactions
+4. Refer to : JPA Mapping Help
+4. Spring Boot
+5. Spring Data JPA
+6. REST
+7. Full Stack Demo
